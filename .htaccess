@@ -1,0 +1,29 @@
+<IfModule mod_env.c>
+    SetEnv CI_ENV development
+</IfModule>
+
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+#RewriteBase /CodeIgniter_2.0.3
+
+#Removes access to the system folder by users.
+RewriteCond %{REQUEST_URI} ^system.*
+RewriteRule ^(.*)$ /index.php/$1 [L]
+
+#Checks to see if the user is attempting to access a valid file,
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#Enable access to the images and css folders, and the robots.txt file
+RewriteCond $1 !^(index\.php|assets|files|robots\.txt)
+RewriteRule ^(.*)$ index.php?$1 [L]
+
+</IfModule>
+#Allow access from all domains for webfonts.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff|font.css|css|js|jpg|jpeg|png|gif|swf)$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+</IfModule>
