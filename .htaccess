@@ -24,6 +24,8 @@ RewriteRule ^(.*)$ index.php?$1 [L]
 <IfModule mod_headers.c>
   <FilesMatch "\.(ttf|ttc|otf|eot|woff|font.css|css|js|jpg|jpeg|png|gif|swf)$">
     Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+    Header set Access-Control-Allow-Headers "*"
     Header set Cache-Control "max-age=604800, public"
   </FilesMatch>
 </IfModule>
