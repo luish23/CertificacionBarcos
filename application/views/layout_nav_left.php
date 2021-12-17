@@ -68,13 +68,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/listUsers" class="nav-link">
+                <a href="/formOrder" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                   <p>Registrar Orden</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/listUsers" class="nav-link">
+                <a href="/listOrders" class="nav-link">
                   <i class="fas fa-list-ul"></i>
                   <p>Listado de Ordenes</p>
                 </a>

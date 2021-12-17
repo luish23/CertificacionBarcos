@@ -7,7 +7,7 @@ Sistema para control de auditoría y peritaje aplicados sobre unidades marítima
 - MariaDB (10.6.4)
 
 ## Funciones Principales
-- Control de Usurios y roles
+- Control de Usuarios y roles
 - Control de Inspección de Navios
 - Adminstración de Oficinas para Peritaje
 - Administración de Certificados (Alerta de Vencimientos)
