@@ -87,6 +87,8 @@ $route['registerEmployee']['POST']     = 'Employee/registerEmployee';
 $route['listBoats']['GET']          = 'Boats/listBoat';
 $route['formBoat']['GET']           = 'Boats/formBoat';
 $route['registerBoat']['POST']      = 'Boats/registerBoat';
+$route['modalBoat']['GET']          = 'Boats/modalBoats';
+
 
 /* 
 * ROUTES ORDERS

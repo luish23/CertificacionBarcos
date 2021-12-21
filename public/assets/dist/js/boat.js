@@ -1,3 +1,17 @@
+$(document).ready(function(){
+  $('#seeBoat').on('show.bs.modal', function (e) {
+      var rowid = $(e.relatedTarget).data('id');
+      $.ajax({
+          type : 'get',
+          url : 'modalBoat', //Here you will fetch records 
+          data :  'id='+ rowid, //Pass $id
+          success : function(data){
+          $('.fetched-data').html(data);//Show fetched data from database
+          }
+      });
+   });
+});
+
 $(function () {
     //   $.validator.setDefaults({
     //     submitHandler: function () {

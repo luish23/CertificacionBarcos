@@ -90,4 +90,33 @@ class Boats_model extends CI_Model {
         return $resultBoat;
     }
 
+    public function getBoatsByUser($idUser)
+    {
+        $result['data'] = false;
+        $this->db_boats->select('GROUP_CONCAT(codBoat) AS ids');
+        $this->db_boats->from('relation_user_boat');
+        $this->db_boats->where('codUser', $idUser);
+        $query = $this->db_boats->get();
+        $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->row('ids') : false;
+
+        if ($resultBoats) {
+            $this->db_boats->select('b.*');
+            $this->db_boats->from('boats b');
+            $this->db_boats->where("b.id IN ($resultBoats)");
+            $this->db_boats->group_by("b.id");
+            $query = $this->db_boats->get();
+            $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+            if ($resultBoats) {
+                $result['data'] = $resultBoats;
+                return $result;
+            }
+
+            return $result;
+        }
+
+        return false;
+
+    }
+
 }
