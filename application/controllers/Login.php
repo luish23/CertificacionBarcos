@@ -50,16 +50,21 @@ class Login extends RESTController {
 
             if ($data) {
                 $userData = $this->employees_model->getEmployee($data);
-
-                $session_data = array(
-                    'user_id'       => $data,
-                    'name'          => $userData->name,
-                    'lastName'      => $userData->lastName,
-                    'codTypeUser'   => $userData->codTypeUser
-                );
-                //set session userdata
-                $this->session->set_userdata($session_data);
-                redirect("dashboard");
+                if ($userData) {
+                    $session_data = array(
+                        'user_id'       => $data,
+                        'name'          => $userData->name,
+                        'lastName'      => $userData->lastName,
+                        'codTypeUser'   => $userData->codTypeUser
+                    );
+                    //set session userdata
+                    $this->session->set_userdata($session_data);
+                    redirect("dashboard");
+                }else{
+                    $this->msg = array('msg' => 'Usuario No Asignado a Personal. Contacte al Admistrador');
+	                $this->load->view('login/login',$this->msg);
+                }
+                
             }else{
                 $this->msg = array('msg' => 'Usuario y/o Password incorrecto.');
 	            $this->load->view('login/login',$this->msg);
