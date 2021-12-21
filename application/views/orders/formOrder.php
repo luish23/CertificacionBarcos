@@ -36,7 +36,13 @@
                   <div class="form-group err-form">
                     <label for="exampleInputEmail1">Navio</label>
                     <select class="form-control" id="id_boat" name="id_boat">
-                        <option value="1">Default select</option>
+                    <option value="0">Seleccione</option>
+                    <?php 
+                        foreach ($data as $key => $value) {
+                            echo '<option value="'.$value['id'].'">'.$value['name'].'</option>';
+                        }
+                    ?>
+                        
                     </select>
                   </div>
                   

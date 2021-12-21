@@ -7,6 +7,7 @@ class Boats_model extends CI_Model {
         parent::__construct();
         $this->db_boats = $this->load->database('boats', true);
         $this->db_relation = $this->load->database('relation_user_boat', true);
+        $this->db_orders = $this->load->database('orders', true);
     }
 
     public function insertBoat($data)
@@ -46,6 +47,47 @@ class Boats_model extends CI_Model {
         $this->db_relation->trans_commit();
 
         return true;
+    }
+
+    public function getBoatsNotDocument($id = null)
+    {
+        $this->db_boats->select('b.id, b.name');
+        $this->db_boats->from("boats b");
+        $this->db_boats->join($this->db_boats->database.'.relation_user_boat', $this->db_boats->database.'.relation_user_boat.codBoat = b.id');
+        $this->db_boats->where('b.conditions', 'INICIADO');
+        $this->db_boats->where('b.status', 1);
+        $this->db_boats->order_by('b.name', 'ASC');
+        $query = $this->db_boats->get();
+        $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+        if ($resultBoats) {
+            $result['data'] = $resultBoats;
+            return $result;
+        }
+        return false;
+    }
+
+    public function getOrdersByUser($id = null)
+    {
+        $this->db_orders->select('b.id, b.name, b.conditions');
+        $this->db_orders->from("boats b");
+        $this->db_orders->where('b.status', 1);
+        $this->db_orders->order_by('b.created_at', 'ASC');
+        $query = $this->db_orders->get();
+        $resultOrders = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        return $resultOrders;
+    }
+
+    public function getBoatById($id)
+    {
+        $this->db_boats->select('*');
+        $this->db_boats->from('boats');
+        $this->db_boats->where('id', $id);
+
+        $query = $this->db_boats->get();
+        $resultBoat['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
+
+        return $resultBoat;
     }
 
 }

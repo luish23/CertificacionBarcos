@@ -35,24 +35,33 @@ class Orders extends RESTController {
 
     public function listOrder_get()
     {
-        $data = $this->users_model->getAllUsers();
+        $data = $this->orders_model->getOrdersByUser($this->session->user_id);
+        
         $template = array('title' => 'Listado de Ordenes');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('orders/listOrder',array('user' => (array)$data));
-        $this->load->view("dashboard/footer_dashboard");
+        $this->load->view('orders/listOrders',$data);
+        $this->load->view("orders/footer_order");
+        
     }
 
     public function formOrder_get()
     {
-        $data = $this->users_model->getAllUsers();
-        $template = array('title' => 'Registrar Ordenes');
-        $this->load->view("dashboard/header_dashboard",$template);
-        $this->load->view("layout_nav_top");
-        $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('orders/formOrder');
-        $this->load->view("orders/footer_order");
+        $data = $this->boats_model->getBoatsNotDocument($this->session->user_id);
+        if($data)
+        {
+            $template = array('title' => 'Registrar Ordenes');
+            $this->load->view("dashboard/header_dashboard",$template);
+            $this->load->view("layout_nav_top");
+            $this->load->view("layout_nav_left",$this->session_data);
+            $this->load->view('orders/formOrder', $data);
+            $this->load->view("orders/footer_order");
+        }else{
+            echo "<script>alert('No tiene registro de Navios pendientes por Orden');</script>";
+            redirect('dashboard', 'refresh');
+        }
+        
     }
 
     public function registerOrder_post()
@@ -60,7 +69,7 @@ class Orders extends RESTController {
         $idWord = null;
         $idPdf = null;
 
-        $pathDate = "/" . date("Y") . "/" . date("m") . "/" . date("d") . "/";
+        $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
         getDir(FCPATH . 'uploads/'.$pathDate);
 
         if(!empty($_FILES['word']['name']))
@@ -81,7 +90,7 @@ class Orders extends RESTController {
         
             if($this->upload->do_upload('word')){
                 $uploadData = $this->upload->data();
-                $doc_word = array('file_name' => $uploadData['file_name'], 'file_ext' => $uploadData['file_ext']);
+                $doc_word = array('file_name' => $uploadData['file_name'], 'file_ext' => $uploadData['file_ext'], 'path_dir' => $config['upload_path']);
                 $idWord = $this->orders_model->insertDocuments($doc_word);
             }
         }
@@ -104,7 +113,7 @@ class Orders extends RESTController {
         
             if($this->upload->do_upload('pdf')){
                 $uploadData = $this->upload->data();
-                $doc_pdf = array('file_name' => $uploadData['file_name'], 'file_ext' => $uploadData['file_ext']);
+                $doc_pdf = array('file_name' => $uploadData['file_name'], 'file_ext' => $uploadData['file_ext'], 'path_dir' => $config['upload_path']);
                 $idPdf = $this->orders_model->insertDocuments($doc_pdf);
             }
         }  
@@ -116,8 +125,20 @@ class Orders extends RESTController {
                     );
         if($this->orders_model->insertOrder($data))
         {
-            redirect("formOrder");
+            $response = $this->orders_model->updateOrderConditions($this->input->post('id_boat'));
+            if ($response) {
+                echo "<script>alert('Orden Registrada satisfactoriamente!!');</script>";
+                redirect('formOrder', 'refresh');
+            }
         }
+    }
+
+    public function modalOrder_get()
+    {
+        $id = $this->input->get('id');
+
+        $data = $this->boats_model->getBoatById($id);
+        $this->load->view('orders/modalOrder', $data);
     }
  
 }

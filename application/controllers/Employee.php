@@ -29,7 +29,7 @@ class Employee extends RESTController {
 
     public function index_get()
     {
-        echo "Controller Users";
+        echo "Controller Employee";
     }
 
     public function listEmployee_get()
@@ -45,12 +45,14 @@ class Employee extends RESTController {
 
     public function formEmployee_get()
     {
-        $data = $this->users_model->getAllUsers();
+        $data = $this->users_model->getUsersNotAssigned();
+        $data['typeUser'] = $this->users_model->getTypeUser();
+        
         $template = array('title' => 'Registrar Empleados');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('employees/formEmployee');
+        $this->load->view('employees/formEmployee',$data);
         $this->load->view("employees/footer_employee");
     }
 

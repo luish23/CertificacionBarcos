@@ -66,4 +66,56 @@ class Orders_model extends CI_Model {
         }
     }
 
+    public function updateOrderConditions($id)
+    {
+        $this->db_boats->set('conditions', 'PROCESO');
+        $this->db_boats->where('id', $id);
+        $this->db_boats->update('boats');
+
+        $result = ($this->db_boats->affected_rows() > 0) ? true :  false;
+        return $result;
+    }
+
+    public function getOrdersByUser($id)
+    {
+        $result['data'] = false;
+        $this->db_orders->select('GROUP_CONCAT(codBoat) AS ids');
+        $this->db_orders->from('relation_user_boat');
+        $this->db_orders->where('codUser', $id);
+        $query = $this->db_orders->get();
+        $resultOrders = ($query!==false && $query->num_rows() > 0) ? $query->row('ids') : false;
+
+        if ($resultOrders) {
+            $this->db_boats->select('b.id, b.name, b.number_imo, b.conditions, o.codWord, o.codPDF');
+            $this->db_boats->from('boats b');
+            $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
+            $this->db_boats->join($this->db_boats->database.'.documents d', ($this->db_boats->database.'.o.codWord = d.id OR '. $this->db_boats->database.'.o.codPDF = d.id'));
+            $this->db_boats->where("b.id IN ($resultOrders)");
+            $this->db_boats->group_by("b.id");
+            $query = $this->db_boats->get();
+            $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+            if ($resultBoats) {
+                $result['data'] = $resultBoats;
+                return $result;
+            }
+
+            return $result;
+        }
+
+        return false;
+    }
+
+    public function getDownload($id)
+    {
+        $this->db_documents->select('path_dir, file_name, file_ext');
+        $this->db_documents->from('documents');
+        $this->db_documents->where('id', $id);
+
+        $query = $this->db_documents->get();
+        $resultDocuments = ($query!==false && $query->num_rows() > 0) ? $query->row() : false;
+
+        return $resultDocuments;
+    }
+
 }
