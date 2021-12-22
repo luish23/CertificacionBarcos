@@ -31,15 +31,15 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="registerEmployee" method="POST">
+              <form id="employeeForm" action="registerEmployee" method="POST">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nombres</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Jose Luis">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Introducir nombre">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Apellidos</label>
-                    <input type="text" name="lastNAme" class="form-control" id="lastNAme" placeholder="Yanez Martinez">
+                    <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Introducir apellido">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">DNI</label>

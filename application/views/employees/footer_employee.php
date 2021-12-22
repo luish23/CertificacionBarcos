@@ -35,7 +35,7 @@
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../public/assets/dist/js/demo.js"></script> -->
 <!-- Custom JS login -->
-<script src="../public/assets/dist/js/users.js"></script>
+<script src="../public/assets/dist/js/employee.js"></script>
 
 </body>
 </html>

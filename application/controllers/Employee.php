@@ -60,7 +60,7 @@ class Employee extends RESTController {
     {
         $data = array(
             "name" => $this->input->post('name'),
-            "lastNAme" => $this->input->post('lastNAme'),
+            "lastName" => $this->input->post('lastName'),
             "gender" => $this->input->post('gender'),
             "phone" => $this->input->post('phone'),
             "dni" => $this->input->post('dni'),
