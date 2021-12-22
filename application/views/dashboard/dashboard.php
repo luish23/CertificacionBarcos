@@ -8,10 +8,9 @@
             <h1 class="m-0">Página Pricipal</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <!-- <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item active">Página Pricipal</li>
-            </ol>
+            </ol> -->
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->

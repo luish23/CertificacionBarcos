@@ -31,19 +31,54 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="registerUsers" method="POST">
+              <form id="quickForm" action="registerEmployee" method="POST">
                 <div class="card-body">
                   <div class="form-group">
+                    <label for="exampleInputEmail1">Nombres</label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Jose Luis">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Apellidos</label>
+                    <input type="text" name="lastNAme" class="form-control" id="lastNAme" placeholder="Yanez Martinez">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">DNI</label>
+                    <input type="number" name="dni" class="form-control" id="dni" placeholder="987654321">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Telefono</label>
+                    <input type="number" name="phone" class="form-control" id="phone" placeholder="987654321">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Sexo</label>
+                    <select class="form-control" name="gender" id="gender">
+                      <option value="0">Seleccione</option>
+                      <option value="Femenino">Femenino</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Usuario</label>
-                    <input type="email" name="username" class="form-control" id="username" placeholder="usuario@dominio.com">
+                    <select class="form-control" name="codUser" id="codUser">
+                      <option value="0">Seleccione</option>
+                      <?php 
+                        foreach ($data as $key => $value) {
+                            echo '<option value="'.$value['id'].'">'.$value['user'].'</option>';
+                        }
+                    ?>
+                    </select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword2">Confirm Password</label>
-                    <input type="password" name="password_confirm" class="form-control" id="password_confirm" data-rule-equalTo="#password" placeholder="Confirm Password">
+                    <label for="exampleInputEmail1">Tipo de Usuario</label>
+                    <select class="form-control" name="codTypeUser" id="codTypeUser">
+                      <option value="0">Seleccione</option>
+                      <?php 
+                        foreach ($typeUser as $key => $value2) {
+                            echo '<option value="'.$value2['id'].'">'.$value2['description'].'</option>';
+                        }
+                    ?>
+                    </select>
                   </div>
                 </div>
                 <!-- /.card-body -->

@@ -34,13 +34,13 @@ class Boats extends RESTController {
 
     public function listBoat_get()
     {
-        $data = $this->users_model->getAllUsers();
-        $template = array('title' => 'Listado de Empleados');
+        $data = $this->boats_model->getBoatsByUser($this->session->user_id);
+        $template = array('title' => 'Listado de Barcos');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('employees/listEmployees',array('user' => (array)$data));
-        $this->load->view("dashboard/footer_dashboard");
+        $this->load->view('boats/listBoats',$data);
+        $this->load->view("boats/footer_boat");
     }
 
     public function formBoat_get()
@@ -93,6 +93,14 @@ class Boats extends RESTController {
         }
         
         
+    }
+
+    public function modalBoats_get()
+    {
+        $id = $this->input->get('id');
+
+        $data = $this->boats_model->getBoatById($id);
+        $this->load->view('boats/modalBoat', $data);
     }
  
 }

@@ -51,5 +51,33 @@ class Users_model extends CI_Model {
 
         return true;
     }
+    public function getUsersNotAssigned()
+    {
+        $result['data'] = false;
+        $this->db_users->select('id, user');
+        $this->db_users->from('users');
+        $this->db_users->where('assigned',0);
+        $this->db_users->where('status',1);
+        $query = $this->db_users->get();
+        $resultUsers = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        if ($resultUsers) {
+            $result['data'] = $resultUsers;
+            return $result;
+        }
+
+        return $resultUsers;
+    }
+
+    public function getTypeUser()
+    {
+        $this->db_typeuser->select('id, description');
+        $this->db_typeuser->from('typeUser');
+        $this->db_typeuser->where('status',1);
+        $query = $this->db_typeuser->get();
+        $resultTypeUsers = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        return $resultTypeUsers;
+    }
 
 }

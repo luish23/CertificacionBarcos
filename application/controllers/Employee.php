@@ -29,7 +29,7 @@ class Employee extends RESTController {
 
     public function index_get()
     {
-        echo "Controller Users";
+        echo "Controller Employee";
     }
 
     public function listEmployee_get()
@@ -45,32 +45,38 @@ class Employee extends RESTController {
 
     public function formEmployee_get()
     {
-        $data = $this->users_model->getAllUsers();
+        $data = $this->users_model->getUsersNotAssigned();
+        $data['typeUser'] = $this->users_model->getTypeUser();
+        
         $template = array('title' => 'Registrar Empleados');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('employees/formEmployee');
+        $this->load->view('employees/formEmployee',$data);
         $this->load->view("employees/footer_employee");
     }
 
     public function registerEmployee_post()
     {
-        if (!empty($this->input->post('username')) && !empty($this->input->post('password'))) {
-            $data = array(  'user' => $this->input->post('username'),
-                            'password' => MD5($this->input->post('password')),
-                            'activated_date' => date("Y-m-d H:m:i"),
-                            'status' => 1
-                        );
+        $data = array(
+            "name" => $this->input->post('name'),
+            "lastNAme" => $this->input->post('lastNAme'),
+            "gender" => $this->input->post('gender'),
+            "phone" => $this->input->post('phone'),
+            "dni" => $this->input->post('dni'),
+            "codUser" => $this->input->post('codUser'),
+            "codTypeUser" => $this->input->post('codTypeUser'),
+        );
 
-            $response = $this->users_model->insertUser($data);
-            redirect('formUsers');
-        }else{
-            $this->response( [
-                'status' => false,
-                'message' => 'Datos no recibidos'
-            ], 200 );
+        $response = $this->employees_model->insertEmployee($data);
+        if ($response) {
+            echo "<script>alert('Empleado registrado satisfactoriamente!!');</script>";
+            redirect('formEmployee', 'refresh');
         }
+        else {
+            echo "Hubo un error al Insertar la data"; die;
+        }
+        
         
     }
  

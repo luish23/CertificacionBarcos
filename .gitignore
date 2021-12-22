@@ -13,3 +13,7 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+
+uploads/*
+!uploads/index.html
+!uploads/.htaccess
