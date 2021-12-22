@@ -58,21 +58,25 @@ class Employee extends RESTController {
 
     public function registerEmployee_post()
     {
-        if (!empty($this->input->post('username')) && !empty($this->input->post('password'))) {
-            $data = array(  'user' => $this->input->post('username'),
-                            'password' => MD5($this->input->post('password')),
-                            'activated_date' => date("Y-m-d H:m:i"),
-                            'status' => 1
-                        );
+        $data = array(
+            "name" => $this->input->post('name'),
+            "lastNAme" => $this->input->post('lastNAme'),
+            "gender" => $this->input->post('gender'),
+            "phone" => $this->input->post('phone'),
+            "dni" => $this->input->post('dni'),
+            "codUser" => $this->input->post('codUser'),
+            "codTypeUser" => $this->input->post('codTypeUser'),
+        );
 
-            $response = $this->users_model->insertUser($data);
-            redirect('formUsers');
-        }else{
-            $this->response( [
-                'status' => false,
-                'message' => 'Datos no recibidos'
-            ], 200 );
+        $response = $this->employees_model->insertEmployee($data);
+        if ($response) {
+            echo "<script>alert('Empleado registrado satisfactoriamente!!');</script>";
+            redirect('formEmployee', 'refresh');
         }
+        else {
+            echo "Hubo un error al Insertar la data"; die;
+        }
+        
         
     }
  

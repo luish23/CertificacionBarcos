@@ -103,7 +103,7 @@ class Orders_model extends CI_Model {
             return $result;
         }
 
-        return false;
+        return $result;
     }
 
     public function getDownload($id)

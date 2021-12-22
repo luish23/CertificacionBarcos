@@ -31,7 +31,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form id="quickForm" action="registerEmpleoyee" method="POST">
+              <form id="quickForm" action="registerEmployee" method="POST">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nombres</label>
@@ -44,6 +44,10 @@
                   <div class="form-group">
                     <label for="exampleInputEmail1">DNI</label>
                     <input type="number" name="dni" class="form-control" id="dni" placeholder="987654321">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Telefono</label>
+                    <input type="number" name="phone" class="form-control" id="phone" placeholder="987654321">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Sexo</label>

@@ -22,4 +22,24 @@ class Employees_model extends CI_Model {
         return $resultEmployee;
         // return $this->db_employee->last_Query();
     }
+
+    public function insertEmployee($data)
+    {
+        $this->db_employee->trans_start();
+        $this->db_employee->trans_strict(FALSE);
+
+        $this->db_employee->insert('employee', $data);
+        $this->db_employee->where('id', $data['codUser']);
+        $this->db_employee->update('users', ['assigned' => 1]);
+
+        if ($this->db_employee->trans_status() === FALSE) {
+            $this->db_employee->trans_rollback();
+
+            return false;
+        }
+
+        $this->db_employee->trans_commit();
+
+        return true;
+    }
 }

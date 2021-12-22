@@ -115,7 +115,7 @@ class Boats_model extends CI_Model {
             return $result;
         }
 
-        return false;
+        return $result;
 
     }
 
