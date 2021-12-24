@@ -33,6 +33,17 @@
               <!-- form start -->
               <form id="ordersForm" action="registerOrder" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
+                <div class="form-group err-form">
+                    <label for="exampleInputEmail1">Oficina</label>
+                    <select class="form-control" id="codOffice" name="codOffice">
+                    <option value="0">Seleccione</option>
+                    <?php 
+                        foreach ($offices as $key => $value2) {
+                            echo '<option value="'.$value2['id'].'">'.$value2['office'].'</option>';
+                        }
+                    ?>   
+                    </select>
+                  </div>
                   <div class="form-group err-form">
                     <label for="exampleInputEmail1">Navio</label>
                     <select class="form-control" id="id_boat" name="id_boat">
@@ -45,7 +56,6 @@
                         
                     </select>
                   </div>
-                  
                   <div class="input-group err-form">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="word" name="word">

@@ -39,13 +39,12 @@ class Users extends RESTController {
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('users/listUsers',array('user' => (array)$data));
-        $this->load->view("dashboard/footer_dashboard");
+        $this->load->view('users/listUsers',$data);
+        $this->load->view("users/footer_users");
     }
 
     public function formUsers_get()
     {
-        $data = $this->users_model->getAllUsers();
         $template = array('title' => 'Registrar Usuarios');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -59,12 +58,17 @@ class Users extends RESTController {
         if (!empty($this->input->post('username')) && !empty($this->input->post('password'))) {
             $data = array(  'user' => $this->input->post('username'),
                             'password' => MD5($this->input->post('password')),
-                            'activated_date' => date("Y-m-d H:m:i"),
                             'status' => 1
                         );
 
             $response = $this->users_model->insertUser($data);
-            redirect('formUsers');
+            if ($response) {
+                echo "<script>alert('Usuario registrado satisfactoriamente!!');</script>";
+                redirect('formUsers', 'refresh');
+            }
+            else {
+                echo "Hubo un error al Insertar la data"; die;
+            }
         }else{
             $this->response( [
                 'status' => false,
@@ -72,6 +76,13 @@ class Users extends RESTController {
             ], 200 );
         }
         
+    }
+
+    public function modalUser_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->users_model->getUserById($id);
+        $this->load->view('users/modalUser', $data);
     }
  
 }

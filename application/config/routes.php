@@ -67,6 +67,7 @@ $route['logout']['GET']       = 'Login/logout';
 $route['listUsers']['GET']          = 'Users/listUsers';
 $route['formUsers']['GET']          = 'Users/formUsers';
 $route['registerUsers']['POST']     = 'Users/registerUsers';
+$route['modalUser']['GET']          = 'Users/modalUser';
 
 /*
 * ROUTES DASHBOARD 
