@@ -53,7 +53,7 @@ class Boats_model extends CI_Model {
     {
         $this->db_boats->select('b.id, b.name');
         $this->db_boats->from("boats b");
-        $this->db_boats->join($this->db_boats->database.'.relation_user_boat', $this->db_boats->database.'.relation_user_boat.codBoat = b.id');
+        $this->db_boats->join($this->db_boats->database.'.relation_user_boat', ($this->db_boats->database.'.relation_user_boat.codBoat = b.id AND '. $this->db_boats->database.'.relation_user_boat.codUser ='.$id));
         $this->db_boats->where('b.conditions', 'INICIADO');
         $this->db_boats->where('b.status', 1);
         $this->db_boats->order_by('b.name', 'ASC');
@@ -92,7 +92,7 @@ class Boats_model extends CI_Model {
         return $resultBoat;
     }
 
-    public function getBoatsByUser($idUser)
+    public function getBoatsByUser($idUser = null)
     {
         $result['data'] = false;
         $this->db_boats->select('GROUP_CONCAT(codBoat) AS ids');
@@ -107,10 +107,10 @@ class Boats_model extends CI_Model {
             $this->db_boats->where("b.id IN ($resultBoats)");
             $this->db_boats->group_by("b.id");
             $query = $this->db_boats->get();
-            $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+            $resultBoats2 = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 
-            if ($resultBoats) {
-                $result['data'] = $resultBoats;
+            if ($resultBoats2) {
+                $result['data'] = $resultBoats2;
                 return $result;
             }
 
@@ -119,6 +119,31 @@ class Boats_model extends CI_Model {
 
         return $result;
 
+    }
+
+    public function getAllBoats()
+    {
+        $result['data'] = false;
+        $this->db_boats->select('b.*');
+        $this->db_boats->from('boats b');
+        $this->db_boats->group_by("b.id");
+        $query = $this->db_boats->get();
+        $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        if ($resultBoats) {
+            $result['data'] = $resultBoats;
+            return $result;
+        }
+
+        return $result;
+    }
+
+    public function updateBoat($data, $id)
+    {
+        $this->db_boats->where('id', $id);
+        $this->db_boats->update('boats',$data);
+
+        return $this->db_boats->affected_rows();
     }
 
 }

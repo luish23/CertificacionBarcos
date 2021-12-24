@@ -33,8 +33,14 @@ class Boats extends RESTController {
     }
 
     public function listBoat_get()
-    {
-        $data = $this->boats_model->getBoatsByUser($this->session->user_id);
+    {   
+        if ($this->session->codTypeUser == 1) // Admin
+        {
+            $data = $this->boats_model->getAllBoats();
+        }else{
+            $data = $this->boats_model->getBoatsByUser($this->session->user_id);
+        }
+
         $template = array('title' => 'Listado de Barcos');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -93,12 +99,63 @@ class Boats extends RESTController {
         }
     }
 
+    public function updateBoat_post()
+    {
+        $id = $this->input->post('id');
+        $data = array(
+            "name" => $this->input->post('name'),
+            "number_imo" => $this->input->post('number_imo'),
+            "shipowner" => $this->input->post('shipowner'),
+            "number_register" => $this->input->post('number_register'),
+            "call_sign" => $this->input->post('call_sign'),
+            "year_build" => $this->input->post('year_build'),
+            "place_build" => $this->input->post('place_build'),
+            "shipyard" => $this->input->post('shipyard'),
+            "type_boat" => $this->input->post('type_boat'),
+            "navigation" => $this->input->post('navigation'),
+            "service" => $this->input->post('service'),
+            "number_approved_passengers" => $this->input->post('number_approved_passengers'),
+            "total_length" => $this->input->post('total_length'),
+            "length_perpendiculars" => $this->input->post('length_perpendiculars'),
+            "manga" => $this->input->post('manga'),
+            "structure" => $this->input->post('structure'),
+            "gross_tonnage" => $this->input->post('gross_tonnage'),
+            "liquid_tonnage" => $this->input->post('liquid_tonnage'),
+            "gross_transport" => $this->input->post('gross_transport'),
+            "amount" => $this->input->post('amount'),
+            "mark" => $this->input->post('mark'),
+            "model" => $this->input->post('model'),
+            "power_speed" => $this->input->post('power_speed')
+        );
+
+        $response = $this->boats_model->updateBoat($data, $id);
+        if ($response) {
+            // $relation = array('codUser' => $this->session->user_id, 'codBoat' => $response);
+            // $this->boats_model->relationUserBoat($relation);
+            echo "<script>alert('Navio Actulizado satisfactoriamente!!');</script>";
+            redirect('listBoats', 'refresh');
+        }
+        else {
+            echo "<script>alert('Hubo un error al Actualizar la data');</script>";
+            redirect('dashboard', 'refresh');
+        }
+    }
+    
+
     public function modalBoats_get()
     {
         $id = $this->input->get('id');
 
         $data = $this->boats_model->getBoatById($id);
         $this->load->view('boats/modalBoat', $data);
+    }
+
+    public function modalBoatsUp_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->boats_model->getBoatById($id);
+
+        $this->load->view('boats/modalBoatUp', $data);
     }
  
 }

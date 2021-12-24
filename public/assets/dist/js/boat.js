@@ -10,6 +10,18 @@ $(document).ready(function(){
           }
       });
    });
+
+   $('#updateBoat').on('show.bs.modal', function (e) {
+    var rowid = $(e.relatedTarget).data('id');
+    $.ajax({
+        type : 'get',
+        url : 'modalBoatUp', //Here you will fetch records 
+        data :  'id='+ rowid, //Pass $id
+        success : function(data){
+        $('.fetched-dataUp').html(data);//Show fetched data from database
+        }
+    });
+ });
 });
 
 $(function () {

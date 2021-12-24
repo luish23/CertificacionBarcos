@@ -34,7 +34,7 @@
                   <tr>
                     <th>Nombre</th>
                     <th>IMO</th>
-                    <th>Estado</th>
+                    <th>Condicion</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
@@ -46,7 +46,7 @@
                       echo "<td>".$value['name']."</td>";
                       echo "<td>".$value['number_imo']."</td>";
                       echo "<td>".$value['conditions']."</td>";                     
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3'><i class='far fa-edit' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
+                      echo "<td><button type='button' title='Ver Navio' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".(int)$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button><button type='button' title='Editar Navio' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBoat' data-id=".(int)$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button><button type='button' title='Eliminar Navio' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
                       echo "</tr>";
                     }
                   }
@@ -56,7 +56,7 @@
                   <tr>
                     <th>Nombre</th>
                     <th>IMO</th>
-                    <th>Estado</th>
+                    <th>Condicion</th>
                     <th>Acciones</th>
                   </tr>
                   </tfoot>
@@ -85,6 +85,19 @@
           </div>
           <div class="modal-body">
               <div class="fetched-data"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateBoat" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Editar Información</h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataUp"></div>
           </div>
       </div>
   </div>

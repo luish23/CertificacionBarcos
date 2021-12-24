@@ -35,7 +35,13 @@ class Orders extends RESTController {
 
     public function listOrder_get()
     {
-        $data = $this->orders_model->getOrdersByUser($this->session->user_id);
+        if ($this->session->codTypeUser == 1) // Admin
+        {
+            $data = $this->orders_model->getAllOrders();
+        }else{
+            $data = $this->orders_model->getOrdersByUser($this->session->user_id);
+        }
+        
         $template = array('title' => 'Listado de Ordenes');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");

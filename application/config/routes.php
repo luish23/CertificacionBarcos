@@ -89,6 +89,9 @@ $route['listBoats']['GET']          = 'Boats/listBoat';
 $route['formBoat']['GET']           = 'Boats/formBoat';
 $route['registerBoat']['POST']      = 'Boats/registerBoat';
 $route['modalBoat']['GET']          = 'Boats/modalBoats';
+$route['modalBoatUp']['GET']        = 'Boats/modalBoatsUp';
+$route['updateBoat']['POST']        = 'Boats/updateBoat';
+
 
 
 /* 
