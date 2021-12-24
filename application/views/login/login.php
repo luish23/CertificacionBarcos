@@ -16,6 +16,9 @@
 
   <div class="frame">
   <div id="msg"></div>
+      <div>
+        <img src="../public/assets/dist/img/logo_naval_services_blank.png" alt="Naval Services" width="50%">
+      </div>
       <div ng-app ng-init="checked = false">
         <form class="form-signin" action="login" method="POST" name="form"> 
           <label for="username">Username</label> 

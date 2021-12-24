@@ -17,6 +17,10 @@ $(function () {
 
   $('#ordersForm').validate({
     rules:{
+        codOffice: {
+          required: true,
+          min:1
+        },
         word:{
             required:true,
             extension: "docx|doc"
@@ -34,6 +38,10 @@ $(function () {
         pdf:{
             required:"Campo Obligatorio",                  
             extension:"Seleccione el formato válido (pdf)"
+        },
+        codOffice: {
+          required: "Por favor seleccione la Oficina",
+          min: "Por favor seleccione la Oficina"
         }
     },
     errorElement: 'span',

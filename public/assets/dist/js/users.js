@@ -1,9 +1,19 @@
+
+$(document).ready(function(){
+  $('#seeUser').on('show.bs.modal', function (e) {
+      var rowid = $(e.relatedTarget).data('id');
+      $.ajax({
+          type : 'get',
+          url : 'modalUser', //Here you will fetch records 
+          data :  'id='+ rowid, //Pass $id
+          success : function(data){
+          $('.fetched-data').html(data);//Show fetched data from database
+          }
+      });
+   });
+});
+
 $(function () {
-//   $.validator.setDefaults({
-//     submitHandler: function () {
-//       alert( "Usuario Registrado!!" );
-//     }
-// });
   $('#userForm').validate({
     rules: {
       username: {
@@ -42,5 +52,21 @@ $(function () {
     unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass('is-invalid');
     }
+  });
+});
+
+$(function () {
+  $("#example1").DataTable({
+    "responsive": true, "lengthChange": false, "autoWidth": false,
+    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+  }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  $('#example2').DataTable({
+    "paging": true,
+    "lengthChange": false,
+    "searching": false,
+    "ordering": true,
+    "info": true,
+    "autoWidth": false,
+    "responsive": true,
   });
 });

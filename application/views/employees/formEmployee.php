@@ -50,6 +50,14 @@
                     <input type="number" name="phone" class="form-control" id="phone" placeholder="987654321">
                   </div>
                   <div class="form-group">
+                    <label for="exampleInputEmail1">Cargo</label>
+                    <input type="text" name="position" class="form-control" id="position" placeholder="Introducir Cargo">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Dirección</label>
+                    <input type="text" name="address" class="form-control" id="address" placeholder="Introducir Dirección">
+                  </div>
+                  <div class="form-group">
                     <label for="exampleInputEmail1">Sexo</label>
                     <select class="form-control" name="gender" id="gender">
                       <option value="0">Seleccione</option>

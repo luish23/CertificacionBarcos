@@ -32,8 +32,10 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>IMO</th>
+                    <th>Oficina</th>
                     <th>Estado</th>
                     <th>Visualizar Documento</th>
                     <th>Acciones</th>
@@ -44,8 +46,10 @@
                   {
                     foreach ($data as $key => $value) {
                       echo "<tr>";
+                      echo "<td>".$value['office'].str_pad($value['id'], 3, '0', STR_PAD_LEFT).$value['anyo']."</td>";
                       echo "<td>".$value['name']."</td>";
                       echo "<td>".$value['number_imo']."</td>";
+                      echo "<td>".$value['office']."</td>";
                       echo "<td>".$value['conditions']."</td>";
                       echo "<td>";
                       if ($value['codWord']) {
@@ -60,7 +64,7 @@
                         echo "<button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
                       } 
                       
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3'><i class='far fa-edit' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
+                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3'><i class='far fa-edit' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
                       echo "</tr>";
                     }
                   }
@@ -68,8 +72,10 @@
                   </tbody>
                   <tfoot>
                   <tr>
+                    <th>#</th>
                     <th>Nombre</th>
                     <th>IMO</th>
+                    <th>Oficina</th>
                     <th>Estado</th>
                     <th>Visualizar Documento</th>
                     <th>Acciones</th>
@@ -90,14 +96,9 @@
     <!-- /.content -->
   </div>
 
-
-
 <div class="modal fade" id="seeBoat" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">Información</h4>
-          </div>
           <div class="modal-body">
               <div class="fetched-data"></div>
           </div>

@@ -10,7 +10,7 @@ class Orders extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("boats_model","users_model","login_model", "orders_model"));
+        $this->load->model(array("boats_model","users_model","login_model", "orders_model", "offices_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
         $this->load->helper(array("custom"));
@@ -42,7 +42,6 @@ class Orders extends RESTController {
         $this->load->view("layout_nav_left",$this->session_data);
         $this->load->view('orders/listOrders',$data);
         $this->load->view("orders/footer_order");
-        
     }
 
     public function formOrder_get()
@@ -50,6 +49,7 @@ class Orders extends RESTController {
         $data = $this->boats_model->getBoatsNotDocument($this->session->user_id);
         if($data)
         {
+            $data['offices'] = $this->offices_model->getOffice();
             $template = array('title' => 'Registrar Ordenes');
             $this->load->view("dashboard/header_dashboard",$template);
             $this->load->view("layout_nav_top");
@@ -118,6 +118,7 @@ class Orders extends RESTController {
         }  
         
         $data = array(  'codUser' => $this->session->user_id, 
+                        'codOffice' => $this->input->post('codOffice'),
                         'codBoat' => $this->input->post('id_boat'),
                         'codWord' => $retVal = ($idWord != null) ? $idWord : null,
                         'codPDF' => $retVal = ($idPdf != null) ? $idPdf : null 
@@ -135,7 +136,6 @@ class Orders extends RESTController {
     public function modalOrder_get()
     {
         $id = $this->input->get('id');
-
         $data = $this->boats_model->getBoatById($id);
         $this->load->view('orders/modalOrder', $data);
     }

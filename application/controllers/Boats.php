@@ -45,7 +45,6 @@ class Boats extends RESTController {
 
     public function formBoat_get()
     {
-        $data = $this->users_model->getAllUsers();
         $template = array('title' => 'Registrar Empleados');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -86,13 +85,12 @@ class Boats extends RESTController {
         if ($response) {
             $relation = array('codUser' => $this->session->user_id, 'codBoat' => $response);
             $this->boats_model->relationUserBoat($relation);
-            redirect('formBoat');
+            echo "<script>alert('Navio registrado satisfactoriamente!!');</script>";
+            redirect('formBoat', 'refresh');
         }
         else {
             echo "Hubo un error al Insertar la data"; die;
         }
-        
-        
     }
 
     public function modalBoats_get()

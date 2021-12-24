@@ -34,12 +34,12 @@ class Employee extends RESTController {
 
     public function listEmployee_get()
     {
-        $data = $this->users_model->getAllUsers();
+
         $template = array('title' => 'Listado de Empleados');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('employees/listEmployees',array('user' => (array)$data));
+        $this->load->view('employees/listEmployees');
         $this->load->view("dashboard/footer_dashboard");
     }
 
@@ -64,6 +64,8 @@ class Employee extends RESTController {
             "gender" => $this->input->post('gender'),
             "phone" => $this->input->post('phone'),
             "dni" => $this->input->post('dni'),
+            "position" => $this->input->post('position'),
+            "address" => $this->input->post('address'),
             "codUser" => $this->input->post('codUser'),
             "codTypeUser" => $this->input->post('codTypeUser'),
         );

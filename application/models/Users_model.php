@@ -19,19 +19,22 @@ class Users_model extends CI_Model {
         $query = $this->db_users->get();
         $resultUsers = ($query!==false && $query->num_rows() > 0) ? $query->row("id") : false;
         return $resultUsers;
-        // return $this->db_users->last_Query();
     }
 
     public function getAllUsers()
     {
-        $this->db_employee->select('e.codUser, e.name, e.lastName, e.codTypeUser, e.status, '.$this->db_typeuser->database.'.typeUser.description, ' .$this->db_users->database.'.users.user, '.$this->db_users->database.'.users.password');
-        $this->db_employee->from("employee e");
-        $this->db_employee->join($this->db_typeuser->database.'.typeUser', $this->db_typeuser->database.'.typeUser.id = e.codTypeUser');
-        $this->db_employee->join($this->db_users->database.'.users', $this->db_users->database.'.users.id = e.codUser');
-        $query = $this->db_employee->get();
-        $resultUsers = ($query!==false && $query->num_rows() > 0) ? $query->row() : false;
-        return $resultUsers;
-        // return $this->db_employee->last_Query();
+        $result['data'] = false;
+        $this->db_users->select('u.id, u.user, u.password, u.assigned, u.status');
+        $this->db_users->from("users u");
+        $query = $this->db_users->get();
+        $resultUsers = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        if ($resultUsers) {
+            $result['data'] = $resultUsers;
+            return $result;
+        }
+
+        return $result;
     }
 
     public function insertUser($data)
@@ -66,7 +69,7 @@ class Users_model extends CI_Model {
             return $result;
         }
 
-        return $resultUsers;
+        return $result;
     }
 
     public function getTypeUser()
@@ -78,6 +81,24 @@ class Users_model extends CI_Model {
         $resultTypeUsers = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 
         return $resultTypeUsers;
+    }
+
+    public function getUserById($id)
+    {
+        $result['data'] = false;
+        $this->db_users->select('e.*, u.*');
+        $this->db_users->from('employee e');
+        $this->db_users->join($this->db_users->database.'.users u', $this->db_users->database.'.u.id ='.$id);
+        $this->db_users->where('e.codUser',$id);
+        $query = $this->db_users->get();
+        $resultUser = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
+
+        if ($resultUser) {
+            $result['data'] = $resultUser;
+            return $result;
+        }
+
+        return $result;
     }
 
 }
