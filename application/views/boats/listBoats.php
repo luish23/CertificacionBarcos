@@ -46,7 +46,9 @@
                       echo "<td>".$value['name']."</td>";
                       echo "<td>".$value['number_imo']."</td>";
                       echo "<td>".$value['conditions']."</td>";                     
-                      echo "<td><button type='button' title='Ver Navio' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".(int)$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button><button type='button' title='Editar Navio' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBoat' data-id=".(int)$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button><button type='button' title='Eliminar Navio' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
+                      echo "<td><button type='button' title='Ver Navio' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".(int)$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
+                      <button type='button' title='Editar Navio' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBoat' data-id=".(int)$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
+                      <button type='button' data-toggle='modal' data-target='#delBoat' title='Eliminar Navio' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-id=".(int)$value['id']."><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
                       echo "</tr>";
                     }
                   }
@@ -98,6 +100,19 @@
           </div>
           <div class="modal-body">
               <div class="fetched-dataUp"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delBoat" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content bg-secondary">
+          <div class="modal-header">
+              <h4 class="modal-title">Seguro desea eliminar el registro?</h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataDel"></div>
           </div>
       </div>
   </div>

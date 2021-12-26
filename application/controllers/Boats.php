@@ -130,9 +130,7 @@ class Boats extends RESTController {
 
         $response = $this->boats_model->updateBoat($data, $id);
         if ($response) {
-            // $relation = array('codUser' => $this->session->user_id, 'codBoat' => $response);
-            // $this->boats_model->relationUserBoat($relation);
-            echo "<script>alert('Navio Actulizado satisfactoriamente!!');</script>";
+            echo "<script>alert('Navio Actualizado satisfactoriamente!!');</script>";
             redirect('listBoats', 'refresh');
         }
         else {
@@ -140,22 +138,46 @@ class Boats extends RESTController {
             redirect('dashboard', 'refresh');
         }
     }
+
+    public function deleteBoat_post()
+    {
+        $id = $this->input->post('id');
+
+        $response = $this->boats_model->deleteBoat($id);
+
+        if ($response) {
+            echo "<script>alert('Navio Eliminado satisfactoriamente!!');</script>";
+            redirect('listBoats', 'refresh');
+        }
+        else {
+            echo "<script>alert('Hubo un error al Actualizar la data');</script>";
+            redirect('dashboard', 'refresh');
+        }
+
+    }
     
 
     public function modalBoats_get()
     {
         $id = $this->input->get('id');
+        $data = $this->boats_model->getBoatMinById($id);
 
-        $data = $this->boats_model->getBoatById($id);
         $this->load->view('boats/modalBoat', $data);
     }
 
     public function modalBoatsUp_get()
     {
         $id = $this->input->get('id');
-        $data = $this->boats_model->getBoatById($id);
+        $data = $this->boats_model->getBoatMinById($id);
 
         $this->load->view('boats/modalBoatUp', $data);
+    }
+
+    public function modalBoatsDel_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->boats_model->getBoatMinById($id);
+        $this->load->view('boats/modalBoatDel', $data);
     }
  
 }

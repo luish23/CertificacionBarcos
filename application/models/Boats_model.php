@@ -85,11 +85,21 @@ class Boats_model extends CI_Model {
         $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat ='.$id);
         $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
         $this->db_boats->where('b.id', $id);
-
+        $this->db_boats->where('b.status', 1);
         $query = $this->db_boats->get();
         $resultBoat['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
-// print_r($this->db_boats->last_query()); die;
         return $resultBoat;
+    }
+
+    public function getBoatMinById($id)
+    {
+        $this->db_boats->select('b.*');
+        $this->db_boats->from('boats b');
+        $this->db_boats->where('b.id', $id);
+        $this->db_boats->where('b.status', 1);
+        $query = $this->db_boats->get();
+        $resultBoatDel['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
+        return $resultBoatDel;
     }
 
     public function getBoatsByUser($idUser = null)
@@ -105,6 +115,7 @@ class Boats_model extends CI_Model {
             $this->db_boats->select('b.*');
             $this->db_boats->from('boats b');
             $this->db_boats->where("b.id IN ($resultBoats)");
+            $this->db_boats->where('b.status', 1);
             $this->db_boats->group_by("b.id");
             $query = $this->db_boats->get();
             $resultBoats2 = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
@@ -126,6 +137,7 @@ class Boats_model extends CI_Model {
         $result['data'] = false;
         $this->db_boats->select('b.*');
         $this->db_boats->from('boats b');
+        $this->db_boats->where('b.status', 1);
         $this->db_boats->group_by("b.id");
         $query = $this->db_boats->get();
         $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
@@ -142,6 +154,16 @@ class Boats_model extends CI_Model {
     {
         $this->db_boats->where('id', $id);
         $this->db_boats->update('boats',$data);
+
+        return $this->db_boats->affected_rows();
+    }
+
+    public function deleteBoat($id)
+    {
+        $this->db_boats->set('status', 0);
+        $this->db_boats->set('conditions', 'ELIMINADO');
+        $this->db_boats->where('id', $id);
+        $this->db_boats->update('boats');
 
         return $this->db_boats->affected_rows();
     }
