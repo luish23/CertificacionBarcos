@@ -165,7 +165,16 @@ class Boats_model extends CI_Model {
         $this->db_boats->where('id', $id);
         $this->db_boats->update('boats');
 
+        $this->_deleteOrder($id);
+
         return $this->db_boats->affected_rows();
+    }
+
+    private function _deleteOrder($id)
+    {
+        $this->db_orders->set('status', 0);
+        $this->db_orders->where('codBoat', $id);
+        $this->db_orders->update('orders');
     }
 
 }

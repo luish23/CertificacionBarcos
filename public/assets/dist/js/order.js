@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#seeBoat').on('show.bs.modal', function (e) {
+  $('#seeOrder').on('show.bs.modal', function (e) {
       var rowid = $(e.relatedTarget).data('id');
       $.ajax({
           type : 'get',
@@ -10,6 +10,31 @@ $(document).ready(function(){
           }
       });
    });
+
+   $('#updateOrder').on('show.bs.modal', function (e) {
+    var rowid = $(e.relatedTarget).data('id');
+    $.ajax({
+        type : 'get',
+        url : 'modalOrderUp', //Here you will fetch records 
+        data :  'id='+ rowid, //Pass $id
+        success : function(data){
+        $('.fetched-dataUp').html(data);//Show fetched data from database
+        }
+    });
+  });
+
+  $('#delOrder').on('show.bs.modal', function (e) {
+    var rowid = $(e.relatedTarget).data('id');
+    $.ajax({
+        type : 'get',
+        url : 'modalOrderDel', //Here you will fetch records 
+        data :  'id='+ rowid, //Pass $id
+        success : function(data){
+        $('.fetched-dataDel').html(data);//Show fetched data from database
+        }
+    });
+  });
+
 });
 
 $(function () {
@@ -18,6 +43,10 @@ $(function () {
   $('#ordersForm').validate({
     rules:{
         codOffice: {
+          required: true,
+          min:1
+        },
+        codBoat: {
           required: true,
           min:1
         },
@@ -38,6 +67,10 @@ $(function () {
         pdf:{
             required:"Campo Obligatorio",                  
             extension:"Seleccione el formato válido (pdf)"
+        },
+        codBoat: {
+          required: "Por favor seleccione el Navio",
+          min: "Por favor seleccione el Navio"
         },
         codOffice: {
           required: "Por favor seleccione la Oficina",

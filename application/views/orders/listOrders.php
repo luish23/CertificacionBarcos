@@ -46,7 +46,7 @@
                   {
                     foreach ($data as $key => $value) {
                       echo "<tr>";
-                      echo "<td>".$value['office'].str_pad($value['id'], 3, '0', STR_PAD_LEFT).$value['anyo']."</td>";
+                      echo "<td>".$value['office'].str_pad($value['idOrder'], 3, '0', STR_PAD_LEFT).$value['anyo']."</td>";
                       echo "<td>".$value['name']."</td>";
                       echo "<td>".$value['number_imo']."</td>";
                       echo "<td>".$value['office']."</td>";
@@ -64,7 +64,9 @@
                         echo "<button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
                       } 
                       
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3'><i class='far fa-edit' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
+                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateOrder' data-id=".$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
                       echo "</tr>";
                     }
                   }
@@ -96,11 +98,37 @@
     <!-- /.content -->
   </div>
 
-<div class="modal fade" id="seeBoat" role="dialog">
+<div class="modal fade" id="seeOrder" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
           <div class="modal-body">
               <div class="fetched-data"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateOrder" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Editar Información</h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataUp"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delOrder" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content bg-secondary">
+          <div class="modal-header">
+              <h4 class="modal-title">Seguro desea eliminar el registro?</h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataDel"></div>
           </div>
       </div>
   </div>

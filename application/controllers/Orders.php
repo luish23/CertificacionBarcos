@@ -125,13 +125,15 @@ class Orders extends RESTController {
         
         $data = array(  'codUser' => $this->session->user_id, 
                         'codOffice' => $this->input->post('codOffice'),
-                        'codBoat' => $this->input->post('id_boat'),
+                        'codBoat' => $this->input->post('codBoat'),
                         'codWord' => $retVal = ($idWord != null) ? $idWord : null,
                         'codPDF' => $retVal = ($idPdf != null) ? $idPdf : null 
                     );
+
         if($this->orders_model->insertOrder($data))
         {
-            $response = $this->orders_model->updateOrderConditions($this->input->post('id_boat'));
+            $response = $this->orders_model->updateOrderConditions($this->input->post('codBoat'));
+
             if ($response) {
                 echo "<script>alert('Orden Registrada satisfactoriamente!!');</script>";
                 redirect('formOrder', 'refresh');
@@ -139,11 +141,117 @@ class Orders extends RESTController {
         }
     }
 
+    public function updateOrder_post()
+    {        
+        $idWord = null;
+        $idPdf = null;
+
+        $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
+        getDir(FCPATH . 'uploads/'.$pathDate);
+
+        $idOrder = $this->input->post('idOrder');
+
+        if(!empty($_FILES['word']['name']))
+        {
+            $_FILES['word']['name'] = $_FILES['word']['name'];
+            $_FILES['word']['type'] = $_FILES['word']['type'];
+            $_FILES['word']['tmp_name'] = $_FILES['word']['tmp_name'];
+            $_FILES['word']['error'] = $_FILES['word']['error'];
+            $_FILES['word']['size'] = $_FILES['word']['size'];
+            
+            $config['upload_path'] = 'uploads/'.$pathDate; 
+            $config['allowed_types'] = 'pdf|docx|doc|xls|xlsx';
+            $config['max_size'] = '5000';
+            $config['file_name'] = $_FILES['word']['name'];
+            $config['overwrite']     = FALSE;
+            $this->load->library('upload',$config); 
+            $this->upload->initialize($config);
+        
+            if($this->upload->do_upload('word')){
+                $uploadData = $this->upload->data();
+                $doc_word = array('file_name' => $uploadData['file_name'], 'file_ext' => $uploadData['file_ext'], 'path_dir' => $config['upload_path']);
+                $idWord = $this->orders_model->insertDocuments($doc_word);
+            }
+        }
+
+        if(!empty($_FILES['pdf']['name']))
+        {
+            $_FILES['pdf']['name'] = $_FILES['pdf']['name'];
+            $_FILES['pdf']['type'] = $_FILES['pdf']['type'];
+            $_FILES['pdf']['tmp_name'] = $_FILES['pdf']['tmp_name'];
+            $_FILES['pdf']['error'] = $_FILES['pdf']['error'];
+            $_FILES['pdf']['size'] = $_FILES['pdf']['size'];
+            
+            $config['upload_path'] = 'uploads/'.$pathDate; 
+            $config['allowed_types'] = 'pdf|docx|doc|xls|xlsx';
+            $config['max_size'] = '5000';
+            $config['file_name'] = $_FILES['pdf']['name'];
+            $config['overwrite']     = FALSE;
+            $this->load->library('upload',$config); 
+            $this->upload->initialize($config);
+        
+            if($this->upload->do_upload('pdf')){
+                $uploadData = $this->upload->data();
+                $doc_pdf = array('file_name' => $uploadData['file_name'], 'file_ext' => $uploadData['file_ext'], 'path_dir' => $config['upload_path']);
+                $idPdf = $this->orders_model->insertDocuments($doc_pdf);
+            }
+        }  
+        
+        $data = array(  'codUser' => $this->session->user_id, 
+                        'codOffice' => $this->input->post('codOffice'),
+                        'codBoat' => $this->input->post('codBoat'),
+                        'codWord' => $retVal = ($idWord != null) ? $idWord : $this->input->post('idword_old'),
+                        'codPDF' => $retVal = ($idPdf != null) ? $idPdf : $this->input->post('idpdf_old') 
+                    );
+        if($this->orders_model->updateOrder($data, $idOrder))
+        {
+                echo "<script>alert('Orden Actualizada satisfactoriamente!!');</script>";
+                redirect('listOrders', 'refresh');
+        }else{
+            echo "Hubo un error al actualizar Orden!!.";
+        }
+    }
+
+    public function deleteOrder_post()
+    {
+        $id = $this->input->post('id');
+
+        $response = $this->orders_model->deleteOrder($id);
+
+        if ($response) {
+            echo "<script>alert('Orden Eliminada satisfactoriamente!!');</script>";
+            redirect('listOrders', 'refresh');
+        }
+        else {
+            echo "<script>alert('Hubo un error al Eliminar la data');</script>";
+            redirect('dashboard', 'refresh');
+        }
+
+    }
+
     public function modalOrder_get()
     {
         $id = $this->input->get('id');
         $data = $this->boats_model->getBoatById($id);
         $this->load->view('orders/modalOrder', $data);
+    }
+
+    public function modalOrderUp_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->orders_model->getOrderBoatById($id);
+        if ($data) {
+            $data['offices'] = $this->offices_model->getOffice();
+        }
+        $this->load->view('orders/modalOrderUp', $data);
+    }
+
+    public function modalOrderDel_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->orders_model->getOrderById($id);
+        // print_r($data); die;
+        $this->load->view('orders/modalOrderDel', $data);
     }
  
 }

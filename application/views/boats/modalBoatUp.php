@@ -126,7 +126,7 @@
         <!-- Modal Footer -->
         <div class="modal-footer">
             <input type="hidden" name="id" id="id" value="<?php echo $data['id']; ?>">
-            <button type="submit" id="submit" class="btn btn-success">Guardar</button>
+            <button type="submit" id="submit" class="btn btn-success">Actualizar</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
     </div>

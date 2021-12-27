@@ -46,7 +46,7 @@
                   </div>
                   <div class="form-group err-form">
                     <label for="exampleInputEmail1">Navio</label>
-                    <select class="form-control" id="id_boat" name="id_boat">
+                    <select class="form-control" id="codBoat" name="codBoat">
                     <option value="0">Seleccione</option>
                     <?php 
                         foreach ($data as $key => $value) {

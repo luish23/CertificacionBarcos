@@ -103,6 +103,10 @@ $route['listOrders']['GET']          = 'Orders/listOrder';
 $route['formOrder']['GET']           = 'Orders/formOrder';
 $route['registerOrder']['POST']      = 'Orders/registerOrder';
 $route['modalOrder']['GET']          = 'Orders/modalOrder';
+$route['modalOrderUp']['GET']        = 'Orders/modalOrderUp';
+$route['modalOrderDel']['GET']       = 'Orders/modalOrderDel';
+$route['updateOrder']['POST']        = 'Orders/updateOrder';
+$route['deleteOrder']['POST']        = 'Orders/deleteOrder';
 
 /* 
 * ROUTES DOWNLOAD
