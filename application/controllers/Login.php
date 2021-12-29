@@ -12,7 +12,15 @@ class Login extends RESTController {
         parent::__construct();
         $this->load->model(array("login_model","users_model","employees_model"));
         $this->load->helper(array('url','form'));
-        $this->load->library(array('form_validation','session'));
+        $this->load->library(array('form_validation','session','encryption'));
+        $this->key = $this->config->item('encryption_key');
+        $this->encryption->initialize(
+            array(  'driver' => 'openssl',
+                    'cipher' => 'aes-128',
+                    'mode' => 'ctr',
+                    'key' => $this->key
+            )
+        );
         $this->msg = ['msg' => false];
     }
 
@@ -30,7 +38,7 @@ class Login extends RESTController {
     public function login_post()
     {
         $username = $this->input->post('username');
-        $password = $this->input->post('password');
+        $password =$this->input->post('password');
 
         $this->form_validation->set_rules('username', 'Username', 'required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required');
@@ -46,7 +54,7 @@ class Login extends RESTController {
             }
             $this->load->view('login/login',$this->msg); 
         }else{
-            $data = $this->users_model->getUsers($username,$password);
+            $data = $this->users_model->veriffUsers($username,$password);
 
             if ($data) {
                 $userData = $this->employees_model->getEmployee($data);

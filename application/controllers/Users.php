@@ -12,9 +12,18 @@ class Users extends RESTController {
         parent::__construct();
         $this->load->model(array("users_model","login_model"));
         $this->load->helper(array('url'));
-        $this->load->library(array('session'));
+        $this->load->library(array('session','encryption'));
+        
         if($this->login_model->logged_id())
 		{
+            $this->key = $this->config->item('encryption_key');
+            $this->encryption->initialize(
+                array(  'driver' => 'openssl',
+                        'cipher' => 'aes-128',
+                        'mode' => 'ctr',
+                        'key' => $this->key
+                )
+            );
 			$this->session_data = array(
 				'user_id'       => $this->session->user_id,
 				'name'          => $this->session->name,
@@ -57,7 +66,7 @@ class Users extends RESTController {
     {
         if (!empty($this->input->post('username')) && !empty($this->input->post('password'))) {
             $data = array(  'user' => $this->input->post('username'),
-                            'password' => MD5($this->input->post('password')),
+                            'password' => $this->encryption->encode($this->input->post('password')),
                             'status' => 1
                         );
 
@@ -78,11 +87,56 @@ class Users extends RESTController {
         
     }
 
+    public function updateUsers_post()
+    {
+        
+        if (!empty($this->input->post('id')) && !empty($this->input->post('password')) && !empty($this->input->post('password_confirm'))) {
+            $id = $this->input->post('id');
+
+            if ($this->input->post('password') != $this->input->post('password_confirm')) {
+                echo "<script>alert('Las contraseñas no coinciden!!');</script>";
+                redirect('listUsers', 'refresh');
+            }else {
+                $data = $this->encryption->encrypt($this->input->post('password'));
+
+                $response = $this->users_model->updatetUser($data, $id);
+                if ($response) {
+                    echo "<script>alert('Usuario Actualizado satisfactoriamente!!');</script>";
+                    redirect('listUsers', 'refresh');
+                }
+                else {
+                    echo "Hubo un error al Actualizar la data"; die;
+                }     
+            }
+        }else{
+            $this->response( [
+                'status' => false,
+                'message' => 'Datos no recibidos'
+            ], 200 );
+        }
+    }
+
     public function modalUser_get()
     {
         $id = $this->input->get('id');
         $data = $this->users_model->getUserById($id);
         $this->load->view('users/modalUser', $data);
+    }
+
+    public function modalUserUp_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->users_model->getOnlyUserById($id);
+        $data['data']['password'] = $this->encryption->decrypt($data['data']['password']);
+        $this->load->view('users/modalUserUp', $data);
+    }
+
+    public function modalUserDel_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->users_model->getUserById($id);
+        print_r($data); 
+        $this->load->view('users/modalUserDel', $data);
     }
  
 }

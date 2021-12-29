@@ -148,12 +148,12 @@
                   <p>Empresa</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="/listEmployee" class="nav-link">
                   <i class="fas fa-list-ul"></i>
                   <p>Otros</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
         </ul>

@@ -11,7 +11,48 @@ $(document).ready(function(){
           }
       });
    });
+
+   $('#updateUser').on('show.bs.modal', function (e) {
+    var rowid = $(e.relatedTarget).data('id');
+    $.ajax({
+        type : 'get',
+        url : 'modalUserUp', //Here you will fetch records 
+        data :  'id='+ rowid, //Pass $id
+        success : function(data){
+        $('.fetched-dataUp').html(data);//Show fetched data from database
+        }
+    });
+   });
+
+   $('#deleteUser').on('show.bs.modal', function (e) {
+    var rowid = $(e.relatedTarget).data('id');
+    $.ajax({
+        type : 'get',
+        url : 'modalUserDel', //Here you will fetch records 
+        data :  'id='+ rowid, //Pass $id
+        success : function(data){
+        $('.fetched-dataDel').html(data);//Show fetched data from database
+        }
+    });
+   });
+   
 });
+
+
+function mostrarPassword(){
+  var cambio = document.getElementById("password");
+  var cambio2 = document.getElementById("password_confirm");
+  if(cambio.type == "password" || cambio2.type == "password"){
+    cambio.type = "text";
+    cambio2.type = "text";
+    $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+  }else{
+    cambio.type = "password";
+    cambio2.type = "password";
+    $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+  }
+}
+
 
 $(function () {
   $('#userForm').validate({
@@ -53,6 +94,7 @@ $(function () {
       $(element).removeClass('is-invalid');
     }
   });
+
 });
 
 $(function () {

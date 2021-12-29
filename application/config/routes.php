@@ -68,6 +68,10 @@ $route['listUsers']['GET']          = 'Users/listUsers';
 $route['formUsers']['GET']          = 'Users/formUsers';
 $route['registerUsers']['POST']     = 'Users/registerUsers';
 $route['modalUser']['GET']          = 'Users/modalUser';
+$route['modalUserUp']['GET']        = 'Users/modalUserUp';
+$route['modalUserDel']['GET']       = 'Users/modalUserDel';
+$route['updateUsers']['POST']       = 'Users/updateUsers';
+$route['deleteUsers']['POST']       = 'Users/deleteUsers';
 
 /*
 * ROUTES DASHBOARD 

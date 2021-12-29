@@ -46,7 +46,9 @@
                       echo "<td>".$value['user']."</td>";
                       echo "<td>". $retVal = ($value['assigned']) ? 'Si' : 'No' ."</td>";
                       echo "<td>". $retVal2 = ($value['status']) ? 'Activo' : 'Inactivo' ."</td>";                      
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeUser' data-id='".(int)$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3'><i class='far fa-edit' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
+                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeUser' data-id='".(int)$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateUser' data-id='".(int)$value['id']."'><i class='far fa-edit' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#deleteUser' data-id='".(int)$value['id']."'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
                       echo "</tr>";
                     }
                   }
@@ -85,6 +87,32 @@
           </div>
           <div class="modal-body">
               <div class="fetched-data"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateUser" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h4 class="modal-title">Editar Información</h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataUp"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="deleteUser" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content bg-secondary">
+          <div class="modal-header">
+          <h4 class="modal-title">Seguro desea eliminar el registro?</h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataDel"></div>
           </div>
       </div>
   </div>

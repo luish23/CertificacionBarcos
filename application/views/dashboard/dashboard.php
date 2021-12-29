@@ -73,7 +73,7 @@
                 <div class="inner">
                     <h3><?php echo $RECHAZADO; ?></h3>
 
-                    <p>Órdenes Rechazadas</p>
+                    <p>Órdenes Canceladas</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
