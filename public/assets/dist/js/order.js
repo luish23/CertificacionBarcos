@@ -35,6 +35,58 @@ $(document).ready(function(){
     });
   });
 
+  $('#codTypeCertification').change(function() {
+    var selectNavio = $("#codBoat").find('option:selected').val();
+    var selectCertif = $('option:selected', this).attr('value');
+
+    $.ajax({
+      type : 'post',
+      url : 'veriffOrder', //Here you will fetch records 
+      data :  'idCer='+ selectCertif+'&idNav='+selectNavio, //Pass $id
+      success : function(data){
+        if( JSON.stringify(data.response) == 'true'){
+          alert('Ya existe una orden con igual tipo de certificacion');
+          $(":submit").attr("disabled", true);
+          $(":submit").removeClass("btn-success");
+          $(":submit").addClass("btn-secondary");
+        }
+        else{
+          $(":submit").removeAttr("disabled");
+          $(":submit").removeClass("btn-secondary");
+          $(":submit").addClass("btn-success");
+        }
+      }
+    });
+
+    $('#codBoat').change(function() {
+      var selectCertif = $("#codTypeCertification").find('option:selected').val();
+      var selectNavio = $('option:selected', this).attr('value');
+      
+      if (selectCertif > 0) {
+        $.ajax({
+          type : 'post',
+          url : 'veriffOrder', //Here you will fetch records 
+          data :  'idCer='+ selectCertif+'&idNav='+selectNavio, //Pass $id
+          success : function(data){
+            if( JSON.stringify(data.response) == 'true'){
+              alert('Ya existe una orden con igual tipo de certificacion');
+              $(":submit").attr("disabled", true);
+              $(":submit").removeClass("btn-success");
+              $(":submit").addClass("btn-secondary");
+            }
+            else{
+              $(":submit").removeAttr("disabled");
+              $(":submit").removeClass("btn-secondary");
+              $(":submit").addClass("btn-success");
+            }
+          }
+        });
+      }
+
+    });
+    
+  });
+
 });
 
 $(function () {
@@ -50,27 +102,35 @@ $(function () {
           required: true,
           min:1
         },
-        word:{
-            required:true,
-            extension: "docx|doc"
-        },
-        pdf:{
-            required:true,
-            extension: "pdf"
+        codTypeCertification: {
+          required: true,
+          min:1
         }
+        // word:{
+        //     required:true,
+        //     extension: "docx|doc"
+        // },
+        // pdf:{
+        //     required:true,
+        //     extension: "pdf"
+        // }
     },
     messages: {  // <-- you must declare messages inside of "messages" option
-        word:{
-            required:"Campo Obligatorio",                  
-            extension:"Seleccione el formato válido (docx|doc)"
-        },
-        pdf:{
-            required:"Campo Obligatorio",                  
-            extension:"Seleccione el formato válido (pdf)"
-        },
+        // word:{
+        //     required:"Campo Obligatorio",                  
+        //     extension:"Seleccione el formato válido (docx|doc)"
+        // },
+        // pdf:{
+        //     required:"Campo Obligatorio",                  
+        //     extension:"Seleccione el formato válido (pdf)"
+        // },
         codBoat: {
           required: "Por favor seleccione el Navio",
           min: "Por favor seleccione el Navio"
+        },
+        codTypeCertification: {
+          required: "Por favor seleccione el Tipo de Certificación a realizar",
+          min: "Por favor seleccione el Tipo de Certificación a realizar"
         },
         codOffice: {
           required: "Por favor seleccione la Oficina",

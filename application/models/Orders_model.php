@@ -112,10 +112,9 @@ class Orders_model extends CI_Model {
     public function getAllOrders()
     {
         $result['data'] = false;
-        $this->db_boats->select('b.id, b.name, b.number_imo, b.conditions, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_boats->select('b.id, b.name, b.number_imo, o.id AS idOrder, o.condition, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_boats->from('boats b');
         $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
-        $this->db_boats->join($this->db_boats->database.'.documents d', ($this->db_boats->database.'.o.codWord = d.id OR '. $this->db_boats->database.'.o.codPDF = d.id'));
         $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
         $this->db_boats->where("b.status",1);
         $this->db_boats->where("o.status",1);
@@ -203,6 +202,19 @@ class Orders_model extends CI_Model {
         $this->db_boats->set('conditions', 'INICIADO');
         $this->db_boats->where('id', $idBoat);
         $this->db_boats->update('boats');
+    }
+
+    public function validOrder($idNav, $idCer)
+    {
+        $this->db_orders->select('id');
+        $this->db_orders->from('orders');
+        $this->db_orders->where('codBoat', $idNav);
+        $this->db_orders->where('codTypeCertification', $idCer);
+
+        $query = $this->db_orders->get();
+        $result = ($query!==false && $query->num_rows() > 0) ? true : false;
+        return $result;
+
     }
 
 }

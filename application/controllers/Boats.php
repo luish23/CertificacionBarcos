@@ -34,12 +34,12 @@ class Boats extends RESTController {
 
     public function listBoat_get()
     {   
-        if ($this->session->codTypeUser == 1) // Admin
-        {
+        // if ($this->session->codTypeUser == 1) // Admin
+        // {
             $data = $this->boats_model->getAllBoats();
-        }else{
-            $data = $this->boats_model->getBoatsByUser($this->session->user_id);
-        }
+        // }else{
+        //     $data = $this->boats_model->getBoatsByUser($this->session->user_id);
+        // }
 
         $template = array('title' => 'Listado de Barcos');
         $this->load->view("dashboard/header_dashboard",$template);

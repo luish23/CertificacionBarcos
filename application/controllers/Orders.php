@@ -10,7 +10,7 @@ class Orders extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("boats_model","users_model","login_model", "orders_model", "offices_model"));
+        $this->load->model(array("boats_model","users_model","login_model", "orders_model", "offices_model", "certifications_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
         $this->load->helper(array("custom"));
@@ -33,14 +33,14 @@ class Orders extends RESTController {
         echo "Controller Orders";
     }
 
+    /**
+     * FUNCION QUE PERMITE LISTAR LAS ORDENES
+     * Inputs: user_id
+     * Output: view orders/listOrders
+     */
     public function listOrder_get()
     {
-        if ($this->session->codTypeUser == 1) // Admin
-        {
-            $data = $this->orders_model->getAllOrders();
-        }else{
-            $data = $this->orders_model->getOrdersByUser($this->session->user_id);
-        }
+        $data = $this->orders_model->getAllOrders();
         
         $template = array('title' => 'Listado de Ordenes');
         $this->load->view("dashboard/header_dashboard",$template);
@@ -50,12 +50,17 @@ class Orders extends RESTController {
         $this->load->view("orders/footer_order");
     }
 
+    /**
+     * FUNCION QUE PERMITE GENERAR LA VISTA DE FORMULARIO
+     * Output: view orders/formOrder
+     */
     public function formOrder_get()
     {
-        $data = $this->boats_model->getBoatsNotDocument($this->session->user_id);
+        $data = $this->boats_model->getBoatsNotDocument();
         if($data)
         {
             $data['offices'] = $this->offices_model->getOffice();
+            $data['certifications'] = $this->certifications_model->getTypeCertifications();
             $template = array('title' => 'Registrar Ordenes');
             $this->load->view("dashboard/header_dashboard",$template);
             $this->load->view("layout_nav_top");
@@ -69,6 +74,11 @@ class Orders extends RESTController {
         
     }
 
+    /**
+     * FUNCION QUE PERMITE REGISTRAR LA ORDEN
+     * Inputs: Files, user_id, codOffice, codBoat
+     * Output: null
+     */
     public function registerOrder_post()
     {        
         $idWord = null;
@@ -126,18 +136,20 @@ class Orders extends RESTController {
         $data = array(  'codUser' => $this->session->user_id, 
                         'codOffice' => $this->input->post('codOffice'),
                         'codBoat' => $this->input->post('codBoat'),
+                        'codTypeCertification' => $this->input->post('codTypeCertification'),
+                        'condition' => 'INICIADO',
                         'codWord' => $retVal = ($idWord != null) ? $idWord : null,
                         'codPDF' => $retVal = ($idPdf != null) ? $idPdf : null 
                     );
 
         if($this->orders_model->insertOrder($data))
         {
-            $response = $this->orders_model->updateOrderConditions($this->input->post('codBoat'));
+            // $response = $this->orders_model->updateOrderConditions($this->input->post('codBoat'));
 
-            if ($response) {
+            // if ($response) {
                 echo "<script>alert('Orden Registrada satisfactoriamente!!');</script>";
                 redirect('formOrder', 'refresh');
-            }
+            // }
         }
     }
 
@@ -200,6 +212,8 @@ class Orders extends RESTController {
         $data = array(  'codUser' => $this->session->user_id, 
                         'codOffice' => $this->input->post('codOffice'),
                         'codBoat' => $this->input->post('codBoat'),
+                        'codTypeCertification' => $this->input->post('codTypeCertification'),
+                        'condition' => 'PROCESO',
                         'codWord' => $retVal = ($idWord != null) ? $idWord : $this->input->post('idword_old'),
                         'codPDF' => $retVal = ($idPdf != null) ? $idPdf : $this->input->post('idpdf_old') 
                     );
@@ -229,6 +243,20 @@ class Orders extends RESTController {
 
     }
 
+    /**
+     * FUNCION QUE VALIDA QUE NO EXISTA ESA ORDEN EN PROCESO PARA EL NAVIO INDICADO
+     */
+    public function veriffOrder_post()
+    {
+        $idNav = $this->input->post('idNav');
+        $idCer = $this->input->post('idCer');
+        $response = $this->orders_model->validOrder($idNav, $idCer);
+
+        $this->response( [
+                    'response' => $response,
+                ], 200 );
+    }
+
     public function modalOrder_get()
     {
         $id = $this->input->get('id');
@@ -244,6 +272,7 @@ class Orders extends RESTController {
             $data['offices'] = $this->offices_model->getOffice();
         }
         $this->load->view('orders/modalOrderUp', $data);
+        $this->load->view("orders/footer_modalOrderUp");
     }
 
     public function modalOrderDel_get()

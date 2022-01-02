@@ -50,7 +50,7 @@
                       echo "<td>".$value['name']."</td>";
                       echo "<td>".$value['number_imo']."</td>";
                       echo "<td>".$value['office']."</td>";
-                      echo "<td>".$value['conditions']."</td>";
+                      echo "<td>".$value['condition']."</td>";
                       echo "<td>";
                       if ($value['codWord']) {
                         echo "<a href='download/".$value['codWord']."' class='btn btn-outline-info btn-rounded waves-effect'><i class='far fa-file-word pr-2' aria-hidden='true'></i>WORD</a>";
@@ -111,9 +111,6 @@
 <div class="modal fade" id="updateOrder" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">Editar Información</h4>
-          </div>
           <div class="modal-body">
               <div class="fetched-dataUp"></div>
           </div>

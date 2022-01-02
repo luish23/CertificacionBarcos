@@ -1,5 +1,11 @@
 <!-- form start -->
 <?php // print_r($data); die; ?>
+<div class="modal-header">
+    <h3 class="modal-title">Información<strong><?php echo '  #'.$data['office'].str_pad($data['id'], 3, '0', STR_PAD_LEFT).$data['anyo']; ?></strong></h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 <form id="ordersFormUpdate" action="updateOrder" method="POST" enctype="multipart/form-data">
     <div class="card-body">
         <div class="form-group err-form">

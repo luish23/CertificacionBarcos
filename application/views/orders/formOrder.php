@@ -56,7 +56,19 @@
                         
                     </select>
                   </div>
-                  <div class="input-group err-form">
+                  <div class="form-group err-form">
+                    <label for="exampleInputEmail1">Tipo de Certificacion</label>
+                    <select class="form-control" id="codTypeCertification" name="codTypeCertification">
+                    <option value="0">Seleccione</option>
+                    <?php 
+                        foreach ($certifications as $key => $value3) {
+                            echo '<option value="'.$value3['id'].'">'.$value3['description_min'].'</option>';
+                        }
+                    ?>
+                        
+                    </select>
+                  </div>
+                  <!-- <div class="input-group err-form">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input" id="word" name="word">
                         <label class="custom-file-label" for="exampleInputFile">Seleccione documento Word</label>
@@ -74,11 +86,11 @@
                       <div class="input-group-append">
                         <span class="input-group-text">&nbsp; PDF &nbsp;</span>
                       </div>
-                    </div>
+                    </div> -->
                 </div>   
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" id="submit" class="btn btn-primary">Registrar</button>
+                  <button type="submit" id="submit" class="btn btn-secondary" disabled>Registrar</button>
                 </div>
               </form>
             </div>

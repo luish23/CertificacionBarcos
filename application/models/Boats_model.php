@@ -49,12 +49,10 @@ class Boats_model extends CI_Model {
         return true;
     }
 
-    public function getBoatsNotDocument($id = null)
+    public function getBoatsNotDocument()
     {
         $this->db_boats->select('b.id, b.name');
         $this->db_boats->from("boats b");
-        $this->db_boats->join($this->db_boats->database.'.relation_user_boat', ($this->db_boats->database.'.relation_user_boat.codBoat = b.id AND '. $this->db_boats->database.'.relation_user_boat.codUser ='.$id));
-        $this->db_boats->where('b.conditions', 'INICIADO');
         $this->db_boats->where('b.status', 1);
         $this->db_boats->order_by('b.name', 'ASC');
         $query = $this->db_boats->get();

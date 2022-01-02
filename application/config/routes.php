@@ -111,8 +111,16 @@ $route['modalOrderUp']['GET']        = 'Orders/modalOrderUp';
 $route['modalOrderDel']['GET']       = 'Orders/modalOrderDel';
 $route['updateOrder']['POST']        = 'Orders/updateOrder';
 $route['deleteOrder']['POST']        = 'Orders/deleteOrder';
+$route['veriffOrder']['POST']        = 'Orders/veriffOrder';
 
 /* 
 * ROUTES DOWNLOAD
 */
 $route['download/(:num)']['GET']          = 'Download/index/$1';
+
+
+/*
+* CERTIFICATIONS 
+*/
+
+$route['generatePDF']['GET']        = 'Certifications/index';

@@ -34,7 +34,6 @@
                   <tr>
                     <th>Nombre</th>
                     <th>IMO</th>
-                    <th>Condicion</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
@@ -44,8 +43,7 @@
                     foreach ($data as $key => $value) {
                       echo "<tr>";
                       echo "<td>".$value['name']."</td>";
-                      echo "<td>".$value['number_imo']."</td>";
-                      echo "<td>".$value['conditions']."</td>";                     
+                      echo "<td>".$value['number_imo']."</td>";                 
                       echo "<td><button type='button' title='Ver Navio' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".(int)$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
                       <button type='button' title='Editar Navio' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBoat' data-id=".(int)$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
                       <button type='button' data-toggle='modal' data-target='#delBoat' title='Eliminar Navio' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-id=".(int)$value['id']."><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
@@ -58,7 +56,6 @@
                   <tr>
                     <th>Nombre</th>
                     <th>IMO</th>
-                    <th>Condicion</th>
                     <th>Acciones</th>
                   </tr>
                   </tfoot>
