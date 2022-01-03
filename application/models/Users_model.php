@@ -53,8 +53,9 @@ class Users_model extends CI_Model {
     public function getAllUsers()
     {
         $result['data'] = false;
-        $this->db_users->select('u.id, u.user, u.password, u.assigned, u.status');
+        $this->db_users->select('u.id, u.user, tu.description, u.password, u.assigned, u.status');
         $this->db_users->from("users u");
+        $this->db_users->join($this->db_users->database.'.typeUser tu', $this->db_users->database.'.tu.id = u.codTypeUser');
         $query = $this->db_users->get();
         $resultUsers = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 

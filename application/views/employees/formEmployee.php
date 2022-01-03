@@ -76,18 +76,7 @@
                         }
                     ?>
                     </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Tipo de Usuario</label>
-                    <select class="form-control" name="codTypeUser" id="codTypeUser">
-                      <option value="0">Seleccione</option>
-                      <?php 
-                        foreach ($typeUser as $key => $value2) {
-                            echo '<option value="'.$value2['id'].'">'.$value2['description'].'</option>';
-                        }
-                    ?>
-                    </select>
-                  </div>
+                  </div>                  
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

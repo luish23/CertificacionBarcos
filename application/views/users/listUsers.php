@@ -33,6 +33,7 @@
                   <thead>
                   <tr>
                     <th>Usuario</th>
+                    <th>Tipo Usuario</th>
                     <th>Asignado</th>
                     <th>Estado</th>
                     <th>Acciones</th>
@@ -44,6 +45,7 @@
                     foreach ($data as $key => $value) {
                       echo "<tr>";
                       echo "<td>".$value['user']."</td>";
+                      echo "<td>".$value['description']."</td>";
                       echo "<td>". $retVal = ($value['assigned']) ? 'Si' : 'No' ."</td>";
                       echo "<td>". $retVal2 = ($value['status']) ? 'Activo' : 'Inactivo' ."</td>";                      
                       echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeUser' data-id='".(int)$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button>
@@ -57,6 +59,7 @@
                   <tfoot>
                   <tr>
                     <th>Usuario</th>
+                    <th>Tipo Usuario</th>
                     <th>Asignado</th>
                     <th>Estado</th>
                     <th>Acciones</th>

@@ -55,10 +55,11 @@ class Users extends RESTController {
     public function formUsers_get()
     {
         $template = array('title' => 'Registrar Usuarios');
+        $data['typeUser'] = $this->users_model->getTypeUser();
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('users/formUsers');
+        $this->load->view('users/formUsers',$data);
         $this->load->view("users/footer_users");
     }
 
@@ -66,6 +67,7 @@ class Users extends RESTController {
     {
         if (!empty($this->input->post('username')) && !empty($this->input->post('password'))) {
             $data = array(  'user' => $this->input->post('username'),
+                            'codTypeUser' => $this->input->post('codTypeUser'),
                             'password' => $this->encryption->encrypt($this->input->post('password')),
                             'status' => 1
                         );

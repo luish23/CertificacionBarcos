@@ -45,8 +45,7 @@ class Employee extends RESTController {
 
     public function formEmployee_get()
     {
-        $data = $this->users_model->getUsersNotAssigned();
-        $data['typeUser'] = $this->users_model->getTypeUser();
+        $data = $this->users_model->getUsersNotAssigned();        
         
         $template = array('title' => 'Registrar Empleados');
         $this->load->view("dashboard/header_dashboard",$template);
