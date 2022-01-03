@@ -50,7 +50,7 @@
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../public/assets/dist/js/demo.js"></script> -->
 <!-- Custom JS login -->
-<script src="../public/assets/dist/js/employee.js"></script>
+<script src="../public/assets/dist/js/business.js"></script>
 
 </body>
 </html>

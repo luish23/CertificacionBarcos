@@ -85,6 +85,12 @@
                   <p>Listado de Ordenes</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="/checkOrders" class="nav-link">
+                <i class="fas fa-check"></i>
+                  <p>Validar Ordenes</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item menu-open">
@@ -143,7 +149,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/formEmployee" class="nav-link">
+                <a href="/listBusiness" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                   <p>Empresa</p>
                 </a>

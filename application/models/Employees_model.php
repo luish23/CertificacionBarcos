@@ -20,7 +20,15 @@ class Employees_model extends CI_Model {
         $query = $this->db_employee->get();
         $resultEmployee = ($query!==false && $query->num_rows() > 0) ? $query->row() : false;
         return $resultEmployee;
-        // return $this->db_employee->last_Query();
+    }
+
+    public function getEmployees()
+    {
+        $this->db_employee->select('*');
+        $this->db_employee->from("employee");
+        $query = $this->db_employee->get();
+        $resultEmployees['data'] = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+        return $resultEmployees;
     }
 
     public function insertEmployee($data)

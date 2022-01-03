@@ -126,3 +126,10 @@ $route['download/(:num)']['GET']          = 'Download/index/$1';
 
 $route['modalCertificado']['GET']            = 'Certifications/modalCertificado';
 $route['generateCertificate']['POST']        = 'Certifications/index';
+
+/**
+ * BUSINESS
+ */
+
+$route['business']['GET']        = 'Business/index';
+$route['listBusiness']['GET']        = 'Business/listBusiness';
