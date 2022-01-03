@@ -99,7 +99,9 @@ class Users extends RESTController {
                 echo "<script>alert('Las contraseñas no coinciden!!');</script>";
                 redirect('listUsers', 'refresh');
             }else {
-                $data = $this->encryption->encrypt($this->input->post('password'));
+                $data['password'] = $this->encryption->encrypt($this->input->post('password'));
+                $data['codTypeUser'] = $this->input->post('codTypeUser');
+                $data['status'] = $this->input->post('status');
 
                 $response = $this->users_model->updatetUser($data, $id);
                 if ($response) {
@@ -129,6 +131,7 @@ class Users extends RESTController {
     {
         $id = $this->input->get('id');
         $data = $this->users_model->getOnlyUserById($id);
+        $data['typeUser'] = $this->users_model->getTypeUser();
         $data['data']['password'] = $this->encryption->decrypt($data['data']['password']);
         $this->load->view('users/modalUserUp', $data);
     }

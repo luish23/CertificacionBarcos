@@ -19,10 +19,6 @@ $(function () {
             required: true,
             min:1
           },
-          codTypeUser: {
-            required: true,
-            min:1
-          },
         },
         messages: {
             name: {
@@ -37,10 +33,6 @@ $(function () {
           codUser: {
             required: "Por favor seleccione un Usuario",
             min: "Por favor seleccione un Usuario"
-          },
-          codTypeUser: {
-            required: "Por favor seleccione un Tipo de Usuario",
-            min: "Por favor seleccione un Tipo de Usuario"
           },
         },
         errorElement: 'span',

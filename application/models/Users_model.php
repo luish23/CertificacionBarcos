@@ -87,7 +87,9 @@ class Users_model extends CI_Model {
 
     public function updatetUser($data, $id)
     {
-        $this->db_users->set('password', $data);
+        $this->db_users->set('password', $data['password']);
+        $this->db_users->set('codTypeUser', $data['codTypeUser']);
+        $this->db_users->set('status', $data['status']);
         $this->db_users->where('id', $id);
         $this->db_users->update('users');
 

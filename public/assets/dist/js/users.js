@@ -70,11 +70,19 @@ $(function () {
         minlength : 5,
         equalTo : "#password_confirm"
       },
+      codTypeUser: {
+        required: true,
+        min:1
+      },
     },
     messages: {
       username: {
         required: "Por favor ingrese un usuario",
         email: "Por favor ingrese un usuario valido"
+      },
+      codTypeUser: {
+        required: "Por favor seleccione un Tipo de Usuario",
+        min: "Por favor seleccione un Tipo de Usuario"
       },
       password: {
         required: "Por favor introduzca un password",
