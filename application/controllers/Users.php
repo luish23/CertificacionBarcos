@@ -66,7 +66,7 @@ class Users extends RESTController {
     {
         if (!empty($this->input->post('username')) && !empty($this->input->post('password'))) {
             $data = array(  'user' => $this->input->post('username'),
-                            'password' => $this->encryption->encode($this->input->post('password')),
+                            'password' => $this->encryption->encrypt($this->input->post('password')),
                             'status' => 1
                         );
 
