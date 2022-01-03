@@ -26,9 +26,9 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                 <div class="inner">
-                    <h3><?php echo $orders; ?></h3>
+                    <h3><?php echo $retVal = (isset($TOTAL)) ? $TOTAL : 0; ?></h3>
 
-                    <p>Nuevas Órdenes</p>
+                    <p>Total de Órdenes</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -41,7 +41,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                 <div class="inner">
-                    <h3><?php echo $FINALIZADO; ?></h3>
+                    <h3><?php echo $retVal = (isset($FINALIZADO)) ? $FINALIZADO : 0; ?></h3>
 
                     <p>Órdenes Completadas</p>
                 </div>
@@ -56,9 +56,9 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3><?php echo $PROCESO; ?></h3>
+                    <h3><?php echo $retVal = (isset($PROCESO)) ? $PROCESO : 0; ?></h3>
 
-                    <p>Órdenes Pendientes</p>
+                    <p>Órdenes en Proceso</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
@@ -71,7 +71,7 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3><?php echo $RECHAZADO; ?></h3>
+                    <h3><?php echo $retVal = (isset($RECHAZADO)) ? $RECHAZADO : 0; ?></h3>
 
                     <p>Órdenes Canceladas</p>
                 </div>

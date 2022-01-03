@@ -63,10 +63,17 @@
                       }else {
                         echo "<button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
                       } 
+
+                      if ($value['condition'] != 'VALIDADO') {
+                        $disabled = 'disabled';
+                      }else {
+                        $disabled = '';
+                      }
                       
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateOrder' data-id=".$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
+                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Orden' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' title='Eliminar Orden' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-primary btn-rounded waves-effect ml-3' $disabled title='Generar Certificado' data-toggle='modal' data-target='#genCertificado' data-id=".$value['idOrder']."><i class='fas fa-file-signature' aria-hidden='true'></i></button></td>";
                       echo "</tr>";
                     }
                   }
@@ -126,6 +133,19 @@
           </div>
           <div class="modal-body">
               <div class="fetched-dataDel"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="genCertificado" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content bg-info">
+          <div class="modal-header">
+              <h4 class="modal-title">Seguro desea Generar el Certificado?</h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataGen"></div>
           </div>
       </div>
   </div>

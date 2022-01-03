@@ -11,9 +11,9 @@ class Orders extends RESTController {
     {
         parent::__construct();
         $this->load->model(array("boats_model","users_model","login_model", "orders_model", "offices_model", "certifications_model"));
-        $this->load->helper(array('url'));
+        $this->load->helper(array("url","custom"));
         $this->load->library(array('session'));
-        $this->load->helper(array("custom"));
+       
         if($this->login_model->logged_id())
 		{
 			$this->session_data = array(
@@ -85,7 +85,7 @@ class Orders extends RESTController {
         $idPdf = null;
 
         $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
-        getDir(FCPATH . 'uploads/'.$pathDate);
+        getDir(FCPATH . 'uploads/Ordenes/'.$pathDate);
 
         if(!empty($_FILES['word']['name']))
         {
@@ -95,7 +95,7 @@ class Orders extends RESTController {
             $_FILES['word']['error'] = $_FILES['word']['error'];
             $_FILES['word']['size'] = $_FILES['word']['size'];
             
-            $config['upload_path'] = 'uploads/'.$pathDate; 
+            $config['upload_path'] = 'uploads/Ordenes/'.$pathDate; 
             $config['allowed_types'] = 'pdf|docx|doc|xls|xlsx';
             $config['max_size'] = '5000';
             $config['file_name'] = $_FILES['word']['name'];
@@ -118,7 +118,7 @@ class Orders extends RESTController {
             $_FILES['pdf']['error'] = $_FILES['pdf']['error'];
             $_FILES['pdf']['size'] = $_FILES['pdf']['size'];
             
-            $config['upload_path'] = 'uploads/'.$pathDate; 
+            $config['upload_path'] = 'uploads/Ordenes/'.$pathDate; 
             $config['allowed_types'] = 'pdf|docx|doc|xls|xlsx';
             $config['max_size'] = '5000';
             $config['file_name'] = $_FILES['pdf']['name'];
@@ -171,7 +171,7 @@ class Orders extends RESTController {
             $_FILES['word']['error'] = $_FILES['word']['error'];
             $_FILES['word']['size'] = $_FILES['word']['size'];
             
-            $config['upload_path'] = 'uploads/'.$pathDate; 
+            $config['upload_path'] = 'uploads/Ordenes/'.$pathDate; 
             $config['allowed_types'] = 'pdf|docx|doc|xls|xlsx';
             $config['max_size'] = '5000';
             $config['file_name'] = $_FILES['word']['name'];
@@ -194,7 +194,7 @@ class Orders extends RESTController {
             $_FILES['pdf']['error'] = $_FILES['pdf']['error'];
             $_FILES['pdf']['size'] = $_FILES['pdf']['size'];
             
-            $config['upload_path'] = 'uploads/'.$pathDate; 
+            $config['upload_path'] = 'uploads/Ordenes/'.$pathDate; 
             $config['allowed_types'] = 'pdf|docx|doc|xls|xlsx';
             $config['max_size'] = '5000';
             $config['file_name'] = $_FILES['pdf']['name'];

@@ -113,6 +113,7 @@ $route['updateOrder']['POST']        = 'Orders/updateOrder';
 $route['deleteOrder']['POST']        = 'Orders/deleteOrder';
 $route['veriffOrder']['POST']        = 'Orders/veriffOrder';
 
+
 /* 
 * ROUTES DOWNLOAD
 */
@@ -123,4 +124,5 @@ $route['download/(:num)']['GET']          = 'Download/index/$1';
 * CERTIFICATIONS 
 */
 
-$route['generatePDF']['GET']        = 'Certifications/index';
+$route['modalCertificado']['GET']            = 'Certifications/modalCertificado';
+$route['generateCertificate']['POST']        = 'Certifications/index';

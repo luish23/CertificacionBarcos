@@ -35,6 +35,18 @@ $(document).ready(function(){
     });
   });
 
+  $('#genCertificado').on('show.bs.modal', function (e) {
+    var rowid = $(e.relatedTarget).data('id');
+    $.ajax({
+        type : 'get',
+        url : 'modalCertificado', //Here you will fetch records 
+        data :  'id='+ rowid, //Pass $id
+        success : function(data){
+        $('.fetched-dataGen').html(data);//Show fetched data from database
+        }
+    });
+  });
+
   $('#codTypeCertification').change(function() {
     var selectNavio = $("#codBoat").find('option:selected').val();
     var selectCertif = $('option:selected', this).attr('value');
