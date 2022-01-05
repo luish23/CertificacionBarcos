@@ -20,12 +20,14 @@ class Dashboard extends CI_Controller {
 			);
 		}else{
             $this->session->unset_userdata('session_data');
+			$this->session->sess_destroy();
 			redirect("login");
 		}
     }
 
 	public function index()
 	{
+		print_r($this->session_data);
 		$data = $this->dashboard_model->getInfo();
 		$template = array('title' => 'Dashboard');
 		$this->load->view("dashboard/header_dashboard",$template);

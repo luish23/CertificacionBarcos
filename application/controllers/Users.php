@@ -32,6 +32,7 @@ class Users extends RESTController {
 			);
         }else{
             $this->session->unset_userdata('session_data');
+            $this->session->sess_destroy();
 			redirect("login");
 		}
     }

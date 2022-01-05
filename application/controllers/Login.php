@@ -13,6 +13,7 @@ class Login extends RESTController {
         $this->load->model(array("login_model","users_model","employees_model"));
         $this->load->helper(array('url','form'));
         $this->load->library(array('form_validation','session','encryption'));
+        $this->lang->load('login','spanish');
         $this->key = $this->config->item('encryption_key');
         $this->encryption->initialize(
             array(  'driver' => 'openssl',
@@ -31,12 +32,14 @@ class Login extends RESTController {
 
         }else{
             $this->session->unset_userdata('session_data');
+            $this->session->sess_destroy();
             $this->load->view('login/login',$this->msg);
         }
     }
 
     public function login_post()
     {
+        print_r($this->session_data);
         $username = $this->input->post('username');
         $password =$this->input->post('password');
 
@@ -84,6 +87,7 @@ class Login extends RESTController {
     {  
         //removing session  
         $this->session->unset_userdata('session_data');  
+        $this->session->sess_destroy();
         $this->load->view('login/login',$this->msg);  
     }  
 }
