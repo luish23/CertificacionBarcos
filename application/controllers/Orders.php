@@ -39,8 +39,12 @@ class Orders extends RESTController {
      * Output: view orders/listOrders
      */
     public function listOrder_get()
-    {
-        $data = $this->orders_model->getAllOrders();
+    {   
+        if ($this->session->codTypeUser == 3) { // ARMADOR
+            $data = $this->orders_model->getOrdersByUser($this->session->user_id);
+        }else{
+            $data = $this->orders_model->getAllOrders();
+        }
         
         $template = array('title' => 'Listado de Ordenes');
         $this->load->view("dashboard/header_dashboard",$template);
@@ -257,6 +261,38 @@ class Orders extends RESTController {
                 ], 200 );
     }
 
+    /**
+     * FUNCION QUE PERMITE LISTAR LAS ORDENES A VALIDAR PARA GENERAR PDF
+     * Inputs: user_id
+     * Output: view orders/checktOrders
+     */
+    public function checkOrders_get()
+    {
+        $data = $this->orders_model->getOrdersProcess();
+        
+        $template = array('title' => 'Validar Ordenes');
+        $this->load->view("dashboard/header_dashboard",$template);
+        $this->load->view("layout_nav_top");
+        $this->load->view("layout_nav_left",$this->session_data);
+        $this->load->view('orders/checkOrders',$data);
+        $this->load->view("orders/footer_order");
+    }
+
+    public function processOrder_post()
+    {
+        $response = $this->orders_model->updateOrdersProcess($this->input->post('idOrder'));
+
+        if ($response) {
+            echo "<script>alert('Orden Validada satisfactoriamente!!');</script>";
+            redirect('listOrders', 'refresh');
+        }
+        else {
+            echo "<script>alert('Hubo un error al Validar la Order');</script>";
+            redirect('dashboard', 'refresh');
+        }
+        
+    }
+
     public function modalOrder_get()
     {
         $id = $this->input->get('id');
@@ -282,5 +318,18 @@ class Orders extends RESTController {
         // print_r($data); die;
         $this->load->view('orders/modalOrderDel', $data);
     }
- 
+
+    public function modalValidOrder_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->orders_model->getOrderBoatById($id);
+        if ($data) {
+            $data['offices'] = $this->offices_model->getOffice();
+        }
+
+        $this->load->view('orders/modalValidOrder', $data);
+        $this->load->view("orders/footer_modalOrderUp");
+
+    }
+    
 }

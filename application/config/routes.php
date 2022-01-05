@@ -112,6 +112,9 @@ $route['modalOrderDel']['GET']       = 'Orders/modalOrderDel';
 $route['updateOrder']['POST']        = 'Orders/updateOrder';
 $route['deleteOrder']['POST']        = 'Orders/deleteOrder';
 $route['veriffOrder']['POST']        = 'Orders/veriffOrder';
+$route['checkOrders']['GET']         = 'Orders/checkOrders';
+$route['modalValidOrder']['GET']     = 'Orders/modalValidOrder';
+$route['processOrder']['POST']     = 'Orders/processOrder';
 
 
 /* 

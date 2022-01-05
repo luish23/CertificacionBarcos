@@ -5,19 +5,19 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Listado de Ordenes</h1>
+            <h1 class="m-0">Validar Ordenes</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="dashboard">Inicio</a></li>
-              <li class="breadcrumb-item active">Listado de Ordenes</li>
+              <li class="breadcrumb-item active">Validar Ordenes</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-<?php // print_r($data); ?>
+
  <!-- Main content -->
  <section class="content">   
       <div class="container-fluid">
@@ -36,9 +36,8 @@
                     <th>Nombre</th>
                     <th>IMO</th>
                     <th>Oficina</th>
-                    <th>Proceso</th>
-                    <th>Documentos de Chequeo</th>
-                    <th>Certificado / Estado</th>
+                    <th>Estado</th>
+                    <th>Visualizar Documento</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
@@ -51,7 +50,7 @@
                       echo "<td>".$value['name']."</td>";
                       echo "<td>".$value['number_imo']."</td>";
                       echo "<td>".$value['office']."</td>";
-                      echo "<td>".$value['condition']."</td>";                      
+                      echo "<td>".$value['condition']."</td>";
                       echo "<td>";
                       if ($value['codWord']) {
                         echo "<a href='download/".$value['codWord']."' class='btn btn-outline-info btn-rounded waves-effect'><i class='far fa-file-word pr-2' aria-hidden='true'></i>WORD</a>";
@@ -63,12 +62,7 @@
                         echo "<a href='download/".$value['codPDF']."' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a></td>";
                       }else {
                         echo "<button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
-                      }
-                      if ($value['idCertificated']) {
-                        echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a><span class='badge badge-success ml-2'>".$value['estado']."</span></td>";
-                      }else {
-                        echo "<td><button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
-                      }  
+                      } 
 
                       if ($value['condition'] != 'VALIDADO') {
                         $disabled = 'disabled';
@@ -77,9 +71,7 @@
                       }
                       
                       echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Orden' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' title='Eliminar Orden' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-primary btn-rounded waves-effect ml-3' $disabled title='Generar Certificado' data-toggle='modal' data-target='#genCertificado' data-id=".$value['idOrder']."><i class='fas fa-file-signature' aria-hidden='true'></i></button></td>";
+                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' title='Editar Orden' data-toggle='modal' data-target='#validOrder' data-id=".$value['id']."><i class='fas fa-check-double'></i></button></td>";
                       echo "</tr>";
                     }
                   }
@@ -91,9 +83,8 @@
                     <th>Nombre</th>
                     <th>IMO</th>
                     <th>Oficina</th>
-                    <th>Proceso</th>
-                    <th>Documentos de Chequeo</th>
-                    <th>Certificado / Estado</th>
+                    <th>Estado</th>
+                    <th>Visualizar Documento</th>
                     <th>Acciones</th>
                   </tr>
                   </tfoot>
@@ -122,37 +113,11 @@
   </div>
 </div>
 
-<div class="modal fade" id="updateOrder" role="dialog">
+<div class="modal fade" id="validOrder" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
           <div class="modal-body">
-              <div class="fetched-dataUp"></div>
-          </div>
-      </div>
-  </div>
-</div>
-
-<div class="modal fade" id="delOrder" role="dialog">
-  <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content bg-secondary">
-          <div class="modal-header">
-              <h4 class="modal-title">Seguro desea eliminar el registro?</h4>
-          </div>
-          <div class="modal-body">
-              <div class="fetched-dataDel"></div>
-          </div>
-      </div>
-  </div>
-</div>
-
-<div class="modal fade" id="genCertificado" role="dialog">
-  <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content bg-info">
-          <div class="modal-header">
-              <h4 class="modal-title">Seguro desea Generar el Certificado?</h4>
-          </div>
-          <div class="modal-body">
-              <div class="fetched-dataGen"></div>
+              <div class="fetched-dataVal"></div>
           </div>
       </div>
   </div>

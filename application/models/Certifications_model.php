@@ -20,9 +20,9 @@ class Certifications_model extends CI_Model {
         return $resultCertifications;
     }
 
-    public function generarCertificado($id)
+    public function generarCertificado($id,$codOffice)
     {
-        $this->db_orders->select('o.*, b.*, e.*, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->select('o.*, b.*, e.name, e.lastName, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_orders->from('orders o');
         $this->db_orders->join($this->db_orders->database.'.boats b', $this->db_orders->database.'.b.id = o.codBoat');
         $this->db_orders->join($this->db_orders->database.'.employee e', $this->db_orders->database.'.e.codUser = o.codUser');

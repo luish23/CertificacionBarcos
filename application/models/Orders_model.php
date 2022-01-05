@@ -76,7 +76,7 @@ class Orders_model extends CI_Model {
         return $result;
     }
 
-    public function getOrdersByUser($id = null)
+    public function getOrdersByUser($id)
     {
         $result['data'] = false;
         $this->db_orders->select('GROUP_CONCAT(codBoat) AS ids');
@@ -112,10 +112,33 @@ class Orders_model extends CI_Model {
     public function getAllOrders()
     {
         $result['data'] = false;
+        $this->db_boats->select('b.id, b.name, b.number_imo, o.id AS idOrder, o.condition, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
+        $this->db_boats->from('boats b');
+        $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
+        $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
+        $this->db_boats->join($this->db_boats->database.'.issuedCertifications ic', $this->db_boats->database.'.ic.codOrder = o.id', 'LEFT');
+        $this->db_boats->where("b.status",1);
+        $this->db_boats->where("o.status",1);
+        $this->db_boats->group_by("b.id");
+        $query = $this->db_boats->get();
+        $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        if ($resultBoats) {
+            $result['data'] = $resultBoats;
+            return $result;
+        }
+
+        return $result;
+    }
+
+    public function getOrdersProcess()
+    {
+        $result['data'] = false;
         $this->db_boats->select('b.id, b.name, b.number_imo, o.id AS idOrder, o.condition, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_boats->from('boats b');
         $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
         $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
+        $this->db_boats->where("o.condition",'PROCESO');
         $this->db_boats->where("b.status",1);
         $this->db_boats->where("o.status",1);
         $this->db_boats->group_by("b.id");
@@ -146,7 +169,7 @@ class Orders_model extends CI_Model {
 
     public function getOrderById($id)
     {
-        $this->db_orders->select('o.id, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->select('o.id, of.id AS idOffice, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_orders->from('orders o');
         $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
         $this->db_orders->where('o.id', $id);
@@ -216,5 +239,15 @@ class Orders_model extends CI_Model {
         return $result;
 
     }
+
+    public function updateOrdersProcess($id)
+    {
+        $this->db_orders->set('condition', 'VALIDADO');
+        $this->db_orders->where('id', $id);
+        $this->db_orders->update('orders');
+
+        return $this->db_orders->affected_rows();
+    }
+    
 
 }

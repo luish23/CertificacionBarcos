@@ -10,8 +10,8 @@ class Certifications extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("certifications_model","orders_model"));
-        $this->load->library(array('custom_log'));
+        $this->load->model(array("certifications_model","orders_model","login_model"));
+        $this->load->library(array('custom_log','session'));
         $this->load->helper(array("url","custom"));
         setlocale(LC_ALL, 'es_ES');
         if($this->login_model->logged_id())
@@ -31,13 +31,15 @@ class Certifications extends RESTController {
     public function index_post()
     {
         $id = $this->input->post('id');
-        $data = $this->certifications_model->generarCertificado($id);
+        $codOffice = $this->input->post('codOffice');
+        $data = $this->certifications_model->generarCertificado($id,$codOffice);
         $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
         getDir(FCPATH . 'uploads/Certificaciones/'.$pathDate);
 
         $config['upload_path'] = 'uploads/Certificaciones/'.$pathDate; 
+        // print_r($data); die;
 
-        if (empty($data))
+        if (!empty($data))
         {
             foreach ($data as $key => $value) 
             {
