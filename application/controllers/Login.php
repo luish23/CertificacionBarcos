@@ -13,7 +13,6 @@ class Login extends RESTController {
         $this->load->model(array("login_model","users_model","employees_model"));
         $this->load->helper(array('url','form'));
         $this->load->library(array('form_validation','session','encryption'));
-        $this->lang->load('login','spanish');
         $this->key = $this->config->item('encryption_key');
         $this->encryption->initialize(
             array(  'driver' => 'openssl',
@@ -39,7 +38,6 @@ class Login extends RESTController {
 
     public function login_post()
     {
-        print_r($this->session_data);
         $username = $this->input->post('username');
         $password =$this->input->post('password');
 
@@ -48,12 +46,12 @@ class Login extends RESTController {
 
         if ($this->form_validation->run() == FALSE){
             if (empty($username) && empty($password)) {
-            $this->msg = ['msg' => 'Usuario y Password vacios'];
+            $this->msg = ['msg' => $this->lang->line('empty_user_pwd')];
             }elseif (empty($username)) {
-                $this->msg = ['msg' => 'Campo Usuario está vacio'];
+                $this->msg = ['msg' => $this->lang->line('empty_user')];
             }elseif(empty($password))
             {
-                $this->msg = ['msg' => 'Campo Password está vacio.'];
+                $this->msg = ['msg' => $this->lang->line('empty_pwd')];
             }
             $this->load->view('login/login',$this->msg); 
         }else{
@@ -66,7 +64,8 @@ class Login extends RESTController {
                         'user_id'       => $data,
                         'name'          => $userData->name,
                         'lastName'      => $userData->lastName,
-                        'codTypeUser'   => $userData->codTypeUser
+                        'codTypeUser'   => $userData->codTypeUser,
+                        'site_lang'     => $userData->site_lang
                     );
                     //set session userdata
                     $this->session->set_userdata($session_data);

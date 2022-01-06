@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Página Pricipal</h1>
+            <h1 class="m-0"><?php echo $this->lang->line('principal_page'); ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <!-- <ol class="breadcrumb float-sm-right">
@@ -28,12 +28,12 @@
                 <div class="inner">
                     <h3><?php echo $retVal = (isset($TOTAL)) ? $TOTAL : 0; ?></h3>
 
-                    <p>Total de Órdenes</p>
+                    <p><?php echo $this->lang->line('label_total_orders'); ?></p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"><?php echo $this->lang->line('label_more'); ?> <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -43,12 +43,12 @@
                 <div class="inner">
                     <h3><?php echo $retVal = (isset($FINALIZADO)) ? $FINALIZADO : 0; ?></h3>
 
-                    <p>Órdenes Completadas</p>
+                    <p><?php echo $this->lang->line('label_completed_orders'); ?></p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"><?php echo $this->lang->line('label_more'); ?> <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -58,12 +58,12 @@
                 <div class="inner">
                     <h3><?php echo $retVal = (isset($PROCESO)) ? $PROCESO : 0; ?></h3>
 
-                    <p>Órdenes en Proceso</p>
+                    <p><?php echo $this->lang->line('label_proccess_orders'); ?></p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"><?php echo $this->lang->line('label_more'); ?> <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -73,12 +73,12 @@
                 <div class="inner">
                     <h3><?php echo $retVal = (isset($RECHAZADO)) ? $RECHAZADO : 0; ?></h3>
 
-                    <p>Órdenes Canceladas</p>
+                    <p><?php echo $this->lang->line('label_canceled_orders'); ?></p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ver más <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer"><?php echo $this->lang->line('label_more'); ?> <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

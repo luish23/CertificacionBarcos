@@ -16,8 +16,11 @@ class Dashboard extends CI_Controller {
 				'user_id'       => $this->session->user_id,
 				'name'          => $this->session->name,
 				'lastName'      => $this->session->lastName,
-				'codTypeUser'   => $this->session->codTypeUser
+				'codTypeUser'   => $this->session->codTypeUser,
+				'site_lang'  	=> $this->session->site_lang
 			);
+
+			$this->lang->load(array('dashboard','layout_nav_left'), $this->session->site_lang);
 		}else{
             $this->session->unset_userdata('session_data');
 			$this->session->sess_destroy();
@@ -28,7 +31,7 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$data = $this->dashboard_model->getInfo();
-		$template = array('title' => 'Dashboard');
+		$template = array('title' => $this->lang->line('dashboard'));
 		$this->load->view("dashboard/header_dashboard",$template);
 		$this->load->view("layout_nav_top");
 		$this->load->view("layout_nav_left",$this->session_data);

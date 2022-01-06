@@ -21,6 +21,8 @@ class Boats extends RESTController {
 				'lastName'      => $this->session->lastName,
 				'codTypeUser'   => $this->session->codTypeUser
 			);
+			$this->lang->load(array('boats','layout_nav_left'), $this->session->site_lang);
+
         }else{
             $this->session->unset_userdata('session_data');
             $this->session->sess_destroy();

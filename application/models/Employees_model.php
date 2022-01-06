@@ -12,7 +12,7 @@ class Employees_model extends CI_Model {
 
     public function getEmployee($id)
     {
-        $this->db_employee->select('e.name, e.lastName, e.codTypeUser, '.$this->db_typeuser->database.'.typeUser.description');
+        $this->db_employee->select('e.name, e.lastName, e.codTypeUser, e.site_lang, '.$this->db_typeuser->database.'.typeUser.description');
         $this->db_employee->from("employee e");
         $this->db_employee->join($this->db_typeuser->database.'.typeUser', $this->db_typeuser->database.'.typeUser.id = e.codTypeUser');
         $this->db_employee->where('e.codUser', $id);
