@@ -22,4 +22,23 @@ $lang['configuration']              = 'Configuración';
 $lang['business']                   = 'Empresa'; 
 
 
+/**
+ * General
+ */
 
+$lang['home']                       = 'Inicio'; 
+$lang['yes']                        = 'Si';
+$lang['no']                         = 'No';
+$lang['save']                       = 'Guardar';
+$lang['update']                     = 'Actualizar';
+$lang['delete']                     = 'Eliminar';
+$lang['close']                      = 'Cerrar';
+$lang['boat']                       = 'Navio';
+$lang['information']                = 'Información';
+$lang['name']                       = 'Nombre';
+$lang['imo']                        = 'IMO';
+$lang['office']                     = 'Oficina';
+$lang['status']                     = 'Estado';
+$lang['actions']                    = 'Acciones';
+$lang['update_information']         = 'Editar Información';
+$lang['exit']                       = 'Salir';

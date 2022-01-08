@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Registrar Navios</h1>
+            <h1 class="m-0"><?php echo $this->lang->line('add_boat'); ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Navios</li>
+              <li class="breadcrumb-item"><a href="dashboard"><?php echo $this->lang->line('home'); ?></a></li>
+              <li class="breadcrumb-item active"><?php echo $this->lang->line('add_boat'); ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -33,130 +33,130 @@
               <!-- form start -->
               <form id="boatForm" action="registerBoat" method="POST">
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label for="inputName" class="col-2 col-form-label">Nombre</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Nombre">
-                        </div>
-                        <label for="inputNumeroIMO" class="col-2 col-form-label">Numero IMO</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="number_imo" id="number_imo" placeholder="Numero IMO">
-                        </div>
+                <div class="form-group row">
+                    <label for="inputName" class="col-2 col-form-label"><?php echo $this->lang->line('name'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="<?php echo $this->lang->line('name'); ?>">
                     </div>
-                    <div class="form-group row">
-                        <label for="inputLabel" class="col-2 col-form-label">Armador</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="shipowner" id="shipowner" placeholder="Armador">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Numero de Registro</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="number_register" id="number_register" placeholder="Numero de Registro">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputLabel" class="col-2 col-form-label">Indicativo de Llamada</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="call_sign" id="call_sign" placeholder="Indicativo de Llamada">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Año de Construcción</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="year_build" id="year_build" placeholder="Año de Construcción">
-                        </div>
-                    </div>
-                    <div class="form-group row">                        
-                        <label for="inputLabel" class="col-2 col-form-label">Lugar de Construcción</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="place_build" id="place_build" placeholder="Lugar de Construcción">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Astillero</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="shipyard" id="shipyard" placeholder="Astillero">
-                        </div>
-                    </div>
-                    <div class="form-group row">                        
-                        <label for="inputLabel" class="col-2 col-form-label">Tipo de Barco</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="type_boat" id="type_boat" placeholder="Tipo de Barco">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Navegación</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="navigation" id="navigation" placeholder="Navegación">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputLabel" class="col-2 col-form-label">Servicio</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="service" id="service" placeholder="Servicio">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Numero de Pasajeros Aprobados</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="number_approved_passengers" id="number_approved_passengers" placeholder="Numero de Pasajeros Aprobados">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputLabel" class="col-2 col-form-label">Longitud Total</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="total_length" id="total_length" placeholder="Longitud Total">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Longitud entre Perpendiculares</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="length_perpendiculars" id="length_perpendiculars" placeholder="Longitud entre Perpendiculares">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputLabel" class="col-2 col-form-label">Manga</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="manga" id="manga" placeholder="Manga">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Estructura</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="structure" id="structure" placeholder="Estructura">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputLabel" class="col-2 col-form-label">Tonelada Bruta</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="gross_tonnage" id="gross_tonnage" placeholder="Tonelada Bruta">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Tonelada Líquida</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="liquid_tonnage" id="liquid_tonnage" placeholder="Tonelada Líquida">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputLabel" class="col-2 col-form-label">Transporte Bruto</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="gross_transport" id="gross_transport" placeholder="Transporte Bruto">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Motor Encendido</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="engine_running" id="engine_running" placeholder="Motor Encendido">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputLabel" class="col-2 col-form-label">Cantidad</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="amount" id="amount" placeholder="Cantidad">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Marca</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="mark" id="mark" placeholder="Marca">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputLabel" class="col-2 col-form-label">Modelo</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="model" id="model" placeholder="Modelo">
-                        </div>
-                        <label for="inputLabel" class="col-2 col-form-label">Potencia / Velocidad</label>
-                        <div class="col-4 err-form">
-                            <input type="text" class="form-control" name="power_speed" id="power_speed" placeholder="Potencia / Velocidad">
-                        </div>
+                    <label for="inputNumeroIMO" class="col-2 col-form-label"><?php echo $this->lang->line('imo'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="number_imo" id="number_imo" placeholder="<?php echo $this->lang->line('imo'); ?>">
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('shipowner'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="shipowner" id="shipowner" placeholder="<?php echo $this->lang->line('shipowner'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('number_register'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="number_register" id="number_register" placeholder="<?php echo $this->lang->line('number_register'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('call_sign'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="call_sign" id="call_sign" placeholder="<?php echo $this->lang->line('call_sign'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('year_build'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="year_build" id="year_build" placeholder="<?php echo $this->lang->line('year_build'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">                        
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('place_build'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="place_build" id="place_build" placeholder="<?php echo $this->lang->line('place_build'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('shipyard'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="shipyard" id="shipyard" placeholder="<?php echo $this->lang->line('shipyard'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">                        
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('type_boat'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="type_boat" id="type_boat" placeholder="<?php echo $this->lang->line('type_boat'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('navigation'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="navigation" id="navigation" placeholder="<?php echo $this->lang->line('navigation'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('service'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="service" id="service" placeholder="<?php echo $this->lang->line('service'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('number_approved_passengers'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="number_approved_passengers" id="number_approved_passengers" placeholder="<?php echo $this->lang->line('number_approved_passengers'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('total_length'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="total_length" id="total_length" placeholder="<?php echo $this->lang->line('total_length'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('length_perpendiculars'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="length_perpendiculars" id="length_perpendiculars" placeholder="<?php echo $this->lang->line('length_perpendiculars'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('manga'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="manga" id="manga" placeholder="<?php echo $this->lang->line('manga'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('structure'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="structure" id="structure" placeholder="<?php echo $this->lang->line('structure'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('gross_tonnage'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="gross_tonnage" id="gross_tonnage" placeholder="<?php echo $this->lang->line('gross_tonnage'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('liquid_tonnage'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="liquid_tonnage" id="liquid_tonnage" placeholder="<?php echo $this->lang->line('liquid_tonnage'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('gross_transport'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="gross_transport" id="gross_transport" placeholder="<?php echo $this->lang->line('gross_transport'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('engine_running'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="engine_running" id="engine_running" placeholder="<?php echo $this->lang->line('engine_running'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('amount'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="amount" id="amount" placeholder="<?php echo $this->lang->line('amount'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('mark'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="mark" id="mark" placeholder="<?php echo $this->lang->line('mark'); ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('model'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="model" id="model" placeholder="<?php echo $this->lang->line('model'); ?>">
+                    </div>
+                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('power_speed'); ?></label>
+                    <div class="col-4 err-form">
+                        <input type="text" class="form-control" name="power_speed" id="power_speed" placeholder="<?php echo $this->lang->line('power_speed'); ?>">
+                    </div>
+                </div>
+            </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" id="submit" class="btn btn-primary">Registrar</button>
+                  <button type="submit" id="submit" class="btn btn-primary"><?php echo $this->lang->line('save'); ?></button>
                 </div>
               </form>
             </div>

@@ -24,6 +24,7 @@ class Users extends RESTController {
                         'key' => $this->key
                 )
             );
+            $this->lang->load(array('users','layout_nav_left'), $this->session->site_lang);
 			$this->session_data = array(
 				'user_id'       => $this->session->user_id,
 				'name'          => $this->session->name,
@@ -45,7 +46,7 @@ class Users extends RESTController {
     public function listUsers_get()
     {
         $data = $this->users_model->getAllUsers();
-        $template = array('title' => 'Listado de Usuarios');
+        $template = array('title' => $this->lang->line('title_users'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
@@ -55,7 +56,7 @@ class Users extends RESTController {
 
     public function formUsers_get()
     {
-        $template = array('title' => 'Registrar Usuarios');
+        $template = array('title' => $this->lang->line('add_users'));
         $data['typeUser'] = $this->users_model->getTypeUser();
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -121,6 +122,23 @@ class Users extends RESTController {
         }
     }
 
+    public function deleteUser_post()
+    {
+        $id = $this->input->post('id');
+
+        $response = $this->users_model->deleteUser($id);
+
+        if ($response) {
+            echo "<script>alert('".$this->lang->line('alert_deleteUser')."');</script>";
+            redirect('listUsers', 'refresh');
+        }
+        else {
+            echo "<script>alert('".$this->lang->line('alertError_deleteUser')."');</script>";
+            redirect('dashboard', 'refresh');
+        }
+
+    }
+
     public function modalUser_get()
     {
         $id = $this->input->get('id');
@@ -140,8 +158,8 @@ class Users extends RESTController {
     public function modalUserDel_get()
     {
         $id = $this->input->get('id');
-        $data = $this->users_model->getUserById($id);
-        print_r($data); 
+        $data = $this->users_model->getOnlyUserById($id);
+        // print_r($data); 
         $this->load->view('users/modalUserDel', $data);
     }
  

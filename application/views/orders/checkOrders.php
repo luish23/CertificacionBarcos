@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Validar Ordenes</h1>
+            <h1 class="m-0"><?php echo $this->lang->line('title_checkOrders'); ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Inicio</a></li>
-              <li class="breadcrumb-item active">Validar Ordenes</li>
+              <li class="breadcrumb-item"><a href="dashboard"><?php echo $this->lang->line('home'); ?></a></li>
+              <li class="breadcrumb-item active"><?php echo $this->lang->line('title_checkOrders'); ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -33,12 +33,12 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>IMO</th>
-                    <th>Oficina</th>
-                    <th>Estado</th>
-                    <th>Visualizar Documento</th>
-                    <th>Acciones</th>
+                    <th><?php echo $this->lang->line('name'); ?></th>
+                    <th><?php echo $this->lang->line('imo'); ?></th>
+                    <th><?php echo $this->lang->line('office'); ?></th>
+                    <th><?php echo $this->lang->line('status'); ?></th>
+                    <th><?php echo $this->lang->line('preview_doc'); ?></th>
+                    <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -80,12 +80,12 @@
                   <tfoot>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>IMO</th>
-                    <th>Oficina</th>
-                    <th>Estado</th>
-                    <th>Visualizar Documento</th>
-                    <th>Acciones</th>
+                    <th><?php echo $this->lang->line('name'); ?></th>
+                    <th><?php echo $this->lang->line('imo'); ?></th>
+                    <th><?php echo $this->lang->line('office'); ?></th>
+                    <th><?php echo $this->lang->line('status'); ?></th>
+                    <th><?php echo $this->lang->line('preview_doc'); ?></th>
+                    <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>
                   </tfoot>
                 </table>

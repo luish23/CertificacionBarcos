@@ -1,10 +1,10 @@
 <!-- Modal DELETE -->
 <div class="modal-header">
-    <h3 class="modal-title"><?php echo $this->lang->line('order'); ?><strong><?php echo '  #'.$data['office'].str_pad($data['id'], 3, '0', STR_PAD_LEFT).$data['anyo']; ?></strong></h3>
+    <h3 class="modal-title"><strong><?php echo $data['user']; ?></strong></h3>
     <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<form id="orderDeleteForm" action="deleteOrder" method="POST">    
+<form id="userDeleteForm" action="deleteUser" method="POST">    
     <!-- Modal Footer -->
     <div class="modal-footer">
         <input type="hidden" name="id" id="id" value="<?php echo $data['id']; ?>">

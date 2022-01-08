@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Listado de Ordenes</h1>
+            <h1 class="m-0"><?php echo $this->lang->line('title_listOrders'); ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Inicio</a></li>
-              <li class="breadcrumb-item active">Listado de Ordenes</li>
+              <li class="breadcrumb-item"><a href="dashboard"><?php echo $this->lang->line('home'); ?></a></li>
+              <li class="breadcrumb-item active"><?php echo $this->lang->line('title_listOrders'); ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -33,13 +33,13 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>IMO</th>
-                    <th>Oficina</th>
-                    <th>Proceso</th>
-                    <th>Documentos de Chequeo</th>
-                    <th>Certificado / Estado</th>
-                    <th>Acciones</th>
+                    <th><?php echo $this->lang->line('name'); ?></th>
+                    <th><?php echo $this->lang->line('imo'); ?></th>
+                    <th><?php echo $this->lang->line('office'); ?></th>
+                    <th><?php echo $this->lang->line('process'); ?></th>
+                    <th><?php echo $this->lang->line('check_documents'); ?></th>
+                    <th><?php echo $this->lang->line('certificated_status'); ?></th>
+                    <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -88,13 +88,13 @@
                   <tfoot>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>IMO</th>
-                    <th>Oficina</th>
-                    <th>Proceso</th>
-                    <th>Documentos de Chequeo</th>
-                    <th>Certificado / Estado</th>
-                    <th>Acciones</th>
+                    <th><?php echo $this->lang->line('name'); ?></th>
+                    <th><?php echo $this->lang->line('imo'); ?></th>
+                    <th><?php echo $this->lang->line('office'); ?></th>
+                    <th><?php echo $this->lang->line('process'); ?></th>
+                    <th><?php echo $this->lang->line('check_documents'); ?></th>
+                    <th><?php echo $this->lang->line('certificated_status'); ?></th>
+                    <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>
                   </tfoot>
                 </table>
@@ -136,7 +136,7 @@
   <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content bg-secondary">
           <div class="modal-header">
-              <h4 class="modal-title">Seguro desea eliminar el registro?</h4>
+              <h4 class="modal-title"><?php echo $this->lang->line('answer_delete_order'); ?></h4>
           </div>
           <div class="modal-body">
               <div class="fetched-dataDel"></div>
@@ -149,7 +149,7 @@
   <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content bg-info">
           <div class="modal-header">
-              <h4 class="modal-title">Seguro desea Generar el Certificado?</h4>
+              <h4 class="modal-title"><?php echo $this->lang->line('answer_generate_certificated'); ?></h4>
           </div>
           <div class="modal-body">
               <div class="fetched-dataGen"></div>

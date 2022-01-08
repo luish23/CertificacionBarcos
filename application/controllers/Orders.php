@@ -22,6 +22,7 @@ class Orders extends RESTController {
 				'lastName'      => $this->session->lastName,
 				'codTypeUser'   => $this->session->codTypeUser
 			);
+            $this->lang->load(array('orders','layout_nav_left'), $this->session->site_lang);
         }else{
             $this->session->unset_userdata('session_data');
             $this->session->sess_destroy();
@@ -47,7 +48,7 @@ class Orders extends RESTController {
             $data = $this->orders_model->getAllOrders();
         }
         
-        $template = array('title' => 'Listado de Ordenes');
+        $template = array('title' => $this->lang->line('title_listOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
@@ -66,14 +67,14 @@ class Orders extends RESTController {
         {
             $data['offices'] = $this->offices_model->getOffice();
             $data['certifications'] = $this->certifications_model->getTypeCertifications();
-            $template = array('title' => 'Registrar Ordenes');
+            $template = array('title' => $this->lang->line('title_formOrders'));
             $this->load->view("dashboard/header_dashboard",$template);
             $this->load->view("layout_nav_top");
             $this->load->view("layout_nav_left",$this->session_data);
             $this->load->view('orders/formOrder', $data);
             $this->load->view("orders/footer_order");
         }else{
-            echo "<script>alert('No tiene registro de Navios pendientes por Orden');</script>";
+            echo "<script>alert('".$this->lang->line('alert_formOrders')."');</script>";
             redirect('dashboard', 'refresh');
         }
         
@@ -152,7 +153,7 @@ class Orders extends RESTController {
             // $response = $this->orders_model->updateOrderConditions($this->input->post('codBoat'));
 
             // if ($response) {
-                echo "<script>alert('Orden Registrada satisfactoriamente!!');</script>";
+                echo "<script>alert('".$this->lang->line('alert_registerOrder')."');</script>";
                 redirect('formOrder', 'refresh');
             // }
         }
@@ -224,7 +225,7 @@ class Orders extends RESTController {
                     );
         if($this->orders_model->updateOrder($data, $idOrder))
         {
-                echo "<script>alert('Orden Actualizada satisfactoriamente!!');</script>";
+                echo "<script>alert('".$this->lang->line('alert_updateOrder')."');</script>";
                 redirect('listOrders', 'refresh');
         }else{
             echo "Hubo un error al actualizar Orden!!.";
@@ -238,11 +239,11 @@ class Orders extends RESTController {
         $response = $this->orders_model->deleteOrder($id);
 
         if ($response) {
-            echo "<script>alert('Orden Eliminada satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_deleteOrder')."');</script>";
             redirect('listOrders', 'refresh');
         }
         else {
-            echo "<script>alert('Hubo un error al Eliminar la data');</script>";
+            echo "<script>alert('".$this->lang->line('alertError_deleteOrder')."');</script>";
             redirect('dashboard', 'refresh');
         }
 
@@ -271,7 +272,7 @@ class Orders extends RESTController {
     {
         $data = $this->orders_model->getOrdersProcess();
         
-        $template = array('title' => 'Validar Ordenes');
+        $template = array('title' => $this->lang->line('title_checkOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
@@ -284,11 +285,11 @@ class Orders extends RESTController {
         $response = $this->orders_model->updateOrdersProcess($this->input->post('idOrder'));
 
         if ($response) {
-            echo "<script>alert('Orden Validada satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_listOrders')."');</script>";
             redirect('listOrders', 'refresh');
         }
         else {
-            echo "<script>alert('Hubo un error al Validar la Order');</script>";
+            echo "<script>alert('".$this->lang->line('alertError_checkOrders')."');</script>";
             redirect('dashboard', 'refresh');
         }
         

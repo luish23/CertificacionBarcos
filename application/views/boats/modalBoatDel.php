@@ -2,21 +2,21 @@
 <form id="boatDeleteForm" action="deleteBoat" method="POST">
     <div class="card-body">
         <div class="form-group row">
-            <label for="inputName" class="col-2 col-form-label">Nombre</label>
+            <label for="inputName" class="col-2 col-form-label"><?php echo $this->lang->line('name'); ?></label>
             <div class="col-4 err-form">
                 <input type="text" class="form-control" name="name" id="name" readonly value="<?php echo $data['name']; ?>">
             </div>
-            <label for="inputNumeroIMO" class="col-2 col-form-label">Numero IMO</label>
+            <label for="inputNumeroIMO" class="col-2 col-form-label"><?php echo $this->lang->line('imo'); ?></label>
             <div class="col-4 err-form">
                 <input type="text" class="form-control" name="number_imo" id="number_imo" readonly value="<?php echo $data['number_imo']; ?>">
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputLabel" class="col-2 col-form-label">Armador</label>
+            <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('shipowner'); ?></label>
             <div class="col-4 err-form">
                 <input type="text" class="form-control" name="shipowner" id="shipowner" readonly value="<?php echo $data['shipowner']; ?>">
             </div>
-            <label for="inputLabel" class="col-2 col-form-label">Numero de Registro</label>
+            <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('number_register'); ?></label>
             <div class="col-4 err-form">
                 <input type="text" class="form-control" name="number_register" id="number_register" readonly value="<?php echo $data['number_register']; ?>">
             </div>
@@ -126,8 +126,8 @@
         <!-- Modal Footer -->
         <div class="modal-footer">
             <input type="hidden" name="id" id="id" value="<?php echo $data['id']; ?>">
-            <button type="submit" id="submit" class="btn btn-danger">Eliminar</button>
-            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+            <button type="submit" id="submit" class="btn btn-danger"><?php echo $this->lang->line('delete'); ?></button>
+            <button type="button" class="btn btn-dark" data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
         </div>
 
     </div>

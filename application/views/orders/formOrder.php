@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Registrar Órdenes</h1>
+            <h1 class="m-0"><?php echo $this->lang->line('add_orders'); ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Órdenes</li>
+              <li class="breadcrumb-item"><a href="dashboard"><?php echo $this->lang->line('home'); ?></a></li>
+              <li class="breadcrumb-item active"><?php echo $this->lang->line('add_orders'); ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -34,9 +34,9 @@
               <form id="ordersForm" action="registerOrder" method="POST" enctype="multipart/form-data">
                 <div class="card-body">
                 <div class="form-group err-form">
-                    <label for="exampleInputEmail1">Oficina</label>
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('office'); ?></label>
                     <select class="form-control" id="codOffice" name="codOffice">
-                    <option value="0">Seleccione</option>
+                    <option value="0"><?php echo $this->lang->line('select'); ?></option>
                     <?php 
                         foreach ($offices as $key => $value2) {
                             echo '<option value="'.$value2['id'].'">'.$value2['office'].'</option>';
@@ -45,9 +45,9 @@
                     </select>
                   </div>
                   <div class="form-group err-form">
-                    <label for="exampleInputEmail1">Navio</label>
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('boat'); ?></label>
                     <select class="form-control" id="codBoat" name="codBoat">
-                    <option value="0">Seleccione</option>
+                    <option value="0"><?php echo $this->lang->line('select'); ?></option>
                     <?php 
                         foreach ($data as $key => $value) {
                             echo '<option value="'.$value['id'].'">'.$value['name'].'</option>';
@@ -57,9 +57,9 @@
                     </select>
                   </div>
                   <div class="form-group err-form">
-                    <label for="exampleInputEmail1">Tipo de Certificacion</label>
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('type_certificated'); ?></label>
                     <select class="form-control" id="codTypeCertification" name="codTypeCertification">
-                    <option value="0">Seleccione</option>
+                    <option value="0"><?php echo $this->lang->line('select'); ?></option>
                     <?php 
                         foreach ($certifications as $key => $value3) {
                             echo '<option value="'.$value3['id'].'">'.$value3['description_min'].'</option>';

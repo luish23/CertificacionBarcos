@@ -157,4 +157,13 @@ class Users_model extends CI_Model {
         return $resultUser;
     }
 
+    public function deleteUser($id)
+    {
+        $this->db_users->set('status', 0);
+        $this->db_users->where('id', $id);
+        $this->db_users->update('users');
+
+        return $this->db_users->affected_rows();
+    }
+
 }

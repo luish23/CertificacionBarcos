@@ -71,7 +71,7 @@ $route['modalUser']['GET']          = 'Users/modalUser';
 $route['modalUserUp']['GET']        = 'Users/modalUserUp';
 $route['modalUserDel']['GET']       = 'Users/modalUserDel';
 $route['updateUsers']['POST']       = 'Users/updateUsers';
-$route['deleteUsers']['POST']       = 'Users/deleteUsers';
+$route['deleteUser']['POST']        = 'Users/deleteUser';
 
 /*
 * ROUTES DASHBOARD 
