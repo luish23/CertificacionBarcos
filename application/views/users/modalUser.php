@@ -21,15 +21,15 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
                 </div>
               </div>
               
 <?php
     }else{
-        echo "<h4>Usuario no tiene Asignado datos de Empleado</h4>";
+        echo "<h4>".$this->lang->line('msg_modalUser')."</h4>";
         echo "<div class='modal-footer'>
-                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cerrar</button>
+                    <button type='button' class='btn btn-secondary' data-dismiss='modal'>".$this->lang->line('close')."</button>
                 </div>";
     }
 ?>

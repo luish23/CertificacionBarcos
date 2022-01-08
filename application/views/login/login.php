@@ -21,11 +21,11 @@
       </div>
       <div ng-app ng-init="checked = false">
         <form class="form-signin" action="login" method="POST" name="form"> 
-          <label for="username">Username</label> 
-          <input class="form-styling" type="email" name="username" minlength="3" placeholder="Ingresar Usuario..." /> 
-          <label for="password">Password</label> 
-          <input class="form-styling" type="password" name="password"  minlength="5" placeholder="Ingresar Clave..." /> 
-          <button type="text" class="btn-animate btn-signin">Ingresar</button>
+          <label for="username"><?php echo $this->lang->line('label_username') ?></label> 
+          <input class="form-styling" type="email" name="username" minlength="3" placeholder="<?php echo $this->lang->line('placeholder_username') ?>" /> 
+          <label for="password"><?php echo $this->lang->line('label_password') ?></label> 
+          <input class="form-styling" type="password" name="password"  minlength="5" placeholder="<?php echo $this->lang->line('placeholder_password') ?>" /> 
+          <button type="text" class="btn-animate btn-signin"><?php echo $this->lang->line('btn_login') ?></button>
         </form>
       </div>
   </div>

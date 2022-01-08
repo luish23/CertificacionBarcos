@@ -68,6 +68,10 @@ $route['listUsers']['GET']          = 'Users/listUsers';
 $route['formUsers']['GET']          = 'Users/formUsers';
 $route['registerUsers']['POST']     = 'Users/registerUsers';
 $route['modalUser']['GET']          = 'Users/modalUser';
+$route['modalUserUp']['GET']        = 'Users/modalUserUp';
+$route['modalUserDel']['GET']       = 'Users/modalUserDel';
+$route['updateUsers']['POST']       = 'Users/updateUsers';
+$route['deleteUser']['POST']        = 'Users/deleteUser';
 
 /*
 * ROUTES DASHBOARD 
@@ -89,6 +93,11 @@ $route['listBoats']['GET']          = 'Boats/listBoat';
 $route['formBoat']['GET']           = 'Boats/formBoat';
 $route['registerBoat']['POST']      = 'Boats/registerBoat';
 $route['modalBoat']['GET']          = 'Boats/modalBoats';
+$route['modalBoatUp']['GET']        = 'Boats/modalBoatsUp';
+$route['modalBoatDel']['GET']       = 'Boats/modalBoatsDel';
+$route['updateBoat']['POST']        = 'Boats/updateBoat';
+$route['deleteBoat']['POST']        = 'Boats/deleteBoat';
+
 
 
 /* 
@@ -98,8 +107,32 @@ $route['listOrders']['GET']          = 'Orders/listOrder';
 $route['formOrder']['GET']           = 'Orders/formOrder';
 $route['registerOrder']['POST']      = 'Orders/registerOrder';
 $route['modalOrder']['GET']          = 'Orders/modalOrder';
+$route['modalOrderUp']['GET']        = 'Orders/modalOrderUp';
+$route['modalOrderDel']['GET']       = 'Orders/modalOrderDel';
+$route['updateOrder']['POST']        = 'Orders/updateOrder';
+$route['deleteOrder']['POST']        = 'Orders/deleteOrder';
+$route['veriffOrder']['POST']        = 'Orders/veriffOrder';
+$route['checkOrders']['GET']         = 'Orders/checkOrders';
+$route['modalValidOrder']['GET']     = 'Orders/modalValidOrder';
+$route['processOrder']['POST']     = 'Orders/processOrder';
+
 
 /* 
 * ROUTES DOWNLOAD
 */
 $route['download/(:num)']['GET']          = 'Download/index/$1';
+
+
+/*
+* CERTIFICATIONS 
+*/
+
+$route['modalCertificado']['GET']            = 'Certifications/modalCertificado';
+$route['generateCertificate']['POST']        = 'Certifications/index';
+
+/**
+ * BUSINESS
+ */
+
+$route['business']['GET']        = 'Business/index';
+$route['listBusiness']['GET']        = 'Business/listBusiness';

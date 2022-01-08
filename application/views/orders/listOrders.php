@@ -5,19 +5,19 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Listado de Ordenes</h1>
+            <h1 class="m-0"><?php echo $this->lang->line('title_listOrders'); ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Inicio</a></li>
-              <li class="breadcrumb-item active">Listado de Ordenes</li>
+              <li class="breadcrumb-item"><a href="dashboard"><?php echo $this->lang->line('home'); ?></a></li>
+              <li class="breadcrumb-item active"><?php echo $this->lang->line('title_listOrders'); ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+<?php // print_r($data); ?>
  <!-- Main content -->
  <section class="content">   
       <div class="container-fluid">
@@ -33,12 +33,13 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>IMO</th>
-                    <th>Oficina</th>
-                    <th>Estado</th>
-                    <th>Visualizar Documento</th>
-                    <th>Acciones</th>
+                    <th><?php echo $this->lang->line('name'); ?></th>
+                    <th><?php echo $this->lang->line('imo'); ?></th>
+                    <th><?php echo $this->lang->line('office'); ?></th>
+                    <th><?php echo $this->lang->line('process'); ?></th>
+                    <th><?php echo $this->lang->line('check_documents'); ?></th>
+                    <th><?php echo $this->lang->line('certificated_status'); ?></th>
+                    <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -46,11 +47,11 @@
                   {
                     foreach ($data as $key => $value) {
                       echo "<tr>";
-                      echo "<td>".$value['office'].str_pad($value['id'], 3, '0', STR_PAD_LEFT).$value['anyo']."</td>";
+                      echo "<td>".$value['office'].str_pad($value['idOrder'], 3, '0', STR_PAD_LEFT).$value['anyo']."</td>";
                       echo "<td>".$value['name']."</td>";
                       echo "<td>".$value['number_imo']."</td>";
                       echo "<td>".$value['office']."</td>";
-                      echo "<td>".$value['conditions']."</td>";
+                      echo "<td>".$value['condition']."</td>";                      
                       echo "<td>";
                       if ($value['codWord']) {
                         echo "<a href='download/".$value['codWord']."' class='btn btn-outline-info btn-rounded waves-effect'><i class='far fa-file-word pr-2' aria-hidden='true'></i>WORD</a>";
@@ -62,9 +63,23 @@
                         echo "<a href='download/".$value['codPDF']."' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a></td>";
                       }else {
                         echo "<button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
-                      } 
+                      }
+                      if ($value['idCertificated']) {
+                        echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a><span class='badge badge-success ml-2'>".$value['estado']."</span></td>";
+                      }else {
+                        echo "<td><button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
+                      }  
+
+                      if ($value['condition'] != 'VALIDADO') {
+                        $disabled = 'disabled';
+                      }else {
+                        $disabled = '';
+                      }
                       
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3'><i class='far fa-edit' aria-hidden='true'></i></button><button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
+                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Orden' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' title='Eliminar Orden' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-primary btn-rounded waves-effect ml-3' $disabled title='Generar Certificado' data-toggle='modal' data-target='#genCertificado' data-id=".$value['idOrder']."><i class='fas fa-file-signature' aria-hidden='true'></i></button></td>";
                       echo "</tr>";
                     }
                   }
@@ -73,12 +88,13 @@
                   <tfoot>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>IMO</th>
-                    <th>Oficina</th>
-                    <th>Estado</th>
-                    <th>Visualizar Documento</th>
-                    <th>Acciones</th>
+                    <th><?php echo $this->lang->line('name'); ?></th>
+                    <th><?php echo $this->lang->line('imo'); ?></th>
+                    <th><?php echo $this->lang->line('office'); ?></th>
+                    <th><?php echo $this->lang->line('process'); ?></th>
+                    <th><?php echo $this->lang->line('check_documents'); ?></th>
+                    <th><?php echo $this->lang->line('certificated_status'); ?></th>
+                    <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>
                   </tfoot>
                 </table>
@@ -96,11 +112,47 @@
     <!-- /.content -->
   </div>
 
-<div class="modal fade" id="seeBoat" role="dialog">
+<div class="modal fade" id="seeOrder" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
           <div class="modal-body">
               <div class="fetched-data"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="updateOrder" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+          <div class="modal-body">
+              <div class="fetched-dataUp"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delOrder" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content bg-secondary">
+          <div class="modal-header">
+              <h4 class="modal-title"><?php echo $this->lang->line('answer_delete_order'); ?></h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataDel"></div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="genCertificado" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content bg-info">
+          <div class="modal-header">
+              <h4 class="modal-title"><?php echo $this->lang->line('answer_generate_certificated'); ?></h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataGen"></div>
           </div>
       </div>
   </div>

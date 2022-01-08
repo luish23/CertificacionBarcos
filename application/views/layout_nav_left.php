@@ -38,14 +38,14 @@
           <li class="nav-item">
             <a href="/dashboard" class="nav-link">
               <i class="fas fa-home nav-icon"></i>
-              <p>Dashboard</p>
+              <p><?php echo $this->lang->line('dashboard'); ?></p>
             </a>
           </li>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="fas fa-anchor"></i>
               <p>
-                Control de Navios
+              <?php echo $this->lang->line('control_boats'); ?>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -53,13 +53,13 @@
               <li class="nav-item">
                 <a href="/formBoat" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
-                  <p>Registrar Navios</p>
+                  <p><?php echo $this->lang->line('add_boats'); ?></p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/listBoats" class="nav-link">
                   <i class="fas fa-list-ul"></i>
-                  <p>Listado de Navios</p>
+                  <p><?php echo $this->lang->line('list_boats'); ?></p>
                 </a>
               </li>
             </ul>
@@ -68,7 +68,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon far fa-file-alt"></i>
               <p>
-                Control de Ordenes
+                <?php echo $this->lang->line('control_orders'); ?>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -76,13 +76,19 @@
               <li class="nav-item">
                 <a href="/formOrder" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
-                  <p>Registrar Orden</p>
+                  <?php echo $this->lang->line('add_orders'); ?>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/listOrders" class="nav-link">
                   <i class="fas fa-list-ul"></i>
-                  <p>Listado de Ordenes</p>
+                    <?php echo $this->lang->line('list_orders'); ?>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/checkOrders" class="nav-link">
+                <i class="fas fa-check"></i>
+                  <?php echo $this->lang->line('check_orders'); ?>
                 </a>
               </li>
             </ul>
@@ -91,7 +97,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-user-shield"></i>
               <p>
-                Control de Usuarios
+                <?php echo $this->lang->line('control_users'); ?>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -99,13 +105,13 @@
               <li class="nav-item">
                 <a href="/formUsers" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
-                  <p>Registrar Usuarios</p>
+                  <?php echo $this->lang->line('add_users'); ?>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/listUsers" class="nav-link">
                   <i class="fas fa-list-ul"></i>
-                  <p>Listado de Usuarios</p>
+                    <?php echo $this->lang->line('list_users'); ?>
                 </a>
               </li>
             </ul>
@@ -114,7 +120,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-user-tie"></i>
               <p>
-              Control de Empleados
+              <?php echo $this->lang->line('control_employees'); ?>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -122,13 +128,13 @@
               <li class="nav-item">
                 <a href="/formEmployee" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
-                  <p>Registrar Empleados</p>
+                  <p><?php echo $this->lang->line('add_employees'); ?></p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/listEmployee" class="nav-link">
                   <i class="fas fa-list-ul"></i>
-                  <p>Listado de Empleados</p>
+                  <p><?php echo $this->lang->line('list_employees'); ?></p>
                 </a>
               </li>
             </ul>
@@ -137,23 +143,23 @@
             <a href="#" class="nav-link active">
               <i class="fas fa-cogs"></i>
               <p>
-               Configuración
+              <?php echo $this->lang->line('configuration'); ?>
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/formEmployee" class="nav-link">
+                <a href="/listBusiness" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
-                  <p>Empresa</p>
+                  <p><?php echo $this->lang->line('business'); ?></p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="/listEmployee" class="nav-link">
                   <i class="fas fa-list-ul"></i>
                   <p>Otros</p>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </li>
         </ul>

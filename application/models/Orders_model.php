@@ -86,13 +86,14 @@ class Orders_model extends CI_Model {
         $resultOrders = ($query!==false && $query->num_rows() > 0) ? $query->row('ids') : false;
 
         if ($resultOrders) {
-            $this->db_boats->select('b.id, b.name, b.number_imo, b.conditions, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+            $this->db_boats->select('b.id, b.name, b.number_imo, b.conditions, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
             $this->db_boats->from('boats b');
             $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
             $this->db_boats->join($this->db_boats->database.'.documents d', ($this->db_boats->database.'.o.codWord = d.id OR '. $this->db_boats->database.'.o.codPDF = d.id'));
             $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
             $this->db_boats->where("b.id IN ($resultOrders)");
             $this->db_boats->where("b.status",1);
+            $this->db_boats->where("o.status",1);
             $this->db_boats->group_by("b.id");
             $query = $this->db_boats->get();
             $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
@@ -108,6 +109,79 @@ class Orders_model extends CI_Model {
         return $result;
     }
 
+    public function getAllOrders()
+    {
+        $result['data'] = false;
+        $this->db_boats->select('b.id, b.name, b.number_imo, o.id AS idOrder, o.condition, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
+        $this->db_boats->from('boats b');
+        $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
+        $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
+        $this->db_boats->join($this->db_boats->database.'.issuedCertifications ic', $this->db_boats->database.'.ic.codOrder = o.id', 'LEFT');
+        $this->db_boats->where("b.status",1);
+        $this->db_boats->where("o.status",1);
+        $this->db_boats->group_by("b.id");
+        $query = $this->db_boats->get();
+        $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        if ($resultBoats) {
+            $result['data'] = $resultBoats;
+            return $result;
+        }
+
+        return $result;
+    }
+
+    public function getOrdersProcess()
+    {
+        $result['data'] = false;
+        $this->db_boats->select('b.id, b.name, b.number_imo, o.id AS idOrder, o.condition, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_boats->from('boats b');
+        $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
+        $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
+        $this->db_boats->where("o.condition",'PROCESO');
+        $this->db_boats->where("b.status",1);
+        $this->db_boats->where("o.status",1);
+        $this->db_boats->group_by("b.id");
+        $query = $this->db_boats->get();
+        $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        if ($resultBoats) {
+            $result['data'] = $resultBoats;
+            return $result;
+        }
+
+        return $result;
+    }
+
+
+    public function getOrderBoatById($id)
+    {
+        $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->from('boats b');
+        $this->db_orders->join($this->db_orders->database.'.orders o', $this->db_orders->database.'.o.codBoat ='.$id);
+        $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
+        $this->db_orders->where('b.id', $id);
+        $this->db_orders->where('b.status', 1);
+        $query = $this->db_orders->get();
+        $resultBoat['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
+        return $resultBoat;
+    }
+
+    public function getOrderById($id)
+    {
+        $this->db_orders->select('o.id, of.id AS idOffice, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->from('orders o');
+        $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
+        $this->db_orders->where('o.id', $id);
+        $this->db_orders->where('o.status', 1);
+
+        $query = $this->db_orders->get();
+        $resultOrder['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
+
+        return $resultOrder;
+
+    }
+
     public function getDownload($id)
     {
         $this->db_documents->select('path_dir, file_name, file_ext');
@@ -119,5 +193,61 @@ class Orders_model extends CI_Model {
 
         return $resultDocuments;
     }
+
+    public function updateOrder($data, $id)
+    {
+        $this->db_orders->where('id', $id);
+        $this->db_orders->update('orders',$data);
+
+        return $this->db_orders->affected_rows();
+    }
+
+    public function deleteOrder($idOrder)
+    {
+        $this->db_boats->select('codBoat');
+        $this->db_boats->from('orders');
+        $this->db_boats->where('id', $idOrder);
+        $query = $this->db_boats->get();
+        $idBoat = ($query!==false && $query->num_rows() > 0) ? $query->row('codBoat') : false;
+
+        $this->_updateConditionsBoat($idBoat);
+
+        $this->db_orders->set('status', 0);
+        $this->db_orders->where('id', $idOrder);
+        $this->db_orders->update('orders');
+
+        return $this->db_orders->affected_rows();
+    }
+
+    private function _updateConditionsBoat($idBoat)
+    {
+        $this->db_boats->set('status', 1);
+        $this->db_boats->set('conditions', 'INICIADO');
+        $this->db_boats->where('id', $idBoat);
+        $this->db_boats->update('boats');
+    }
+
+    public function validOrder($idNav, $idCer)
+    {
+        $this->db_orders->select('id');
+        $this->db_orders->from('orders');
+        $this->db_orders->where('codBoat', $idNav);
+        $this->db_orders->where('codTypeCertification', $idCer);
+
+        $query = $this->db_orders->get();
+        $result = ($query!==false && $query->num_rows() > 0) ? true : false;
+        return $result;
+
+    }
+
+    public function updateOrdersProcess($id)
+    {
+        $this->db_orders->set('condition', 'VALIDADO');
+        $this->db_orders->where('id', $id);
+        $this->db_orders->update('orders');
+
+        return $this->db_orders->affected_rows();
+    }
+    
 
 }

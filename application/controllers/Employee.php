@@ -23,6 +23,7 @@ class Employee extends RESTController {
 			);
         }else{
             $this->session->unset_userdata('session_data');
+            $this->session->sess_destroy();
 			redirect("login");
 		}
     }
@@ -34,19 +35,19 @@ class Employee extends RESTController {
 
     public function listEmployee_get()
     {
+        $data = $this->employees_model->getEmployees();
 
         $template = array('title' => 'Listado de Empleados');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('employees/listEmployees');
-        $this->load->view("dashboard/footer_dashboard");
+        $this->load->view('employees/listEmployees', $data);
+        $this->load->view("employees/footer_employee");
     }
 
     public function formEmployee_get()
     {
-        $data = $this->users_model->getUsersNotAssigned();
-        $data['typeUser'] = $this->users_model->getTypeUser();
+        $data = $this->users_model->getUsersNotAssigned();        
         
         $template = array('title' => 'Registrar Empleados');
         $this->load->view("dashboard/header_dashboard",$template);
