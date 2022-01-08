@@ -42,3 +42,5 @@ $lang['status']                     = 'Estado';
 $lang['actions']                    = 'Acciones';
 $lang['update_information']         = 'Editar Información';
 $lang['exit']                       = 'Salir';
+$lang['active']                     = 'Activo';
+$lang['inactive']                   = 'Inactivo';

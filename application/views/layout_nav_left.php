@@ -76,19 +76,19 @@
               <li class="nav-item">
                 <a href="/formOrder" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
-                  <?php echo $this->lang->line('add_orders'); ?>
+                  <p><?php echo $this->lang->line('add_orders'); ?></p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/listOrders" class="nav-link">
                   <i class="fas fa-list-ul"></i>
-                    <?php echo $this->lang->line('list_orders'); ?>
+                  <p><?php echo $this->lang->line('list_orders'); ?></p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/checkOrders" class="nav-link">
                 <i class="fas fa-check"></i>
-                  <?php echo $this->lang->line('check_orders'); ?>
+                <p><?php echo $this->lang->line('check_orders'); ?></p>
                 </a>
               </li>
             </ul>
@@ -105,13 +105,13 @@
               <li class="nav-item">
                 <a href="/formUsers" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
-                  <?php echo $this->lang->line('add_users'); ?>
+                <p><?php echo $this->lang->line('add_users'); ?></p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="/listUsers" class="nav-link">
                   <i class="fas fa-list-ul"></i>
-                    <?php echo $this->lang->line('list_users'); ?>
+                  <p><?php echo $this->lang->line('list_users'); ?></p>
                 </a>
               </li>
             </ul>

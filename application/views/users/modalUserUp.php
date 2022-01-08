@@ -35,11 +35,11 @@
     <select class="form-control" name="status" id="status">
     <?php 
         if ($data['status']) {
-            echo '<option value="1" selected="selected">Activo</option>';
-            echo '<option value="0">Inactivo</option>';
+            echo '<option value="1" selected="selected">'.$this->lang->line('active').'</option>';
+            echo '<option value="0">'.$this->lang->line('inactive').'</option>';
         }else{
-            echo '<option value="1">Activo</option>';
-            echo '<option value="0" selected="selected">Inactivo</option>';
+            echo '<option value="1">'.$this->lang->line('active').'</option>';
+            echo '<option value="0" selected="selected">'.$this->lang->line('inactive').'</option>';
         }
     ?>
     </select>

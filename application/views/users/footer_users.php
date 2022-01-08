@@ -5,7 +5,7 @@
     <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="logout" class="nav-link">
-                  <span class="fas fa-sign-out-alt nav-icon"> Salir</span>
+                  <span class="fas fa-sign-out-alt nav-icon"> <?php echo $this->lang->line('exit'); ?></span>
                   
                 </a>
               </li>

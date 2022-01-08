@@ -21,6 +21,7 @@ class Employee extends RESTController {
 				'lastName'      => $this->session->lastName,
 				'codTypeUser'   => $this->session->codTypeUser
 			);
+            $this->lang->load(array('employee','layout_nav_left'), $this->session->site_lang);
         }else{
             $this->session->unset_userdata('session_data');
             $this->session->sess_destroy();
@@ -37,7 +38,7 @@ class Employee extends RESTController {
     {
         $data = $this->employees_model->getEmployees();
 
-        $template = array('title' => 'Listado de Empleados');
+        $template = array('title' => $this->lang->line('list_employees'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
@@ -49,7 +50,7 @@ class Employee extends RESTController {
     {
         $data = $this->users_model->getUsersNotAssigned();        
         
-        $template = array('title' => 'Registrar Empleados');
+        $template = array('title' => $this->lang->line('add_employees'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
