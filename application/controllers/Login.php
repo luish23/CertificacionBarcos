@@ -62,13 +62,14 @@ class Login extends RESTController {
                 if ($userData) {
                     $session_data = array(
                         'user_id'       => $data,
-                        'name'          => $userData->name,
-                        'lastName'      => $userData->lastName,
-                        'codTypeUser'   => $userData->codTypeUser,
-                        'site_lang'     => $userData->site_lang
+                        'name'          => $userData['data']['name'],
+                        'lastName'      => $userData['data']['lastName'],
+                        'codTypeUser'   => $userData['data']['codTypeUser'],
+                        'site_lang'     => $userData['data']['site_lang']
                     );
                     //set session userdata
                     $this->session->set_userdata($session_data);
+
                     redirect("dashboard");
                 }else{
                     $this->msg = array('msg' => 'Usuario No Asignado a Personal. Contacte al Admistrador');

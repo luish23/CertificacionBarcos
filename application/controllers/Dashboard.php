@@ -19,7 +19,6 @@ class Dashboard extends CI_Controller {
 				'codTypeUser'   => $this->session->codTypeUser,
 				'site_lang'  	=> $this->session->site_lang
 			);
-
 			$this->lang->load(array('dashboard','layout_nav_left'), $this->session->site_lang);
 		}else{
             $this->session->unset_userdata('session_data');
