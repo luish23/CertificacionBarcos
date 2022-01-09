@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Registrar Empleados</h1>
+            <h1 class="m-0"><?php echo $this->lang->line('add_employees'); ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item active">Registrar Empleados</li>
+              <li class="breadcrumb-item"><a href="#"><?php echo $this->lang->line('home'); ?></a></li>
+              <li class="breadcrumb-item active"><?php echo $this->lang->line('add_employees'); ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -34,42 +34,42 @@
               <form id="employeeForm" action="registerEmployee" method="POST">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nombres</label>
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Introducir nombre">
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('name'); ?></label>
+                    <input type="text" name="name" class="form-control" id="name" placeholder="<?php echo $this->lang->line('placeholder_name_employee'); ?>">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Apellidos</label>
-                    <input type="text" name="lastName" class="form-control" id="lastName" placeholder="Introducir apellido">
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('lastName'); ?></label>
+                    <input type="text" name="lastName" class="form-control" id="lastName" placeholder="<?php echo $this->lang->line('placeholder_lastName_employee'); ?>">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">DNI</label>
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('dni'); ?></label>
                     <input type="number" name="dni" class="form-control" id="dni" placeholder="987654321">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Telefono</label>
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('phone'); ?></label>
                     <input type="number" name="phone" class="form-control" id="phone" placeholder="987654321">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Cargo</label>
-                    <input type="text" name="position" class="form-control" id="position" placeholder="Introducir Cargo">
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('position'); ?></label>
+                    <input type="text" name="position" class="form-control" id="position" placeholder="<?php echo $this->lang->line('placeholder_position_employee'); ?>">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Dirección</label>
-                    <input type="text" name="address" class="form-control" id="address" placeholder="Introducir Dirección">
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('address'); ?></label>
+                    <input type="text" name="address" class="form-control" id="address" placeholder="<?php echo $this->lang->line('placeholder_address_employee'); ?>">
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Sexo</label>
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('gender'); ?></label>
                     <select class="form-control" name="gender" id="gender">
-                      <option value="0">Seleccione</option>
+                      <option value="0"><?php echo $this->lang->line('select'); ?></option>
                       <option value="Femenino">Femenino</option>
                       <option value="Masculino">Masculino</option>
                       <option value="Otro">Otro</option>
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Usuario</label>
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('user'); ?></label>
                     <select class="form-control" name="codUser" id="codUser">
-                      <option value="0">Seleccione</option>
+                      <option value="0"><?php echo $this->lang->line('select'); ?></option>
                       <?php 
                         foreach ($data as $key => $value) {
                             echo '<option value="'.$value['id'].'">'.$value['user'].'</option>';
@@ -80,7 +80,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" id="submit" class="btn btn-primary">Registrar</button>
+                  <button type="submit" id="submit" class="btn btn-primary"><?php echo $this->lang->line('save'); ?></button>
                 </div>
               </form>
             </div>

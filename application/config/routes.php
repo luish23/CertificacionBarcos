@@ -82,9 +82,15 @@ $route['dashboard']['GET']    = 'Dashboard/index';
 /* 
 * ROUTES EMPLOYEES
 */
+
 $route['listEmployee']['GET']          = 'Employee/listEmployee';
 $route['formEmployee']['GET']          = 'Employee/formEmployee';
 $route['registerEmployee']['POST']     = 'Employee/registerEmployee';
+$route['modalEmployee']['GET']         = 'Employee/modalEmployee';
+$route['modalEmployeeUp']['GET']       = 'Employee/modalEmployeeUp';
+$route['modalEmployeeDel']['GET']      = 'Employee/modalEmployeeDel';
+$route['updateEmployee']['POST']       = 'Employee/updateEmployee';
+$route['deleteEmployee']['POST']       = 'Employee/deleteEmployee';
 
 /* 
 * ROUTES BOATS

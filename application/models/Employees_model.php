@@ -12,13 +12,24 @@ class Employees_model extends CI_Model {
 
     public function getEmployee($id)
     {
-        $this->db_employee->select('e.name, e.lastName, e.codTypeUser, e.site_lang, '.$this->db_typeuser->database.'.typeUser.description');
+        $this->db_employee->select('e.id, e.name, e.lastName, e.gender, e.dni, e.position, e.address, e.photo, e.phone, e.codTypeUser, e.site_lang, '.$this->db_typeuser->database.'.typeUser.description');
         $this->db_employee->from("employee e");
         $this->db_employee->join($this->db_typeuser->database.'.typeUser', $this->db_typeuser->database.'.typeUser.id = e.codTypeUser');
         $this->db_employee->where('e.codUser', $id);
         $this->db_employee->where('e.status', 1);
         $query = $this->db_employee->get();
-        $resultEmployee = ($query!==false && $query->num_rows() > 0) ? $query->row() : false;
+        $resultEmployee['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
+        return $resultEmployee;
+    }
+
+    public function getEmployeeUpdate($id)
+    {
+        $this->db_employee->select('e.id, e.name, e.lastName, e.gender, e.dni, e.position, e.address, e.photo, e.phone, e.status, e.codTypeUser, e.site_lang, '.$this->db_typeuser->database.'.typeUser.description');
+        $this->db_employee->from("employee e");
+        $this->db_employee->join($this->db_typeuser->database.'.typeUser', $this->db_typeuser->database.'.typeUser.id = e.codTypeUser');
+        $this->db_employee->where('e.codUser', $id);
+        $query = $this->db_employee->get();
+        $resultEmployee['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
         return $resultEmployee;
     }
 
@@ -49,5 +60,22 @@ class Employees_model extends CI_Model {
         $this->db_employee->trans_commit();
 
         return true;
+    }
+
+    public function updateEmployee($data, $id)
+    {
+        $this->db_employee->where('id', $id);
+        $this->db_employee->update('employee',$data);
+
+        return $this->db_employee->affected_rows();
+    }
+
+    public function deleteEmployee($id)
+    {
+        $this->db_users->set('status', 0);
+        $this->db_users->where('id', $id);
+        $this->db_users->update('employee');
+
+        return $this->db_users->affected_rows();
     }
 }

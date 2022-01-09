@@ -54,7 +54,7 @@ class Boats extends RESTController {
 
     public function formBoat_get()
     {
-        $template = array('title' => 'Registrar Empleados');
+        $template = array('title' => 'Registrar Barcos');
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);

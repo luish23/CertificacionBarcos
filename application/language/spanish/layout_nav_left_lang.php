@@ -35,7 +35,11 @@ $lang['delete']                     = 'Eliminar';
 $lang['close']                      = 'Cerrar';
 $lang['boat']                       = 'Navio';
 $lang['information']                = 'Información';
+$lang['dni']                        = 'DNI';
+$lang['lastName']                   = 'Apellidos';
 $lang['name']                       = 'Nombre';
+$lang['address']                    = 'Direccion';
+$lang['gender']                     = 'Sexo';
 $lang['imo']                        = 'IMO';
 $lang['office']                     = 'Oficina';
 $lang['status']                     = 'Estado';
@@ -44,3 +48,10 @@ $lang['update_information']         = 'Editar Información';
 $lang['exit']                       = 'Salir';
 $lang['active']                     = 'Activo';
 $lang['inactive']                   = 'Inactivo';
+
+$lang['name_lastname']              = 'Nombre y Apellido';
+$lang['phone']                      = 'Teléfono';
+$lang['position']                   = 'Cargo';
+$lang['select']                     = 'Seleccione';
+$lang['user']                       = 'Usuario';
+

@@ -109,7 +109,8 @@ class Certifications extends RESTController {
                     echo "<script>alert('Certificado Generado satisfactoriamente!!');</script>";
                     redirect('listOrders', 'refresh');
             }else{
-                echo "Hubo un error al Generar el Certificado.";
+                echo "<script>alert('Hubo un error al Generar el Certificado.');</script>";
+                redirect('listOrders', 'refresh');
             }
         }else{
             echo "<script>alert('No se puede Generar el Certificado.');</script>";

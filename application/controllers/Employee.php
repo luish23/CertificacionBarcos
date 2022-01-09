@@ -68,8 +68,7 @@ class Employee extends RESTController {
             "dni" => $this->input->post('dni'),
             "position" => $this->input->post('position'),
             "address" => $this->input->post('address'),
-            "codUser" => $this->input->post('codUser'),
-            "codTypeUser" => $this->input->post('codTypeUser'),
+            "codUser" => $this->input->post('codUser')
         );
 
         $response = $this->employees_model->insertEmployee($data);
@@ -78,10 +77,75 @@ class Employee extends RESTController {
             redirect('formEmployee', 'refresh');
         }
         else {
-            echo "Hubo un error al Insertar la data"; die;
+            echo "<script>alert('EHubo un error al Insertar la data');</script>";
+            redirect('formEmployee', 'refresh');
+        }
+    }
+
+    public function updateEmployee_post()
+    {
+        $id = $this->input->post('id');
+        $data = array(
+            "name" => $this->input->post('name'),
+            "lastName" => $this->input->post('lastName'),
+            "gender" => $this->input->post('gender'),
+            "phone" => $this->input->post('phone'),
+            "dni" => $this->input->post('dni'),
+            "position" => $this->input->post('position'),
+            "address" => $this->input->post('address'),
+            "status" => $this->input->post('status')
+        );
+
+        $response = $this->employees_model->updateEmployee($data, $id);
+        if ($response) {
+            echo "<script>alert('Empleado Actualizado satisfactoriamente!!');</script>";
+            redirect('listEmployee', 'refresh');
+        }
+        else {
+            echo "<script>alert('Hubo un error al Actualizar la Informacion');</script>";
+            redirect('listEmployee', 'refresh');
         }
         
         
+    }
+
+    public function deleteEmployee_post()
+    {
+        $id = $this->input->post('id');
+
+        $response = $this->employees_model->deleteEmployee($id);
+
+        if ($response) {
+            echo "<script>alert('Empleado Eliminado satisfactoriamente!!');</script>";
+            redirect('listEmployee', 'refresh');
+        }
+        else {
+            echo "<script>alert('Hubo un error al Eliminar la data');</script>";
+            redirect('dashboard', 'refresh');
+        }
+
+    }
+
+    public function modalEmployee_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->employees_model->getEmployee($id);
+        $this->load->view('employees/modalEmployee', $data);
+    }
+
+    public function modalEmployeeUp_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->employees_model->getEmployeeUpdate($id);
+        $this->load->view('employees/modalEmployeeUp', $data);
+        $this->load->view('employees/footer_modalEmployee', $data);
+    }
+
+    public function modalEmployeeDel_get()
+    {
+        $id = $this->input->get('id');
+        $data = $this->employees_model->getEmployee($id);
+        $this->load->view('employees/modalEmployeeDel', $data);
     }
  
 }

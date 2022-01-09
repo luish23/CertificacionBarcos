@@ -150,7 +150,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/listBusiness" class="nav-link">
-                <i class="fas fa-plus-circle"></i>
+                <i class="fas fa-building"></i>
                   <p><?php echo $this->lang->line('business'); ?></p>
                 </a>
               </li>
