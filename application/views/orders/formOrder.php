@@ -62,7 +62,7 @@
                     <option value="0"><?php echo $this->lang->line('select'); ?></option>
                     <?php 
                         foreach ($certifications as $key => $value3) {
-                            echo '<option value="'.$value3['id'].'">'.$value3['description_min'].'</option>';
+                            echo '<option value="'.$value3['id'].'">'.$value3['name_certificate']. ' / '.$value3['name_list_verification'].'</option>';
                         }
                     ?>
                         

@@ -67,6 +67,7 @@ class Orders extends RESTController {
         {
             $data['offices'] = $this->offices_model->getOffice();
             $data['certifications'] = $this->certifications_model->getTypeCertifications();
+            // print_r($data['certifications']); die;
             $template = array('title' => $this->lang->line('title_formOrders'));
             $this->load->view("dashboard/header_dashboard",$template);
             $this->load->view("layout_nav_top");
