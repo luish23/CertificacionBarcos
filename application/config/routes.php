@@ -120,7 +120,7 @@ $route['deleteOrder']['POST']        = 'Orders/deleteOrder';
 $route['veriffOrder']['POST']        = 'Orders/veriffOrder';
 $route['checkOrders']['GET']         = 'Orders/checkOrders';
 $route['modalValidOrder']['GET']     = 'Orders/modalValidOrder';
-$route['processOrder']['POST']     = 'Orders/processOrder';
+$route['processOrder']['POST']       = 'Orders/processOrder';
 
 
 /* 
@@ -134,7 +134,7 @@ $route['download/(:num)']['GET']          = 'Download/index/$1';
 */
 
 $route['modalCertificado']['GET']            = 'Certifications/modalCertificado';
-$route['generateCertificate']['POST']        = 'Certifications/index';
+$route['generateCertificate']['GET']         = 'Certifications/index';
 
 /**
  * BUSINESS

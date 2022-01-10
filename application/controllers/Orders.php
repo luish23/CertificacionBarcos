@@ -47,7 +47,7 @@ class Orders extends RESTController {
         }else{
             $data = $this->orders_model->getAllOrders();
         }
-        
+        // print_r($data); die;
         $template = array('title' => $this->lang->line('title_listOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");

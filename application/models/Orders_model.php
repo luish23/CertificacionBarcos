@@ -112,15 +112,17 @@ class Orders_model extends CI_Model {
     public function getAllOrders()
     {
         $result['data'] = false;
-        $this->db_boats->select('b.id, b.name, b.number_imo, o.id AS idOrder, o.condition, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
+        $this->db_boats->select('b.id, b.name, b.number_imo, o.id AS idOrder, o.condition, o.codWord, o.codPDF, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
         $this->db_boats->from('boats b');
         $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
         $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
         $this->db_boats->join($this->db_boats->database.'.issuedCertifications ic', $this->db_boats->database.'.ic.codOrder = o.id', 'LEFT');
+        $this->db_boats->join($this->db_boats->database.'.typeCertifications tc', $this->db_boats->database.'.tc.id = o.codTypeCertification');
         $this->db_boats->where("b.status",1);
         $this->db_boats->where("o.status",1);
-        $this->db_boats->group_by("b.id");
+        // $this->db_boats->group_by("b.id");
         $query = $this->db_boats->get();
+        // print_r($this->db_boats->last_query()); die;
         $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 
         if ($resultBoats) {
@@ -156,7 +158,7 @@ class Orders_model extends CI_Model {
 
     public function getOrderBoatById($id)
     {
-        $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, o.codTypeCertification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_orders->from('boats b');
         $this->db_orders->join($this->db_orders->database.'.orders o', $this->db_orders->database.'.o.codBoat ='.$id);
         $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');

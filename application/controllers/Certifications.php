@@ -29,11 +29,12 @@ class Certifications extends RESTController {
 		}
     }
 
-    public function index_post()
+    public function index_get()
     {
-        $id = $this->input->post('id');
-        $codOffice = $this->input->post('codOffice');
+        $id = $this->input->get('id');
+        $codOffice = $this->input->get('codOffice');
         $data = $this->certifications_model->generarCertificado($id,$codOffice);
+        print_r($data); die;
         $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
         getDir(FCPATH . 'uploads/Certificaciones/'.$pathDate);
 

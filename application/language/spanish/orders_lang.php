@@ -22,6 +22,10 @@ $lang['alert_checkOrders']                     = 'Orden Validada satisfactoriame
 $lang['alertError_checkOrders']                = 'Hubo un error al Validar la Order';
 $lang['answer_delete_order']                   = 'Seguro desea eliminar el registro?';
 $lang['asnwer_generate_certificated']          = 'Seguro desea Generar el Certificado?';
+$lang['type_certificate']                      = 'Certificado';
+$lang['list_verification']                     = 'Listado de Verificación';
+$lang['select_word']                           = 'Seleccione documento Word';
+$lang['select_pdf']                            = 'Seleccione documento PDF';
 
 
 /**
