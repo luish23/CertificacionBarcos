@@ -1,6 +1,6 @@
 <!-- Modal VER -->
     <div class="modal-header">
-        <h3 class="modal-title"><?php echo $this->lang->line('information'); ?><strong><?php echo '  #'.$data['office'].str_pad($data['id'], 3, '0', STR_PAD_LEFT).$data['anyo']; ?></strong></h3>
+        <h3 class="modal-title"><?php echo $this->lang->line('information'); ?><strong><?php // echo '  #'.$data['office'].str_pad($data['id'], 3, '0', STR_PAD_LEFT).$data['anyo']; ?></strong></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>

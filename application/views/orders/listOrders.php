@@ -67,7 +67,14 @@
                         echo "<button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
                       }
                       if ($value['idCertificated']) {
-                        echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a><span class='badge badge-success ml-2'>".$value['estado']."</span></td>";
+                        if ($value['estado'] == 'ACTIVO') {
+                          $alert = "<span class='badge badge-success ml-2'>".$value['estado']."</span>";
+                        }elseif($value['estado'] == 'VENCIDO'){
+                          $alert = "<span class='badge badge-danger ml-2'>".$value['estado']."</span>";
+                        }else{
+                          $alert = "<span class='badge badge-warning ml-2'>".$value['estado']."</span>";
+                        }
+                        echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a>".$alert."</td>";
                       }else {
                         echo "<td><button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
                       }  

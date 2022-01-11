@@ -37,14 +37,14 @@ class Boats extends RESTController {
 
     public function listBoat_get()
     {   
-        // if ($this->session->codTypeUser == 1) // Admin
-        // {
+        if ($this->session->codTypeUser == 1) // Admin
+        {
             $data = $this->boats_model->getAllBoats();
-        // }else{
-        //     $data = $this->boats_model->getBoatsByUser($this->session->user_id);
-        // }
+        }else{
+            $data = $this->boats_model->getBoatsByUser($this->session->user_id);
+        }
 
-        $template = array('title' => 'Listado de Barcos');
+        $template = array('title' => $this->lang->line('list_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
@@ -54,7 +54,7 @@ class Boats extends RESTController {
 
     public function formBoat_get()
     {
-        $template = array('title' => 'Registrar Barcos');
+        $template = array('title' => $this->lang->line('add_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
@@ -95,11 +95,12 @@ class Boats extends RESTController {
         if ($response) {
             $relation = array('codUser' => $this->session->user_id, 'codBoat' => $response);
             $this->boats_model->relationUserBoat($relation);
-            echo "<script>alert('Navio registrado satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_insert_ok')."');</script>";
             redirect('formBoat', 'refresh');
         }
         else {
-            echo "Hubo un error al Insertar la data"; die;
+            echo "<script>alert('".$this->lang->line('alert_insert_error')."');</script>";
+            redirect('dashboard', 'refresh');
         }
     }
 
@@ -135,11 +136,11 @@ class Boats extends RESTController {
 
         $response = $this->boats_model->updateBoat($data, $id);
         if ($response) {
-            echo "<script>alert('Navio Actualizado satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_update_error')."');</script>";
             redirect('listBoats', 'refresh');
         }
         else {
-            echo "<script>alert('Hubo un error al Actualizar la data');</script>";
+            echo "<script>alert('".$this->lang->line('alert_update_error')."');</script>";
             redirect('dashboard', 'refresh');
         }
     }
@@ -151,11 +152,11 @@ class Boats extends RESTController {
         $response = $this->boats_model->deleteBoat($id);
 
         if ($response) {
-            echo "<script>alert('Navio Eliminado satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_delete_error')."');</script>";
             redirect('listBoats', 'refresh');
         }
         else {
-            echo "<script>alert('Hubo un error al Actualizar la data');</script>";
+            echo "<script>alert('".$this->lang->line('alert_delete_error')."');</script>";
             redirect('dashboard', 'refresh');
         }
 

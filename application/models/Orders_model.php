@@ -235,9 +235,21 @@ class Orders_model extends CI_Model {
         $this->db_orders->from('orders');
         $this->db_orders->where('codBoat', $idNav);
         $this->db_orders->where('codTypeCertification', $idCer);
+        $this->db_orders->where('status', 1);
+        $this->db_orders->where_not_in('condition', ['CANCELADO']);
 
         $query = $this->db_orders->get();
-        $result = ($query!==false && $query->num_rows() > 0) ? true : false;
+        $result = ($query!==false && $query->num_rows() > 0) ? $query->row_array('id') : false;
+
+        if ($result) {
+            $this->db_orders->select('id');
+            $this->db_orders->from('issuedCertifications');
+            $this->db_orders->where_in('codOrder', (array)$result);
+            $this->db_orders->where('estado', 'ACTIVO');
+            $query = $this->db_orders->get();
+            $result = ($query!==false && $query->num_rows() > 0) ? true : false;
+        }
+        // return $this->db_orders->last_query(); 
         return $result;
 
     }
