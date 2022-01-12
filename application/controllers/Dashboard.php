@@ -17,6 +17,7 @@ class Dashboard extends CI_Controller {
 				'name'          => $this->session->name,
 				'lastName'      => $this->session->lastName,
 				'codTypeUser'   => $this->session->codTypeUser,
+				'codShipowner'  => $this->session->codShipowner,
 				'site_lang'  	=> $this->session->site_lang
 			);
 			$this->lang->load(array('dashboard','layout_nav_left'), $this->session->site_lang);

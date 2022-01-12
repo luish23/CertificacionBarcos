@@ -10,7 +10,7 @@ class Employee extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("users_model","login_model", "employees_model"));
+        $this->load->model(array("users_model","login_model", "employees_model", "boats_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
         if($this->login_model->logged_id())
@@ -49,7 +49,8 @@ class Employee extends RESTController {
     public function formEmployee_get()
     {
         $data = $this->users_model->getUsersNotAssigned();        
-        
+        $data['shipowner'] = $this->boats_model->getShipowner();
+        // print_r($data); die;
         $template = array('title' => $this->lang->line('add_employees'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -68,7 +69,9 @@ class Employee extends RESTController {
             "dni" => $this->input->post('dni'),
             "position" => $this->input->post('position'),
             "address" => $this->input->post('address'),
+            "codShipowner" => $this->input->post('codShipowner'),
             "codUser" => $this->input->post('codUser')
+            
         );
 
         $response = $this->employees_model->insertEmployee($data);

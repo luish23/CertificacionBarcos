@@ -65,6 +65,7 @@ class Login extends RESTController {
                         'name'          => $userData['data']['name'],
                         'lastName'      => $userData['data']['lastName'],
                         'codTypeUser'   => $userData['data']['codTypeUser'],
+                        'codShipowner'  => $userData['data']['codShipowner'],
                         'site_lang'     => $userData['data']['site_lang']
                     );
                     //set session userdata

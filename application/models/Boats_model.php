@@ -103,18 +103,19 @@ class Boats_model extends CI_Model {
     public function getBoatsByUser($idUser = null)
     {
         $result['data'] = false;
-        $this->db_boats->select('GROUP_CONCAT(codBoat) AS ids');
-        $this->db_boats->from('relation_user_boat');
-        $this->db_boats->where('codUser', $idUser);
-        $query = $this->db_boats->get();
-        $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->row('ids') : false;
+        // $this->db_boats->select('GROUP_CONCAT(codBoat) AS ids');
+        // $this->db_boats->from('relation_user_boat');
+        // $this->db_boats->where('codUser', $idUser);
+        // $query = $this->db_boats->get();
+        // $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->row('ids') : false;
 
-        if ($resultBoats) {
-            $this->db_boats->select('b.*');
+        // if ($resultBoats) {
+            $this->db_boats->select('b.*, sh.name_ship');
             $this->db_boats->from('boats b');
-            $this->db_boats->where("b.id IN ($resultBoats)");
+            $this->db_boats->join($this->db_boats->database.'.shipowner sh', $this->db_boats->database.'.b.codShipowner = sh.id');
+            $this->db_boats->where('b.codShipowner',$idUser);
             $this->db_boats->where('b.status', 1);
-            $this->db_boats->group_by("b.id");
+            // $this->db_boats->group_by("b.id");
             $query = $this->db_boats->get();
             $resultBoats2 = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 
@@ -124,7 +125,7 @@ class Boats_model extends CI_Model {
             }
 
             return $result;
-        }
+        // }
 
         return $result;
 
@@ -133,10 +134,11 @@ class Boats_model extends CI_Model {
     public function getAllBoats()
     {
         $result['data'] = false;
-        $this->db_boats->select('b.*');
+        $this->db_boats->select('b.*, sh.name_ship');
         $this->db_boats->from('boats b');
+        $this->db_boats->join($this->db_boats->database.'.shipowner sh', $this->db_boats->database.'.b.codShipowner = sh.id');
         $this->db_boats->where('b.status', 1);
-        $this->db_boats->group_by("b.id");
+        // $this->db_boats->group_by("b.id");
         $query = $this->db_boats->get();
         $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 
@@ -180,12 +182,12 @@ class Boats_model extends CI_Model {
         $result['data'] = false;
         $this->db_boats->select('*');
         $this->db_boats->from('shipowner');
-        $this->db_boats->where('status', 1);
+        // $this->db_boats->where('status', 1);
         $query = $this->db_boats->get();
         $resultShipowner = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 
         if ($resultShipowner) {
-            $result['data'] = $resultShipowner;
+            $result = $resultShipowner;
             return $result;
         }
 

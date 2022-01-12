@@ -19,7 +19,8 @@ class Boats extends RESTController {
 				'user_id'       => $this->session->user_id,
 				'name'          => $this->session->name,
 				'lastName'      => $this->session->lastName,
-				'codTypeUser'   => $this->session->codTypeUser
+				'codTypeUser'   => $this->session->codTypeUser,
+				'codShipowner'  => $this->session->codShipowner
 			);
 			$this->lang->load(array('boats','layout_nav_left'), $this->session->site_lang);
 
@@ -41,9 +42,8 @@ class Boats extends RESTController {
         {
             $data = $this->boats_model->getAllBoats();
         }else{
-            $data = $this->boats_model->getBoatsByUser($this->session->user_id);
+            $data = $this->boats_model->getBoatsByUser($this->session->codShipowner);
         }
-
         $template = array('title' => $this->lang->line('list_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -54,7 +54,7 @@ class Boats extends RESTController {
 
     public function formBoat_get()
     {
-        $data = $this->boats_model->getShipowner();
+        $data['data'] = $this->boats_model->getShipowner();
         $template = array('title' => $this->lang->line('add_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");

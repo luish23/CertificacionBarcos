@@ -76,7 +76,18 @@
                         }
                     ?>
                     </select>
-                  </div>                  
+                  </div>   
+                  <div class="form-group">
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('shipowner'); ?></label>
+                    <select class="form-control" name="codShipowner" id="codShipowner">
+                      <option value="0"><?php echo $this->lang->line('select'); ?></option>
+                      <?php 
+                        foreach ($shipowner as $key2 => $value2) {
+                            echo '<option value="'.$value2['id'].'">'.$value2['name_ship'].'</option>';
+                        }
+                    ?>
+                    </select>
+                  </div>                
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
