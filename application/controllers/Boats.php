@@ -44,6 +44,7 @@ class Boats extends RESTController {
         }else{
             $data = $this->boats_model->getBoatsByUser($this->session->codShipowner);
         }
+        // print_r($data); die;
         $template = array('title' => $this->lang->line('list_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
