@@ -272,6 +272,7 @@ class Orders extends RESTController {
     public function checkOrders_get()
     {
         $data = $this->orders_model->getOrdersProcess();
+        // print_r($data); die;
         
         $template = array('title' => $this->lang->line('title_checkOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
@@ -286,12 +287,12 @@ class Orders extends RESTController {
         $response = $this->orders_model->updateOrdersProcess($this->input->post('idOrder'));
 
         if ($response) {
-            echo "<script>alert('".$this->lang->line('alert_listOrders')."');</script>";
+            echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
             redirect('listOrders', 'refresh');
         }
         else {
-            echo "<script>alert('".$this->lang->line('alertError_checkOrders')."');</script>";
-            redirect('dashboard', 'refresh');
+            echo "<script>alert('".$this->lang->line('alert_process_error')."');</script>";
+            redirect('checkOrders', 'refresh');
         }
         
     }

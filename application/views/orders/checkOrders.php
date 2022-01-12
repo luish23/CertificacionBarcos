@@ -70,8 +70,8 @@
                         $disabled = '';
                       }
                       
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Orden' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' title='Editar Orden' data-toggle='modal' data-target='#validOrder' data-id=".$value['id']."><i class='fas fa-check-double'></i></button></td>";
+                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Datos' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' title='Validar Orden' data-toggle='modal' data-target='#validOrder' data-id=".$value['idOrder']."><i class='fas fa-check-double'></i></button></td>";
                       echo "</tr>";
                     }
                   }

@@ -78,3 +78,10 @@ $lang['amount']                                     = 'Cantidad';
 $lang['mark']                                       = 'Marca';
 $lang['model']                                      = 'Modelo';
 $lang['power_speed']                                = 'Potencia / Velocidad';
+
+/**
+ * processOrder
+ */
+
+$lang['alert_process_orders']                        = 'Orden Validada Satisfactoriamente!!';
+$lang['alert_process_error']                         = 'Error al validar la Orden';

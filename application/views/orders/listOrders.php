@@ -86,7 +86,7 @@
                       }
                       
                       echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Orden' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-1' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-1' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['idOrder']."><i class='far fa-edit' aria-hidden='true'></i></button>
                       <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1' title='Eliminar Orden' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>
                       <button type='button' class='btn btn-outline-primary btn-rounded waves-effect ml-1' $disabled title='Generar Certificado' data-toggle='modal' data-target='#genCertificado' data-id=".$value['idOrder']."><i class='fas fa-file-signature' aria-hidden='true'></i></button></td>";
                       echo "</tr>";

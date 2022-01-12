@@ -134,7 +134,9 @@ $route['download/(:num)']['GET']          = 'Download/index/$1';
 */
 
 $route['modalCertificado']['GET']            = 'Certifications/modalCertificado';
-$route['generateCertificate']['GET']         = 'Certifications/index';
+$route['generateCertificate']['POST']        = 'Certifications/index';
+$route['configCert']['GET']                  = 'Certifications/configCert';
+
 
 /**
  * BUSINESS

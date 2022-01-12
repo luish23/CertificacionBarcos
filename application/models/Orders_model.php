@@ -143,9 +143,11 @@ class Orders_model extends CI_Model {
         $this->db_boats->where("o.condition",'PROCESO');
         $this->db_boats->where("b.status",1);
         $this->db_boats->where("o.status",1);
-        $this->db_boats->group_by("b.id");
+        // $this->db_boats->group_by("b.id");
+
         $query = $this->db_boats->get();
         $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+        // print_r($this->db_boats->last_query()); die;
 
         if ($resultBoats) {
             $result['data'] = $resultBoats;
@@ -160,9 +162,9 @@ class Orders_model extends CI_Model {
     {
         $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, o.codTypeCertification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_orders->from('boats b');
-        $this->db_orders->join($this->db_orders->database.'.orders o', $this->db_orders->database.'.o.codBoat ='.$id);
+        $this->db_orders->join($this->db_orders->database.'.orders o', $this->db_orders->database.'.o.id ='.$id);
         $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
-        $this->db_orders->where('b.id', $id);
+        // $this->db_orders->where('o.id', $id);
         $this->db_orders->where('b.status', 1);
         $query = $this->db_orders->get();
         $resultBoat['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
@@ -239,17 +241,18 @@ class Orders_model extends CI_Model {
         $this->db_orders->where_not_in('condition', ['CANCELADO']);
 
         $query = $this->db_orders->get();
-        $result = ($query!==false && $query->num_rows() > 0) ? $query->row_array('id') : false;
+        $result = ($query!==false && $query->num_rows() > 0) ? true : false;
+        // print_r($result); die;
 
-        if ($result) {
-            $this->db_orders->select('id');
-            $this->db_orders->from('issuedCertifications');
-            $this->db_orders->where_in('codOrder', (array)$result);
-            $this->db_orders->where('estado', 'ACTIVO');
-            $query = $this->db_orders->get();
-            $result = ($query!==false && $query->num_rows() > 0) ? true : false;
-        }
-        // return $this->db_orders->last_query(); 
+        // if ($result) {
+        //     $this->db_orders->select('id');
+        //     $this->db_orders->from('issuedCertifications');
+        //     $this->db_orders->where_in('codOrder', (array)$result);
+        //     $this->db_orders->where('estado', 'ACTIVO');
+        //     $query = $this->db_orders->get();
+        //     $result = ($query!==false && $query->num_rows() > 0) ? true : false;
+        // }
+        // return $this->db_orders->last_query(); die;
         return $result;
 
     }

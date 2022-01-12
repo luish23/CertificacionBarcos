@@ -14,32 +14,35 @@ class Certifications extends RESTController {
         $this->load->library(array('custom_log','session'));
         $this->load->helper(array("url","custom"));
         setlocale(LC_ALL, 'es_ES');
-        if($this->login_model->logged_id())
-		{
-			$this->session_data = array(
-				'user_id'       => $this->session->user_id,
-				'name'          => $this->session->name,
-				'lastName'      => $this->session->lastName,
-				'codTypeUser'   => $this->session->codTypeUser
-			);
-        }else{
-            $this->session->unset_userdata('session_data');
-            $this->session->sess_destroy();
-			redirect("login");
-		}
+        // if($this->login_model->logged_id())
+		// {
+		// 	$this->session_data = array(
+		// 		'user_id'       => $this->session->user_id,
+		// 		'name'          => $this->session->name,
+		// 		'lastName'      => $this->session->lastName,
+		// 		'codTypeUser'   => $this->session->codTypeUser
+		// 	);
+        // }else{
+        //     $this->session->unset_userdata('session_data');
+        //     $this->session->sess_destroy();
+		// 	redirect("login");
+		// }
     }
 
-    public function index_get()
+    public function configCert_get()
     {
         $id = $this->input->get('id');
         $codOffice = $this->input->get('codOffice');
+        $codTypeCertificate = $this->input->get('codTypeCertificate');
+        $certificate = $this->certifications_model->getPathCertificate($codTypeCertificate);
         $data = $this->certifications_model->generarCertificado($id,$codOffice);
-        print_r($data); die;
+
+        // print_r($data); die;
+
         $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
         getDir(FCPATH . 'uploads/Certificaciones/'.$pathDate);
 
         $config['upload_path'] = 'uploads/Certificaciones/'.$pathDate; 
-        // print_r($data); die;
 
         if (!empty($data))
         {
@@ -48,7 +51,50 @@ class Certifications extends RESTController {
                 $file_name = $value['office'].str_pad($value['id'], 3, '0', STR_PAD_LEFT).$value['anyo'].'-'.$value['codTypeCertification'].'_'.$value['number_imo'].'.pdf';
                 $pdf = new FPDF();
                 $pdf->AddPage('P','A4',0);
-                $pdf->Image('/var/www/html/sgcb.development.com/public_html/public/certificaciones/01-NS-certificado-de-seguranca-da-navegacao_FRONT.jpg', 0, 0, 210, 300);
+                $pdf->Image(FCPATH.'/public/certificaciones/03-NS-Certificado-de-Tracao-Estatica_FRONT.jpg', 0, 0, 210, 300);
+              
+                $pdf->Output($config['upload_path'].$file_name , 'I' );
+            }
+        }
+    }
+
+    public function index_post()
+    {
+        $id = $this->input->post('id');
+        $codOffice = $this->input->post('codOffice');
+        $codTypeCertificate = $this->input->post('codTypeCertificate');
+        $certificate = $this->certifications_model->getPathCertificate($codTypeCertificate);
+        $data = $this->certifications_model->generarCertificado($id,$codOffice);
+
+        // print_r($certificate); die;
+
+        $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
+        getDir(FCPATH . 'uploads/Certificaciones/'.$pathDate);
+
+        $config['upload_path'] = 'uploads/Certificaciones/'.$pathDate; 
+
+        switch ($codTypeCertificate) {
+            case 1:
+                $this->_createCertificate1($data,$config,$certificate);
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+
+    }
+
+    private function _createCertificate1($data,$config,$certificate)
+    {
+        if (!empty($data))
+        {
+            foreach ($data as $key => $value) 
+            {
+                $file_name = $value['office'].str_pad($value['id'], 3, '0', STR_PAD_LEFT).$value['anyo'].'-'.$value['codTypeCertification'].'_'.$value['number_imo'].'.pdf';
+                $pdf = new FPDF();
+                $pdf->AddPage('P','A4',0);
+                $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
                 $pdf->SetFont('Arial','B',12);
                 $pdf->SetXY(171,17);
                 $pdf->Cell(29,10,$value['office'].str_pad($value['id'], 3, '0', STR_PAD_LEFT).$value['anyo'],0,1,'C');
@@ -107,7 +153,7 @@ class Certifications extends RESTController {
 
             if($response)
             {
-                    echo "<script>alert('Certificado Generado satisfactoriamente!!');</script>";
+                    echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
                     redirect('listOrders', 'refresh');
             }else{
                 echo "<script>alert('Hubo un error al Generar el Certificado.');</script>";
