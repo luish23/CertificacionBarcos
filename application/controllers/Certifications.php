@@ -101,7 +101,7 @@ class Certifications extends RESTController {
                 $pdf->SetXY(100,80);
                 $pdf->Cell(75,10, strtoupper(utf8_decode($value['name'].' '.$value['lastName'])),0,1,'C');
                 $pdf->SetXY(10,100);
-                $pdf->Cell(114,10,strtoupper(utf8_decode($value['shipowner'])),0,1,'C');
+                $pdf->Cell(114,10,strtoupper(utf8_decode($value['name_ship'])),0,1,'C');
                 $pdf->SetXY(127,100);
                 $pdf->Cell(32,10,'INDICATIVO',0,1,'C');
                 $pdf->SetXY(163,100);

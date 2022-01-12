@@ -54,11 +54,12 @@ class Boats extends RESTController {
 
     public function formBoat_get()
     {
+        $data = $this->boats_model->getShipowner();
         $template = array('title' => $this->lang->line('add_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('boats/formBoat');
+        $this->load->view('boats/formBoat',$data);
         $this->load->view("boats/footer_boat");
     }
 
@@ -67,7 +68,7 @@ class Boats extends RESTController {
         $data = array(
             "name" => $this->input->post('name'),
             "number_imo" => $this->input->post('number_imo'),
-            "shipowner" => $this->input->post('shipowner'),
+            "codShipowner" => $this->input->post('codShipowner'),
             "number_register" => $this->input->post('number_register'),
             "call_sign" => $this->input->post('call_sign'),
             "year_build" => $this->input->post('year_build'),
@@ -110,7 +111,7 @@ class Boats extends RESTController {
         $data = array(
             "name" => $this->input->post('name'),
             "number_imo" => $this->input->post('number_imo'),
-            "shipowner" => $this->input->post('shipowner'),
+            "codShipowner" => $this->input->post('codShipowner'),
             "number_register" => $this->input->post('number_register'),
             "call_sign" => $this->input->post('call_sign'),
             "year_build" => $this->input->post('year_build'),

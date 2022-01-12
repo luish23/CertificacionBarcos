@@ -175,4 +175,21 @@ class Boats_model extends CI_Model {
         $this->db_orders->update('orders');
     }
 
+    public function getShipowner()
+    {
+        $result['data'] = false;
+        $this->db_boats->select('*');
+        $this->db_boats->from('shipowner');
+        $this->db_boats->where('status', 1);
+        $query = $this->db_boats->get();
+        $resultShipowner = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        if ($resultShipowner) {
+            $result['data'] = $resultShipowner;
+            return $result;
+        }
+
+        return $result;
+    }
+
 }

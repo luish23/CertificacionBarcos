@@ -43,8 +43,9 @@ $(document).ready(function(){
       number_imo: {
         required: true,
       },
-      shipowner: {
+      codShipowner: {
         required: true,
+        min:1
       },
       number_register: {
         required: true,
@@ -117,8 +118,9 @@ $(document).ready(function(){
         number_imo: {
             required: "El campo es obligatorio",
         },
-        shipowner: {
+        codShipowner: {
             required: "El campo es obligatorio",
+            min: "El campo es obligatorio"
         },
         number_register: {
             required: "El campo es obligatorio",
