@@ -79,22 +79,26 @@ class Orders_model extends CI_Model {
     public function getOrdersByUser($id)
     {
         $result['data'] = false;
-        $this->db_orders->select('GROUP_CONCAT(codBoat) AS ids');
-        $this->db_orders->from('relation_user_boat');
-        $this->db_orders->where('codUser', $id);
-        $query = $this->db_orders->get();
-        $resultOrders = ($query!==false && $query->num_rows() > 0) ? $query->row('ids') : false;
+        // $this->db_orders->select('GROUP_CONCAT(codBoat) AS ids');
+        // $this->db_orders->from('relation_user_boat');
+        // $this->db_orders->where('codUser', $id);
+        // $query = $this->db_orders->get();
+        // $resultOrders = ($query!==false && $query->num_rows() > 0) ? $query->row('ids') : false;
 
-        if ($resultOrders) {
-            $this->db_boats->select('b.id, b.name, b.number_imo, b.conditions, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        // if ($resultOrders) {
+            $this->db_boats->select('b.id, b.name, b.number_imo, tc.name_list_verification, o.condition, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
+            // $this->db_boats->select('b.id, b.name, b.number_imo, o.condition, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
             $this->db_boats->from('boats b');
             $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
-            $this->db_boats->join($this->db_boats->database.'.documents d', ($this->db_boats->database.'.o.codWord = d.id OR '. $this->db_boats->database.'.o.codPDF = d.id'));
+            // $this->db_boats->join($this->db_boats->database.'.documents d', ($this->db_boats->database.'.o.codWord = d.id OR '. $this->db_boats->database.'.o.codPDF = d.id'));
             $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
-            $this->db_boats->where("b.id IN ($resultOrders)");
-            $this->db_boats->where("b.status",1);
-            $this->db_boats->where("o.status",1);
+            $this->db_boats->join($this->db_boats->database.'.issuedCertifications ic', $this->db_boats->database.'.ic.codOrder = o.id', 'LEFT');
+            $this->db_boats->join($this->db_boats->database.'.typeCertifications tc', $this->db_boats->database.'.o.codTypeCertification = tc.codCert');
+            // $this->db_boats->where("b.id IN ($resultOrders)");
+            // $this->db_boats->where("b.status",1);
+            // $this->db_boats->where("o.status",1);
             $this->db_boats->group_by("b.id");
+            $this->db_boats->where('b.codShipowner',$id);
             $query = $this->db_boats->get();
             $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 
@@ -104,7 +108,7 @@ class Orders_model extends CI_Model {
             }
 
             return $result;
-        }
+        // }
 
         return $result;
     }

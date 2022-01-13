@@ -20,6 +20,7 @@ class Orders extends RESTController {
 				'user_id'       => $this->session->user_id,
 				'name'          => $this->session->name,
 				'lastName'      => $this->session->lastName,
+				'codShipowner'  => $this->session->codShipowner,
 				'codTypeUser'   => $this->session->codTypeUser
 			);
             $this->lang->load(array('orders','layout_nav_left'), $this->session->site_lang);
@@ -42,8 +43,8 @@ class Orders extends RESTController {
      */
     public function listOrder_get()
     {   
-        if ($this->session->codTypeUser == 3) { // ARMADOR
-            $data = $this->orders_model->getOrdersByUser($this->session->user_id);
+        if ($this->session->codTypeUser == 6) { // ARMADOR
+            $data = $this->orders_model->getOrdersByUser($this->session->codShipowner);
         }else{
             $data = $this->orders_model->getAllOrders();
         }
@@ -166,7 +167,7 @@ class Orders extends RESTController {
         $idPdf = null;
 
         $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
-        getDir(FCPATH . 'uploads/'.$pathDate);
+        getDir(FCPATH . 'uploads/Ordernes/'.$pathDate);
 
         $idOrder = $this->input->post('idOrder');
 

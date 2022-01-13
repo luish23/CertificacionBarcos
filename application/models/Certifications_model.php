@@ -68,7 +68,7 @@ class Certifications_model extends CI_Model {
     {
         $this->db_orders->select('name_certificate, name_list_verification, path_jpg_certification_front, path_jpg_certification_back');
         $this->db_orders->from('typeCertifications');
-        $this->db_orders->where('id', $id);
+        $this->db_orders->where('codCert', $id);
         $this->db_orders->where('status', 1);
         $query = $this->db_orders->get();
         $resultCertificate = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;

@@ -85,3 +85,4 @@ $lang['power_speed']                                = 'Potencia / Velocidad';
 
 $lang['alert_process_orders']                        = 'Orden Validada Satisfactoriamente!!';
 $lang['alert_process_error']                         = 'Error al validar la Orden';
+$lang['answer_generate_certificated']                = 'Desea generar el Certificado en';
