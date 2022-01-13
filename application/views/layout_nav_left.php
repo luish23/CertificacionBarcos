@@ -1,7 +1,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="dashboard" class="brand-link">
       <img src="../public/assets/dist/img/logo.jpg" alt="Logo Naval" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-bold">Naval Services</span>
     </a>
@@ -41,6 +41,7 @@
               <p><?php echo $this->lang->line('dashboard'); ?></p>
             </a>
           </li>
+          <?php if ($session['mNavio']) { ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="fas fa-anchor"></i>
@@ -50,20 +51,26 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <?php if ($session['addNavio']) { ?>
               <li class="nav-item">
                 <a href="/formBoat" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                   <p><?php echo $this->lang->line('add_boats'); ?></p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if ($session['listNavio']) { ?>
               <li class="nav-item">
                 <a href="/listBoats" class="nav-link">
                   <i class="fas fa-list-ul"></i>
                   <p><?php echo $this->lang->line('list_boats'); ?></p>
                 </a>
               </li>
+              <?php } ?>
             </ul>
           </li>
+          <?php } ?>
+          <?php if ($session['mOrder']) { ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon far fa-file-alt"></i>
@@ -73,26 +80,34 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <?php if ($session['addOrder']) { ?>
               <li class="nav-item">
                 <a href="/formOrder" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                   <p><?php echo $this->lang->line('add_orders'); ?></p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if ($session['listOrder']) { ?>
               <li class="nav-item">
                 <a href="/listOrders" class="nav-link">
                   <i class="fas fa-list-ul"></i>
                   <p><?php echo $this->lang->line('list_orders'); ?></p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if ($session['validOrder']) { ?>
               <li class="nav-item">
                 <a href="/checkOrders" class="nav-link">
                 <i class="fas fa-check"></i>
                 <p><?php echo $this->lang->line('check_orders'); ?></p>
                 </a>
               </li>
+              <?php } ?>
             </ul>
           </li>
+          <?php } ?>
+          <?php if ($session['mUser']) { ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-user-shield"></i>
@@ -102,20 +117,26 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <?php if ($session['addUser']) { ?>
               <li class="nav-item">
                 <a href="/formUsers" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                 <p><?php echo $this->lang->line('add_users'); ?></p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if ($session['listUser']) { ?>
               <li class="nav-item">
                 <a href="/listUsers" class="nav-link">
                   <i class="fas fa-list-ul"></i>
                   <p><?php echo $this->lang->line('list_users'); ?></p>
                 </a>
               </li>
+              <?php } ?>
             </ul>
           </li>
+          <?php } ?>
+          <?php if ($session['mEmployee']) { ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-user-tie"></i>
@@ -125,20 +146,26 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <?php if ($session['addEmployee']) { ?>
               <li class="nav-item">
                 <a href="/formEmployee" class="nav-link">
                 <i class="fas fa-plus-circle"></i>
                   <p><?php echo $this->lang->line('add_employees'); ?></p>
                 </a>
               </li>
+              <?php } ?>
+              <?php if ($session['listEmployee']) { ?>
               <li class="nav-item">
                 <a href="/listEmployee" class="nav-link">
                   <i class="fas fa-list-ul"></i>
                   <p><?php echo $this->lang->line('list_employees'); ?></p>
                 </a>
               </li>
+              <?php } ?>
             </ul>
           </li>
+          <?php } ?>
+          <?php if ($session['mConfig']) { ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
               <i class="fas fa-cogs"></i>
@@ -148,20 +175,17 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <?php if ($session['business']) { ?>
               <li class="nav-item">
                 <a href="/listBusiness" class="nav-link">
-                <i class="fas fa-plus-circle"></i>
+                <i class="fas fa-building"></i>
                   <p><?php echo $this->lang->line('business'); ?></p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="/listEmployee" class="nav-link">
-                  <i class="fas fa-list-ul"></i>
-                  <p>Otros</p>
-                </a>
-              </li> -->
+              <?php } ?>
             </ul>
           </li>
+          <?php } ?>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

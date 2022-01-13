@@ -6,8 +6,9 @@
 <form id="CertificadoForm" action="generateCertificate" method="POST">    
     <!-- Modal Footer -->
     <div class="modal-footer">
-        <input type="text" name="id" id="id" value="<?php echo $data['id']; ?>">
-        <input type="text" name="codOffice" id="codOffice" value="<?php echo $data['idOffice']; ?>">
+        <input type="hidden" name="id" id="id" value="<?php echo $data['id']; ?>">
+        <input type="hidden" name="codOffice" id="codOffice" value="<?php echo $data['idOffice']; ?>">
+        <input type="hidden" name="codTypeCertification" id="codTypeCertification" value="<?php echo $data['codTypeCertification']; ?>">
         <button type="submit" id="submit" class="btn btn-success">Si</button>
         <button type="button" class="btn btn-dark" data-dismiss="modal">No</button>
     </div>

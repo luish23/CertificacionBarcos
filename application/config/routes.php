@@ -82,9 +82,15 @@ $route['dashboard']['GET']    = 'Dashboard/index';
 /* 
 * ROUTES EMPLOYEES
 */
+
 $route['listEmployee']['GET']          = 'Employee/listEmployee';
 $route['formEmployee']['GET']          = 'Employee/formEmployee';
 $route['registerEmployee']['POST']     = 'Employee/registerEmployee';
+$route['modalEmployee']['GET']         = 'Employee/modalEmployee';
+$route['modalEmployeeUp']['GET']       = 'Employee/modalEmployeeUp';
+$route['modalEmployeeDel']['GET']      = 'Employee/modalEmployeeDel';
+$route['updateEmployee']['POST']       = 'Employee/updateEmployee';
+$route['deleteEmployee']['POST']       = 'Employee/deleteEmployee';
 
 /* 
 * ROUTES BOATS
@@ -114,7 +120,7 @@ $route['deleteOrder']['POST']        = 'Orders/deleteOrder';
 $route['veriffOrder']['POST']        = 'Orders/veriffOrder';
 $route['checkOrders']['GET']         = 'Orders/checkOrders';
 $route['modalValidOrder']['GET']     = 'Orders/modalValidOrder';
-$route['processOrder']['POST']     = 'Orders/processOrder';
+$route['processOrder']['POST']       = 'Orders/processOrder';
 
 
 /* 
@@ -129,6 +135,8 @@ $route['download/(:num)']['GET']          = 'Download/index/$1';
 
 $route['modalCertificado']['GET']            = 'Certifications/modalCertificado';
 $route['generateCertificate']['POST']        = 'Certifications/index';
+$route['configCert']['GET']                  = 'Certifications/configCert';
+
 
 /**
  * BUSINESS

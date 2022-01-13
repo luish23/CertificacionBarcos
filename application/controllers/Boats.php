@@ -19,8 +19,10 @@ class Boats extends RESTController {
 				'user_id'       => $this->session->user_id,
 				'name'          => $this->session->name,
 				'lastName'      => $this->session->lastName,
-				'codTypeUser'   => $this->session->codTypeUser
+				'codTypeUser'   => $this->session->codTypeUser,
+				'codShipowner'  => $this->session->codShipowner
 			);
+            $this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
 			$this->lang->load(array('boats','layout_nav_left'), $this->session->site_lang);
 
         }else{
@@ -37,14 +39,14 @@ class Boats extends RESTController {
 
     public function listBoat_get()
     {   
-        // if ($this->session->codTypeUser == 1) // Admin
-        // {
-            $data = $this->boats_model->getAllBoats();
-        // }else{
-        //     $data = $this->boats_model->getBoatsByUser($this->session->user_id);
-        // }
-
-        $template = array('title' => 'Listado de Barcos');
+        if ($this->session->codTypeUser == 6) // Armador
+        {
+            $data = $this->boats_model->getBoatsByUser($this->session->codShipowner);
+        }else{
+            $data = $this->boats_model->getAllBoats();  
+        }
+        // print_r($data); die;
+        $template = array('title' => $this->lang->line('list_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
@@ -54,11 +56,12 @@ class Boats extends RESTController {
 
     public function formBoat_get()
     {
-        $template = array('title' => 'Registrar Empleados');
+        $data['data'] = $this->boats_model->getShipowner();
+        $template = array('title' => $this->lang->line('add_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
-        $this->load->view('boats/formBoat');
+        $this->load->view('boats/formBoat',$data);
         $this->load->view("boats/footer_boat");
     }
 
@@ -67,7 +70,7 @@ class Boats extends RESTController {
         $data = array(
             "name" => $this->input->post('name'),
             "number_imo" => $this->input->post('number_imo'),
-            "shipowner" => $this->input->post('shipowner'),
+            "codShipowner" => $this->input->post('codShipowner'),
             "number_register" => $this->input->post('number_register'),
             "call_sign" => $this->input->post('call_sign'),
             "year_build" => $this->input->post('year_build'),
@@ -95,11 +98,12 @@ class Boats extends RESTController {
         if ($response) {
             $relation = array('codUser' => $this->session->user_id, 'codBoat' => $response);
             $this->boats_model->relationUserBoat($relation);
-            echo "<script>alert('Navio registrado satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_insert_ok')."');</script>";
             redirect('formBoat', 'refresh');
         }
         else {
-            echo "Hubo un error al Insertar la data"; die;
+            echo "<script>alert('".$this->lang->line('alert_insert_error')."');</script>";
+            redirect('dashboard', 'refresh');
         }
     }
 
@@ -109,7 +113,7 @@ class Boats extends RESTController {
         $data = array(
             "name" => $this->input->post('name'),
             "number_imo" => $this->input->post('number_imo'),
-            "shipowner" => $this->input->post('shipowner'),
+            "codShipowner" => $this->input->post('codShipowner'),
             "number_register" => $this->input->post('number_register'),
             "call_sign" => $this->input->post('call_sign'),
             "year_build" => $this->input->post('year_build'),
@@ -135,11 +139,11 @@ class Boats extends RESTController {
 
         $response = $this->boats_model->updateBoat($data, $id);
         if ($response) {
-            echo "<script>alert('Navio Actualizado satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_update_error')."');</script>";
             redirect('listBoats', 'refresh');
         }
         else {
-            echo "<script>alert('Hubo un error al Actualizar la data');</script>";
+            echo "<script>alert('".$this->lang->line('alert_update_error')."');</script>";
             redirect('dashboard', 'refresh');
         }
     }
@@ -151,11 +155,11 @@ class Boats extends RESTController {
         $response = $this->boats_model->deleteBoat($id);
 
         if ($response) {
-            echo "<script>alert('Navio Eliminado satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_delete_error')."');</script>";
             redirect('listBoats', 'refresh');
         }
         else {
-            echo "<script>alert('Hubo un error al Actualizar la data');</script>";
+            echo "<script>alert('".$this->lang->line('alert_delete_error')."');</script>";
             redirect('dashboard', 'refresh');
         }
 
@@ -166,7 +170,6 @@ class Boats extends RESTController {
     {
         $id = $this->input->get('id');
         $data = $this->boats_model->getBoatMinById($id);
-
         $this->load->view('boats/modalBoat', $data);
     }
 

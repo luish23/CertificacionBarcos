@@ -20,8 +20,11 @@ class Orders extends RESTController {
 				'user_id'       => $this->session->user_id,
 				'name'          => $this->session->name,
 				'lastName'      => $this->session->lastName,
-				'codTypeUser'   => $this->session->codTypeUser
+				'codTypeUser'   => $this->session->codTypeUser,
+                'codShipowner'  => $this->session->codShipowner,
+				'site_lang'  	=> $this->session->site_lang
 			);
+            $this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
             $this->lang->load(array('orders','layout_nav_left'), $this->session->site_lang);
         }else{
             $this->session->unset_userdata('session_data');
@@ -42,12 +45,12 @@ class Orders extends RESTController {
      */
     public function listOrder_get()
     {   
-        if ($this->session->codTypeUser == 3) { // ARMADOR
-            $data = $this->orders_model->getOrdersByUser($this->session->user_id);
+        if ($this->session->codTypeUser == 6) { // ARMADOR
+            $data = $this->orders_model->getOrdersByUser($this->session->codShipowner);
         }else{
             $data = $this->orders_model->getAllOrders();
         }
-        
+        // print_r($data); die;
         $template = array('title' => $this->lang->line('title_listOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -67,6 +70,7 @@ class Orders extends RESTController {
         {
             $data['offices'] = $this->offices_model->getOffice();
             $data['certifications'] = $this->certifications_model->getTypeCertifications();
+            // print_r($data['certifications']); die;
             $template = array('title' => $this->lang->line('title_formOrders'));
             $this->load->view("dashboard/header_dashboard",$template);
             $this->load->view("layout_nav_top");
@@ -165,7 +169,7 @@ class Orders extends RESTController {
         $idPdf = null;
 
         $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
-        getDir(FCPATH . 'uploads/'.$pathDate);
+        getDir(FCPATH . 'uploads/Ordernes/'.$pathDate);
 
         $idOrder = $this->input->post('idOrder');
 
@@ -271,6 +275,7 @@ class Orders extends RESTController {
     public function checkOrders_get()
     {
         $data = $this->orders_model->getOrdersProcess();
+        // print_r($data); die;
         
         $template = array('title' => $this->lang->line('title_checkOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
@@ -285,12 +290,12 @@ class Orders extends RESTController {
         $response = $this->orders_model->updateOrdersProcess($this->input->post('idOrder'));
 
         if ($response) {
-            echo "<script>alert('".$this->lang->line('alert_listOrders')."');</script>";
+            echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
             redirect('listOrders', 'refresh');
         }
         else {
-            echo "<script>alert('".$this->lang->line('alertError_checkOrders')."');</script>";
-            redirect('dashboard', 'refresh');
+            echo "<script>alert('".$this->lang->line('alert_process_error')."');</script>";
+            redirect('checkOrders', 'refresh');
         }
         
     }

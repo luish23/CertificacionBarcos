@@ -33,6 +33,7 @@
                   <thead>
                   <tr>
                     <th><?php echo $this->lang->line('name'); ?></th>
+                    <th><?php echo $this->lang->line('shipowner'); ?></th>
                     <th><?php echo $this->lang->line('imo'); ?></th>
                     <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>
@@ -43,6 +44,7 @@
                     foreach ($data as $key => $value) {
                       echo "<tr>";
                       echo "<td>".$value['name']."</td>";
+                      echo "<td>".$value['name_ship']."</td>";                 
                       echo "<td>".$value['number_imo']."</td>";                 
                       echo "<td><button type='button' title='Ver Navio' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".(int)$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
                       <button type='button' title='Editar Navio' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBoat' data-id=".(int)$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
@@ -55,6 +57,7 @@
                   <tfoot>
                   <tr>
                     <th><?php echo $this->lang->line('name'); ?></th>
+                    <th><?php echo $this->lang->line('shipowner'); ?></th>
                     <th><?php echo $this->lang->line('imo'); ?></th>
                     <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>

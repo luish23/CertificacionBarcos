@@ -22,6 +22,10 @@ $lang['alert_checkOrders']                     = 'Orden Validada satisfactoriame
 $lang['alertError_checkOrders']                = 'Hubo un error al Validar la Order';
 $lang['answer_delete_order']                   = 'Seguro desea eliminar el registro?';
 $lang['asnwer_generate_certificated']          = 'Seguro desea Generar el Certificado?';
+$lang['type_certificate']                      = 'Certificado';
+$lang['list_verification']                     = 'Listado de Verificación';
+$lang['select_word']                           = 'Seleccione documento Word';
+$lang['select_pdf']                            = 'Seleccione documento PDF';
 
 
 /**
@@ -74,3 +78,11 @@ $lang['amount']                                     = 'Cantidad';
 $lang['mark']                                       = 'Marca';
 $lang['model']                                      = 'Modelo';
 $lang['power_speed']                                = 'Potencia / Velocidad';
+
+/**
+ * processOrder
+ */
+
+$lang['alert_process_orders']                        = 'Orden Validada Satisfactoriamente!!';
+$lang['alert_process_error']                         = 'Error al validar la Orden';
+$lang['answer_generate_certificated']                = 'Desea generar el Certificado en';

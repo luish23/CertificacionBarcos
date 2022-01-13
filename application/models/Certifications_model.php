@@ -22,11 +22,12 @@ class Certifications_model extends CI_Model {
 
     public function generarCertificado($id,$codOffice)
     {
-        $this->db_orders->select('o.*, b.*, e.name, e.lastName, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->select('o.id AS codOrder, o.codOffice, o.codUser, o.codBoat, o.codWord, o.codPDF, o.codTypeCertification, o.condition, o.reasonRejection, b.*, s.name_ship, e.name as nameEmployee, e.lastName, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_orders->from('orders o');
         $this->db_orders->join($this->db_orders->database.'.boats b', $this->db_orders->database.'.b.id = o.codBoat');
         $this->db_orders->join($this->db_orders->database.'.employee e', $this->db_orders->database.'.e.codUser = o.codUser');
-        $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
+        $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = '.$codOffice);
+        $this->db_orders->join($this->db_orders->database.'.shipowner s', $this->db_orders->database.'.s.id = b.codShipowner');
         $this->db_orders->where('o.id', $id);
         $this->db_orders->where('o.condition', 'VALIDADO');
         $this->db_orders->where('o.status', 1);
@@ -61,5 +62,17 @@ class Certifications_model extends CI_Model {
 
         $result = ($this->db_orders->affected_rows() > 0) ? true :  false;
         return $result;
+    }
+
+    public function getPathCertificate($id)
+    {
+        $this->db_orders->select('name_certificate, name_list_verification, path_jpg_certification_front, path_jpg_certification_back');
+        $this->db_orders->from('typeCertifications');
+        $this->db_orders->where('codCert', $id);
+        $this->db_orders->where('status', 1);
+        $query = $this->db_orders->get();
+        $resultCertificate = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
+
+        return $resultCertificate;
     }
 }

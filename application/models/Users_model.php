@@ -121,6 +121,7 @@ class Users_model extends CI_Model {
         $this->db_typeuser->select('id, description');
         $this->db_typeuser->from('typeUser');
         $this->db_typeuser->where('status',1);
+        $this->db_typeuser->order_by('description','ASC');
         $query = $this->db_typeuser->get();
         $resultTypeUsers = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 

@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Listado de Empleados</h1>
+            <h1 class="m-0"><?php echo $this->lang->line('list_employees'); ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="dashboard">Inicio</a></li>
-              <li class="breadcrumb-item active">Listado de Empleados</li>
+              <li class="breadcrumb-item"><a href="dashboard"><?php echo $this->lang->line('home'); ?></a></li>
+              <li class="breadcrumb-item active"><?php echo $this->lang->line('list_employees'); ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -32,11 +32,11 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>Nombre y Apellido</th>
-                    <th>Teléfono</th>
-                    <th>Cargo</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th><?php echo $this->lang->line('name_lastname'); ?></th>
+                    <th><?php echo $this->lang->line('phone'); ?></th>
+                    <th><?php echo $this->lang->line('position'); ?></th>
+                    <th><?php echo $this->lang->line('status'); ?></th>
+                    <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -47,10 +47,10 @@
                       echo "<td>".$value['name']. ' ' .$value['lastName']."</td>";
                       echo "<td>".$value['phone']."</td>";
                       echo "<td>".$value['position']."</td>";
-                      echo "<td>". $retVal2 = ($value['status']) ? 'Activo' : 'Inactivo' ."</td>";                      
+                      echo "<td>". $retVal2 = ($value['status']) ? $this->lang->line('active') : $this->lang->line('inactive') ."</td>";                      
                       echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeEmployee' data-id='".(int)$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateEmployee' data-id='".(int)$value['id']."'><i class='far fa-edit' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#deleteEmployee' data-id='".(int)$value['id']."'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
+                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateEmployee' data-id='".(int)$value['id']."'><i class='far fa-edit' aria-hidden='true'></i></button></td>";
+                      // <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#deleteEmployee' data-id='".(int)$value['id']."'><i class='far fa-trash-alt' aria-hidden='true'></i></button>
                       echo "</tr>";
                     }
                   }
@@ -58,11 +58,11 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>Nombre y Apellido</th>
-                    <th>Teléfono</th>
-                    <th>Cargo</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th><?php echo $this->lang->line('name_lastname'); ?></th>
+                    <th><?php echo $this->lang->line('phone'); ?></th>
+                    <th><?php echo $this->lang->line('position'); ?></th>
+                    <th><?php echo $this->lang->line('status'); ?></th>
+                    <th><?php echo $this->lang->line('actions'); ?></th>
                   </tr>
                   </tfoot>
                 </table>
@@ -86,7 +86,7 @@
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
-              <h4 class="modal-title">Información</h4>
+              <h4 class="modal-title"><?php echo $this->lang->line('information'); ?></h4>
           </div>
           <div class="modal-body">
               <div class="fetched-data"></div>
@@ -99,7 +99,7 @@
   <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
-          <h4 class="modal-title">Editar Información</h4>
+          <h4 class="modal-title"><?php echo $this->lang->line('update_information'); ?></h4>
           </div>
           <div class="modal-body">
               <div class="fetched-dataUp"></div>
@@ -108,15 +108,15 @@
   </div>
 </div>
 
-<div class="modal fade" id="deleteEmployee" role="dialog">
+<!-- <div class="modal fade" id="deleteEmployee" role="dialog">
   <div class="modal-dialog" role="document">
       <div class="modal-content bg-secondary">
           <div class="modal-header">
-          <h4 class="modal-title">Seguro desea eliminar el registro?</h4>
+          <h4 class="modal-title"><?php // echo $this->lang->line('answer_delete_employee'); ?></h4>
           </div>
           <div class="modal-body">
               <div class="fetched-dataDel"></div>
           </div>
       </div>
   </div>
-</div>
+</div> -->

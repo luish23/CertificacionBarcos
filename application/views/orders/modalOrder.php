@@ -1,6 +1,6 @@
 <!-- Modal VER -->
     <div class="modal-header">
-        <h3 class="modal-title"><?php echo $this->lang->line('information'); ?><strong><?php echo '  #'.$data['office'].str_pad($data['id'], 3, '0', STR_PAD_LEFT).$data['anyo']; ?></strong></h3>
+        <h3 class="modal-title"><?php echo $this->lang->line('information'); ?><strong><?php // echo '  #'.$data['office'].str_pad($data['id'], 3, '0', STR_PAD_LEFT).$data['anyo']; ?></strong></h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
         </button>
@@ -19,7 +19,7 @@
         <div class="form-group row">
             <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('shipowner'); ?></label>
             <div class="col-4 err-form">
-                <input type="text" class="form-control" name="shipowner" id="shipowner" readonly value="<?php echo $data['shipowner']; ?>">
+                <input type="text" class="form-control" name="shipowner" id="shipowner" readonly value="<?php echo $data['name_ship']; ?>">
             </div>
             <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('number_register'); ?></label>
             <div class="col-4 err-form">

@@ -44,15 +44,23 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('shipowner'); ?></label>
+                    <label for="exampleInputEmail1" class="col-2 col-form-label"><?php echo $this->lang->line('shipowner'); ?></label>
                     <div class="col-4 err-form">
-                        <input type="text" class="form-control" name="shipowner" id="shipowner" placeholder="<?php echo $this->lang->line('shipowner'); ?>">
+                        <select class="form-control" name="codShipowner" id="codShipowner">
+                        <option value="0"><?php echo $this->lang->line('select'); ?></option>
+                        <?php 
+                            foreach ($data as $key => $value) {
+                                echo '<option value="'.$value['id'].'">'.$value['name_ship'].'</option>';
+                            }
+                        ?>
+                        </select>
                     </div>
                     <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('number_register'); ?></label>
                     <div class="col-4 err-form">
                         <input type="text" class="form-control" name="number_register" id="number_register" placeholder="<?php echo $this->lang->line('number_register'); ?>">
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('call_sign'); ?></label>
                     <div class="col-4 err-form">

@@ -34,8 +34,9 @@
                   <tr>
                     <th>#</th>
                     <th><?php echo $this->lang->line('name'); ?></th>
-                    <th><?php echo $this->lang->line('imo'); ?></th>
-                    <th><?php echo $this->lang->line('office'); ?></th>
+                    <!-- <th><?php // echo $this->lang->line('imo'); ?></th> -->
+                    <!-- <th><?php // echo $this->lang->line('type_certificate'); ?></th> -->
+                    <th><?php echo $this->lang->line('list_verification'); ?></th>
                     <th><?php echo $this->lang->line('process'); ?></th>
                     <th><?php echo $this->lang->line('check_documents'); ?></th>
                     <th><?php echo $this->lang->line('certificated_status'); ?></th>
@@ -49,8 +50,9 @@
                       echo "<tr>";
                       echo "<td>".$value['office'].str_pad($value['idOrder'], 3, '0', STR_PAD_LEFT).$value['anyo']."</td>";
                       echo "<td>".$value['name']."</td>";
-                      echo "<td>".$value['number_imo']."</td>";
-                      echo "<td>".$value['office']."</td>";
+                      // echo "<td>".$value['number_imo']."</td>";
+                      // echo "<td>".$value['name_certificate']."</td>";
+                      echo "<td>".$value['name_list_verification']."</td>";
                       echo "<td>".$value['condition']."</td>";                      
                       echo "<td>";
                       if ($value['codWord']) {
@@ -60,14 +62,21 @@
                         echo "<button disabled type='button' class='btn btn-outline-info btn-rounded waves-effect'><i class='far fa-file-word pr-2' aria-hidden='true'></i>WORD</button>";
                       }
                       if ($value['codPDF']) {
-                        echo "<a href='download/".$value['codPDF']."' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a></td>";
+                        echo "<a href='download/".$value['codPDF']."' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a></td>";
                       }else {
-                        echo "<button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
+                        echo "<button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
                       }
                       if ($value['idCertificated']) {
-                        echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a><span class='badge badge-success ml-2'>".$value['estado']."</span></td>";
+                        if ($value['estado'] == 'ACTIVO') {
+                          $alert = "<span class='badge badge-success ml-2'>".$value['estado']."</span>";
+                        }elseif($value['estado'] == 'VENCIDO'){
+                          $alert = "<span class='badge badge-danger ml-2'>".$value['estado']."</span>";
+                        }else{
+                          $alert = "<span class='badge badge-warning ml-2'>".$value['estado']."</span>";
+                        }
+                        echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a>".$alert."</td>";
                       }else {
-                        echo "<td><button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
+                        echo "<td><button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
                       }  
 
                       if ($value['condition'] != 'VALIDADO') {
@@ -77,9 +86,9 @@
                       }
                       
                       echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Orden' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' title='Eliminar Orden' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-primary btn-rounded waves-effect ml-3' $disabled title='Generar Certificado' data-toggle='modal' data-target='#genCertificado' data-id=".$value['idOrder']."><i class='fas fa-file-signature' aria-hidden='true'></i></button></td>";
+                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-1' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['idOrder']."><i class='far fa-edit' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1' title='Eliminar Orden' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>
+                      <button type='button' class='btn btn-outline-primary btn-rounded waves-effect ml-1' $disabled title='Generar Certificado' data-toggle='modal' data-target='#genCertificado' data-id=".$value['idOrder']."><i class='fas fa-file-signature' aria-hidden='true'></i></button></td>";
                       echo "</tr>";
                     }
                   }
@@ -89,8 +98,9 @@
                   <tr>
                     <th>#</th>
                     <th><?php echo $this->lang->line('name'); ?></th>
-                    <th><?php echo $this->lang->line('imo'); ?></th>
-                    <th><?php echo $this->lang->line('office'); ?></th>
+                    <!-- <th><?php // echo $this->lang->line('imo'); ?></th> -->
+                    <!-- <th><?php // echo $this->lang->line('type_certificate'); ?></th> -->
+                    <th><?php echo $this->lang->line('list_verification'); ?></th>
                     <th><?php echo $this->lang->line('process'); ?></th>
                     <th><?php echo $this->lang->line('check_documents'); ?></th>
                     <th><?php echo $this->lang->line('certificated_status'); ?></th>

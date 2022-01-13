@@ -35,6 +35,7 @@
                     <th>Empresa</th>
                     <th>Teléfono</th>
                     <th>Dirección</th>
+                    <th>CPF/CNPJ</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -46,10 +47,11 @@
                     echo "<td>".$data['name']."</td>";
                     echo "<td>".$data['phone']."</td>";
                     echo "<td>".$data['address']."</td>";
+                    echo "<td>".$data['cpf_cnpj']."</td>";
                     echo "<td>". $retVal2 = ($data['status']) ? 'Activo' : 'Inactivo' ."</td>";                      
-                    echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBusiness' data-id='".(int)$data['id']."'><i class='far fa-eye' aria-hidden='true'></i></button>
-                    <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBusiness' data-id='".(int)$data['id']."'><i class='far fa-edit' aria-hidden='true'></i></button>
-                    </td>";
+                    echo "<td><button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBusiness' data-id='".(int)$data['id']."'><i class='far fa-edit' aria-hidden='true'></i></button></td>";
+                    // <button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBusiness' data-id='".(int)$data['id']."'><i class='far fa-eye' aria-hidden='true'></i></button>
+                    
                   }
                   ?>
                   </tbody>
@@ -58,6 +60,7 @@
                     <th>Empresa</th>
                     <th>Teléfono</th>
                     <th>Dirección</th>
+                    <th>CPF/CNPJ</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>

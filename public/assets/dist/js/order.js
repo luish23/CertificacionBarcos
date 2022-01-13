@@ -69,9 +69,10 @@ $(document).ready(function(){
       url : 'veriffOrder', //Here you will fetch records 
       data :  'idCer='+ selectCertif+'&idNav='+selectNavio, //Pass $id
       success : function(data){
+        console.log(data);
         if( JSON.stringify(data.response) == 'true'){
-          alert('Ya existe una orden con igual tipo de certificacion');
           $(":submit").attr("disabled", true);
+          alert('Hay una certificación Vigente para este Navio');
           $(":submit").removeClass("btn-success");
           $(":submit").addClass("btn-secondary");
         }

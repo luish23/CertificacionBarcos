@@ -7,6 +7,13 @@
 $lang['add_boat']                                    = 'Registrar Navios';
 $lang['listBoats']                                   = 'Listado de Navios';
 $lang['answer_delete_boat']                          = 'Seguro desea eliminar el registro?';
+$lang['alert_insert_ok']                             = 'Navio registrado satisfactoriamente!!';
+$lang['alert_insert_error']                          = 'Hubo un error al Insertar la data';
+$lang['alert_update_ok']                             = 'Navio Actualizado satisfactoriamente!!';
+$lang['alert_update_error']                          = 'Hubo un error al Actualizar la data';
+$lang['alert_delete_ok']                             = 'Navio Eliminado satisfactoriamente!!';
+$lang['alert_delete_error']                          = 'Hubo un error al Eliminar la data';
+
 
 
 /*
