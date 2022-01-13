@@ -20,6 +20,8 @@ class Dashboard extends CI_Controller {
 				'codShipowner'  => $this->session->codShipowner,
 				'site_lang'  	=> $this->session->site_lang
 			);
+
+			$this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
 			$this->lang->load(array('dashboard','layout_nav_left'), $this->session->site_lang);
 		}else{
             $this->session->unset_userdata('session_data');

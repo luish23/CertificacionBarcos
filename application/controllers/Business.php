@@ -23,6 +23,7 @@ class Business extends RESTController {
                 'codShipowner'  => $this->session->codShipowner,
                 'site_lang'  	=> $this->session->site_lang
 			);
+            $this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
             $this->lang->load(array('business','layout_nav_left'), $this->session->site_lang);
         }else{
             $this->session->unset_userdata('session_data');

@@ -24,6 +24,7 @@ class Certifications extends RESTController {
         //      'codShipowner'  => $this->session->codShipowner,
         //      'site_lang'  	=> $this->session->site_lang
 		// 	);
+        //  $this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
         // }else{
         //     $this->session->unset_userdata('session_data');
         //     $this->session->sess_destroy();

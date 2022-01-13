@@ -22,6 +22,7 @@ class Boats extends RESTController {
 				'codTypeUser'   => $this->session->codTypeUser,
 				'codShipowner'  => $this->session->codShipowner
 			);
+            $this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
 			$this->lang->load(array('boats','layout_nav_left'), $this->session->site_lang);
 
         }else{
