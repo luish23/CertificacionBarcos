@@ -78,12 +78,13 @@ class Boats_model extends CI_Model {
 
     public function getBoatById($id)
     {
-        $this->db_boats->select('b.*, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_boats->select('b.*, of.office, sh.name_ship, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_boats->from('boats b');
         $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat ='.$id);
         $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
+        $this->db_boats->join($this->db_boats->database.'.shipowner sh', $this->db_boats->database.'.b.codShipowner = sh.id');
         $this->db_boats->where('b.id', $id);
-        $this->db_boats->where('b.status', 1);
+        // $this->db_boats->where('b.status', 1);
         $query = $this->db_boats->get();
         $resultBoat['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
         return $resultBoat;

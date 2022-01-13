@@ -19,7 +19,7 @@
         <div class="form-group row">
             <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('shipowner'); ?></label>
             <div class="col-4 err-form">
-                <input type="text" class="form-control" name="shipowner" id="shipowner" readonly value="<?php echo $data['shipowner']; ?>">
+                <input type="text" class="form-control" name="shipowner" id="shipowner" readonly value="<?php echo $data['name_ship']; ?>">
             </div>
             <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('number_register'); ?></label>
             <div class="col-4 err-form">

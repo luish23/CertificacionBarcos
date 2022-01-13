@@ -173,7 +173,7 @@ class Orders_model extends CI_Model {
 
     public function getOrderById($id)
     {
-        $this->db_orders->select('o.id, of.id AS idOffice, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->select('o.id, o.codTypeCertification, of.id AS idOffice, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_orders->from('orders o');
         $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
         $this->db_orders->where('o.id', $id);

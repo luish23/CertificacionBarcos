@@ -1,5 +1,5 @@
 <!-- form start -->
-<?php // print_r($data); die; ?>
+<?php // print_r($data); ?>
 <div class="modal-header">
     <h3 class="modal-title"><?php echo $this->lang->line('information'); ?><strong><?php echo '  #'.$data['office'].str_pad($data['idOrder'], 3, '0', STR_PAD_LEFT).$data['anyo']; ?></strong></h3>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -47,8 +47,8 @@
         </div>   
         <!-- /.card-body -->
         <div class="modal-footer">
-            <input type="hidden" name="codBoat" id="codBoat" value="<?php echo $data['id']; ?>">
-            <input type="hidden" name="idOrder" id="idOrder" value="<?php echo $data['idOrder']; ?>">
+            <input type="text" name="codBoat" id="codBoat" value="<?php echo $data['codBoat']; ?>">
+            <input type="text" name="idOrder" id="idOrder" value="<?php echo $data['idOrder']; ?>">
             <input type="hidden" name="codTypeCertification" id="codTypeCertification" value="<?php echo $data['codTypeCertification']; ?>">                
             <button type="submit" id="submit" class="btn btn-success"><?php echo $this->lang->line('update'); ?></button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
