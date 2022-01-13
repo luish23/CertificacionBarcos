@@ -95,7 +95,7 @@ class Boats_model extends CI_Model {
         $this->db_boats->select('b.*, sh.name_ship');
         $this->db_boats->from('boats b');
         $this->db_boats->join($this->db_boats->database.'.shipowner sh', $this->db_boats->database.'.b.codShipowner = sh.id');
-        $this->db_boats->where('b.codShipowner',$id);
+        // $this->db_boats->where('b.codShipowner',$id);
         $this->db_boats->where('b.id', $id);
         $this->db_boats->where('b.status', 1);
         $query = $this->db_boats->get();

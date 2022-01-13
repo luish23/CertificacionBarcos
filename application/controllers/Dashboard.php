@@ -30,7 +30,12 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		$data = $this->dashboard_model->getInfo();
+		if ($this->session->codTypeUser == 6) // Armador
+        {
+            $data = $this->dashboard_model->getInfoById($this->session->codShipowner);
+        }else{
+            $data = $this->dashboard_model->getInfo();  
+        }
 		$template = array('title' => $this->lang->line('dashboard'));
 		$this->load->view("dashboard/header_dashboard",$template);
 		$this->load->view("layout_nav_top");

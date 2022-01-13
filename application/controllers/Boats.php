@@ -38,11 +38,11 @@ class Boats extends RESTController {
 
     public function listBoat_get()
     {   
-        if ($this->session->codTypeUser == 1) // Admin
+        if ($this->session->codTypeUser == 6) // Armador
         {
-            $data = $this->boats_model->getAllBoats();
-        }else{
             $data = $this->boats_model->getBoatsByUser($this->session->codShipowner);
+        }else{
+            $data = $this->boats_model->getAllBoats();  
         }
         // print_r($data); die;
         $template = array('title' => $this->lang->line('list_boats'));
@@ -169,7 +169,6 @@ class Boats extends RESTController {
     {
         $id = $this->input->get('id');
         $data = $this->boats_model->getBoatMinById($id);
-
         $this->load->view('boats/modalBoat', $data);
     }
 
