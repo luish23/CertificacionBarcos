@@ -19,7 +19,9 @@ class Business extends RESTController {
 				'user_id'       => $this->session->user_id,
 				'name'          => $this->session->name,
 				'lastName'      => $this->session->lastName,
-				'codTypeUser'   => $this->session->codTypeUser
+				'codTypeUser'   => $this->session->codTypeUser,
+                'codShipowner'  => $this->session->codShipowner,
+                'site_lang'  	=> $this->session->site_lang
 			);
             $this->lang->load(array('business','layout_nav_left'), $this->session->site_lang);
         }else{

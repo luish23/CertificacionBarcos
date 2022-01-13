@@ -20,8 +20,9 @@ class Orders extends RESTController {
 				'user_id'       => $this->session->user_id,
 				'name'          => $this->session->name,
 				'lastName'      => $this->session->lastName,
-				'codShipowner'  => $this->session->codShipowner,
-				'codTypeUser'   => $this->session->codTypeUser
+				'codTypeUser'   => $this->session->codTypeUser,
+                'codShipowner'  => $this->session->codShipowner,
+				'site_lang'  	=> $this->session->site_lang
 			);
             $this->lang->load(array('orders','layout_nav_left'), $this->session->site_lang);
         }else{
