@@ -169,7 +169,7 @@ class Orders extends RESTController {
         $idPdf = null;
 
         $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
-        getDir(FCPATH . 'uploads/Ordernes/'.$pathDate);
+        getDir(FCPATH . 'uploads/Ordenes/'.$pathDate);
 
         $idOrder = $this->input->post('idOrder');
 
