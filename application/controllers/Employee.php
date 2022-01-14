@@ -79,11 +79,11 @@ class Employee extends RESTController {
 
         $response = $this->employees_model->insertEmployee($data);
         if ($response) {
-            echo "<script>alert('Empleado registrado satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_add_employee')."');</script>";
             redirect('formEmployee', 'refresh');
         }
         else {
-            echo "<script>alert('EHubo un error al Insertar la data');</script>";
+            echo "<script>alert('".$this->lang->line('alert_error_employee')."');</script>";
             redirect('formEmployee', 'refresh');
         }
     }
@@ -104,11 +104,11 @@ class Employee extends RESTController {
 
         $response = $this->employees_model->updateEmployee($data, $id);
         if ($response) {
-            echo "<script>alert('Empleado Actualizado satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_update_employee')."');</script>";
             redirect('listEmployee', 'refresh');
         }
         else {
-            echo "<script>alert('Hubo un error al Actualizar la Informacion');</script>";
+            echo "<script>alert('".$this->lang->line('alert_error_update_employee')."');</script>";
             redirect('listEmployee', 'refresh');
         }
         
@@ -122,11 +122,11 @@ class Employee extends RESTController {
         $response = $this->employees_model->deleteEmployee($id);
 
         if ($response) {
-            echo "<script>alert('Empleado Eliminado satisfactoriamente!!');</script>";
+            echo "<script>alert('".$this->lang->line('alert_delete_employee')."');</script>";
             redirect('listEmployee', 'refresh');
         }
         else {
-            echo "<script>alert('Hubo un error al Eliminar la data');</script>";
+            echo "<script>alert('".$this->lang->line('alert_error_delete_employee')."');</script>";
             redirect('dashboard', 'refresh');
         }
 
@@ -151,6 +151,7 @@ class Employee extends RESTController {
     {
         $id = $this->input->get('id');
         $data = $this->employees_model->getEmployee($id);
+        // print_r($data); die;
         $this->load->view('employees/modalEmployeeDel', $data);
     }
  

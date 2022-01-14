@@ -14,7 +14,20 @@
             <div class="form-group row">
                 <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('shipowner'); ?></label>
                 <div class="col-4 err-form">
-                    <input type="text" class="form-control" name="shipowner" id="shipowner" value="<?php echo $data['name_ship']; ?>">
+                    <select class="form-control" name="codShipowner" id="codShipowner">
+                        <option value="0"><?php echo $this->lang->line('select'); ?></option>
+                        <?php 
+                        foreach ($shipowner as $key => $value2) {
+                            if ($data['codShipowner'] == $value2['id']) {
+                                echo '<option value="'.$value2['id'].'" selected="selected">'.$value2['name_ship'].'</option>';
+                            }else{
+                                echo '<option value="'.$value2['id'].'">'.$value2['name_ship'].'</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+
+
                 </div>
                 <label for="inputLabel" class="col-2 col-form-label"><?php echo $this->lang->line('number_register'); ?></label>
                 <div class="col-4 err-form">

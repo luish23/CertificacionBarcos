@@ -138,8 +138,9 @@ class Boats extends RESTController {
         );
 
         $response = $this->boats_model->updateBoat($data, $id);
+
         if ($response) {
-            echo "<script>alert('".$this->lang->line('alert_update_error')."');</script>";
+            echo "<script>alert('".$this->lang->line('alert_update_ok')."');</script>";
             redirect('listBoats', 'refresh');
         }
         else {
@@ -155,7 +156,7 @@ class Boats extends RESTController {
         $response = $this->boats_model->deleteBoat($id);
 
         if ($response) {
-            echo "<script>alert('".$this->lang->line('alert_delete_error')."');</script>";
+            echo "<script>alert('".$this->lang->line('alert_delete_ok')."');</script>";
             redirect('listBoats', 'refresh');
         }
         else {
@@ -177,7 +178,7 @@ class Boats extends RESTController {
     {
         $id = $this->input->get('id');
         $data = $this->boats_model->getBoatMinById($id);
-
+        $data['shipowner'] = $this->boats_model->getShipowner();
         $this->load->view('boats/modalBoatUp', $data);
     }
 

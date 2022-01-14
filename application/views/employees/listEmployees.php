@@ -48,10 +48,17 @@
                       echo "<td>".$value['phone']."</td>";
                       echo "<td>".$value['position']."</td>";
                       echo "<td>". $retVal2 = ($value['status']) ? $this->lang->line('active') : $this->lang->line('inactive') ."</td>";                      
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeEmployee' data-id='".(int)$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateEmployee' data-id='".(int)$value['id']."'><i class='far fa-edit' aria-hidden='true'></i></button></td>";
-                      // <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#deleteEmployee' data-id='".(int)$value['id']."'><i class='far fa-trash-alt' aria-hidden='true'></i></button>
-                      echo "</tr>";
+                      echo "<td>";
+                      if ($session['previewInfo']) {
+                        echo "<button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeEmployee' data-id='".(int)$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button>";
+                      }
+                      if ($session['editInfo']) {
+                        echo "<button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateEmployee' data-id='".(int)$value['id']."'><i class='far fa-edit' aria-hidden='true'></i></button>";
+                      }
+                      if ($session['deleteInfo']) {
+                        echo "<button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#deleteEmployee' data-id='".(int)$value['id']."'><i class='far fa-trash-alt' aria-hidden='true'></i></button>";
+                      }
+                      echo "</td></tr>";
                     }
                   }
                   ?>
@@ -108,15 +115,15 @@
   </div>
 </div>
 
-<!-- <div class="modal fade" id="deleteEmployee" role="dialog">
+<div class="modal fade" id="deleteEmployee" role="dialog">
   <div class="modal-dialog" role="document">
       <div class="modal-content bg-secondary">
           <div class="modal-header">
-          <h4 class="modal-title"><?php // echo $this->lang->line('answer_delete_employee'); ?></h4>
+          <h4 class="modal-title"><?php echo $this->lang->line('answer_delete_employee'); ?></h4>
           </div>
           <div class="modal-body">
               <div class="fetched-dataDel"></div>
           </div>
       </div>
   </div>
-</div> -->
+</div>

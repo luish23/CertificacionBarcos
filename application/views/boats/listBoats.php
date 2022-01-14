@@ -46,10 +46,17 @@
                       echo "<td>".$value['name']."</td>";
                       echo "<td>".$value['name_ship']."</td>";                 
                       echo "<td>".$value['number_imo']."</td>";                 
-                      echo "<td><button type='button' title='Ver Navio' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".(int)$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
-                      <button type='button' title='Editar Navio' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBoat' data-id=".(int)$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>
-                      <button type='button' data-toggle='modal' data-target='#delBoat' title='Eliminar Navio' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-id=".(int)$value['id']."><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
-                      echo "</tr>";
+                      echo "<td>";
+                      if ($session['previewInfo']) {
+                        echo "<button type='button' title='Ver Navio' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".(int)$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>";
+                      }
+                      if ($session['editInfo']) {
+                        echo "<button type='button' title='Editar Navio' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBoat' data-id=".(int)$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>";
+                      }
+                      if ($session['deleteInfo']) {
+                        echo "<button type='button' data-toggle='modal' data-target='#delBoat' title='Eliminar Navio' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-id=".(int)$value['id']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>";
+                      }
+                        echo "</td></tr>";
                     }
                   }
                   ?>

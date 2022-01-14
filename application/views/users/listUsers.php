@@ -48,9 +48,16 @@
                       echo "<td>".$value['description']."</td>";
                       echo "<td>". $retVal = ($value['assigned']) ? 'Si' : 'No' ."</td>";
                       echo "<td>". $retVal2 = ($value['status']) ? 'Activo' : 'Inactivo' ."</td>";                      
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeUser' data-id='".(int)$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateUser' data-id='".(int)$value['id']."'><i class='far fa-edit' aria-hidden='true'></i></button>
-                      <button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#deleteUser' data-id='".(int)$value['id']."'><i class='far fa-trash-alt' aria-hidden='true'></i></button></td>";
+                      echo "<td>";
+                      if ($session['previewInfo']) {
+                        echo "<button type='button' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeUser' data-id='".(int)$value['id']."'><i class='far fa-eye' aria-hidden='true'></i></button>";
+                      }
+                      if ($session['editInfo']) {
+                        echo "<button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateUser' data-id='".(int)$value['id']."'><i class='far fa-edit' aria-hidden='true'></i></button>";
+                      }
+                      if ($session['deleteInfo']) {
+                        echo "<button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#deleteUser' data-id='".(int)$value['id']."'><i class='far fa-trash-alt' aria-hidden='true'></i></button>";
+                      }
                       echo "</tr>";
                     }
                   }
