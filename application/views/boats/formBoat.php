@@ -40,7 +40,7 @@
                     </div>
                     <label for="inputNumeroIMO" class="col-2 col-form-label"><?php echo $this->lang->line('imo'); ?></label>
                     <div class="col-4 err-form">
-                        <input type="text" class="form-control" name="number_imo" id="number_imo" placeholder="<?php echo $this->lang->line('imo'); ?>">
+                        <input type="number" class="form-control" name="number_imo" id="number_imo" placeholder="<?php echo $this->lang->line('imo'); ?>">
                     </div>
                 </div>
                 <div class="form-group row">
