@@ -157,7 +157,6 @@ class Boats_model extends CI_Model {
     {
         $this->db_boats->where('id', $id);
         $this->db_boats->update('boats',$data);
-
         return $this->db_boats->affected_rows();
     }
 
@@ -182,7 +181,7 @@ class Boats_model extends CI_Model {
 
     public function getShipowner()
     {
-        $result['data'] = false;
+        // $result['data'] = false;
         $this->db_boats->select('*');
         $this->db_boats->from('shipowner');
         // $this->db_boats->where('status', 1);
