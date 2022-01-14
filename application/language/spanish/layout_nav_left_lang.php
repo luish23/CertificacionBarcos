@@ -15,9 +15,9 @@ $lang['check_orders']               = 'Validar Ordenes';
 $lang['control_users']              = 'Control de Usuarios'; 
 $lang['add_users']                  = 'Registrar Usuarios'; 
 $lang['list_users']                 = 'Listado de Usuarios'; 
-$lang['control_employees']          = 'Control de Empleados'; 
-$lang['add_employees']              = 'Registrar Empleados'; 
-$lang['list_employees']             = 'Listado de Empleados'; 
+$lang['control_employees']          = 'Control de Personal'; 
+$lang['add_employees']              = 'Registrar Personal'; 
+$lang['list_employees']             = 'Listado de Personal'; 
 $lang['configuration']              = 'Configuración'; 
 $lang['business']                   = 'Empresa'; 
 
