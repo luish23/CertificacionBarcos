@@ -42,6 +42,7 @@ $(document).ready(function(){
       },
       number_imo: {
         required: true,
+        minlength: 7
       },
       codShipowner: {
         required: true,
@@ -76,24 +77,29 @@ $(document).ready(function(){
       },
       total_length: {
         required: true,
+        pattern: "^[0-9]{1,3}[.]{1}[0-9]{1,2}",
       },
       length_perpendiculars: {
         required: true,
+        pattern: "^[0-9]{1,3}[.]{1}[0-9]{1,2}",
       },
       manga: {
         required: true,
+        pattern: "^[0-9]{1,3}[.]{1}[0-9]{1,2}",
       },
       structure: {
         required: true,
       },
       gross_tonnage: {
         required: true,
+        pattern: "^[0-9]{1,5}[.]{1}[0-9]{1,2}",
       },
       liquid_tonnage: {
         required: true,
       },
       gross_transport: {
         required: true,
+        pattern: "^[0-9]{1,5}[.]{1}[0-9]{1,2}",
       },
       engine_running: {
         required: true,
@@ -117,6 +123,7 @@ $(document).ready(function(){
         },
         number_imo: {
             required: "El campo es obligatorio",
+            minlength: "Minimo 7 digitos"
         },
         codShipowner: {
             required: "El campo es obligatorio",
@@ -151,24 +158,29 @@ $(document).ready(function(){
         },
         total_length: {
             required: "El campo es obligatorio",
+            pattern: "Patron numerico incorrecto. Ej: 123.45",
         },
         length_perpendiculars: {
             required: "El campo es obligatorio",
+            pattern: "Patron numerico incorrecto. Ej: 123.45",
         },
         manga: {
             required: "El campo es obligatorio",
+            pattern: "Patron numerico incorrecto. Ej: 123.45",
         },
         structure: {
             required: "El campo es obligatorio",
         },
         gross_tonnage: {
             required: "El campo es obligatorio",
+            pattern: "Patron numerico incorrecto. Ej: 12345.67",
         },
         liquid_tonnage: {
             required: "El campo es obligatorio",
         },
         gross_transport: {
             required: "El campo es obligatorio",
+            pattern: "Patron numerico incorrecto. Ej: 12345.67",
         },
         engine_running: {
             required: "El campo es obligatorio",
