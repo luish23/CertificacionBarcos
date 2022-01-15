@@ -48,9 +48,13 @@ $lang['questions_order']                        = 'Desea Validar la Orden?';
 $lang['add_orders']                             = 'Registrar Órdenes';
 $lang['select']                                 = 'Selecione';
 $lang['type_certificated']                      = 'Tipo de Certificacion';
+$lang['list_verification']                      = 'Tipo de Verificacion';
 $lang['process']                                = 'Proceso';
 $lang['check_documents']                        = 'Documentos de Chequeo';
 $lang['certificated_status']                    = 'Certificado / Estado';
+$lang['start']                                  = 'INICIADO';
+$lang['process']                                = 'PROCESO';
+$lang['condition']                              = 'Estado de la Orden';
 
 /**
  * modalOrder.php

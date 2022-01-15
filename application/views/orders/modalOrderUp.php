@@ -44,12 +44,28 @@
                 <span class="input-group-text">&nbsp; PDF &nbsp;</span>
                 </div>
             </div>
+            </br>
+            <div class="form-group err-form">
+                <label for="exampleInputEmail1"><?php echo $this->lang->line('condition'); ?></label>
+                <select class="form-control" id="condition" name="condition">
+                <option value="<?php echo $this->lang->line('start'); ?>" selected="selected"><?php echo $this->lang->line('start'); ?></option>
+                <option value="<?php echo $this->lang->line('process'); ?>"><?php echo $this->lang->line('process'); ?></option>
+                </select>
+            </div>
+            <div class="form-group err-form">
+                <label for="exampleInputEmail1"><?php echo $this->lang->line('provisional'); ?></label>
+                <select class="form-control" id="provisional" name="provisional">
+                <option value="1"><?php echo $this->lang->line('yes'); ?></option>
+                <option value="0" selected="selected"><?php echo $this->lang->line('no'); ?></option>
+                </select>
+            </div>
         </div>   
         <!-- /.card-body -->
         <div class="modal-footer">
             <input type="hidden" name="codBoat" id="codBoat" value="<?php echo $data['codBoat']; ?>">
             <input type="hidden" name="idOrder" id="idOrder" value="<?php echo $data['idOrder']; ?>">
             <input type="hidden" name="codTypeCertification" id="codTypeCertification" value="<?php echo $data['codTypeCertification']; ?>">                
+            <input type="hidden" name="codListVerification" id="codListVerification" value="<?php echo $data['codListVerification']; ?>">                
             <button type="submit" id="submit" class="btn btn-success"><?php echo $this->lang->line('update'); ?></button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
         </div>

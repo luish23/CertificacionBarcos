@@ -164,7 +164,7 @@ class Orders_model extends CI_Model {
 
     public function getOrderBoatById($id)
     {
-        $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, o.codTypeCertification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, o.codTypeCertification, o.codListVerification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_orders->from('boats b');
         $this->db_orders->join($this->db_orders->database.'.orders o', $this->db_orders->database.'.o.id ='.$id);
         $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
@@ -235,31 +235,33 @@ class Orders_model extends CI_Model {
         $this->db_boats->update('boats');
     }
 
-    public function validOrder($idNav, $idCer)
+    public function getVerifications($idCer)
+    {
+        $this->db_orders->select('id, name_list_verification');
+        $this->db_orders->from('typeCertifications');
+        $this->db_orders->where('codCert', $idCer);
+        $query = $this->db_orders->get();
+        $result = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+        return $result;
+    }
+
+    public function validOrder($idNav, $idCer, $idVerif)
     {
         $this->db_orders->select('id');
         $this->db_orders->from('orders');
         $this->db_orders->where('codBoat', $idNav);
         $this->db_orders->where('codTypeCertification', $idCer);
+        $this->db_orders->where('codListVerification', $idVerif);
         $this->db_orders->where('status', 1);
         $this->db_orders->where_not_in('condition', ['CANCELADO']);
 
         $query = $this->db_orders->get();
         $result = ($query!==false && $query->num_rows() > 0) ? true : false;
-        // print_r($result); die;
-
-        // if ($result) {
-        //     $this->db_orders->select('id');
-        //     $this->db_orders->from('issuedCertifications');
-        //     $this->db_orders->where_in('codOrder', (array)$result);
-        //     $this->db_orders->where('estado', 'ACTIVO');
-        //     $query = $this->db_orders->get();
-        //     $result = ($query!==false && $query->num_rows() > 0) ? true : false;
-        // }
-        // return $this->db_orders->last_query(); die;
         return $result;
 
     }
+
+    
 
     public function updateOrdersProcess($id)
     {

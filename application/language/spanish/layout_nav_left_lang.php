@@ -29,6 +29,7 @@ $lang['business']                   = 'Empresa';
 $lang['home']                       = 'Inicio'; 
 $lang['yes']                        = 'Si';
 $lang['no']                         = 'No';
+$lang['provisional']                = 'Provisional';
 $lang['save']                       = 'Guardar';
 $lang['update']                     = 'Actualizar';
 $lang['delete']                     = 'Eliminar';

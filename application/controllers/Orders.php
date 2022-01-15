@@ -147,6 +147,8 @@ class Orders extends RESTController {
                         'codOffice' => $this->input->post('codOffice'),
                         'codBoat' => $this->input->post('codBoat'),
                         'codTypeCertification' => $this->input->post('codTypeCertification'),
+                        'codListVerification' => $this->input->post('codListVerification'),
+                        'provisional' => $this->input->post('provisional'),
                         'condition' => 'INICIADO',
                         'codWord' => $retVal = ($idWord != null) ? $idWord : null,
                         'codPDF' => $retVal = ($idPdf != null) ? $idPdf : null 
@@ -223,7 +225,9 @@ class Orders extends RESTController {
                         'codOffice' => $this->input->post('codOffice'),
                         'codBoat' => $this->input->post('codBoat'),
                         'codTypeCertification' => $this->input->post('codTypeCertification'),
-                        'condition' => 'PROCESO',
+                        'codListVerification' => $this->input->post('codListVerification'),
+                        'provisional' => $this->input->post('provisional'),
+                        'condition' => $this->input->post('condition'),
                         'codWord' => $retVal = ($idWord != null) ? $idWord : $this->input->post('idword_old'),
                         'codPDF' => $retVal = ($idPdf != null) ? $idPdf : $this->input->post('idpdf_old') 
                     );
@@ -260,7 +264,8 @@ class Orders extends RESTController {
     {
         $idNav = $this->input->post('idNav');
         $idCer = $this->input->post('idCer');
-        $response = $this->orders_model->validOrder($idNav, $idCer);
+        $idVerif = $this->input->post('idVerif');
+        $response = $this->orders_model->validOrder($idNav, $idCer, $idVerif);
 
         $this->response( [
                     'response' => $response,
@@ -268,9 +273,40 @@ class Orders extends RESTController {
     }
 
     /**
+     * FUNCION QUE VALIDA QUE NO EXISTA ESA ORDEN EN PROCESO PARA EL NAVIO INDICADO
+     */
+    public function getVerifications_post()
+    {
+        $idCer = $this->input->post('idCer');
+        $result = $this->orders_model->getVerifications($idCer);
+
+        if ($result) {
+            $response = '<div class="form-group err-form">';
+            $response .= '<label for="exampleInputEmail1">'.$this->lang->line("list_verification").'</label>';
+            $response .= '<select class="form-control" id="codListVerification" onChange="listVerif()" name="codListVerification">';
+            $response .= '<option value="0">'.$this->lang->line("select").'</option>';
+            foreach ($result as $key => $value) {
+                $response .= '<option value="'.$value['id'].'">'.$value['name_list_verification'].'</option>';;
+            }
+            $response .= '</select></div>';
+            
+        }else {
+            $response = '<div class="form-group err-form">';
+            $response .= '<label for="exampleInputEmail1">'.$this->lang->line("list_verification").'</label>';
+            $response .= '<select class="form-control" id="codListVerification" name="codListVerification">';
+            $response .= '<option value="0">'.$this->lang->line("select").'</option>';
+            $response .= '</select></div>';
+        }
+
+        print($response);
+
+    }
+    
+
+    /**
      * FUNCION QUE PERMITE LISTAR LAS ORDENES A VALIDAR PARA GENERAR PDF
      * Inputs: user_id
-     * Output: view orders/checktOrders
+     * Output: view orders/checkOrders
      */
     public function checkOrders_get()
     {

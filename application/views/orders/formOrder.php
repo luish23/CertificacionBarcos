@@ -62,31 +62,28 @@
                     <option value="0"><?php echo $this->lang->line('select'); ?></option>
                     <?php 
                         foreach ($certifications as $key => $value3) {
-                            echo '<option value="'.$value3['codCert'].'">'.$value3['name_certificate']. ' / '.$value3['name_list_verification'].'</option>';
+                            echo '<option value="'.$value3['codCert'].'">'.$value3['name_certificate'].'</option>';
                         }
                     ?>
                         
                     </select>
                   </div>
-                  <!-- <div class="input-group err-form">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="word" name="word">
-                        <label class="custom-file-label" for="exampleInputFile">Seleccione documento Word</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">WORD</span>
-                      </div>
+                  <div id="SelectListVerification">
+                    <div class="form-group err-form">
+                      <label for="exampleInputEmail1"><?php echo $this->lang->line('type_certificated'); ?></label>
+                      <select class="form-control" id="codListVerification" name="codListVerification">
+                      <option value="0"><?php echo $this->lang->line('select'); ?></option>                              
+                      </select>
+                    </div>
                   </div>
-                    </br>
-                    <div class="input-group err-form">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="pdf" name="pdf">
-                        <label class="custom-file-label" for="exampleInputFile">Seleccione documento PDF</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">&nbsp; PDF &nbsp;</span>
-                      </div>
-                    </div> -->
+
+                  <div class="form-group err-form">
+                    <label for="exampleInputEmail1"><?php echo $this->lang->line('provisional'); ?></label>
+                    <select class="form-control" id="provisional" name="provisional">
+                    <option value="1"><?php echo $this->lang->line('yes'); ?></option>
+                    <option value="0" selected="selected"><?php echo $this->lang->line('no'); ?></option>
+                    </select>
+                  </div>
                 </div>   
                 <!-- /.card-body -->
                 <div class="card-footer">
