@@ -374,5 +374,95 @@ class Orders extends RESTController {
         $this->load->view("orders/footer_modalOrderUp");
 
     }
-    
+
+    /**
+     * COVALIDAÇÕES CERTIFICADO DE SEGURANÇA DA NAVEGAÇÃO NS01
+     */
+    public function updateOrderNS01_post()
+    {
+        $idOrder = $this->input->post('idOrder');
+        $msg = false;
+
+        // si orden existe hacer update sino insert
+        $info = array(
+            'transport_commodity' => $transport_commodity = ($this->input->post('transport_commodity')) ? $this->input->post('transport_commodity') : 0,
+            'propulsion_plant_type' => $propulsion_plant_type = ($this->input->post('propulsion_plant_type')) ? $this->input->post('propulsion_plant_type') : NULL,
+            'power_total_efective' => $power_total_efective = ($this->input->post('power_total_efective')) ? $this->input->post('power_total_efective') : 0,
+            'towing_destination' => $towing_destination = ($this->input->post('towing_destination')) ? $this->input->post('towing_destination') : NULL,
+            'vessel' => $vessel = ($this->input->post('vessel')) ? $this->input->post('vessel') : NULL,
+            'poll' => $poll = ($this->input->post('poll')) ? $this->input->post('poll') : 0,
+            'normam01' => $normam01 = ($this->input->post('normam01')) ? $this->input->post('normam01') : 0,
+            'normam02' => $normam02 = ($this->input->post('normam02')) ? $this->input->post('normam02') : 0,
+            'public_water_transport' => $public_water_transport = ($this->input->post('public_water_transport')) ? $this->input->post('public_water_transport') : NULL,
+            'issued_in' => $issued_in = ($this->input->post('issued_in')) ? $this->input->post('issued_in') : NULL,
+            'seated_passengersP' => $seated_passengersP = ($this->input->post('seated_passengersP')) ? $this->input->post('seated_passengersP') : 0,
+            'seated_passengersS' => $seated_passengersS = ($this->input->post('seated_passengersS')) ? $this->input->post('seated_passengersS') : 0,
+            'seated_passengersL' => $seated_passengersL = ($this->input->post('seated_passengersL')) ? $this->input->post('seated_passengersL') : 0,
+            'passengers_cabinP' => $passengers_cabinP = ($this->input->post('passengers_cabinP')) ? $this->input->post('passengers_cabinP') : 0,
+            'passengers_cabinS' => $passengers_cabinS = ($this->input->post('passengers_cabinS')) ? $this->input->post('passengers_cabinS') : 0,
+            'passengers_cabinL' => $passengers_cabinL = ($this->input->post('passengers_cabinL')) ? $this->input->post('passengers_cabinL') : 0,
+            'passengers_networksP' => $passengers_networksP = ($this->input->post('passengers_networksP')) ? $this->input->post('passengers_networksP') : 0,
+            'passengers_networksS' => $passengers_networksS = ($this->input->post('passengers_networksS')) ? $this->input->post('passengers_networksS') : 0,
+            'passengers_networksL' => $passengers_networksL = ($this->input->post('passengers_networksL')) ? $this->input->post('passengers_networksL') : 0,
+            'carga_geral' => $carga_geral = ($this->input->post('carga_geral')) ? $this->input->post('carga_geral') : NULL,
+            'helmet' => $helmet = ($this->input->post('helmet')) ? $this->input->post('helmet') : NULL,
+            'almoxarifado' => $almoxarifado = ($this->input->post('almoxarifado')) ? $this->input->post('almoxarifado') : NULL,
+            'main_deposit' => $main_deposit = ($this->input->post('main_deposit')) ? $this->input->post('main_deposit') : NULL,
+            'upper_deposit' => $upper_deposit = ($this->input->post('upper_deposit')) ? $this->input->post('upper_deposit') : NULL,
+            'observations' => $observations = ($this->input->post('observations')) ? $this->input->post('observations') : NULL
+        );
+
+        $infoEx = array(
+            'visit_annual01_init' => $visit_annual01_init = ($this->input->post('visit_annual01_init')) ? $this->input->post('visit_annual01_init') : NULL,
+            'visit_annual01_end' => $visit_annual01_end = ($this->input->post('visit_annual01_end')) ? $this->input->post('visit_annual01_end') : NULL,
+            'place_date_visit01' => $place_date_visit01 = ($this->input->post('place_date_visit01')) ? $this->input->post('place_date_visit01') : NULL,
+            'surveyor01' => $surveyor01 = ($this->input->post('surveyor01')) ? $this->input->post('surveyor01') : NULL,
+            'visit_annual02_init' => $visit_annual02_init = ($this->input->post('visit_annual02_init')) ? $this->input->post('visit_annual02_init') : NULL,
+            'visit_annual02_end' => $visit_annual02_end = ($this->input->post('visit_annual02_end')) ? $this->input->post('visit_annual02_end') : NULL,
+            'place_date_visit02' => $place_date_visit02 = ($this->input->post('place_date_visit02')) ? $this->input->post('place_date_visit02') : NULL,
+            'surveyor02' => $surveyor02 = ($this->input->post('surveyor02')) ? $this->input->post('surveyor02') : NULL,
+            'visit_intermedia_init' => $visit_intermedia_init = ($this->input->post('visit_intermedia_init')) ? $this->input->post('visit_intermedia_init') : NULL,
+            'visit_intermedia_end' => $visit_intermedia_end = ($this->input->post('visit_intermedia_end')) ? $this->input->post('visit_intermedia_end') : NULL,
+            'place_date_intermedia' => $place_date_intermedia = ($this->input->post('place_date_intermedia')) ? $this->input->post('place_date_intermedia') : NULL,
+            'intermedia_surveyor' => $intermedia_surveyor = ($this->input->post('intermedia_surveyor')) ? $this->input->post('intermedia_surveyor') : NULL,
+            'visit_annual03_init' => $visit_annual03_init = ($this->input->post('visit_annual03_init')) ? $this->input->post('visit_annual03_init') : NULL,
+            'visit_annual03_end' => $visit_annual03_end = ($this->input->post('visit_annual03_end')) ? $this->input->post('visit_annual03_end') : NULL,
+            'place_date_visit03' => $place_date_visit03 = ($this->input->post('place_date_visit03')) ? $this->input->post('place_date_visit03') : NULL,
+            'surveyor03' => $surveyor03 = ($this->input->post('surveyor03')) ? $this->input->post('surveyor03') : NULL,
+            'visit_annual04_init' => $visit_annual04_init = ($this->input->post('visit_annual04_init')) ? $this->input->post('visit_annual04_init') : NULL,
+            'visit_annual04_end' => $visit_annual04_end = ($this->input->post('visit_annual04_end')) ? $this->input->post('visit_annual04_end') : NULL,
+            'place_date_visit04' => $place_date_visit04 = ($this->input->post('place_date_visit04')) ? $this->input->post('place_date_visit04') : NULL,
+            'surveyor04' => $surveyor04 = ($this->input->post('surveyor04')) ? $this->input->post('surveyor04') : NULL
+        );
+
+        $idOrderNS = $this->orders_model->getOrderNS('dataExtraNS01',$idOrder);
+
+        if ($idOrderNS) {
+            $responseNS = $this->orders_model->updateOrderNS('dataExtraNS01', ['id' => $idOrderNS], $info);
+            if ($responseNS) {
+                $responseEx = $this->orders_model->updateOrderNS('convalidationsNS01', ['codNS01' => $idOrderNS], $infoEx);
+                $msg = true;
+            }
+        }else {
+            $data = array_merge($info,['codOrder' => $idOrder]);
+            $responseNS = $this->orders_model->insertOrderNS('dataExtraNS01',$data);
+
+            $dataEx = array_merge($infoEx,['codNS01' => $idOrder]);
+            if ($dataEx) {
+                $responseEx = $this->orders_model->insertOrderNS('convalidationsNS01',$dataEx);
+                $msg = true;
+            }
+            
+        }
+
+        if ($msg) {
+            echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
+            redirect('listOrders', 'refresh');
+        }
+        else {
+            echo "<script>alert('".$this->lang->line('alert_process_error')."');</script>";
+            redirect('dashboard', 'refresh');
+        }
+
+    }
 }

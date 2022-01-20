@@ -55,6 +55,7 @@ $lang['certificated_status']                    = 'Certificado / Estado';
 $lang['start']                                  = 'INICIADO';
 $lang['process']                                = 'PROCESO';
 $lang['condition']                              = 'Estado de la Orden';
+$lang['convalidations']                         = 'Convalidaciones';
 
 /**
  * modalOrder.php

@@ -14,3 +14,13 @@ Sistema para control de auditoría y peritaje aplicados sobre unidades marítima
 - Generación de Ordenes para verificación de Navios 
 - Generación de Certificados
 
+Falta:
+
+direccion del armador: porto de inscricao
+bastimento de quilha: dd/mm/yyyy (manual)
+fechas de vencimiento abiertas puestas por el inspector
+fecha de vencimiento del certificado 5 anos menos 1 dia certificado de seguransa
+
+emitio em fecha de emision del certificado
+
+Manual de usuario

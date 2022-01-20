@@ -86,7 +86,7 @@ class Orders_model extends CI_Model {
         // $resultOrders = ($query!==false && $query->num_rows() > 0) ? $query->row('ids') : false;
 
         // if ($resultOrders) {
-            $this->db_boats->select('b.id, b.name, b.number_imo, tc.name_list_verification, o.condition, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
+            $this->db_boats->select('b.id, b.name, b.number_imo, tc.name_list_verification, o.condition, o.provisional, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
             // $this->db_boats->select('b.id, b.name, b.number_imo, o.condition, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
             $this->db_boats->from('boats b');
             $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
@@ -116,7 +116,7 @@ class Orders_model extends CI_Model {
     public function getAllOrders()
     {
         $result['data'] = false;
-        $this->db_boats->select('b.id, b.name, b.number_imo, o.id AS idOrder, o.condition, o.codWord, o.codPDF, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
+        $this->db_boats->select('b.id, b.name, b.number_imo, o.provisional, o.id AS idOrder, o.condition, o.codWord, o.codPDF, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
         $this->db_boats->from('boats b');
         $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
         $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
@@ -273,4 +273,41 @@ class Orders_model extends CI_Model {
     }
     
 
+    public function getOrderNS($table, $idOrder)
+    {
+        $this->db_orders->select('id');
+        $this->db_orders->from($table);
+        $this->db_orders->where('codOrder', $idOrder);
+
+        $query = $this->db_orders->get();
+        $result = ($query!==false && $query->num_rows() > 0) ? $query->row('id') : false;
+        return $result;
+    }
+
+    public function insertOrderNS($table,$data)
+    {
+        $this->db_orders->trans_begin();
+
+        $this->db_orders->insert($table, $data);
+        $item = $this->db_orders->insert_id();
+
+        if ($this->db_orders->trans_status() === FALSE) {
+            $this->db_orders->trans_rollback();
+
+            return false;
+        }
+        else {
+            $this->db_orders->trans_commit();
+            return $item;
+        }
+    }
+
+    public function updateOrderNS($table, $condition, $info)
+    {
+        $this->db_orders->set($info);
+        $this->db_orders->where($condition);
+        $this->db_orders->update($table);
+
+        return $this->db_orders->affected_rows();
+    }
 }

@@ -122,6 +122,7 @@ $route['checkOrders']['GET']         = 'Orders/checkOrders';
 $route['modalValidOrder']['GET']     = 'Orders/modalValidOrder';
 $route['processOrder']['POST']       = 'Orders/processOrder';
 $route['getVerifications']['POST']   = 'Orders/getVerifications';
+$route['updateOrderNS01']['POST']    = 'Orders/updateOrderNS01';
 
 
 /* 
