@@ -3,21 +3,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+	public function __construct()
+    {
+        parent::__construct();
+        $this->load->model(array("boats_model","users_model","login_model", "orders_model", "offices_model", "certifications_model"));
+        $this->load->helper(array("url","custom"));
+        $this->load->library(array('session'));
+       
+        if($this->login_model->logged_id())
+		{
+			$this->session_data = array(
+				'user_id'       => $this->session->user_id,
+				'name'          => $this->session->name,
+				'lastName'      => $this->session->lastName,
+				'codTypeUser'   => $this->session->codTypeUser,
+                'codShipowner'  => $this->session->codShipowner,
+				'site_lang'  	=> $this->session->site_lang
+			);
+            $this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
+            $this->lang->load(array('orders','layout_nav_left'), $this->session->site_lang);
+        }else{
+            $this->session->unset_userdata('session_data');
+            $this->session->sess_destroy();
+			redirect("login");
+		}
+    }
+	
 	public function index()
 	{
 		$this->load->view('welcome_message');

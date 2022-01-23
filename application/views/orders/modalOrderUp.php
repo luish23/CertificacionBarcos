@@ -1,3 +1,9 @@
+<?php 
+    print_r($data);
+    echo "</br></br>";
+    print_r($dataNS);
+    echo "</br></br>";
+?>
 <div class="modal-header">
     <h4 class="modal-title"><strong><?php echo '  #'.$data['office'].str_pad($data['idOrder'], 4, '0', STR_PAD_LEFT).$data['anyo']; ?></strong></h4>
 </div>
@@ -8,9 +14,21 @@
             <li class="nav-item">
             <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true"><?php echo $this->lang->line('information'); ?></a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false"><?php echo $this->lang->line('convalidations'); ?></a>
-            </li>
+            <?php if ($data['codTypeCertification'] == 1) {
+                echo ' <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-one-ns01-tab" data-toggle="pill" href="#custom-tabs-one-ns01" role="tab" aria-controls="custom-tabs-one-ns01" aria-selected="false">'. $this->lang->line("convalidations").'</a>
+                </li>';
+            } ?>
+            <?php if ($data['codTypeCertification'] == 2) {
+                echo ' <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-one-ns02-tab" data-toggle="pill" href="#custom-tabs-one-ns02" role="tab" aria-controls="custom-tabs-one-ns02" aria-selected="false">'. $this->lang->line("place_includes").'</a>
+                </li>';
+            } ?>
+           <?php if ($data['codTypeCertification'] == 3) {
+                echo ' <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-one-ns03-tab" data-toggle="pill" href="#custom-tabs-one-ns03" role="tab" aria-controls="custom-tabs-one-ns03" aria-selected="false">'. $this->lang->line("test_result").'</a>
+                </li>';
+            } ?>
         </ul>
     </div>
     <div class="card-body">
@@ -57,15 +75,28 @@
                 <div class="form-group err-form">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('condition'); ?></label>
                     <select class="form-control" id="condition" name="condition">
-                    <option value="<?php echo $this->lang->line('start'); ?>" selected="selected"><?php echo $this->lang->line('start'); ?></option>
-                    <option value="<?php echo $this->lang->line('process'); ?>"><?php echo $this->lang->line('process'); ?></option>
+                    <?php if ($data['condition'] == 'INICIADO') {
+                        echo '<option value="'.$this->lang->line('start').'" selected="selected">'.$this->lang->line("start").'</option>';
+                        echo '<option value="'.$this->lang->line('process').'">'.$this->lang->line("process").'</option>';
+                    }else {
+                        echo '<option value="'.$this->lang->line('start').'">'.$this->lang->line("start").'</option>';
+                        echo '<option value="'.$this->lang->line('process').'" selected="selected">'.$this->lang->line("process").'</option>';
+                    }
+                    ?>
                     </select>
                 </div>
                 <div class="form-group err-form">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('provisional'); ?></label>
                     <select class="form-control" id="provisional" name="provisional">
-                    <option value="1"><?php echo $this->lang->line('yes'); ?></option>
-                    <option value="0" selected="selected"><?php echo $this->lang->line('no'); ?></option>
+                        <?php if ($data['provisional']) {
+                            echo '<option value="1" selected="selected">'.$this->lang->line("yes").'</option>';
+                            echo '<option value="0">'.$this->lang->line("no").'</option>';
+                        }else {
+                            echo '<option value="1">'.$this->lang->line("yes").'</option>';
+                            echo '<option value="0" selected="selected">'.$this->lang->line("no").'</option>';
+                        }
+                        ?>
+                    
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -79,180 +110,282 @@
             </form>
 
             </div>
-            <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+            <div class="tab-pane fade" id="custom-tabs-one-ns01" role="tabpanel" aria-labelledby="custom-tabs-one-ns01-tab">
                 <form id="ordersFormUpdateNS01" action="updateOrderNS01" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="form-group row col-12">
                         <div class="col-4">
-                            <select class="form-control" id="transport_commodity" name="transport_commodity">
-                                <option value="">Transportar Mercancía</option>
-                                <option value="1">Si</option>
-                                <option value="0">No</option>
-                            </select>
+                            <div class="form-group row err-form">
+                                <label for="exampleInputEmail1" class="col-8"><?php echo $this->lang->line('transport_commodity'); ?></label>
+                                <select class="form-control col-3 " id="transport_commodity" name="transport_commodity">
+                                    <?php 
+                                        if ($dataNS['transport_commodity']) {
+                                            echo '<option value="1" selected="selected">'.$this->lang->line("yes").'</option>';
+                                            echo '<option value="0">'.$this->lang->line("no").'</option>';
+                                        }else{
+                                            echo '<option value="1">'.$this->lang->line("yes").'</option>';
+                                            echo '<option value="0" selected="selected">'.$this->lang->line("no").'</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="propulsion_plant_type" name="propulsion_plant_type" placeholder="Tipo da Planta Propulsora">
+                            <input type="text" class="form-control" id="propulsion_plant_type" name="propulsion_plant_type" value="<?php if (isset($dataNS['propulsion_plant_type'])) echo $dataNS['propulsion_plant_type'] ?>" placeholder="Tipo da Planta Propulsora">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="power_total_efective" name="power_total_efective" placeholder="Potencia Efectiva Total">
+                            <input type="text" class="form-control" id="power_total_efective" name="power_total_efective" value="<?php if (isset($dataNS['power_total_efective'])) echo $dataNS['power_total_efective'] ?>" placeholder="Potencia Efectiva Total">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-4">
-                            <input type="text" class="form-control" id="towing_destination" name="towing_destination" placeholder="Destino del Remolque">
+                            <input type="text" class="form-control" id="towing_destination" name="towing_destination" value="<?php if (isset($dataNS['towing_destination'])) echo $dataNS['towing_destination'] ?>" placeholder="Destino del Remolque">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="vessel" name="vessel" placeholder="Embarcación">
+                            <input type="text" class="form-control" id="vessel" name="vessel" value="<?php if (isset($dataNS['vessel'])) echo $dataNS['vessel'] ?>" placeholder="Embarcación">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="poll" name="poll" placeholder="Encuesta">
+                            <input type="text" class="form-control" id="poll" name="poll" value="<?php if (isset($dataNS['poll'])) echo $dataNS['poll'] ?>" placeholder="Encuesta">
                         </div>
                     </div>
                     <div class="row col-12 m-1">
                         <div class="form-check col-4">
-                            <input class="form-check-input" type="checkbox" id="normam01" value="1" name="normam01">
+                            <?php 
+                                if (isset($dataNS['normam01'])) {
+                                    echo '<input class="form-check-input" type="checkbox" id="normam01" value="1" checked name="normam01">';
+                                }else{
+                                    echo '<input class="form-check-input" type="checkbox" id="normam01" value="1" name="normam01">';
+                                }
+                            ?>
                             <label class="form-check-label" for="normam01">NORMAM-01</label>
                         </div>
                         <div class="form-check col-4">
-                            <input class="form-check-input" type="checkbox" id="normam02" value="1" name="normam02">
+                            <?php 
+                                if (isset($dataNS['normam02'])) {
+                                    echo '<input class="form-check-input" type="checkbox" id="normam02" value="1" checked name="normam02">';
+                                }else{
+                                    echo '<input class="form-check-input" type="checkbox" id="normam02" value="1" name="normam02">';
+                                }
+                            ?>
                             <label class="form-check-label" for="normam02">NORMAM-02</label>
                         </div>
                         <div class="form-check col-4">
-                            <input class="form-check-input" type="checkbox" id="public_water_transport"  value="1" name="public_water_transport">
+                            <?php 
+                                if (isset($dataNS['public_water_transport'])) {
+                                    echo '<input class="form-check-input" type="checkbox" id="public_water_transport" value="1" checked name="public_water_transport">';
+                                }else{
+                                    echo '<input class="form-check-input" type="checkbox" id="public_water_transport" value="1" name="public_water_transport">';
+                                }
+                            ?>
                             <label class="form-check-label" for="public_water_transport">Transporte Público de Pasajeros</label>
                         </div>
                     </div>
  
                     <div class="form-group row col-12 pt-2">
                         <div class="col-12">
-                            <input type="text" class="form-control" id="issued_in" name="issued_in" placeholder="Emitido en">
+                            <input type="text" class="form-control" id="issued_in" name="issued_in" value="<?php if (isset($dataNS['issued_in'])) echo $dataNS['issued_in'] ?>" placeholder="Emitido en">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_annual01_init" name="visit_annual01_init" placeholder="Visita 01 desde">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_annual01_init" name="visit_annual01_init" value="<?php if (isset($dataNSEx['visit_annual01_init'])) echo date("d-m-Y", strtotime($dataNSEx['visit_annual01_init'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_annual01_end" name="visit_annual01_end" placeholder="Visita 01 hasta">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_annual01_end" name="visit_annual01_end" value="<?php if (isset($dataNSEx['visit_annual01_end'])) echo date("d-m-Y", strtotime($dataNSEx['visit_annual01_end'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="place_date_visit01" name="place_date_visit01" placeholder="Lugar de visita 01">
+                            <input type="text" class="form-control" id="place_date_visit01" name="place_date_visit01" value="<?php if (isset($dataNSEx['place_date_visit01'])) echo $dataNSEx['place_date_visit01'] ?>" placeholder="Lugar de visita 01">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="surveyor01" name="surveyor01" placeholder="Encuestador 01">
+                            <input type="text" class="form-control" id="surveyor01" name="surveyor01" value="<?php if (isset($dataNSEx['surveyor01'])) echo $dataNSEx['surveyor01'] ?>" placeholder="Encuestador 01">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_annual02_init" name="visit_annual02_init" placeholder="Visita 02 desde">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_annual02_init" name="visit_annual02_init" value="<?php if (isset($dataNSEx['visit_annual02_init'])) echo date("d-m-Y", strtotime($dataNSEx['visit_annual02_init'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_annual02_end" name="visit_annual02_end" placeholder="Visita 02 hasta">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_annual02_end" name="visit_annual02_end" value="<?php if (isset($dataNSEx['visit_annual02_end'])) echo date("d-m-Y", strtotime($dataNSEx['visit_annual02_end'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="place_date_visit02" name="place_date_visit02" placeholder="Lugar de visita 02">
+                            <input type="text" class="form-control" id="place_date_visit02" name="place_date_visit02" value="<?php if (isset($dataNSEx['place_date_visit02'])) echo $dataNSEx['place_date_visit02'] ?>" placeholder="Lugar de visita 02">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="surveyor02" name="surveyor02" placeholder="Encuestador 02">
+                            <input type="text" class="form-control" id="surveyor02" name="surveyor02" value="<?php if (isset($dataNSEx['surveyor02'])) echo $dataNSEx['surveyor02'] ?>" placeholder="Encuestador 02">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_intermedia_init" name="visit_intermedia_init" placeholder="Visita Intermedio desde">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_intermedia_init" name="visit_intermedia_init" value="<?php if (isset($dataNSEx['visit_intermedia_init'])) echo date("d-m-Y", strtotime($dataNSEx['visit_intermedia_init'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_intermedia_end" name="visit_intermedia_end" placeholder="Visita Intermedio hasta">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_intermedia_end" name="visit_intermedia_end" value="<?php if (isset($dataNSEx['visit_intermedia_end'])) echo date("d-m-Y", strtotime($dataNSEx['visit_intermedia_end'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="place_date_intermedia" name="place_date_intermedia" placeholder="Lugar de visita Intermedio">
+                            <input type="text" class="form-control" id="place_date_intermedia" name="place_date_intermedia" value="<?php if (isset($dataNSEx['place_date_intermedia'])) echo $dataNSEx['place_date_intermedia'] ?>" placeholder="Lugar de visita Intermedio">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="intermedia_surveyor" name="intermedia_surveyor" placeholder="Encuestador Intermedio">
+                            <input type="text" class="form-control" id="intermedia_surveyor" name="intermedia_surveyor" value="<?php if (isset($dataNSEx['intermedia_surveyor'])) echo $dataNSEx['intermedia_surveyor'] ?>" placeholder="Encuestador Intermedio">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_annual03_init" name="visit_annual03_init" placeholder="Visita 03 desde">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_annual03_init" name="visit_annual03_init" value="<?php if (isset($dataNSEx['visit_annual03_init'])) echo date("d-m-Y", strtotime($dataNSEx['visit_annual03_init'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_annual03_end" name="visit_annual03_end" placeholder="Visita 03 hasta">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_annual03_end" name="visit_annual03_end" value="<?php if (isset($dataNSEx['visit_annual03_end'])) echo date("d-m-Y", strtotime($dataNSEx['visit_annual03_end'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="place_date_visit03" name="place_date_visit03" placeholder="Lugar de visita 03">
+                            <input type="text" class="form-control" id="place_date_visit03" name="place_date_visit03" value="<?php if (isset($dataNSEx['place_date_visit03'])) echo $dataNSEx['place_date_visit03'] ?>" placeholder="Lugar de visita 03">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="surveyor03" name="surveyor03" placeholder="Encuestador 03">
+                            <input type="text" class="form-control" id="surveyor03" name="surveyor03" value="<?php if (isset($dataNSEx['surveyor03'])) echo $dataNSEx['surveyor03'] ?>" placeholder="Encuestador 03">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_annual04_init" name="visit_annual04_init" placeholder="Visita 04 desde">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_annual04_init" name="visit_annual04_init" value="<?php if (isset($dataNSEx['visit_annual04_init'])) echo date("d-m-Y", strtotime($dataNSEx['visit_annual04_init'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="visit_annual04_end" name="visit_annual04_end" placeholder="Visita 04 hasta">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="visit_annual04_end" name="visit_annual04_end" value="<?php if (isset($dataNSEx['visit_annual04_end'])) echo date("d-m-Y", strtotime($dataNSEx['visit_annual04_end'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="place_date_visit04" name="place_date_visit04" placeholder="Lugar de visita 04">
+                            <input type="text" class="form-control" id="place_date_visit04" name="place_date_visit04" value="<?php if (isset($dataNSEx['place_date_visit04'])) echo $dataNSEx['place_date_visit04'] ?>"  placeholder="Lugar de visita 04">
                         </div>
                         <div class="col-3">
-                            <input type="text" class="form-control" id="surveyor04" name="surveyor04" placeholder="Encuestador 04">
+                            <input type="text" class="form-control" id="surveyor04" name="surveyor04" value="<?php if (isset($dataNSEx['surveyor04'])) echo $dataNSEx['surveyor04'] ?>"  placeholder="Encuestador 04">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-4">
-                            <input type="text" class="form-control" id="seated_passengersP" name="seated_passengersP" placeholder="Passageiros sentados CONVÉS PRINCIPAL">
+                            <input type="text" class="form-control" id="seated_passengersP" name="seated_passengersP" value="<?php if (isset($dataNS['seated_passengersP'])) echo $dataNS['seated_passengersP'] ?>" placeholder="Passageiros sentados CONVÉS PRINCIPAL">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="seated_passengersS" name="seated_passengersS" placeholder="Passageiros sentados CONVÉS SUPERIOR">
+                            <input type="text" class="form-control" id="seated_passengersS" name="seated_passengersS" value="<?php if (isset($dataNS['seated_passengersS'])) echo $dataNS['seated_passengersS'] ?>" placeholder="Passageiros sentados CONVÉS SUPERIOR">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="seated_passengersL" name="seated_passengersL" placeholder="Passageiros sentados ÁREA DE LAZER">
+                            <input type="text" class="form-control" id="seated_passengersL" name="seated_passengersL" value="<?php if (isset($dataNS['seated_passengersL'])) echo $dataNS['seated_passengersL'] ?>" placeholder="Passageiros sentados ÁREA DE LAZER">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-4">
-                            <input type="text" class="form-control" id="passengers_cabinP" name="passengers_cabinP" placeholder="Passageiros em camarote CONVÉS PRINCIPAL">
+                            <input type="text" class="form-control" id="passengers_cabinP" name="passengers_cabinP" value="<?php if (isset($dataNS['passengers_cabinP'])) echo $dataNS['passengers_cabinP'] ?>" placeholder="Passageiros em camarote CONVÉS PRINCIPAL">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="passengers_cabinS" name="passengers_cabinS" placeholder="Passageiros em camarote CONVÉS SUPERIOR">
+                            <input type="text" class="form-control" id="passengers_cabinS" name="passengers_cabinS" value="<?php if (isset($dataNS['passengers_cabinS'])) echo $dataNS['passengers_cabinS'] ?>" placeholder="Passageiros em camarote CONVÉS SUPERIOR">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="passengers_cabinL" name="passengers_cabinL" placeholder="Passageiros em camarote ÁREA DE LAZER">
+                            <input type="text" class="form-control" id="passengers_cabinL" name="passengers_cabinL" value="<?php if (isset($dataNS['passengers_cabinL'])) echo $dataNS['passengers_cabinL'] ?>" placeholder="Passageiros em camarote ÁREA DE LAZER">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-4">
-                            <input type="text" class="form-control" id="passengers_networksP" name="passengers_networksP" placeholder="Passageiros em redes CONVÉS PRINCIPAL">
+                            <input type="text" class="form-control" id="passengers_networksP" name="passengers_networksP" value="<?php if (isset($dataNS['passengers_networksP'])) echo $dataNS['passengers_networksP'] ?>" placeholder="Passageiros em redes CONVÉS PRINCIPAL">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="passengers_networksS" name="passengers_networksS" placeholder="Passageiros em redes CONVÉS SUPERIOR">
+                            <input type="text" class="form-control" id="passengers_networksS" name="passengers_networksS" value="<?php if (isset($dataNS['passengers_networksS'])) echo $dataNS['passengers_networksS'] ?>" placeholder="Passageiros em redes CONVÉS SUPERIOR">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="passengers_networksL" name="passengers_networksL" placeholder="Passageiros em redes ÁREA DE LAZER">
+                            <input type="text" class="form-control" id="passengers_networksL" name="passengers_networksL" value="<?php if (isset($dataNS['passengers_networksL'])) echo $dataNS['passengers_networksL'] ?>" placeholder="Passageiros em redes ÁREA DE LAZER">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-4">
-                            <input type="text" class="form-control" id="carga_geral" name="carga_geral" placeholder="Porão de carga 01 (carga geral)">
+                            <input type="text" class="form-control" id="carga_geral" name="carga_geral" value="<?php if (isset($dataNS['carga_geral'])) echo $dataNS['carga_geral'] ?>" placeholder="Porão de carga 01 (carga geral)">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="helmet" name="helmet" placeholder="Paiol no casco">
+                            <input type="text" class="form-control" id="helmet" name="helmet" value="<?php if (isset($dataNS['helmet'])) echo $dataNS['helmet'] ?>" placeholder="Paiol no casco">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="almoxarifado" name="almoxarifado" placeholder="Almoxarifado no convés principal">
+                            <input type="text" class="form-control" id="almoxarifado" name="almoxarifado" value="<?php if (isset($dataNS['almoxarifado'])) echo $dataNS['almoxarifado'] ?>" placeholder="Almoxarifado no convés principal">
                         </div>
                     </div>
                     <div class="form-group row col-12">
                         <div class="col-4">
-                            <input type="text" class="form-control" id="main_deposit" name="main_deposit" placeholder="Depósito no convés principal">
+                            <input type="text" class="form-control" id="main_deposit" name="main_deposit" value="<?php if (isset($dataNS['main_deposit'])) echo $dataNS['main_deposit'] ?>" placeholder="Depósito no convés principal">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="upper_deposit" name="upper_deposit" placeholder="Depósito no convés superior">
+                            <input type="text" class="form-control" id="upper_deposit" name="upper_deposit" value="<?php if (isset($dataNS['upper_deposit'])) echo $dataNS['upper_deposit'] ?>" placeholder="Depósito no convés superior">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="observations" name="observations" placeholder="Observaciones">
+                            <input type="text" class="form-control" id="observations" name="observations" value="<?php if (isset($dataNS['observations'])) echo $dataNS['observations'] ?>" placeholder="Observaciones">
                         </div>
                     </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="hidden" name="idOrder" id="idOrder" value="<?php echo $data['idOrder']; ?>">             
+                    <button type="submit" id="submit" class="btn btn-success"><?php echo $this->lang->line('update'); ?></button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
+                </div>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="custom-tabs-one-ns02" role="tabpanel" aria-labelledby="custom-tabs-one-ns02-tab">
+                <form id="ordersFormUpdateNS02" action="updateOrderNS02" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="form-group row col-12">
+                        <div class="col-4">
+                            <input type="text" class="form-control" id="port_inscription" name="port_inscription" value="<?php if (isset($dataNS['port_inscription'])) echo $dataNS['port_inscription'] ?>" placeholder="Porto de Inscrição">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" id="batimento" name="batimento" value="<?php if (isset($dataNS['batimento'])) echo $dataNS['batimento'] ?>" placeholder="Batimento de Quilha">
+                        </div>
+                        <div class="col-4">
+                            <input type="text" class="form-control" id="ruler_length" name="ruler_length" value="<?php if (isset($dataNS['ruler_length'])) echo $dataNS['ruler_length'] ?>" placeholder="Comprimento De Regra">
+                        </div>
+                    </div>
+                    
                 </div>
 
                 <div class="modal-footer">

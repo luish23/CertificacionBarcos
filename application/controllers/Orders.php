@@ -50,7 +50,9 @@ class Orders extends RESTController {
         }else{
             $data = $this->orders_model->getAllOrders();
         }
+        // echo "<pre>";
         // print_r($data); die;
+        // echo "</pre>";
         $template = array('title' => $this->lang->line('title_listOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -347,9 +349,45 @@ class Orders extends RESTController {
     {
         $id = $this->input->get('id');
         $data = $this->orders_model->getOrderBoatById($id);
+        // print_r($data);
+
         if ($data) {
-            $data['offices'] = $this->offices_model->getOffice();
+            $data['offices'] = $this->offices_model->getOffice();            
         }
+        // echo "</br>ENTRE</br>";
+        // print_r($data);
+
+        switch ($data['data']['codTypeCertification']) {
+            case 1:
+                $data['dataNS'] = $this->orders_model->getDataNS('dataExtraNS01', ['codOrder' => $id]);
+                if ($data['dataNS']) {
+                    $data['dataNSEx'] = $this->orders_model->getDataNS('convalidationsNS01', ['codNS01' => $data['dataNS']['id']]);
+                }
+                break;
+            
+            // case 2:
+            //     $data['dataNS02'] = $this->orders_model->getDataNS('dataExtraNS02', ['codOrder' => $id]);
+            //     if ($data['dataNS02']) {
+            //         $data['dataNSGT'] = $this->orders_model->getDataNS('grossTonnage', ['codExtra02_gt' => $data['dataNS']['id']]);
+            //         $data['dataNSLT'] = $this->orders_model->getDataNS('liquidTonnage', ['codExtra02_lt' => $data['dataNS']['id']]);
+            //     }
+            //     break;
+            
+            // case 3:
+            //     $data['dataNS03'] = $this->orders_model->getDataNS('dataExtraNS03', ['codOrder' => $id]);
+            //     if ($data['dataNS03']) {
+            //         $data['dataNSEx03'] = $this->orders_model->getDataNS('testResultNS03', ['codNS03' => $data['dataNS']['id']]);
+            //     }
+            //     break;
+            
+            default:
+                echo "<script>alert('".$this->lang->line('alert_error_codTypeCertification')."');</script>";
+                redirect('dashboard', 'refresh');
+                break;
+        }
+        // echo "</br>FINAL</br>";
+        // print_r($data); // die;
+
         $this->load->view('orders/modalOrderUp', $data);
         $this->load->view("orders/footer_modalOrderUp");
     }
@@ -413,24 +451,24 @@ class Orders extends RESTController {
         );
 
         $infoEx = array(
-            'visit_annual01_init' => $visit_annual01_init = ($this->input->post('visit_annual01_init')) ? $this->input->post('visit_annual01_init') : NULL,
-            'visit_annual01_end' => $visit_annual01_end = ($this->input->post('visit_annual01_end')) ? $this->input->post('visit_annual01_end') : NULL,
+            'visit_annual01_init' => $visit_annual01_init = ($this->input->post('visit_annual01_init')) ? date("Y-m-d", strtotime($this->input->post('visit_annual01_init'))) : NULL,
+            'visit_annual01_end' => $visit_annual01_end = ($this->input->post('visit_annual01_end')) ? date("Y-m-d", strtotime($this->input->post('visit_annual01_end'))) : NULL,
             'place_date_visit01' => $place_date_visit01 = ($this->input->post('place_date_visit01')) ? $this->input->post('place_date_visit01') : NULL,
             'surveyor01' => $surveyor01 = ($this->input->post('surveyor01')) ? $this->input->post('surveyor01') : NULL,
-            'visit_annual02_init' => $visit_annual02_init = ($this->input->post('visit_annual02_init')) ? $this->input->post('visit_annual02_init') : NULL,
-            'visit_annual02_end' => $visit_annual02_end = ($this->input->post('visit_annual02_end')) ? $this->input->post('visit_annual02_end') : NULL,
+            'visit_annual02_init' => $visit_annual02_init = ($this->input->post('visit_annual02_init')) ? date("Y-m-d", strtotime($this->input->post('visit_annual02_init'))) : NULL,
+            'visit_annual02_end' => $visit_annual02_end = ($this->input->post('visit_annual02_end')) ? date("Y-m-d", strtotime($this->input->post('visit_annual02_end'))) : NULL,
             'place_date_visit02' => $place_date_visit02 = ($this->input->post('place_date_visit02')) ? $this->input->post('place_date_visit02') : NULL,
             'surveyor02' => $surveyor02 = ($this->input->post('surveyor02')) ? $this->input->post('surveyor02') : NULL,
-            'visit_intermedia_init' => $visit_intermedia_init = ($this->input->post('visit_intermedia_init')) ? $this->input->post('visit_intermedia_init') : NULL,
-            'visit_intermedia_end' => $visit_intermedia_end = ($this->input->post('visit_intermedia_end')) ? $this->input->post('visit_intermedia_end') : NULL,
+            'visit_intermedia_init' => $visit_intermedia_init = ($this->input->post('visit_intermedia_init')) ? date("Y-m-d", strtotime($this->input->post('visit_intermedia_init'))) : NULL,
+            'visit_intermedia_end' => $visit_intermedia_end = ($this->input->post('visit_intermedia_end')) ? date("Y-m-d", strtotime($this->input->post('visit_intermedia_end'))) : NULL,
             'place_date_intermedia' => $place_date_intermedia = ($this->input->post('place_date_intermedia')) ? $this->input->post('place_date_intermedia') : NULL,
             'intermedia_surveyor' => $intermedia_surveyor = ($this->input->post('intermedia_surveyor')) ? $this->input->post('intermedia_surveyor') : NULL,
-            'visit_annual03_init' => $visit_annual03_init = ($this->input->post('visit_annual03_init')) ? $this->input->post('visit_annual03_init') : NULL,
-            'visit_annual03_end' => $visit_annual03_end = ($this->input->post('visit_annual03_end')) ? $this->input->post('visit_annual03_end') : NULL,
+            'visit_annual03_init' => $visit_annual03_init = ($this->input->post('visit_annual03_init')) ? date("Y-m-d", strtotime($this->input->post('visit_annual03_init'))) : NULL,
+            'visit_annual03_end' => $visit_annual03_end = ($this->input->post('visit_annual03_end')) ? date("Y-m-d", strtotime($this->input->post('visit_annual03_end'))) : NULL,
             'place_date_visit03' => $place_date_visit03 = ($this->input->post('place_date_visit03')) ? $this->input->post('place_date_visit03') : NULL,
             'surveyor03' => $surveyor03 = ($this->input->post('surveyor03')) ? $this->input->post('surveyor03') : NULL,
-            'visit_annual04_init' => $visit_annual04_init = ($this->input->post('visit_annual04_init')) ? $this->input->post('visit_annual04_init') : NULL,
-            'visit_annual04_end' => $visit_annual04_end = ($this->input->post('visit_annual04_end')) ? $this->input->post('visit_annual04_end') : NULL,
+            'visit_annual04_init' => $visit_annual04_init = ($this->input->post('visit_annual04_init')) ? date("Y-m-d", strtotime($this->input->post('visit_annual04_init'))) : NULL,
+            'visit_annual04_end' => $visit_annual04_end = ($this->input->post('visit_annual04_end')) ? date("Y-m-d", strtotime($this->input->post('visit_annual04_end'))) : NULL,
             'place_date_visit04' => $place_date_visit04 = ($this->input->post('place_date_visit04')) ? $this->input->post('place_date_visit04') : NULL,
             'surveyor04' => $surveyor04 = ($this->input->post('surveyor04')) ? $this->input->post('surveyor04') : NULL
         );
@@ -439,10 +477,8 @@ class Orders extends RESTController {
 
         if ($idOrderNS) {
             $responseNS = $this->orders_model->updateOrderNS('dataExtraNS01', ['id' => $idOrderNS], $info);
-            if ($responseNS) {
-                $responseEx = $this->orders_model->updateOrderNS('convalidationsNS01', ['codNS01' => $idOrderNS], $infoEx);
-                $msg = true;
-            }
+            $responseEx = $this->orders_model->updateOrderNS('convalidationsNS01', ['codNS01' => $idOrderNS], $infoEx);
+            $msg = true;
         }else {
             $data = array_merge($info,['codOrder' => $idOrder]);
             $responseNS = $this->orders_model->insertOrderNS('dataExtraNS01',$data);

@@ -53,6 +53,12 @@ $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+/**
+ * PARA PRUEBAS
+ */
+
+$route['welcome']['GET']      = 'Welcome/index';
+
 /*
 * ROUTES LOGIN
 */

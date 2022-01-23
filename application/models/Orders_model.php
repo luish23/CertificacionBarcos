@@ -66,15 +66,15 @@ class Orders_model extends CI_Model {
         }
     }
 
-    public function updateOrderConditions($id)
-    {
-        $this->db_boats->set('conditions', 'PROCESO');
-        $this->db_boats->where('id', $id);
-        $this->db_boats->update('boats');
+    // public function updateOrderConditions($id)
+    // {
+    //     $this->db_boats->set('conditions', 'PROCESO');
+    //     $this->db_boats->where('id', $id);
+    //     $this->db_boats->update('boats');
 
-        $result = ($this->db_boats->affected_rows() > 0) ? true :  false;
-        return $result;
-    }
+    //     $result = ($this->db_boats->affected_rows() > 0) ? true :  false;
+    //     return $result;
+    // }
 
     public function getOrdersByUser($id)
     {
@@ -86,12 +86,10 @@ class Orders_model extends CI_Model {
         // $resultOrders = ($query!==false && $query->num_rows() > 0) ? $query->row('ids') : false;
 
         // if ($resultOrders) {
-            $this->db_boats->select('b.id, b.name, b.number_imo, tc.name_list_verification, o.condition, o.provisional, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
-            // $this->db_boats->select('b.id, b.name, b.number_imo, o.condition, o.id AS idOrder, o.codWord, o.codPDF, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
-            $this->db_boats->from('boats b');
-            $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
-            // $this->db_boats->join($this->db_boats->database.'.documents d', ($this->db_boats->database.'.o.codWord = d.id OR '. $this->db_boats->database.'.o.codPDF = d.id'));
-            $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
+            $this->db_boats->select('b.id, b.name, b.number_imo, o.provisional, o.id AS idOrder, o.condition, o.codWord, o.codPDF, o.codTypeCertification, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.estado, ic.created_at AS dateCertificate');
+            $this->db_boats->from('orders o');
+            $this->db_boats->join($this->db_boats->database.'.boats b', $this->db_boats->database.'.o.codBoat = b.id');
+            $this->db_boats->join($this->db_boats->database.'.offices of', 'o.codOffice = '.$this->db_boats->database.'.of.id');
             $this->db_boats->join($this->db_boats->database.'.issuedCertifications ic', $this->db_boats->database.'.ic.codOrder = o.id', 'LEFT');
             $this->db_boats->join($this->db_boats->database.'.typeCertifications tc', $this->db_boats->database.'.o.codTypeCertification = tc.codCert');
             // $this->db_boats->where("b.id IN ($resultOrders)");
@@ -116,17 +114,15 @@ class Orders_model extends CI_Model {
     public function getAllOrders()
     {
         $result['data'] = false;
-        $this->db_boats->select('b.id, b.name, b.number_imo, o.provisional, o.id AS idOrder, o.condition, o.codWord, o.codPDF, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.codTypeCertification, ic.estado, ic.created_at AS dateCertificate');
-        $this->db_boats->from('boats b');
-        $this->db_boats->join($this->db_boats->database.'.orders o', $this->db_boats->database.'.o.codBoat = b.id');
-        $this->db_boats->join($this->db_boats->database.'.offices of', $this->db_boats->database.'.of.id = o.codOffice');
-        $this->db_boats->join($this->db_boats->database.'.issuedCertifications ic', $this->db_boats->database.'.ic.codOrder = o.id', 'LEFT');
-        $this->db_boats->join($this->db_boats->database.'.typeCertifications tc', $this->db_boats->database.'.tc.id = o.codTypeCertification');
+        $this->db_boats->select('b.id, b.name, b.number_imo, o.provisional, o.id AS idOrder, o.condition, o.codWord, o.codPDF, o.codTypeCertification, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.estado, ic.created_at AS dateCertificate');
+        $this->db_boats->from('orders o');
+        $this->db_boats->join($this->db_boats->database.'.boats b', $this->db_boats->database.'.o.codBoat = b.id');
+        $this->db_boats->join($this->db_boats->database.'.offices of', 'o.codOffice = '.$this->db_boats->database.'.of.id');
+        $this->db_boats->join($this->db_boats->database.'.issuedCertifications ic', 'o.id ='.$this->db_boats->database.'.ic.codOrder', 'LEFT');
+        $this->db_boats->join($this->db_boats->database.'.typeCertifications tc', 'o.codTypeCertification ='.$this->db_boats->database.'.tc.id');
         $this->db_boats->where("b.status",1);
         $this->db_boats->where("o.status",1);
-        // $this->db_boats->group_by("b.id");
         $query = $this->db_boats->get();
-        // print_r($this->db_boats->last_query()); die;
         $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 
         if ($resultBoats) {
@@ -164,11 +160,11 @@ class Orders_model extends CI_Model {
 
     public function getOrderBoatById($id)
     {
-        $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, o.codTypeCertification, o.codListVerification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
-        $this->db_orders->from('boats b');
-        $this->db_orders->join($this->db_orders->database.'.orders o', $this->db_orders->database.'.o.id ='.$id);
+        $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, o.provisional, o.condition, o.codTypeCertification, o.codListVerification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->from('orders o');
+        $this->db_orders->join($this->db_orders->database.'.boats b', $this->db_orders->database.'.b.id = o.codBoat');
         $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
-        // $this->db_orders->where('o.id', $id);
+        $this->db_orders->where('o.id', $id);
         $this->db_orders->where('b.status', 1);
         $query = $this->db_orders->get();
         $resultBoat['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
@@ -204,6 +200,9 @@ class Orders_model extends CI_Model {
 
     public function updateOrder($data, $id)
     {
+        if ($data['condition'] == 'PROCESO') {
+            $data['inspect_date_end'] = date('Y-m-d');
+        }
         $this->db_orders->where('id', $id);
         $this->db_orders->update('orders',$data);
 
@@ -309,5 +308,16 @@ class Orders_model extends CI_Model {
         $this->db_orders->update($table);
 
         return $this->db_orders->affected_rows();
+    }
+
+    public function getDataNS($table, $condition)
+    {
+        $this->db_orders->select('*');
+        $this->db_orders->from($table);
+        $this->db_orders->where($condition);
+
+        $query = $this->db_orders->get();
+        $result = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
+        return $result;
     }
 }

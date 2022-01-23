@@ -55,7 +55,11 @@ $lang['certificated_status']                    = 'Certificado / Estado';
 $lang['start']                                  = 'INICIADO';
 $lang['process']                                = 'PROCESO';
 $lang['condition']                              = 'Estado de la Orden';
+
+/** TABS FORM UPDATE */                         
 $lang['convalidations']                         = 'Convalidaciones';
+$lang['place_includes']                         = 'Espacios Incluidos';
+$lang['test_result']                            = 'Resultados del Ensayo';
 
 /**
  * modalOrder.php
@@ -83,6 +87,8 @@ $lang['amount']                                     = 'Cantidad';
 $lang['mark']                                       = 'Marca';
 $lang['model']                                      = 'Modelo';
 $lang['power_speed']                                = 'Potencia / Velocidad';
+$lang['transport_commodity']                        = 'Transportar Mercancía';
+$lang['alert_error_codTypeCertification']           = 'No existe el tipo de Certificacion';
 
 /**
  * processOrder

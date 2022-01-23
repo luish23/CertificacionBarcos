@@ -13,6 +13,7 @@ $(document).ready(function(){
 
    $('#updateOrder').on('show.bs.modal', function (e) {
     var rowid = $(e.relatedTarget).data('id');
+    console.log(rowid);
     $.ajax({
         type : 'get',
         url : 'modalOrderUp', //Here you will fetch records 

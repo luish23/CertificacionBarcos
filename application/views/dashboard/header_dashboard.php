@@ -21,8 +21,6 @@
     <link rel="stylesheet" href="../public/assets/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="../public/assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="../public/assets/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="../public/assets/plugins/summernote/summernote-bs4.min.css">
     <!-- DataTables -->
