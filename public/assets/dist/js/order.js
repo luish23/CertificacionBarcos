@@ -13,6 +13,7 @@ $(document).ready(function(){
 
    $('#updateOrder').on('show.bs.modal', function (e) {
     var rowid = $(e.relatedTarget).data('id');
+    console.log(rowid);
     $.ajax({
         type : 'get',
         url : 'modalOrderUp', //Here you will fetch records 
@@ -61,26 +62,16 @@ $(document).ready(function(){
   });
 
   $('#codTypeCertification').change(function() {
-    var selectNavio = $("#codBoat").find('option:selected').val();
     var selectCertif = $('option:selected', this).attr('value');
 
     $.ajax({
       type : 'post',
-      url : 'veriffOrder', //Here you will fetch records 
-      data :  'idCer='+ selectCertif+'&idNav='+selectNavio, //Pass $id
+      url : 'getVerifications', //Here you will fetch records 
+      data :  'idCer='+ selectCertif, //Pass $id
       success : function(data){
         console.log(data);
-        if( JSON.stringify(data.response) == 'true'){
-          $(":submit").attr("disabled", true);
-          alert('Hay una certificación Vigente para este Navio');
-          $(":submit").removeClass("btn-success");
-          $(":submit").addClass("btn-secondary");
-        }
-        else{
-          $(":submit").removeAttr("disabled");
-          $(":submit").removeClass("btn-secondary");
-          $(":submit").addClass("btn-success");
-        }
+        var newP = $(data);
+        $("#SelectListVerification").html(newP);
       }
     });
 
@@ -115,6 +106,34 @@ $(document).ready(function(){
 
 });
 
+function listVerif() {
+  var selectNavio = $("#codBoat").find('option:selected').val();
+  var selectCertif = $("#codTypeCertification").find('option:selected').val();
+  var selectVerif = $("#codListVerification").find('option:selected').val();
+  console.log(selectNavio);
+  console.log(selectCertif);
+  console.log(selectVerif);
+    $.ajax({
+    type : 'post',
+    url : 'veriffOrder', //Here you will fetch records 
+    data :  'idCer='+ selectCertif+'&idNav='+selectNavio+'&idVerif='+selectVerif, //Pass $id
+    success : function(data){
+      console.log(data);
+        if( JSON.stringify(data.response) == 'true'){
+          $(":submit").attr("disabled", true);
+          alert('Hay una certificación Vigente para este Navio');
+          $(":submit").removeClass("btn-success");
+          $(":submit").addClass("btn-secondary");
+        }
+        else{
+          $(":submit").removeAttr("disabled");
+          $(":submit").removeClass("btn-secondary");
+          $(":submit").addClass("btn-success");
+        }
+      }
+    })
+  }
+
 $(function () {
   bsCustomFileInput.init();
 
@@ -131,25 +150,13 @@ $(function () {
         codTypeCertification: {
           required: true,
           min:1
+        },
+        codListVerification: {
+          required: true,
+          min:1
         }
-        // word:{
-        //     required:true,
-        //     extension: "docx|doc"
-        // },
-        // pdf:{
-        //     required:true,
-        //     extension: "pdf"
-        // }
     },
     messages: {  // <-- you must declare messages inside of "messages" option
-        // word:{
-        //     required:"Campo Obligatorio",                  
-        //     extension:"Seleccione el formato válido (docx|doc)"
-        // },
-        // pdf:{
-        //     required:"Campo Obligatorio",                  
-        //     extension:"Seleccione el formato válido (pdf)"
-        // },
         codBoat: {
           required: "Por favor seleccione el Navio",
           min: "Por favor seleccione el Navio"
@@ -161,6 +168,10 @@ $(function () {
         codOffice: {
           required: "Por favor seleccione la Oficina",
           min: "Por favor seleccione la Oficina"
+        },
+        codListVerification: {
+          required: "Por favor seleccione la Lista de Verificacion",
+          min: "Por favor seleccione la Lista de Verificacion"
         }
     },
     errorElement: 'span',

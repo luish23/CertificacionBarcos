@@ -53,6 +53,12 @@ $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+/**
+ * PARA PRUEBAS
+ */
+
+$route['welcome']['GET']      = 'Welcome/index';
+
 /*
 * ROUTES LOGIN
 */
@@ -121,6 +127,10 @@ $route['veriffOrder']['POST']        = 'Orders/veriffOrder';
 $route['checkOrders']['GET']         = 'Orders/checkOrders';
 $route['modalValidOrder']['GET']     = 'Orders/modalValidOrder';
 $route['processOrder']['POST']       = 'Orders/processOrder';
+$route['getVerifications']['POST']   = 'Orders/getVerifications';
+$route['updateOrderNS01']['POST']    = 'Orders/updateOrderNS01';
+$route['updateOrderNS02']['POST']    = 'Orders/updateOrderNS02';
+$route['updateOrderNS03']['POST']    = 'Orders/updateOrderNS03';
 
 
 /* 

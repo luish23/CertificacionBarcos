@@ -14,6 +14,19 @@ class Certifications_model extends CI_Model {
         $this->db_certifications->select('*');
         $this->db_certifications->from("typeCertifications");
         $this->db_certifications->where('status', 1);
+        $this->db_certifications->group_by('codCert');
+        $query = $this->db_certifications->get();
+        $resultCertifications = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
+
+        return $resultCertifications;
+    }
+
+    public function getListCertification($idCert)
+    {
+        $this->db_certifications->select('*');
+        $this->db_certifications->from("typeCertifications");
+        $this->db_certifications->where('codCert', $idCert);
+        $this->db_certifications->where('status', 1);
         $query = $this->db_certifications->get();
         $resultCertifications = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
 

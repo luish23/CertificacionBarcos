@@ -1,4 +1,5 @@
-  <!-- Content Wrapper. Contains page content -->
+<?php // print_r($data); //die; ?>
+<!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -52,7 +53,7 @@
                       echo "<td>".$value['name']."</td>";
                       // echo "<td>".$value['number_imo']."</td>";
                       // echo "<td>".$value['name_certificate']."</td>";
-                      echo "<td>".$value['name_list_verification']."</td>";
+                      echo "<td>".$value['codTypeCertification'].$value['name_list_verification']."</td>";
                       echo "<td>".$value['condition']."</td>";                      
                       echo "<td>";
                       if ($value['codWord']) {
@@ -66,6 +67,11 @@
                       }else {
                         echo "<button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
                       }
+                      if ($value['provisional']) {
+                        $provisional = "<span class='badge badge-warning ml-2'>Provisional</span>";
+                      }else {
+                        $provisional = '';
+                      }
                       if ($value['idCertificated']) {
                         if ($value['estado'] == 'ACTIVO') {
                           $alert = "<span class='badge badge-success ml-2'>".$value['estado']."</span>";
@@ -74,9 +80,9 @@
                         }else{
                           $alert = "<span class='badge badge-warning ml-2'>".$value['estado']."</span>";
                         }
-                        echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a>".$alert."</td>";
+                        echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a>".$alert."".$provisional."</td>";
                       }else {
-                        echo "<td><button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button></td>";
+                        echo "<td><button disabled type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</button>".$provisional."</td>";
                       }  
 
                       if ($value['condition'] != 'VALIDADO') {
@@ -90,7 +96,7 @@
                         echo "<button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Orden' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>";
                       }
                       if ($session['editInfo']) {
-                        echo "<button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-1' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['idOrder']."><i class='far fa-edit' aria-hidden='true'></i></button>";
+                        echo "<button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-1' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['idOrder'].">".$value['idOrder']."<i class='far fa-edit' aria-hidden='true'></i></button>";
                       }
                       if ($session['deleteInfo']) {
                         echo "<button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1' title='Eliminar Orden' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>";
