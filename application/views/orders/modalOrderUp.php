@@ -1,9 +1,3 @@
-<?php 
-    print_r($data);
-    echo "</br></br>";
-    print_r($dataNS);
-    echo "</br></br>";
-?>
 <div class="modal-header">
     <h4 class="modal-title"><strong><?php echo '  #'.$data['office'].str_pad($data['idOrder'], 4, '0', STR_PAD_LEFT).$data['anyo']; ?></strong></h4>
 </div>
@@ -376,16 +370,331 @@
                 <div class="row">
                     <div class="form-group row col-12">
                         <div class="col-4">
-                            <input type="text" class="form-control" id="port_inscription" name="port_inscription" value="<?php if (isset($dataNS['port_inscription'])) echo $dataNS['port_inscription'] ?>" placeholder="Porto de Inscrição">
+                            <label for="exampleFormControlInput1">Puerto de Inscripción</label>
+                            <input type="text" class="form-control" id="port_inscription" name="port_inscription" value="<?php if (isset($dataNS02['port_inscription'])) echo $dataNS02['port_inscription'] ?>" placeholder="Porto de Inscrição">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="batimento" name="batimento" value="<?php if (isset($dataNS['batimento'])) echo $dataNS['batimento'] ?>" placeholder="Batimento de Quilha">
+                            <label for="exampleFormControlInput1">Batimento de Quilha</label>
+                            <input type="text" class="form-control" id="batimento" name="batimento" value="<?php if (isset($dataNS02['batimento'])) echo $dataNS02['batimento'] ?>" placeholder="Batimento de Quilha">
                         </div>
                         <div class="col-4">
-                            <input type="text" class="form-control" id="ruler_length" name="ruler_length" value="<?php if (isset($dataNS['ruler_length'])) echo $dataNS['ruler_length'] ?>" placeholder="Comprimento De Regra">
+                            <label for="exampleFormControlInput1">Comprimento De Regra</label>
+                            <input type="text" class="form-control" id="ruler_length" name="ruler_length" value="<?php if (isset($dataNS02['ruler_length'])) echo $dataNS02['ruler_length'] ?>" placeholder="Comprimento De Regra">
                         </div>
                     </div>
-                    
+                    <div class="form-group row col-12">
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Boca</label>
+                            <input type="text" class="form-control" id="boca" name="boca" value="<?php if (isset($dataNS02['boca'])) echo $dataNS02['boca'] ?>" placeholder="Boca">
+                        </div>
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Pontal Moldado</label>
+                            <input type="text" class="form-control" id="molded_knit" name="molded_knit" value="<?php if (isset($dataNS02['molded_knit'])) echo $dataNS02['molded_knit'] ?>" placeholder="Pontal Moldado">
+                        </div>
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Emitido em</label>
+                            <input type="text" class="form-control" id="emitido" name="emitido" value="<?php if (isset($dataNS02['emitido'])) echo $dataNS02['emitido'] ?>" placeholder="Emitido em">
+                        </div>
+                    </div>
+                    <!-- CAMPOS NO RELEVANTES PARA EL CERTIFICADO NS02 -->
+                    <!-- <div class="form-group row col-12">
+                        <div class="form-group pl-2">
+                            <input class="btn btn-success" type="button" id="add_field" value="Agregar +">    
+                        </div>
+                        <div id="listas" class="form-row pl-1">
+                        </div>
+                    </div> -->
+                    <div class="form-group row col-12">
+                        <div class="col-12">
+                            <label for="exampleFormControlInput1">Espacios Excluidos</label>
+                            <input type="text" class="form-control" id="place_exclude" name="place_exclude" value="<?php if (isset($dataNS02['place_exclude'])) echo $dataNS02['place_exclude'] ?>" placeholder="Espacios Excluidos">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12">
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Total de passageiros em camarote</label>
+                            <input type="text" class="form-control" id="number_passengers_berths" name="number_passengers_berths" value="<?php if (isset($dataNS02['number_passengers_berths'])) echo $dataNS02['number_passengers_berths'] ?>" placeholder="Número total de passageiros em camarotes com até 8 beliches">
+                        </div>
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Número total dos demais passageiros</label>
+                            <input type="text" class="form-control" id="number_total_passengers" name="number_total_passengers" value="<?php if (isset($dataNS02['number_total_passengers'])) echo $dataNS02['number_total_passengers'] ?>" placeholder="Número total dos demais passageiros">
+                        </div>
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Calado Moldado</label>
+                            <input type="text" class="form-control" id="molded_project" name="molded_project" value="<?php if (isset($dataNS02['molded_project'])) echo $dataNS02['molded_project'] ?>" placeholder="Calado Moldado">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12">
+                        <div class="col-6">
+                            <label for="exampleFormControlInput1">Fecha y Lugar de Arqueo Original</label>
+                            <input type="text" class="form-control" id="place_date_original" name="place_date_original" value="<?php if (isset($dataNS02['place_date_original'])) echo $dataNS02['place_date_original'] ?>" placeholder="Fecha y Lugar de Arqueo Original">
+                        </div>
+                        <div class="col-6">
+                            <label for="exampleFormControlInput1">Fecha y Lugar de Ultimo Arqueo</label>
+                            <input type="text" class="form-control" id="place_date_last" name="place_date_last" value="<?php if (isset($dataNS02['place_date_last'])) echo $dataNS02['place_date_last'] ?>" placeholder="Fecha y Lugar de Ultimo Arqueo">
+                        </div>
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="exampleFormControlInput1">Observaciones</label>
+                            <input type="text" class="form-control" id="observations" name="observations" value="<?php if (isset($dataNS02['observations'])) echo $dataNS02['observations'] ?>" placeholder="Observaciones">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="hidden" name="idOrder" id="idOrder" value="<?php echo $data['idOrder']; ?>">             
+                    <button type="submit" id="submit" class="btn btn-success"><?php echo $this->lang->line('update'); ?></button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $this->lang->line('close'); ?></button>
+                </div>
+                </form>
+            </div>
+
+            <div class="tab-pane fade" id="custom-tabs-one-ns03" role="tabpanel" aria-labelledby="custom-tabs-one-ns03-tab">
+                <form id="ordersFormUpdateNS03" action="updateOrderNS03" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="form-group row col-12">
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">LO(m)</label>
+                            <input type="text" class="form-control" id="lo" name="lo" value="<?php if (isset($dataNS03['lo'])) echo $dataNS03['lo'] ?>" placeholder="LO(m)">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Boca Moldada (m)</label>
+                            <input type="text" class="form-control" id="boca_moldada" name="boca_moldada" value="<?php if (isset($dataNS03['boca_moldada'])) echo $dataNS03['boca_moldada'] ?>" placeholder="Boca Moldada (m)">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Pontal Moldado</label>
+                            <input type="text" class="form-control" id="pontal_moldado" name="pontal_moldado" value="<?php if (isset($dataNS03['pontal_moldado'])) echo $dataNS03['pontal_moldado'] ?>" placeholder="Pontal Moldado">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Nº de série</label>
+                            <input type="text" class="form-control" id="number_serie" name="number_serie" value="<?php if (isset($dataNS03['number_serie'])) echo $dataNS03['number_serie'] ?>" placeholder="Nº de série">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12">                        
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Cantidad</label>
+                            <input type="text" class="form-control" id="amount" name="amount" value="<?php if (isset($dataNS03['amount'])) echo $dataNS03['amount'] ?>" placeholder="Cantidad">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Potencia HP</label>
+                            <input type="text" class="form-control" id="powerHP" name="powerHP" value="<?php if (isset($dataNS03['powerHP'])) echo $dataNS03['powerHP'] ?>" placeholder="Potencia HP">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Rotação (rpm)</label>
+                            <input type="text" class="form-control" id="rotation" name="rotation" value="<?php if (isset($dataNS03['rotation'])) echo $dataNS03['rotation'] ?>" placeholder="Rotação (rpm)">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Redução</label>
+                            <input type="text" class="form-control" id="reduce" name="reduce" value="<?php if (isset($dataNS03['reduce'])) echo $dataNS03['reduce'] ?>" placeholder="Redução">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12">
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Tipo</label>
+                            <input type="text" class="form-control" id="type" name="type" value="<?php if (isset($dataNS03['type'])) echo $dataNS03['type'] ?>" placeholder="Tipo">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Nº de pás</label>
+                            <input type="text" class="form-control" id="number_pas" name="number_pas" value="<?php if (isset($dataNS03['number_pas'])) echo $dataNS03['number_pas'] ?>" placeholder="Nº de pás">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Diamêtro</label>
+                            <input type="text" class="form-control" id="diameter" name="diameter" value="<?php if (isset($dataNS03['diameter'])) echo $dataNS03['diameter'] ?>" placeholder="Diamêtro">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Passo</label>
+                            <input type="text" class="form-control" id="passo" name="passo" value="<?php if (isset($dataNS03['passo'])) echo $dataNS03['passo'] ?>" placeholder="Passo">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12">                        
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Tracción Estatica</label>
+                            <input type="text" class="form-control" id="static_drive" name="static_drive" value="<?php if (isset($dataNS03['static_drive'])) echo $dataNS03['static_drive'] ?>" placeholder="Tracción Estatica">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Lugar</label>
+                            <input type="text" class="form-control" id="place" name="place" value="<?php if (isset($dataNS03['place'])) echo $dataNS03['place'] ?>" placeholder="Lugar">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Fecha</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="fecha" name="fecha" value="<?php if (isset($dataNS03['fecha'])) echo date("d-m-Y", strtotime($dataNS03['fecha'])) ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd-mm-yyyy" data-mask="" inputmode="numeric">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">Hora</label>
+                            <input type="text" class="form-control" id="times" name="times" value="<?php if (isset($dataNS03['times'])) echo $dataNS03['times'] ?>" placeholder="Hora">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12">
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Viento</label>
+                            <input type="text" class="form-control" id="wind" name="wind" value="<?php if (isset($dataNS03['wind'])) echo $dataNS03['wind'] ?>" placeholder="Viento">
+                        </div>
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Correnteza</label>
+                            <input type="text" class="form-control" id="actual" name="actual" value="<?php if (isset($dataNS03['actual'])) echo $dataNS03['actual'] ?>" placeholder="Correnteza">
+                        </div>
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Profundidade</label>
+                            <input type="text" class="form-control" id="depth" name="depth" value="<?php if (isset($dataNS03['depth'])) echo $dataNS03['depth'] ?>" placeholder="Profundidade">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12">
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">HAV</label>
+                            <input type="text" class="form-control" id="hav" name="hav" value="<?php if (isset($dataNS03['hav'])) echo $dataNS03['hav'] ?>" placeholder="HAV">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">HAR</label>
+                            <input type="text" class="form-control" id="har" name="har" value="<?php if (isset($dataNS03['har'])) echo $dataNS03['har'] ?>" placeholder="HAR">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">TRIM</label>
+                            <input type="text" class="form-control" id="trims" name="trims" value="<?php if (isset($dataNS03['trims'])) echo $dataNS03['trims'] ?>" placeholder="TRIM">
+                        </div>
+                        <div class="col-3">
+                            <label for="exampleFormControlInput1">LCABO</label>
+                            <input type="text" class="form-control" id="lcabo" name="lcabo" value="<?php if (isset($dataNS03['lcabo'])) echo $dataNS03['lcabo'] ?>" placeholder="LCABO">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12">
+                        <div class="form-check col-4 ml-md-auto">
+                            <?php 
+                                if (isset($dataNS['attachments1'])) {
+                                    echo '<input class="form-check-input" type="checkbox" id="attachments1" value="1" checked name="attachments1">';
+                                }else{
+                                    echo '<input class="form-check-input" type="checkbox" id="attachments1" value="1" name="attachments1">';
+                                }
+                            ?>
+                            <label class="form-check-label" for="attachments1">Gráfico “tração estática x rotação”</label>
+                        </div>
+                        <div class="form-check col-4 ml-md-auto">
+                            <?php 
+                                if (isset($dataNS['attachments2'])) {
+                                    echo '<input class="form-check-input" type="checkbox" id="attachments2" value="1" checked name="attachments2">';
+                                }else{
+                                    echo '<input class="form-check-input" type="checkbox" id="attachments2" value="1" name="attachments2">';
+                                }
+                            ?>
+                            <label class="form-check-label" for="attachments2">Gráfico “potência x rotação”</label>
+                        </div>
+                    </div>
+                    <div class="form-group row col-12 text-center">
+                        <div class="col-2">
+                            <label for="exampleFormControlInput1">Condição de carga</label>
+                            <input type="text" class="btn btn-info" value="70%" readonly>
+                        </div>
+                        <div class="col-1">
+                            <label for="exampleFormControlInput1">BB</label>
+                            <input type="text" class="form-control" id="bb70" name="bb70" value="<?php if (isset($dataNSEx03['bb70'])) echo $dataNSEx03['bb70'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <label for="exampleFormControlInput1">LC</label>
+                            <input type="text" class="form-control" id="lc70" name="lc70" value="<?php if (isset($dataNSEx03['lc70'])) echo $dataNSEx03['lc70'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <label for="exampleFormControlInput1">BE</label>
+                            <input type="text" class="form-control" id="be70" name="be70" value="<?php if (isset($dataNSEx03['be70'])) echo $dataNSEx03['be70'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <label for="exampleFormControlInput1">Tração máxima</label>
+                            <input type="text" class="form-control" id="max70" name="max70" value="<?php if (isset($dataNSEx03['max70'])) echo $dataNSEx03['max70'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <label for="exampleFormControlInput1">Tração mínima</label>
+                            <input type="text" class="form-control" id="min70" name="min70" value="<?php if (isset($dataNSEx03['min70'])) echo $dataNSEx03['min70'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <label for="exampleFormControlInput1">Tração estática</label>
+                            <input type="text" class="form-control" id="static70" name="static70" value="<?php if (isset($dataNSEx03['static70'])) echo $dataNSEx03['static70'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <label for="exampleFormControlInput1">Potência</label>
+                            <input type="text" class="form-control" id="opc70" name="opc70" value="<?php if (isset($dataNSEx03['opc70'])) echo $dataNSEx03['opc70'] ?>">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12 text-center">
+                        <div class="col-2">
+                            <input type="text" class="btn btn-info" value="80%" readonly>
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="bb80" name="bb80" value="<?php if (isset($dataNSEx03['bb80'])) echo $dataNSEx03['bb80'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="lc80" name="lc80" value="<?php if (isset($dataNSEx03['lc80'])) echo $dataNSEx03['lc80'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="be80" name="be80" value="<?php if (isset($dataNSEx03['be80'])) echo $dataNSEx03['be80'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="max80" name="max80" value="<?php if (isset($dataNSEx03['max80'])) echo $dataNSEx03['max80'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="min80" name="min80" value="<?php if (isset($dataNSEx03['min80'])) echo $dataNSEx03['min80'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="static80" name="static80" value="<?php if (isset($dataNSEx03['static80'])) echo $dataNSEx03['static80'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="opc80" name="opc80" value="<?php if (isset($dataNSEx03['opc80'])) echo $dataNSEx03['opc80'] ?>">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12 text-center">
+                        <div class="col-2">
+                            <input type="text" class="btn btn-info" value="90%" readonly>
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="bb90" name="bb90" value="<?php if (isset($dataNSEx03['bb90'])) echo $dataNSEx03['bb90'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="lc90" name="lc90" value="<?php if (isset($dataNSEx03['lc90'])) echo $dataNSEx03['lc90'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="be90" name="be90" value="<?php if (isset($dataNSEx03['be90'])) echo $dataNSEx03['be90'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="max90" name="max90" value="<?php if (isset($dataNSEx03['max90'])) echo $dataNSEx03['max90'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="min90" name="min90" value="<?php if (isset($dataNSEx03['min90'])) echo $dataNSEx03['min90'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="static90" name="static90" value="<?php if (isset($dataNSEx03['static90'])) echo $dataNSEx03['static90'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="opc90" name="opc90" value="<?php if (isset($dataNSEx03['opc90'])) echo $dataNSEx03['opc90'] ?>">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12 text-center">
+                        <div class="col-2">
+                            <input type="text" class="btn btn-info" value="100%" readonly>
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="bb100" name="bb100" value="<?php if (isset($dataNSEx03['bb100'])) echo $dataNSEx03['bb100'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="lc100" name="lc100" value="<?php if (isset($dataNSEx03['lc100'])) echo $dataNSEx03['lc100'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="be100" name="be100" value="<?php if (isset($dataNSEx03['be100'])) echo $dataNSEx03['be100'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="max100" name="max100" value="<?php if (isset($dataNSEx03['max100'])) echo $dataNSEx03['max100'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="min100" name="min100" value="<?php if (isset($dataNSEx03['min100'])) echo $dataNSEx03['min100'] ?>">
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="static100" name="static100" value="<?php if (isset($dataNSEx03['static100'])) echo $dataNSEx03['static100'] ?>">
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="opc100" name="opc100" value="<?php if (isset($dataNSEx03['opc100'])) echo $dataNSEx03['opc100'] ?>">
+                        </div>
+                    </div>
+                   
                 </div>
 
                 <div class="modal-footer">

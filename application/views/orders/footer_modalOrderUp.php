@@ -96,6 +96,28 @@
     }
   });
 
+  /** PARA AGREGAR CAMPOS ADICIONALES */
+  var campos_max          = 10;   //max de 10 campos
+  var x = 0;
+  $('#add_field').click (function(e) {
+          e.preventDefault();     //prevenir novos clicks
+          if (x < campos_max) {
+                  $('#listas').append('<div class="pl-1">\
+                                        <input type="text" class="form-control" name="namePlace_gt[]" id="namePlace_gt">\
+                                        <input type="text" class="form-control" name="local_gt[]" id="local_gt">\
+                                        <input type="text" class="form-control" name="length_gt[]" id="length_gt">\
+                                        <a href="#" class="btn btn-danger" id="remove_field" role="button">Remover</a>\
+                          </div>');
+                  x++;
+          }
+  });
+  // Remover o div anterior
+  $('#listas').on("click","#remove_field",function(e) {
+          e.preventDefault();
+          $(this).parent('div').remove();
+          x--;
+  });
+
 </script>
 </body>
 </html>

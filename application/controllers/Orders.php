@@ -349,13 +349,11 @@ class Orders extends RESTController {
     {
         $id = $this->input->get('id');
         $data = $this->orders_model->getOrderBoatById($id);
-        // print_r($data);
+        // print_r($data); die;
 
         if ($data) {
-            $data['offices'] = $this->offices_model->getOffice();            
+            $data['offices'] = $this->offices_model->getOffice();    
         }
-        // echo "</br>ENTRE</br>";
-        // print_r($data);
 
         switch ($data['data']['codTypeCertification']) {
             case 1:
@@ -365,28 +363,26 @@ class Orders extends RESTController {
                 }
                 break;
             
-            // case 2:
-            //     $data['dataNS02'] = $this->orders_model->getDataNS('dataExtraNS02', ['codOrder' => $id]);
-            //     if ($data['dataNS02']) {
-            //         $data['dataNSGT'] = $this->orders_model->getDataNS('grossTonnage', ['codExtra02_gt' => $data['dataNS']['id']]);
-            //         $data['dataNSLT'] = $this->orders_model->getDataNS('liquidTonnage', ['codExtra02_lt' => $data['dataNS']['id']]);
-            //     }
-            //     break;
+            case 2:
+                $data['dataNS02'] = $this->orders_model->getDataNS('dataExtraNS02', ['codOrder' => $id]);
+                // if ($data['dataNS02']) {
+                //     $data['dataNSGT'] = $this->orders_model->getDataNS('grossTonnage', ['codExtra02_gt' => $data['dataNS']['id']]);
+                //     $data['dataNSLT'] = $this->orders_model->getDataNS('liquidTonnage', ['codExtra02_lt' => $data['dataNS']['id']]);
+                // }
+                break;
             
-            // case 3:
-            //     $data['dataNS03'] = $this->orders_model->getDataNS('dataExtraNS03', ['codOrder' => $id]);
-            //     if ($data['dataNS03']) {
-            //         $data['dataNSEx03'] = $this->orders_model->getDataNS('testResultNS03', ['codNS03' => $data['dataNS']['id']]);
-            //     }
-            //     break;
+            case 3:
+                $data['dataNS03'] = $this->orders_model->getDataNS('dataExtraNS03', ['codOrder' => $id]);
+                if ($data['dataNS03']) {
+                    $data['dataNSEx03'] = $this->orders_model->getDataNS('testResultNS03', ['codNS03' => $data['dataNS03']['id']]);
+                }
+                break;
             
             default:
                 echo "<script>alert('".$this->lang->line('alert_error_codTypeCertification')."');</script>";
                 redirect('dashboard', 'refresh');
                 break;
         }
-        // echo "</br>FINAL</br>";
-        // print_r($data); // die;
 
         $this->load->view('orders/modalOrderUp', $data);
         $this->load->view("orders/footer_modalOrderUp");
@@ -483,9 +479,166 @@ class Orders extends RESTController {
             $data = array_merge($info,['codOrder' => $idOrder]);
             $responseNS = $this->orders_model->insertOrderNS('dataExtraNS01',$data);
 
-            $dataEx = array_merge($infoEx,['codNS01' => $idOrder]);
+            $dataEx = array_merge($infoEx,['codNS01' => $responseNS]);
             if ($dataEx) {
                 $responseEx = $this->orders_model->insertOrderNS('convalidationsNS01',$dataEx);
+                $msg = true;
+            }
+            
+        }
+
+        if ($msg) {
+            echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
+            redirect('listOrders', 'refresh');
+        }
+        else {
+            echo "<script>alert('".$this->lang->line('alert_process_error')."');</script>";
+            redirect('dashboard', 'refresh');
+        }
+
+    }
+
+    /**
+     * CERTIFICADO NACIONAL DE ARQUEAÇÃO NS02
+     */
+    public function updateOrderNS02_post()
+    {
+        $idOrder = $this->input->post('idOrder');
+        $msg = false;
+        /** campos no relevante para el certificado */
+        // print_r($this->input->post('namePlace_gt')); 
+        // print_r($this->input->post('local_gt')); 
+        // print_r($this->input->post('length_gt')); 
+
+        // si orden existe hacer update sino insert
+        $info = array(
+            'port_inscription' => $port_inscription = ($this->input->post('port_inscription')) ? $this->input->post('port_inscription') : NULL,
+            'batimento' => $batimento = ($this->input->post('batimento')) ? $this->input->post('batimento') : NULL,
+            'ruler_length' => $ruler_length = ($this->input->post('ruler_length')) ? $this->input->post('ruler_length') : 0,
+            'boca' => $boca = ($this->input->post('boca')) ? $this->input->post('boca') : 0,
+            'molded_knit' => $molded_knit = ($this->input->post('molded_knit')) ? $this->input->post('molded_knit') : 0,
+            'emitido' => $emitido = ($this->input->post('emitido')) ? $this->input->post('emitido') : NULL,
+            'place_exclude' => $place_exclude = ($this->input->post('place_exclude')) ? $this->input->post('place_exclude') : NULL,
+            'number_passengers_berths' => $number_passengers_berths = ($this->input->post('number_passengers_berths')) ? $this->input->post('number_passengers_berths') : 0,
+            'number_total_passengers' => $number_total_passengers = ($this->input->post('number_total_passengers')) ? $this->input->post('number_total_passengers') : 0,
+            'molded_project' => $molded_project = ($this->input->post('molded_project')) ? $this->input->post('molded_project') : NULL,
+            'place_date_original' => $place_date_original = ($this->input->post('place_date_original')) ? $this->input->post('place_date_original') : NULL,
+            'place_date_last' => $place_date_last = ($this->input->post('place_date_last')) ? $this->input->post('place_date_last') : NULL,
+            'observations' => $observations = ($this->input->post('observations')) ? $this->input->post('observations') : NULL
+        );
+
+        $idOrderNS = $this->orders_model->getOrderNS('dataExtraNS02',$idOrder);
+
+        if ($idOrderNS) {
+            $responseNS = $this->orders_model->updateOrderNS('dataExtraNS02', ['id' => $idOrderNS], $info);
+            // $responseEx = $this->orders_model->updateOrderNS('convalidationsNS01', ['codNS01' => $idOrderNS], $infoEx);
+            $msg = true;
+        }else {
+            $data = array_merge($info,['codOrder' => $idOrder]);
+            $responseNS = $this->orders_model->insertOrderNS('dataExtraNS02',$data);
+            $msg = true;
+
+            // $dataEx = array_merge($infoEx,['codNS01' => $responseNS]);
+            // if ($dataEx) {
+            //     $responseEx = $this->orders_model->insertOrderNS('convalidationsNS01',$dataEx);
+            //     $msg = true;
+            // }
+            
+        }
+
+        if ($msg) {
+            echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
+            redirect('listOrders', 'refresh');
+        }
+        else {
+            echo "<script>alert('".$this->lang->line('alert_process_error')."');</script>";
+            redirect('dashboard', 'refresh');
+        }
+
+    }
+
+    /**
+     * CERTIFICADO DE TRAÇÃO ESTÁTICA NS03
+     */
+    public function updateOrderNS03_post()
+    {
+        $idOrder = $this->input->post('idOrder');
+        $msg = false;
+
+        // si orden existe hacer update sino insert
+        $info = array(
+            'lo' => $lo = ($this->input->post('lo')) ? $this->input->post('lo') : NULL,
+            'boca_moldada' => $boca_moldada = ($this->input->post('boca_moldada')) ? $this->input->post('boca_moldada') : NULL,
+            'pontal_moldado' => $pontal_moldado = ($this->input->post('pontal_moldado')) ? $this->input->post('pontal_moldado') : NULL,
+            'number_serie' => $number_serie = ($this->input->post('number_serie')) ? $this->input->post('number_serie') : NULL,
+            'amount' => $amount = ($this->input->post('amount')) ? $this->input->post('amount') : 0,
+            'powerHP' => $powerHP = ($this->input->post('powerHP')) ? $this->input->post('powerHP') : 0,
+            'rotation' => $rotation = ($this->input->post('rotation')) ? $this->input->post('rotation') : 0,
+            'reduce' => $reduce = ($this->input->post('reduce')) ? $this->input->post('reduce') : NULL,
+            'type' => $type = ($this->input->post('type')) ? $this->input->post('type') : NULL,
+            'number_pas' => $number_pas = ($this->input->post('number_pas')) ? $this->input->post('number_pas') : 0,
+            'diameter' => $diameter = ($this->input->post('diameter')) ? $this->input->post('diameter') : NULL,
+            'passo' => $passo = ($this->input->post('passo')) ? $this->input->post('passo') : NULL,
+            'static_drive' => $static_drive = ($this->input->post('static_drive')) ? $this->input->post('static_drive') : NULL,
+            'place' => $place = ($this->input->post('place')) ? $this->input->post('place') : NULL,
+            'fecha' => $fecha = ($this->input->post('fecha')) ? date("Y-m-d", strtotime($this->input->post('fecha'))) : NULL,
+            'times' => $times = ($this->input->post('times')) ? $this->input->post('times') : NULL,
+            'wind' => $wind = ($this->input->post('wind')) ? $this->input->post('wind') : NULL,
+            'actual' => $actual = ($this->input->post('actual')) ? $this->input->post('actual') : NULL,
+            'depth' => $depth = ($this->input->post('depth')) ? $this->input->post('depth') : NULL,
+            'hav' => $hav = ($this->input->post('hav')) ? $this->input->post('hav') : NULL,
+            'har' => $har = ($this->input->post('har')) ? $this->input->post('har') : NULL,
+            'trims' => $trims = ($this->input->post('trims')) ? $this->input->post('trims') : NULL,
+            'lcabo' => $lcabo = ($this->input->post('lcabo')) ? $this->input->post('lcabo') : NULL,
+            'attachments1' => $attachments1 = ($this->input->post('attachments1')) ? $this->input->post('attachments1') : 0,
+            'attachments2' => $attachments2 = ($this->input->post('attachments2')) ? $this->input->post('attachments2') : 0
+        );
+
+        $infoEx = array(
+                    'bb70' => $bb70 = ($this->input->post('bb70')) ? $this->input->post('bb70') : NULL, 
+                    'lc70' => $lc70 = ($this->input->post('lc70')) ? $this->input->post('lc70') : NULL, 
+                    'be70' => $be70 = ($this->input->post('be70')) ? $this->input->post('be70') : NULL, 
+                    'max70' => $max70 = ($this->input->post('max70')) ? $this->input->post('max70') : NULL, 
+                    'min70' => $min70 = ($this->input->post('min70')) ? $this->input->post('min70') : NULL, 
+                    'static70' => $static70 = ($this->input->post('static70')) ? $this->input->post('static70') : NULL, 
+                    'opc70' => $opc70 = ($this->input->post('opc70')) ? $this->input->post('opc70') : NULL, 
+                    'bb80' => $bb80 = ($this->input->post('bb80')) ? $this->input->post('bb80') : NULL, 
+                    'lc80' => $lc80 = ($this->input->post('lc80')) ? $this->input->post('lc80') : NULL, 
+                    'be80' => $be80 = ($this->input->post('be80')) ? $this->input->post('be80') : NULL, 
+                    'max80' => $max80 = ($this->input->post('max80')) ? $this->input->post('max80') : NULL, 
+                    'min80' => $min80 = ($this->input->post('min80')) ? $this->input->post('min80') : NULL, 
+                    'static80' => $static80 = ($this->input->post('static80')) ? $this->input->post('static80') : NULL, 
+                    'opc80' => $opc80 = ($this->input->post('opc80')) ? $this->input->post('opc80') : NULL,
+                    'bb90' => $bb90 = ($this->input->post('bb90')) ? $this->input->post('bb90') : NULL, 
+                    'lc90' => $lc90 = ($this->input->post('lc90')) ? $this->input->post('lc90') : NULL, 
+                    'be90' => $be90 = ($this->input->post('be90')) ? $this->input->post('be90') : NULL, 
+                    'max90' => $max90 = ($this->input->post('max90')) ? $this->input->post('max90') : NULL, 
+                    'min90' => $min90 = ($this->input->post('min90')) ? $this->input->post('min90') : NULL, 
+                    'static90' => $static90 = ($this->input->post('static90')) ? $this->input->post('static90') : NULL, 
+                    'opc90' => $opc90 = ($this->input->post('opc90')) ? $this->input->post('opc90') : NULL,
+                    'bb100' => $bb100 = ($this->input->post('bb100')) ? $this->input->post('bb100') : NULL, 
+                    'lc100' => $lc100 = ($this->input->post('lc100')) ? $this->input->post('lc100') : NULL, 
+                    'be100' => $be100 = ($this->input->post('be100')) ? $this->input->post('be100') : NULL, 
+                    'max100' => $max100 = ($this->input->post('max100')) ? $this->input->post('max100') : NULL, 
+                    'min100' => $min100 = ($this->input->post('min100')) ? $this->input->post('min100') : NULL, 
+                    'static100' => $static100 = ($this->input->post('static100')) ? $this->input->post('static100') : NULL, 
+                    'opc100' => $opc100 = ($this->input->post('opc100')) ? $this->input->post('opc100') : NULL   
+        );
+
+        $idOrderNS = $this->orders_model->getOrderNS('dataExtraNS03',$idOrder);
+
+        if ($idOrderNS) {
+            $responseNS = $this->orders_model->updateOrderNS('dataExtraNS03', ['id' => $idOrderNS], $info);
+            $responseEx = $this->orders_model->updateOrderNS('testResultNS03', ['codNS03' => $idOrderNS], $infoEx);
+            $msg = true;
+        }else {
+            $data = array_merge($info,['codOrder' => $idOrder]);
+            $responseNS = $this->orders_model->insertOrderNS('dataExtraNS03',$data);
+            $msg = true;
+
+            $dataEx = array_merge($infoEx,['codNS03' => $responseNS]);
+            if ($dataEx) {
+                $responseEx = $this->orders_model->insertOrderNS('testResultNS03',$dataEx);
                 $msg = true;
             }
             
