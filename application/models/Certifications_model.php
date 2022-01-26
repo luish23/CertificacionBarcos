@@ -55,6 +55,7 @@ class Certifications_model extends CI_Model {
         $this->db_orders->trans_begin();
 
         $this->db_orders->insert('issuedCertifications', $data);
+        $item_id = $this->db_orders->insert_id();
 
         if ($this->db_orders->trans_status() === FALSE) {
             $this->db_orders->trans_rollback();
@@ -63,7 +64,7 @@ class Certifications_model extends CI_Model {
         else {
             $this->db_orders->trans_commit();
             $this->_changeCondition($data['codOrder']);
-            return true;
+            return $item_id;
         }
     }
 

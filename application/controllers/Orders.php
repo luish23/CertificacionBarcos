@@ -10,7 +10,7 @@ class Orders extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("boats_model","users_model","login_model", "orders_model", "offices_model", "certifications_model"));
+        $this->load->model(array("boats_model","users_model","login_model", "orders_model", "offices_model", "certifications_model", "logs_model"));
         $this->load->helper(array("url","custom"));
         $this->load->library(array('session'));
        
@@ -50,9 +50,7 @@ class Orders extends RESTController {
         }else{
             $data = $this->orders_model->getAllOrders();
         }
-        // echo "<pre>";
-        // print_r($data); die;
-        // echo "</pre>";
+
         $template = array('title' => $this->lang->line('title_listOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -68,11 +66,12 @@ class Orders extends RESTController {
     public function formOrder_get()
     {
         $data = $this->boats_model->getBoatsNotDocument();
+
         if($data)
         {
             $data['offices'] = $this->offices_model->getOffice();
             $data['certifications'] = $this->certifications_model->getTypeCertifications();
-            // print_r($data['certifications']); die;
+
             $template = array('title' => $this->lang->line('title_formOrders'));
             $this->load->view("dashboard/header_dashboard",$template);
             $this->load->view("layout_nav_top");
@@ -156,14 +155,11 @@ class Orders extends RESTController {
                         'codPDF' => $retVal = ($idPdf != null) ? $idPdf : null 
                     );
 
-        if($this->orders_model->insertOrder($data))
+        if($response = $this->orders_model->insertOrder($data))
         {
-            // $response = $this->orders_model->updateOrderConditions($this->input->post('codBoat'));
-
-            // if ($response) {
-                echo "<script>alert('".$this->lang->line('alert_registerOrder')."');</script>";
-                redirect('formOrder', 'refresh');
-            // }
+            $this->logs_model->registerLogs($this->session->user_id, 'registerOrder_post', 'Add', 'Insertó Id: '.$response);
+            echo "<script>alert('".$this->lang->line('alert_registerOrder')."');</script>";
+            redirect('formOrder', 'refresh');
         }
     }
 
@@ -235,8 +231,9 @@ class Orders extends RESTController {
                     );
         if($this->orders_model->updateOrder($data, $idOrder))
         {
-                echo "<script>alert('".$this->lang->line('alert_updateOrder')."');</script>";
-                redirect('listOrders', 'refresh');
+            $this->logs_model->registerLogs($this->session->user_id, 'updateOrder_post', 'Update', 'Actualizó Id: '.$idOrder);
+            echo "<script>alert('".$this->lang->line('alert_updateOrder')."');</script>";
+            redirect('listOrders', 'refresh');
         }else{
             echo "Hubo un error al actualizar Orden!!.";
         }
@@ -249,6 +246,7 @@ class Orders extends RESTController {
         $response = $this->orders_model->deleteOrder($id);
 
         if ($response) {
+            $this->logs_model->registerLogs($this->session->user_id, 'deleteOrder_post', 'Delete', 'Eliminó Id: '.$id);
             echo "<script>alert('".$this->lang->line('alert_deleteOrder')."');</script>";
             redirect('listOrders', 'refresh');
         }
@@ -313,7 +311,7 @@ class Orders extends RESTController {
     public function checkOrders_get()
     {
         $data = $this->orders_model->getOrdersProcess();
-        // print_r($data); die;
+        $this->logs_model->registerLogs($this->session->user_id, 'checkOrders_get', 'Get');
         
         $template = array('title' => $this->lang->line('title_checkOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
@@ -325,9 +323,11 @@ class Orders extends RESTController {
 
     public function processOrder_post()
     {
-        $response = $this->orders_model->updateOrdersProcess($this->input->post('idOrder'));
+        $id = $this->input->post('idOrder');
+        $response = $this->orders_model->updateOrdersProcess($id);
 
         if ($response) {
+            $this->logs_model->registerLogs($this->session->user_id, 'processOrder_post', 'Update', 'Actualizo Id: '.$id);
             echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
             redirect('listOrders', 'refresh');
         }
@@ -349,7 +349,6 @@ class Orders extends RESTController {
     {
         $id = $this->input->get('id');
         $data = $this->orders_model->getOrderBoatById($id);
-        // print_r($data); die;
 
         if ($data) {
             $data['offices'] = $this->offices_model->getOffice();    
@@ -392,7 +391,7 @@ class Orders extends RESTController {
     {
         $id = $this->input->get('id');
         $data = $this->orders_model->getOrderById($id);
-        // print_r($data); die;
+
         $this->load->view('orders/modalOrderDel', $data);
     }
 
@@ -474,20 +473,23 @@ class Orders extends RESTController {
         if ($idOrderNS) {
             $responseNS = $this->orders_model->updateOrderNS('dataExtraNS01', ['id' => $idOrderNS], $info);
             $responseEx = $this->orders_model->updateOrderNS('convalidationsNS01', ['codNS01' => $idOrderNS], $infoEx);
+            $this->logs_model->registerLogs($this->session->user_id, 'updateOrderNS01_post', 'Update', 'Actualizó datos en tablas dataExtraNS01/convalidationsNS01 Id/codNS01: '.$idOrderNS);
             $msg = true;
         }else {
             $data = array_merge($info,['codOrder' => $idOrder]);
             $responseNS = $this->orders_model->insertOrderNS('dataExtraNS01',$data);
 
             $dataEx = array_merge($infoEx,['codNS01' => $responseNS]);
-            if ($dataEx) {
+            if ($responseNS) {
                 $responseEx = $this->orders_model->insertOrderNS('convalidationsNS01',$dataEx);
+                $this->logs_model->registerLogs($this->session->user_id, 'updateOrderNS01_post', 'Add', 'Insertó datos en tablas dataExtraNS01/convalidationsNS01 Id/codNS01: '.$responseNS);
                 $msg = true;
             }
             
         }
 
         if ($msg) {
+            $this->logs_model->registerLogs($this->session->user_id, 'updateOrderNS01_post', 'Update');
             echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
             redirect('listOrders', 'refresh');
         }
@@ -531,22 +533,27 @@ class Orders extends RESTController {
 
         if ($idOrderNS) {
             $responseNS = $this->orders_model->updateOrderNS('dataExtraNS02', ['id' => $idOrderNS], $info);
-            // $responseEx = $this->orders_model->updateOrderNS('convalidationsNS01', ['codNS01' => $idOrderNS], $infoEx);
+            $this->logs_model->registerLogs($this->session->user_id, 'updateOrderNS02_post', 'Update', 'Actualizó dataExtraNS02 Id: '.$idOrderNS);
+            // $responseEx = $this->orders_model->updateOrderNS('grossTonnage', ['codNS01' => $idOrderNS], $infoEx);
+            // $responseEx = $this->orders_model->updateOrderNS('liquidTonnage', ['codNS01' => $idOrderNS], $infoEx);
             $msg = true;
         }else {
             $data = array_merge($info,['codOrder' => $idOrder]);
             $responseNS = $this->orders_model->insertOrderNS('dataExtraNS02',$data);
+            $this->logs_model->registerLogs($this->session->user_id, 'updateOrderNS02_post', 'Add', 'Insertó dataExtraNS02 Id: '.$responseNS);
             $msg = true;
 
             // $dataEx = array_merge($infoEx,['codNS01' => $responseNS]);
             // if ($dataEx) {
-            //     $responseEx = $this->orders_model->insertOrderNS('convalidationsNS01',$dataEx);
+            //     $responseEx = $this->orders_model->insertOrderNS('grossTonnage',$dataEx);
+            //     $responseEx = $this->orders_model->insertOrderNS('liquidTonnage',$dataEx);
             //     $msg = true;
             // }
             
         }
 
         if ($msg) {
+            $this->logs_model->registerLogs($this->session->user_id, 'updateOrderNS02_post', 'Update');
             echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
             redirect('listOrders', 'refresh');
         }
@@ -630,15 +637,16 @@ class Orders extends RESTController {
         if ($idOrderNS) {
             $responseNS = $this->orders_model->updateOrderNS('dataExtraNS03', ['id' => $idOrderNS], $info);
             $responseEx = $this->orders_model->updateOrderNS('testResultNS03', ['codNS03' => $idOrderNS], $infoEx);
+            $this->logs_model->registerLogs($this->session->user_id, 'updateOrderNS03_post', 'Update', 'Actualizó dataExtraNS03 Id: '.$idOrderNS);
             $msg = true;
         }else {
             $data = array_merge($info,['codOrder' => $idOrder]);
             $responseNS = $this->orders_model->insertOrderNS('dataExtraNS03',$data);
-            $msg = true;
 
             $dataEx = array_merge($infoEx,['codNS03' => $responseNS]);
-            if ($dataEx) {
+            if ($responseNS) {
                 $responseEx = $this->orders_model->insertOrderNS('testResultNS03',$dataEx);
+                $this->logs_model->registerLogs($this->session->user_id, 'updateOrderNS03_post', 'Update', 'Insertó datos en tablas dataExtraNS03/testResultNS03 Id/codNS03: '.$responseNS);
                 $msg = true;
             }
             

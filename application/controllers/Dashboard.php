@@ -6,7 +6,7 @@ class Dashboard extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("login_model","dashboard_model"));
+        $this->load->model(array("login_model","dashboard_model", "logs_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
 

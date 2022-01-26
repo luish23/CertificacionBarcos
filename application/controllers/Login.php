@@ -10,7 +10,7 @@ class Login extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("login_model","users_model","employees_model"));
+        $this->load->model(array("login_model", "users_model", "employees_model", "logs_model"));
         $this->load->helper(array('url','form'));
         $this->load->library(array('form_validation','session','encryption'));
         $this->key = $this->config->item('encryption_key');
@@ -70,7 +70,7 @@ class Login extends RESTController {
                     );
                     //set session userdata
                     $this->session->set_userdata($session_data);
-
+                    $this->logs_model->registerLogs($data, 'login_post', 'Login System', NULL);
                     redirect("dashboard");
                 }else{
                     $this->msg = array('msg' => 'Usuario No Asignado a Personal. Contacte al Admistrador');
@@ -87,6 +87,10 @@ class Login extends RESTController {
     public function logout_get()  
     {  
         //removing session  
+        if (isset($this->session->user_id)) {
+            $this->logs_model->registerLogs($this->session->user_id, 'logout_get', 'Logout System', NULL);
+        }
+        
         $this->session->unset_userdata('session_data');  
         $this->session->sess_destroy();
         $this->load->view('login/login',$this->msg);  

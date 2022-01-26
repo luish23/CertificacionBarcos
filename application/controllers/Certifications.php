@@ -10,7 +10,7 @@ class Certifications extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("certifications_model","orders_model","login_model"));
+        $this->load->model(array("certifications_model","orders_model","login_model", "logs_model"));
         $this->load->library(array('custom_log','session'));
         $this->load->helper(array("url","custom"));
         setlocale(LC_ALL, 'es_ES');
@@ -185,8 +185,9 @@ class Certifications extends RESTController {
 
             if($response)
             {
-                    echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
-                    redirect('listOrders', 'refresh');
+                $this->logs_model->registerLogs($this->session->user_id, '_createCertificate1', 'Get', 'Generó Certificado Id: '.$response);
+                echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
+                redirect('listOrders', 'refresh');
             }else{
                 echo "<script>alert('Hubo un error al Generar el Certificado.');</script>";
                 redirect('listOrders', 'refresh');
@@ -248,8 +249,9 @@ class Certifications extends RESTController {
 
             if($response)
             {
-                    echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
-                    redirect('listOrders', 'refresh');
+                $this->logs_model->registerLogs($this->session->user_id, '_createCertificate2', 'Get', 'Generó Certificado Id: '.$response);
+                echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
+                redirect('listOrders', 'refresh');
             }else{
                 echo "<script>alert('Hubo un error al Generar el Certificado.');</script>";
                 redirect('listOrders', 'refresh');
@@ -350,8 +352,9 @@ class Certifications extends RESTController {
 
             if($response)
             {
-                    echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
-                    redirect('listOrders', 'refresh');
+                $this->logs_model->registerLogs($this->session->user_id, '_createCertificate3', 'Get', 'Generó Certificado Id: '.$response);
+                echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
+                redirect('listOrders', 'refresh');
             }else{
                 echo "<script>alert('Hubo un error al Generar el Certificado.');</script>";
                 redirect('listOrders', 'refresh');

@@ -10,7 +10,7 @@ class Business extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("business_model","login_model"));
+        $this->load->model(array("business_model", "login_model", "logs_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
         if($this->login_model->logged_id())
@@ -40,6 +40,7 @@ class Business extends RESTController {
     public function listBusiness_get()
     {
         $data['data'] = $this->business_model->getBusiness();
+        $this->logs_model->registerLogs($this->session->user_id, 'listBusiness_get', 'Get', NULL);
 
         $template = array('title' => 'Empresa');
         $this->load->view("dashboard/header_dashboard",$template);

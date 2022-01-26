@@ -50,6 +50,8 @@ class Employees_model extends CI_Model {
         $this->db_employee->trans_strict(FALSE);
 
         $this->db_employee->insert('employee', $data);
+        $item_id = $this->db_employee->insert_id();
+
         $this->db_employee->where('id', $data['codUser']);
         $this->db_employee->update('users', ['assigned' => 1]);
 
@@ -61,7 +63,7 @@ class Employees_model extends CI_Model {
 
         $this->db_employee->trans_commit();
 
-        return true;
+        return $item_id;
     }
 
     public function updateEmployee($data, $id)
