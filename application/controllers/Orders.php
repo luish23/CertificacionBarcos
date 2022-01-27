@@ -488,7 +488,6 @@ class Orders extends RESTController {
         }
 
         if ($msg) {
-            $this->logs_model->registerLogs($this->session->user_id, 'updateOrderNS01_post', 'Update');
             echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
             redirect('listOrders', 'refresh');
         }
