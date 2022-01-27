@@ -40,7 +40,6 @@ class Business extends RESTController {
     public function listBusiness_get()
     {
         $data['data'] = $this->business_model->getBusiness();
-        $this->logs_model->registerLogs($this->session->user_id, 'listBusiness_get', 'Get', NULL);
 
         $template = array('title' => 'Empresa');
         $this->load->view("dashboard/header_dashboard",$template);
