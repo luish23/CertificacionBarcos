@@ -157,7 +157,7 @@ class Orders extends RESTController {
 
         if($response = $this->orders_model->insertOrder($data))
         {
-            $this->logs_model->registerLogs($this->session->user_id, 'registerOrder_post', 'Add', 'Insertó Id: '.$response);
+            $this->logs_model->registerLogs($this->session->user_id, 'registerOrder_post', 'Add', 'Insertó Order Id: '.$response);
             echo "<script>alert('".$this->lang->line('alert_registerOrder')."');</script>";
             redirect('formOrder', 'refresh');
         }
@@ -231,7 +231,7 @@ class Orders extends RESTController {
                     );
         if($this->orders_model->updateOrder($data, $idOrder))
         {
-            $this->logs_model->registerLogs($this->session->user_id, 'updateOrder_post', 'Update', 'Actualizó Id: '.$idOrder);
+            $this->logs_model->registerLogs($this->session->user_id, 'updateOrder_post', 'Update', 'Actualizó Order Id: '.$idOrder);
             echo "<script>alert('".$this->lang->line('alert_updateOrder')."');</script>";
             redirect('listOrders', 'refresh');
         }else{
@@ -246,7 +246,7 @@ class Orders extends RESTController {
         $response = $this->orders_model->deleteOrder($id);
 
         if ($response) {
-            $this->logs_model->registerLogs($this->session->user_id, 'deleteOrder_post', 'Delete', 'Eliminó Id: '.$id);
+            $this->logs_model->registerLogs($this->session->user_id, 'deleteOrder_post', 'Delete', 'Eliminó Order Id: '.$id);
             echo "<script>alert('".$this->lang->line('alert_deleteOrder')."');</script>";
             redirect('listOrders', 'refresh');
         }
@@ -311,7 +311,6 @@ class Orders extends RESTController {
     public function checkOrders_get()
     {
         $data = $this->orders_model->getOrdersProcess();
-        $this->logs_model->registerLogs($this->session->user_id, 'checkOrders_get', 'Get');
         
         $template = array('title' => $this->lang->line('title_checkOrders'));
         $this->load->view("dashboard/header_dashboard",$template);
@@ -327,7 +326,7 @@ class Orders extends RESTController {
         $response = $this->orders_model->updateOrdersProcess($id);
 
         if ($response) {
-            $this->logs_model->registerLogs($this->session->user_id, 'processOrder_post', 'Update', 'Actualizo Id: '.$id);
+            $this->logs_model->registerLogs($this->session->user_id, 'processOrder_post', 'Update', 'Procesó Order Id: '.$id);
             echo "<script>alert('".$this->lang->line('alert_process_orders')."');</script>";
             redirect('listOrders', 'refresh');
         }

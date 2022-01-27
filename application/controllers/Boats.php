@@ -45,7 +45,7 @@ class Boats extends RESTController {
         }else{
             $data = $this->boats_model->getAllBoats();  
         }
-        $this->logs_model->registerLogs($this->session->user_id, 'listBoat_get', 'Get', NULL);
+
         $template = array('title' => $this->lang->line('list_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");

@@ -80,7 +80,7 @@ class Employee extends RESTController {
         $response = $this->employees_model->insertEmployee($data);
 
         if ($response) {
-            $this->logs_model->registerLogs($this->session->user_id, 'registerEmployee_post', 'Add', 'Insertó Id: '.$response);
+            $this->logs_model->registerLogs($this->session->user_id, 'registerEmployee_post', 'Add', 'Insertó Employee Id: '.$response);
             echo "<script>alert('".$this->lang->line('alert_add_employee')."');</script>";
             redirect('formEmployee', 'refresh');
         }
@@ -104,10 +104,10 @@ class Employee extends RESTController {
             "status" => $this->input->post('status')
         );
 
-        $response = $this->employees_model->updateEmployee_post($data, $id);
+        $response = $this->employees_model->updateEmployee($data, $id);
 
         if ($response) {
-            $this->logs_model->registerLogs($this->session->user_id, 'updateEmployee_post', 'Update', 'Actualizó Id: '.$id);
+            $this->logs_model->registerLogs($this->session->user_id, 'updateEmployee_post', 'Update', 'Actualizó Employee Id: '.$id);
             echo "<script>alert('".$this->lang->line('alert_update_employee')."');</script>";
             redirect('listEmployee', 'refresh');
         }
@@ -126,7 +126,7 @@ class Employee extends RESTController {
         $response = $this->employees_model->deleteEmployee($id);
 
         if ($response) {
-            $this->logs_model->registerLogs($this->session->user_id, 'deleteEmployee_post', 'Delete', 'Borró Id: '.$id);
+            $this->logs_model->registerLogs($this->session->user_id, 'deleteEmployee_post', 'Delete', 'Borró Employee Id: '.$id);
             echo "<script>alert('".$this->lang->line('alert_delete_employee')."');</script>";
             redirect('listEmployee', 'refresh');
         }

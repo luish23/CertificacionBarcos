@@ -1,5 +1,3 @@
-
-
 <form id="updateEmployeeForm" action="updateEmployee" method="POST">
 <div class="card-body">
     <div class="form-group">

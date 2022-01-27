@@ -10,7 +10,7 @@ class Users extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("users_model"," login_model", "logs_model"));
+        $this->load->model(array("users_model", "login_model", "logs_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session','encryption'));
         
@@ -81,7 +81,7 @@ class Users extends RESTController {
 
             $response = $this->users_model->insertUser($data);
             if ($response) {
-                $this->logs_model->registerLogs($this->session->user_id, 'registerUsers_post', 'Add', 'Insertó Id: '.$response);
+                $this->logs_model->registerLogs($this->session->user_id, 'registerUsers_post', 'Add', 'Insertó User Id: '.$response);
                 echo "<script>alert('Usuario registrado satisfactoriamente!!');</script>";
                 redirect('formUsers', 'refresh');
             }
@@ -113,7 +113,7 @@ class Users extends RESTController {
 
                 $response = $this->users_model->updatetUser($data, $id);
                 if ($response) {
-                    $this->logs_model->registerLogs($this->session->user_id, 'updateUsers_post', 'Update', 'Actualizó Id: '.$id);
+                    $this->logs_model->registerLogs($this->session->user_id, 'updateUsers_post', 'Update', 'Actualizó User Id: '.$id);
                     echo "<script>alert('Usuario Actualizado satisfactoriamente!!');</script>";
                     redirect('listUsers', 'refresh');
                 }
@@ -136,7 +136,7 @@ class Users extends RESTController {
         $response = $this->users_model->deleteUser($id);
 
         if ($response) {
-            $this->logs_model->registerLogs($this->session->user_id, 'deleteUser_post', 'Delete', 'Eliminó Id: '.$id);
+            $this->logs_model->registerLogs($this->session->user_id, 'deleteUser_post', 'Delete', 'Eliminó User Id: '.$id);
             echo "<script>alert('".$this->lang->line('alert_deleteUser')."');</script>";
             redirect('listUsers', 'refresh');
         }
