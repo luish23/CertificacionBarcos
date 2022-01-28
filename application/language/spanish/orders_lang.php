@@ -33,6 +33,7 @@ $lang['select_pdf']                            = 'Seleccione documento PDF';
  */
 
 $lang['preview_doc']                            = 'Visualizar Documento';
+$lang['answer_preview_certificated']            = 'Previsualizar Certificado';
 
 /**
  * modalValidOrder.php
