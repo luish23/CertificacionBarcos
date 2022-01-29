@@ -452,9 +452,17 @@
                 <form id="ordersFormUpdateNS03" action="updateOrderNS03" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="form-group row col-12">
-                        <div class="col-6">
+                        <div class="col-4">
                             <label for="exampleFormControlInput1">Ejecutor del Ensayo</label>
-                            <input type="text" class="form-control" id="executor" name="executor" value="<?php if (isset($dataNS03['executor'])) echo $dataNS03['executor'] ?>" placeholder="Ejecutor del Ensayo">
+                            <input type="text" class="form-control" id="executor" name="executor" value="<?php if (isset($dataNS04['executor'])) echo $dataNS03['executor'] ?>" placeholder="Ejecutor del Ensayo">
+                        </div>
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Marca</label>
+                            <input type="text" class="form-control" id="mark" name="mark" value="<?php if (isset($dataNS03['mark'])) echo $dataNS03['mark'] ?>" placeholder="Marca">
+                        </div>
+                        <div class="col-4">
+                            <label for="exampleFormControlInput1">Modelo</label>
+                            <input type="text" class="form-control" id="model" name="model" value="<?php if (isset($dataNS03['model'])) echo $dataNS03['model'] ?>" placeholder="Modelo">
                         </div>
                     </div>
                     <div class="form-group row col-12">

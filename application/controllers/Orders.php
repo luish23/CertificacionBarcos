@@ -573,6 +573,8 @@ class Orders extends RESTController {
         // si orden existe hacer update sino insert
         $info = array(
             'executor' => $executor = ($this->input->post('executor')) ? $this->input->post('executor') : NULL,
+            'mark' => $mark = ($this->input->post('mark')) ? $this->input->post('mark') : NULL,
+            'model' => $model = ($this->input->post('model')) ? $this->input->post('model') : NULL,
             'lo' => $lo = ($this->input->post('lo')) ? $this->input->post('lo') : NULL,
             'boca_moldada' => $boca_moldada = ($this->input->post('boca_moldada')) ? $this->input->post('boca_moldada') : NULL,
             'pontal_moldado' => $pontal_moldado = ($this->input->post('pontal_moldado')) ? $this->input->post('pontal_moldado') : NULL,
