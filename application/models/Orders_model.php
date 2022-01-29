@@ -245,9 +245,10 @@ class Orders_model extends CI_Model {
 
     
 
-    public function updateOrdersProcess($id)
+    public function updateOrdersProcess($id,$condition,$reasonRejection)
     {
-        $this->db_orders->set('condition', 'VALIDADO');
+        $this->db_orders->set('condition', $condition);
+        $this->db_orders->set('reasonRejection', $reasonRejection);
         $this->db_orders->where('id', $id);
         $this->db_orders->update('orders');
 

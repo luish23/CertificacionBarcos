@@ -323,7 +323,9 @@ class Orders extends RESTController {
     public function processOrder_post()
     {
         $id = $this->input->post('idOrder');
-        $response = $this->orders_model->updateOrdersProcess($id);
+        $condition = $this->post('condition');
+        $reasonRejection = $this->post('reasonRejection');
+        $response = $this->orders_model->updateOrdersProcess($id,$condition,$reasonRejection);
 
         if ($response) {
             $this->logs_model->registerLogs($this->session->user_id, 'processOrder_post', 'Update', 'Procesó Order Id: '.$id);

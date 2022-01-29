@@ -11,8 +11,8 @@
         <div class="form-group err-form">
             <label for="exampleInputEmail1"><?php echo $this->lang->line('questions_order'); ?></label>
             <select class="form-control" id="condition" name="condition">
-                <option value="1"><?php echo $this->lang->line('yes'); ?></option>
-                <option value="0"><?php echo $this->lang->line('no'); ?></option>  
+                <option value="VALIDADO"><?php echo $this->lang->line('yes'); ?></option>
+                <option value="CANCELADO"><?php echo $this->lang->line('no'); ?></option>  
             </select>
             </div>
             <msg></msg>

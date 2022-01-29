@@ -306,72 +306,230 @@ class Certifications extends RESTController {
         if ($codTypeCertificate == 2) {
             /** DATA EXTRA convalidationsNS01 / dataExtraNS01 */
             $data['dataNS'] = $this->orders_model->getDataNS('dataExtraNS02', ['codOrder' => $id]);
-// print_r($data); die;
+
             if (!empty($data))
             {
-                // foreach ($data as $key => $value) 
-                // {
-                    $dateInspect = explode('-',$data['data']['inspect_date_end']);
-                    $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days"));
-                    $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days")));
-                    $file_name = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'].'-'.$data['data']['codTypeCertification'].'_'.$data['data']['number_imo'].'.pdf';
-                    $pdf = new FPDF();
-                    $pdf->AddPage('P','A4',0);
-                    $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
-                    $pdf->SetFont('Arial','B',12);
-                    $pdf->SetXY(170,23);
-                    $pdf->Cell(28,10,$data['data']['office'].' '.str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'],0,1,'C');
-                    $pdf->SetXY(49,109);
-                    $pdf->Cell(146,8,$data['data']['name'],0,1,'C');
-                    $pdf->SetXY(10,138);
-                    $pdf->Cell(61,8,$data['data']['call_sign'],0,1,'C');
-                    $pdf->SetXY(75,138);
-                    $pdf->Cell(61,8,$data['dataNS']['port_inscription'],0,1,'C');
-                    $pdf->SetXY(140,138);
-                    $pdf->Cell(61,8,$data['dataNS']['batimento'],0,1,'C');
-                    $pdf->SetXY(10,167);
-                    $pdf->Cell(61,8,$data['dataNS']['ruler_length'],0,1,'C');
-                    $pdf->SetXY(75,167);
-                    $pdf->Cell(61,8,$data['dataNS']['boca'],0,1,'C');
-                    $pdf->SetXY(140,167);
-                    $pdf->Cell(61,8,$data['dataNS']['molded_knit'],0,1,'C');
-                    $pdf->SetXY(108,192);
-                    $pdf->Cell(41,8,$data['data']['gross_tonnage'],0,1,'C');
-                    $pdf->SetXY(108,210);
-                    $pdf->Cell(41,8,$data['data']['liquid_tonnage'],0,1,'C');
-                    $pdf->SetXY(33,254);
-                    $pdf->Cell(76,8,$data['dataNS']['emitido'],0,1,'C');
-                    $pdf->SetXY(119,254);
-                    $pdf->Cell(12,8,$dateInspect[2],0,1,'C');
-                    $pdf->SetXY(138,254);
-                    $pdf->Cell(35,8,$this->_formatDate($dateInspect[1]),0,1,'C');
-                    $pdf->SetXY(180,254);
-                    $pdf->Cell(20,8,$dateInspect[0],0,1,'C');
-                    /**
-                     * PAGINA 2
-                     */
-                    $pdf->AddPage('P','A4',0);
-                    $pdf->Image(FCPATH.$certificate['path_jpg_certification_back'], 0, 0, 210, 300);
-                    $pdf->SetXY(173,198);
-                    $pdf->Cell(26,8,$data['dataNS']['number_passengers_berths'],0,1,'C');
-                    $pdf->SetXY(173,215);
-                    $pdf->Cell(26,8,$data['dataNS']['number_total_passengers'],0,1,'C');
-                    $pdf->SetXY(108,235);
-                    $pdf->Cell(90,8,$data['dataNS']['molded_project'],0,1,'C');
+                $dateInspect = explode('-',$data['data']['inspect_date_end']);
+                $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days"));
+                $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days")));
+                $file_name = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'].'-'.$data['data']['codTypeCertification'].'_'.$data['data']['number_imo'].'.pdf';
+                $pdf = new FPDF();
+                $pdf->AddPage('P','A4',0);
+                $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
+                $pdf->SetFont('Arial','B',12);
+                $pdf->SetXY(170,23);
+                $pdf->Cell(28,10,$data['data']['office'].' '.str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'],0,1,'C');
+                $pdf->SetXY(49,109);
+                $pdf->Cell(146,8,$data['data']['name'],0,1,'C');
+                $pdf->SetXY(10,138);
+                $pdf->Cell(61,8,$data['data']['call_sign'],0,1,'C');
+                $pdf->SetXY(75,138);
+                $pdf->Cell(61,8,$data['dataNS']['port_inscription'],0,1,'C');
+                $pdf->SetXY(140,138);
+                $pdf->Cell(61,8,$data['dataNS']['batimento'],0,1,'C');
+                $pdf->SetXY(10,167);
+                $pdf->Cell(61,8,$data['dataNS']['ruler_length'],0,1,'C');
+                $pdf->SetXY(75,167);
+                $pdf->Cell(61,8,$data['dataNS']['boca'],0,1,'C');
+                $pdf->SetXY(140,167);
+                $pdf->Cell(61,8,$data['dataNS']['molded_knit'],0,1,'C');
+                $pdf->SetXY(108,192);
+                $pdf->Cell(41,8,$data['data']['gross_tonnage'],0,1,'C');
+                $pdf->SetXY(108,210);
+                $pdf->Cell(41,8,$data['data']['liquid_tonnage'],0,1,'C');
+                $pdf->SetXY(33,254);
+                $pdf->Cell(76,8,$data['dataNS']['emitido'],0,1,'C');
+                $pdf->SetXY(119,254);
+                $pdf->Cell(12,8,$dateInspect[2],0,1,'C');
+                $pdf->SetXY(138,254);
+                $pdf->Cell(35,8,$this->_formatDate($dateInspect[1]),0,1,'C');
+                $pdf->SetXY(180,254);
+                $pdf->Cell(20,8,$dateInspect[0],0,1,'C');
+                /**
+                 * PAGINA 2
+                 */
+                $pdf->AddPage('P','A4',0);
+                $pdf->Image(FCPATH.$certificate['path_jpg_certification_back'], 0, 0, 210, 300);
+                $pdf->SetXY(173,198);
+                $pdf->Cell(26,8,$data['dataNS']['number_passengers_berths'],0,1,'C');
+                $pdf->SetXY(173,215);
+                $pdf->Cell(26,8,$data['dataNS']['number_total_passengers'],0,1,'C');
+                $pdf->SetXY(108,235);
+                $pdf->Cell(90,8,$data['dataNS']['molded_project'],0,1,'C');
 
-                    $pdf->SetXY(10,254);
-                    $pdf->Cell(90,8,$data['dataNS']['place_date_original'],0,1,'C');
-                    $pdf->SetXY(108,254);
-                    $pdf->Cell(90,8,$data['dataNS']['place_date_last'],0,1,'C');
-                    
-                    $pdf->SetFont('Arial','',10);
-                    $pdf->SetXY(10,198);
-                    $pdf->MultiCell(94,8,utf8_decode($data['dataNS']['place_exclude']),0,'L',false);
-                    $pdf->SetXY(46,267);
-                    $pdf->MultiCell(155,4,utf8_decode($data['dataNS']['observations']),0,'L',false);
+                $pdf->SetXY(10,254);
+                $pdf->Cell(90,8,$data['dataNS']['place_date_original'],0,1,'C');
+                $pdf->SetXY(108,254);
+                $pdf->Cell(90,8,$data['dataNS']['place_date_last'],0,1,'C');
+                
+                $pdf->SetFont('Arial','',10);
+                $pdf->SetXY(10,198);
+                $pdf->MultiCell(94,8,utf8_decode($data['dataNS']['place_exclude']),0,'L',false);
+                $pdf->SetXY(46,267);
+                $pdf->MultiCell(155,4,utf8_decode($data['dataNS']['observations']),0,'L',false);
 
-                    $pdf->Output($config['upload_path'].$file_name , 'I' ); // I: envia el fichero a navegador F: guarda el fichero en un fichero local de nombre name
-                // }
+                $pdf->Output($config['upload_path'].$file_name , 'I' ); // I: envia el fichero a navegador F: guarda el fichero en un fichero local de nombre name
+
+            }
+        }
+
+        if ($codTypeCertificate == 3) {
+            /** DATA EXTRA convalidationsNS01 / dataExtraNS01 */
+            $data['dataNS'] = $this->orders_model->getDataNS('dataExtraNS03', ['codOrder' => $id]);
+            if ($data['dataNS']) {
+                $data['dataNSEx'] = $this->orders_model->getDataNS('testResultNS03', ['codNS03' => $data['dataNS']['id']]);
+            }
+            
+            if (!empty($data))
+            {
+                $file_name = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'].'-'.$data['data']['codTypeCertification'].'_'.$data['data']['number_imo'].'.pdf';
+                $pdf = new FPDF();
+                $pdf->AddPage('P','A4',0);
+                $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
+                $pdf->SetFont('Arial','B',12);
+                $pdf->SetXY(168,23);
+                $pdf->Cell(29,10,$data['data']['office'].' '.str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'],0,1,'C');
+                $pdf->SetXY(55,53);
+                $pdf->Cell(146,8,$data['data']['name'],0,1,'C');
+                $pdf->SetXY(50,60);
+                $pdf->Cell(46,8,$data['data']['year_build'],0,1,'C');
+                $pdf->SetXY(120,60);
+                $pdf->Cell(82,8,$data['data']['shipyard'],0,1,'C');
+                $pdf->SetXY(28,67);
+                $pdf->Cell(72,8,$data['data']['name_ship'],0,1,'C');
+                $pdf->SetXY(128,67);
+                $pdf->Cell(74,8,$data['data']['name_ship'],0,1,'C');
+                $pdf->SetXY(48,74);
+                $pdf->Cell(153,8,$data['dataNS']['executor'],0,1,'C');
+                $pdf->SetXY(10,102);
+                $pdf->Cell(60,8,$data['dataNS']['lo'],0,1,'C');
+                $pdf->SetXY(75,102);
+                $pdf->Cell(60,8,$data['dataNS']['boca_moldada'],0,1,'C');
+                $pdf->SetXY(140,102);
+                $pdf->Cell(60,8,$data['dataNS']['pontal_moldado'],0,1,'C');
+                $pdf->SetXY(26,125);
+                $pdf->Cell(77,8,$data['dataNS']['mark'],0,1,'C');
+                $pdf->SetXY(123,125);
+                $pdf->Cell(77,8,$data['dataNS']['model'],0,1,'C');
+                $pdf->SetXY(34,135);
+                $pdf->Cell(68,8,$data['dataNS']['number_serie'],0,1,'C');
+                $pdf->SetXY(132,135);
+                $pdf->Cell(68,8,$data['dataNS']['amount'],0,1,'C');
+                $pdf->SetXY(47,144);
+                $pdf->Cell(55,8,$data['dataNS']['powerHP'],0,1,'C');
+                $pdf->SetXY(138,144);
+                $pdf->Cell(63,8,$data['dataNS']['rotation'],0,1,'C');
+                $pdf->SetXY(30,154);
+                $pdf->Cell(170,8,$data['dataNS']['reduce'],0,1,'C');
+                $pdf->SetXY(21,174);
+                $pdf->Cell(82,8,$data['dataNS']['type'],0,1,'C');
+                $pdf->SetXY(128,174);
+                $pdf->Cell(72,8,$data['dataNS']['number_pas'],0,1,'C');
+                $pdf->SetXY(32,183);
+                $pdf->Cell(71,8,$data['dataNS']['diameter'],0,1,'C');
+                $pdf->SetXY(123,183);
+                $pdf->Cell(78,8,$data['dataNS']['passo'],0,1,'C');
+                $pdf->SetXY(96,196);
+                $pdf->Cell(62,8,$data['dataNS']['static_drive'],0,1,'C');
+                $pdf->SetXY(22,209);
+                $pdf->Cell(80,8,$data['dataNS']['place'],0,1,'C');
+                $pdf->SetXY(117,209);
+                $pdf->Cell(34,8,date("d-m-Y", strtotime($data['dataNS']['fecha'])),0,1,'C');
+                $pdf->SetXY(167,209);
+                $pdf->Cell(34,8,date("H:i", strtotime($data['dataNS']['times'])),0,1,'C');
+                $pdf->SetXY(34,219);
+                $pdf->Cell(27,8,$data['dataNS']['wind'],0,1,'C');
+                $pdf->SetXY(101,219);
+                $pdf->Cell(30,8,$data['dataNS']['actual'],0,1,'C');
+                $pdf->SetXY(172,219);
+                $pdf->Cell(29,8,$data['dataNS']['depth'],0,1,'C');
+                $pdf->SetXY(28,228);
+                $pdf->Cell(27,8,$data['dataNS']['hav'],0,1,'C');
+                $pdf->SetXY(76,228);
+                $pdf->Cell(27,8,$data['dataNS']['har'],0,1,'C');
+                $pdf->SetXY(127,228);
+                $pdf->Cell(26,8,$data['dataNS']['trims'],0,1,'C');
+                $pdf->SetXY(174,228);
+                $pdf->Cell(27,8,$data['dataNS']['lcabo'],0,1,'C');
+               
+                if ($data['dataNS']['attachments1']) {
+                    $pdf->SetXY(34,254);
+                    $pdf->Cell(8,8,'X',0,1,'C');
+                }
+                
+                if ($data['dataNS']['attachments2']) {
+                    $pdf->SetXY(34,262);
+                    $pdf->Cell(8,7,'X',0,1,'C');
+                }
+
+                /**
+                 * PAGINA 2
+                 */
+
+                $pdf->AddPage('P','A4',0);
+                $pdf->Image(FCPATH.$certificate['path_jpg_certification_back'], 0, 0, 210, 300);
+                $pdf->SetXY(40,70);
+                $pdf->Cell(10,7,$data['dataNSEx']['bb70'],0,0,'C');
+                $pdf->SetXY(52,70);
+                $pdf->Cell(10,7,$data['dataNSEx']['lc70'],0,0,'C');
+                $pdf->SetXY(65,70);
+                $pdf->Cell(10,7,$data['dataNSEx']['be70'],0,0,'C');
+                $pdf->SetXY(78,70);
+                $pdf->Cell(28,7,$data['dataNSEx']['max70'],0,0,'C');
+                $pdf->SetXY(110,70);
+                $pdf->Cell(28,7,$data['dataNSEx']['min70'],0,0,'C');
+                $pdf->SetXY(141,70);
+                $pdf->Cell(28,7,$data['dataNSEx']['static70'],0,0,'C');
+                $pdf->SetXY(172,70);
+                $pdf->Cell(28,7,$data['dataNSEx']['opc70'],0,0,'C');
+
+                $pdf->SetXY(40,79);
+                $pdf->Cell(10,7,$data['dataNSEx']['bb80'],0,0,'C');
+                $pdf->SetXY(52,79);
+                $pdf->Cell(10,7,$data['dataNSEx']['lc80'],0,0,'C');
+                $pdf->SetXY(65,79);
+                $pdf->Cell(10,7,$data['dataNSEx']['be80'],0,0,'C');
+                $pdf->SetXY(78,79);
+                $pdf->Cell(28,7,$data['dataNSEx']['max80'],0,0,'C');
+                $pdf->SetXY(110,79);
+                $pdf->Cell(28,7,$data['dataNSEx']['min80'],0,0,'C');
+                $pdf->SetXY(141,79);
+                $pdf->Cell(28,7,$data['dataNSEx']['static80'],0,0,'C');
+                $pdf->SetXY(172,79);
+                $pdf->Cell(28,7,$data['dataNSEx']['opc80'],0,0,'C');
+
+                $pdf->SetXY(40,88);
+                $pdf->Cell(10,7,$data['dataNSEx']['bb90'],0,0,'C');
+                $pdf->SetXY(52,88);
+                $pdf->Cell(10,7,$data['dataNSEx']['lc90'],0,0,'C');
+                $pdf->SetXY(65,88);
+                $pdf->Cell(10,7,$data['dataNSEx']['be90'],0,0,'C');
+                $pdf->SetXY(78,88);
+                $pdf->Cell(28,7,$data['dataNSEx']['max90'],0,0,'C');
+                $pdf->SetXY(110,88);
+                $pdf->Cell(28,7,$data['dataNSEx']['min90'],0,0,'C');
+                $pdf->SetXY(141,88);
+                $pdf->Cell(28,7,$data['dataNSEx']['static90'],0,0,'C');
+                $pdf->SetXY(172,88);
+                $pdf->Cell(28,7,$data['dataNSEx']['opc90'],0,0,'C');
+
+                $pdf->SetXY(40,97);
+                $pdf->Cell(10,7,$data['dataNSEx']['bb100'],0,0,'C');
+                $pdf->SetXY(52,97);
+                $pdf->Cell(10,7,$data['dataNSEx']['lc100'],0,0,'C');
+                $pdf->SetXY(65,97);
+                $pdf->Cell(10,7,$data['dataNSEx']['be100'],0,0,'C');
+                $pdf->SetXY(78,97);
+                $pdf->Cell(28,7,$data['dataNSEx']['max100'],0,0,'C');
+                $pdf->SetXY(110,97);
+                $pdf->Cell(28,7,$data['dataNSEx']['min100'],0,0,'C');
+                $pdf->SetXY(141,97);
+                $pdf->Cell(28,7,$data['dataNSEx']['static100'],0,0,'C');
+                $pdf->SetXY(172,97);
+                $pdf->Cell(28,7,$data['dataNSEx']['opc100'],0,0,'C');
+
+
+                $pdf->Output($config['upload_path'].$file_name , 'I' ); // I: envia el fichero a navegador F: guarda el fichero en un fichero local de nombre name
             }
         }
 
@@ -407,6 +565,10 @@ class Certifications extends RESTController {
                 break;
             
             case 3:
+                $data['dataNS'] = $this->orders_model->getDataNS('dataExtraNS03', ['codOrder' => $id]);
+                if ($data['dataNS']) {
+                    $data['dataNSEx'] = $this->orders_model->getDataNS('testResultNS03', ['codNS03' => $data['dataNS']['id']]);
+                }
                 $this->_createCertificate3($data,$config,$certificate,$downloadType);
                 break;
 
@@ -784,86 +946,162 @@ class Certifications extends RESTController {
     {
         if (!empty($data))
         {
-            foreach ($data as $key => $value) 
-            {
-                $file_name = $value['office'].str_pad($value['codOrder'], 3, '0', STR_PAD_LEFT).$value['anyo'].'-'.$value['codTypeCertification'].'_'.$value['number_imo'].'.pdf';
-                $pdf = new FPDF();
-                $pdf->AddPage('P','A4',0);
-                $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
-                $pdf->SetFont('Arial','B',12);
-                $pdf->SetXY(168,23);
-                $pdf->Cell(29,10,$value['office'].str_pad($value['codOrder'], 3, '0', STR_PAD_LEFT).$value['anyo'],0,1,'C');
-                $pdf->SetXY(55,53);
-                $pdf->Cell(146,8,$value['name'],0,1,'C');
-                $pdf->SetXY(50,60);
-                $pdf->Cell(46,8,$value['year_build'],0,1,'C');
-                $pdf->SetXY(120,60);
-                $pdf->Cell(82,8,$value['shipyard'],0,1,'C');
-                $pdf->SetXY(28,67);
-                $pdf->Cell(72,8,$value['name_ship'],0,1,'C');
-                $pdf->SetXY(128,67);
-                $pdf->Cell(74,8,'INTERESSADO',0,1,'C');
-                $pdf->SetXY(48,74);
-                $pdf->Cell(153,8,'EXECUTOR DO ENSAIO',0,1,'C');
-                $pdf->SetXY(10,102);
-                $pdf->Cell(60,8,'LO(m)',0,1,'C');
-                $pdf->SetXY(75,102);
-                $pdf->Cell(60,8,'BOCA MOLDADA (m)',0,1,'C');
-                $pdf->SetXY(140,102);
-                $pdf->Cell(60,8,'PONTAL MOLDADO (m)',0,1,'C');
-                $pdf->SetXY(26,125);
-                $pdf->Cell(77,8,'MARCA',0,1,'C');
-                $pdf->SetXY(123,125);
-                $pdf->Cell(77,8,'MODELO',0,1,'C');
-                $pdf->SetXY(34,135);
-                $pdf->Cell(68,8,'N DE SERIE',0,1,'C');
-                $pdf->SetXY(132,135);
-                $pdf->Cell(68,8,'QUANTIDADE',0,1,'C');
-                $pdf->SetXY(47,144);
-                $pdf->Cell(55,8,'POTENCIA HP',0,1,'C');
-                $pdf->SetXY(138,144);
-                $pdf->Cell(63,8,'ROTACION',0,1,'C');
-                $pdf->SetXY(30,154);
-                $pdf->Cell(170,8,'REDUCCION',0,1,'C');
-                $pdf->SetXY(21,174);
-                $pdf->Cell(82,8,'TIPO',0,1,'C');
-                $pdf->SetXY(128,174);
-                $pdf->Cell(72,8,'N PAS',0,1,'C');
-                $pdf->SetXY(32,183);
-                $pdf->Cell(71,8,'DIAMETRO',0,1,'C');
-                $pdf->SetXY(123,183);
-                $pdf->Cell(78,8,'PASSO',0,1,'C');
-                $pdf->SetXY(96,196);
-                $pdf->Cell(62,8,'ESTATICA',0,1,'C');
-                $pdf->SetXY(22,209);
-                $pdf->Cell(80,8,'LOCAL',0,1,'C');
-                $pdf->SetXY(117,209);
-                $pdf->Cell(34,8,'DATA',0,1,'C');
-                $pdf->SetXY(167,209);
-                $pdf->Cell(34,8,'HORA',0,1,'C');
-                $pdf->SetXY(34,219);
-                $pdf->Cell(27,8,'VENTO',0,1,'C');
-                $pdf->SetXY(101,219);
-                $pdf->Cell(30,8,'CORRENTEZA',0,1,'C');
-                $pdf->SetXY(172,219);
-                $pdf->Cell(29,8,'PROFUNDID',0,1,'C');
-                $pdf->SetXY(28,228);
-                $pdf->Cell(27,8,'HAV',0,1,'C');
-                $pdf->SetXY(76,228);
-                $pdf->Cell(27,8,'HAR',0,1,'C');
-                $pdf->SetXY(127,228);
-                $pdf->Cell(26,8,'TRIM',0,1,'C');
-                $pdf->SetXY(174,228);
-                $pdf->Cell(27,8,'LCABO',0,1,'C');
-                $pdf->Output($config['upload_path'].$file_name , $downloadType ); // I: envia el fichero a navegador F: guarda el fichero en un fichero local de nombre name
+            $file_name = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'].'-'.$data['data']['codTypeCertification'].'_'.$data['data']['number_imo'].'.pdf';
+            $pdf = new FPDF();
+            $pdf->AddPage('P','A4',0);
+            $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
+            $pdf->SetFont('Arial','B',12);
+            $pdf->SetXY(168,23);
+            $pdf->Cell(29,10,$data['data']['office'].' '.str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'],0,1,'C');
+            $pdf->SetXY(55,53);
+            $pdf->Cell(146,8,$data['data']['name'],0,1,'C');
+            $pdf->SetXY(50,60);
+            $pdf->Cell(46,8,$data['data']['year_build'],0,1,'C');
+            $pdf->SetXY(120,60);
+            $pdf->Cell(82,8,$data['data']['shipyard'],0,1,'C');
+            $pdf->SetXY(28,67);
+            $pdf->Cell(72,8,$data['data']['name_ship'],0,1,'C');
+            $pdf->SetXY(128,67);
+            $pdf->Cell(74,8,$data['data']['name_ship'],0,1,'C');
+            $pdf->SetXY(48,74);
+            $pdf->Cell(153,8,$data['dataNS']['executor'],0,1,'C');
+            $pdf->SetXY(10,102);
+            $pdf->Cell(60,8,$data['dataNS']['lo'],0,1,'C');
+            $pdf->SetXY(75,102);
+            $pdf->Cell(60,8,$data['dataNS']['boca_moldada'],0,1,'C');
+            $pdf->SetXY(140,102);
+            $pdf->Cell(60,8,$data['dataNS']['pontal_moldado'],0,1,'C');
+            $pdf->SetXY(26,125);
+            $pdf->Cell(77,8,$data['dataNS']['mark'],0,1,'C');
+            $pdf->SetXY(123,125);
+            $pdf->Cell(77,8,$data['dataNS']['model'],0,1,'C');
+            $pdf->SetXY(34,135);
+            $pdf->Cell(68,8,$data['dataNS']['number_serie'],0,1,'C');
+            $pdf->SetXY(132,135);
+            $pdf->Cell(68,8,$data['dataNS']['amount'],0,1,'C');
+            $pdf->SetXY(47,144);
+            $pdf->Cell(55,8,$data['dataNS']['powerHP'],0,1,'C');
+            $pdf->SetXY(138,144);
+            $pdf->Cell(63,8,$data['dataNS']['rotation'],0,1,'C');
+            $pdf->SetXY(30,154);
+            $pdf->Cell(170,8,$data['dataNS']['reduce'],0,1,'C');
+            $pdf->SetXY(21,174);
+            $pdf->Cell(82,8,$data['dataNS']['type'],0,1,'C');
+            $pdf->SetXY(128,174);
+            $pdf->Cell(72,8,$data['dataNS']['number_pas'],0,1,'C');
+            $pdf->SetXY(32,183);
+            $pdf->Cell(71,8,$data['dataNS']['diameter'],0,1,'C');
+            $pdf->SetXY(123,183);
+            $pdf->Cell(78,8,$data['dataNS']['passo'],0,1,'C');
+            $pdf->SetXY(96,196);
+            $pdf->Cell(62,8,$data['dataNS']['static_drive'],0,1,'C');
+            $pdf->SetXY(22,209);
+            $pdf->Cell(80,8,$data['dataNS']['place'],0,1,'C');
+            $pdf->SetXY(117,209);
+            $pdf->Cell(34,8,date("d-m-Y", strtotime($data['dataNS']['fecha'])),0,1,'C');
+            $pdf->SetXY(167,209);
+            $pdf->Cell(34,8,date("H:i", strtotime($data['dataNS']['times'])),0,1,'C');
+            $pdf->SetXY(34,219);
+            $pdf->Cell(27,8,$data['dataNS']['wind'],0,1,'C');
+            $pdf->SetXY(101,219);
+            $pdf->Cell(30,8,$data['dataNS']['actual'],0,1,'C');
+            $pdf->SetXY(172,219);
+            $pdf->Cell(29,8,$data['dataNS']['depth'],0,1,'C');
+            $pdf->SetXY(28,228);
+            $pdf->Cell(27,8,$data['dataNS']['hav'],0,1,'C');
+            $pdf->SetXY(76,228);
+            $pdf->Cell(27,8,$data['dataNS']['har'],0,1,'C');
+            $pdf->SetXY(127,228);
+            $pdf->Cell(26,8,$data['dataNS']['trims'],0,1,'C');
+            $pdf->SetXY(174,228);
+            $pdf->Cell(27,8,$data['dataNS']['lcabo'],0,1,'C');
+            
+            if ($data['dataNS']['attachments1']) {
+                $pdf->SetXY(34,254);
+                $pdf->Cell(8,8,'X',0,1,'C');
             }
+            
+            if ($data['dataNS']['attachments2']) {
+                $pdf->SetXY(34,262);
+                $pdf->Cell(8,7,'X',0,1,'C');
+            }
+
+            /**
+             * PAGINA 2
+             */
+
+            $pdf->AddPage('P','A4',0);
+            $pdf->Image(FCPATH.$certificate['path_jpg_certification_back'], 0, 0, 210, 300);
+            $pdf->SetXY(40,70);
+            $pdf->Cell(10,7,$data['dataNSEx']['bb70'],0,0,'C');
+            $pdf->SetXY(52,70);
+            $pdf->Cell(10,7,$data['dataNSEx']['lc70'],0,0,'C');
+            $pdf->SetXY(65,70);
+            $pdf->Cell(10,7,$data['dataNSEx']['be70'],0,0,'C');
+            $pdf->SetXY(78,70);
+            $pdf->Cell(28,7,$data['dataNSEx']['max70'],0,0,'C');
+            $pdf->SetXY(110,70);
+            $pdf->Cell(28,7,$data['dataNSEx']['min70'],0,0,'C');
+            $pdf->SetXY(141,70);
+            $pdf->Cell(28,7,$data['dataNSEx']['static70'],0,0,'C');
+            $pdf->SetXY(172,70);
+            $pdf->Cell(28,7,$data['dataNSEx']['opc70'],0,0,'C');
+
+            $pdf->SetXY(40,79);
+            $pdf->Cell(10,7,$data['dataNSEx']['bb80'],0,0,'C');
+            $pdf->SetXY(52,79);
+            $pdf->Cell(10,7,$data['dataNSEx']['lc80'],0,0,'C');
+            $pdf->SetXY(65,79);
+            $pdf->Cell(10,7,$data['dataNSEx']['be80'],0,0,'C');
+            $pdf->SetXY(78,79);
+            $pdf->Cell(28,7,$data['dataNSEx']['max80'],0,0,'C');
+            $pdf->SetXY(110,79);
+            $pdf->Cell(28,7,$data['dataNSEx']['min80'],0,0,'C');
+            $pdf->SetXY(141,79);
+            $pdf->Cell(28,7,$data['dataNSEx']['static80'],0,0,'C');
+            $pdf->SetXY(172,79);
+            $pdf->Cell(28,7,$data['dataNSEx']['opc80'],0,0,'C');
+
+            $pdf->SetXY(40,88);
+            $pdf->Cell(10,7,$data['dataNSEx']['bb90'],0,0,'C');
+            $pdf->SetXY(52,88);
+            $pdf->Cell(10,7,$data['dataNSEx']['lc90'],0,0,'C');
+            $pdf->SetXY(65,88);
+            $pdf->Cell(10,7,$data['dataNSEx']['be90'],0,0,'C');
+            $pdf->SetXY(78,88);
+            $pdf->Cell(28,7,$data['dataNSEx']['max90'],0,0,'C');
+            $pdf->SetXY(110,88);
+            $pdf->Cell(28,7,$data['dataNSEx']['min90'],0,0,'C');
+            $pdf->SetXY(141,88);
+            $pdf->Cell(28,7,$data['dataNSEx']['static90'],0,0,'C');
+            $pdf->SetXY(172,88);
+            $pdf->Cell(28,7,$data['dataNSEx']['opc90'],0,0,'C');
+
+            $pdf->SetXY(40,97);
+            $pdf->Cell(10,7,$data['dataNSEx']['bb100'],0,0,'C');
+            $pdf->SetXY(52,97);
+            $pdf->Cell(10,7,$data['dataNSEx']['lc100'],0,0,'C');
+            $pdf->SetXY(65,97);
+            $pdf->Cell(10,7,$data['dataNSEx']['be100'],0,0,'C');
+            $pdf->SetXY(78,97);
+            $pdf->Cell(28,7,$data['dataNSEx']['max100'],0,0,'C');
+            $pdf->SetXY(110,97);
+            $pdf->Cell(28,7,$data['dataNSEx']['min100'],0,0,'C');
+            $pdf->SetXY(141,97);
+            $pdf->Cell(28,7,$data['dataNSEx']['static100'],0,0,'C');
+            $pdf->SetXY(172,97);
+            $pdf->Cell(28,7,$data['dataNSEx']['opc100'],0,0,'C');
+
+            $pdf->Output($config['upload_path'].$file_name , $downloadType ); // I: envia el fichero a navegador F: guarda el fichero en un fichero local de nombre name
+            
 
             $config['file_name'] = $file_name;
             $config['extension_file'] = 'pdf';
-            $config['codOrder'] = $value['codOrder'];
-            $config['codTypeCertification'] = $value['codTypeCertification'];
-            $config['numberOrder'] = $value['office'].str_pad($value['codOrder'], 3, '0', STR_PAD_LEFT).$value['anyo'];
-            $config['codUserAuthorized'] = $value['codUser'];
+            $config['codOrder'] = $data['data']['codOrder'];
+            $config['codTypeCertification'] = $data['data']['codTypeCertification'];
+            $config['numberOrder'] = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'];
+            $config['codUserAuthorized'] = $data['data']['codUser'];
+            $config['expired_certificated'] = $expireCert;
 
             $response = ($downloadType == 'F') ? $this->certifications_model->insertCertificate($config) : true;
 

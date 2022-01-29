@@ -53,7 +53,7 @@
                       echo "<td>".$value['name']."</td>";
                       // echo "<td>".$value['number_imo']."</td>";
                       // echo "<td>".$value['name_certificate']."</td>";
-                      echo "<td>".$value['codTypeCertification'].$value['name_list_verification']."</td>";
+                      echo "<td>".$value['name_list_verification']."</td>";
                       echo "<td>".$value['condition']."</td>";                      
                       echo "<td>";
                       if ($value['codWord']) {
@@ -96,7 +96,7 @@
                         echo "<button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Orden' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>";
                       }
                       if ($session['editInfo']) {
-                        echo "<button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-1' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['idOrder'].">".$value['idOrder']."<i class='far fa-edit' aria-hidden='true'></i></button>";
+                        echo "<button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-1' title='Editar Orden' data-toggle='modal' data-target='#updateOrder' data-id=".$value['idOrder']."><i class='far fa-edit' aria-hidden='true'></i></button>";
                       }
                       if ($session['deleteInfo']) {
                         echo "<button type='button' class='btn btn-outline-danger btn-rounded waves-effect ml-1' title='Eliminar Orden' data-toggle='modal' data-target='#delOrder' data-id=".$value['idOrder']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>";
