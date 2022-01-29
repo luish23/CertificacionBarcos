@@ -78,7 +78,7 @@
                         }elseif($value['estado'] == 'VENCIDO'){
                           $alert = "<span class='badge badge-danger ml-2'>".$value['estado']."</span>";
                         }else{
-                          $alert = "<span class='badge badge-warning ml-2'>".$value['estado']."</span>";
+                          $alert = "<span class='badge badge-warning ml-2'>".$value['estado'].' '.$value['days_remaining']." días</span>";
                         }
                         echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a>".$alert."".$provisional."</td>";
                       }else {
