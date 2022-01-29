@@ -452,6 +452,12 @@
                 <form id="ordersFormUpdateNS03" action="updateOrderNS03" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="form-group row col-12">
+                        <div class="col-6">
+                            <label for="exampleFormControlInput1">Ejecutor del Ensayo</label>
+                            <input type="text" class="form-control" id="executor" name="executor" value="<?php if (isset($dataNS03['executor'])) echo $dataNS03['executor'] ?>" placeholder="Ejecutor del Ensayo">
+                        </div>
+                    </div>
+                    <div class="form-group row col-12">
                         <div class="col-3">
                             <label for="exampleFormControlInput1">LO(m)</label>
                             <input type="text" class="form-control" id="lo" name="lo" value="<?php if (isset($dataNS03['lo'])) echo $dataNS03['lo'] ?>" placeholder="LO(m)">
