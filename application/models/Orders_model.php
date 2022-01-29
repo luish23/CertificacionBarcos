@@ -71,7 +71,7 @@ class Orders_model extends CI_Model {
     {
         $result['data'] = false;
 
-        $this->db_boats->select('b.id, b.name, b.number_imo, o.provisional, o.id AS idOrder, o.condition, o.codWord, o.codPDF, o.codTypeCertification, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.estado, ic.created_at AS dateCertificate');
+        $this->db_boats->select('b.id, b.name, b.number_imo, o.provisional, o.id AS idOrder, o.condition, o.codWord, o.codPDF, o.codTypeCertification, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.estado, ic.days_remaining, ic.created_at AS dateCertificate');
         $this->db_boats->from('orders o');
         $this->db_boats->join($this->db_boats->database.'.boats b', $this->db_boats->database.'.o.codBoat = b.id');
         $this->db_boats->join($this->db_boats->database.'.offices of', 'o.codOffice = '.$this->db_boats->database.'.of.id');
@@ -97,7 +97,7 @@ class Orders_model extends CI_Model {
     public function getAllOrders()
     {
         $result['data'] = false;
-        $this->db_boats->select('b.id, b.name, b.number_imo, o.provisional, o.id AS idOrder, o.condition, o.codWord, o.codPDF, o.codTypeCertification, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.estado, ic.created_at AS dateCertificate');
+        $this->db_boats->select('b.id, b.name, b.number_imo, o.provisional, o.id AS idOrder, o.condition, o.codWord, o.codPDF, o.codTypeCertification, tc.name_certificate, tc.name_list_verification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo, ic.id AS idCertificated, ic.upload_path, ic.file_name, ic.estado, ic.days_remaining, ic.created_at AS dateCertificate');
         $this->db_boats->from('orders o');
         $this->db_boats->join($this->db_boats->database.'.boats b', $this->db_boats->database.'.o.codBoat = b.id');
         $this->db_boats->join($this->db_boats->database.'.offices of', 'o.codOffice = '.$this->db_boats->database.'.of.id');
