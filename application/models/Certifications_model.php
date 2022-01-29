@@ -33,16 +33,16 @@ class Certifications_model extends CI_Model {
         return $resultCertifications;
     }
 
-    public function generarCertificado($id)
+    public function generarCertificado($id, $condition)
     {
-        $this->db_orders->select('o.id AS codOrder, o.codOffice, o.codUser, o.codBoat, o.codWord, o.codPDF, o.codTypeCertification, o.condition, o.reasonRejection, b.*, s.name_ship, e.name as nameEmployee, e.lastName, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->select('o.id AS codOrder, o.codOffice, o.codUser, o.codBoat, o.codWord, o.codPDF, o.codTypeCertification, o.condition, o.reasonRejection, o.inspect_date_end, b.*, s.name_ship, e.name as nameEmployee, e.lastName, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_orders->from('orders o');
         $this->db_orders->join($this->db_orders->database.'.boats b', $this->db_orders->database.'.b.id = o.codBoat');
         $this->db_orders->join($this->db_orders->database.'.employee e', $this->db_orders->database.'.e.codUser = o.codUser');
         $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
         $this->db_orders->join($this->db_orders->database.'.shipowner s', $this->db_orders->database.'.s.id = b.codShipowner');
         $this->db_orders->where('o.id', $id);
-        $this->db_orders->where('o.condition', 'VALIDADO');
+        $this->db_orders->where('o.condition', $condition);
         $this->db_orders->where('o.status', 1);
         $query = $this->db_orders->get();
         $resultCertificate['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
@@ -55,6 +55,7 @@ class Certifications_model extends CI_Model {
         $this->db_orders->trans_begin();
 
         $this->db_orders->insert('issuedCertifications', $data);
+        $item_id = $this->db_orders->insert_id();
 
         if ($this->db_orders->trans_status() === FALSE) {
             $this->db_orders->trans_rollback();
@@ -63,7 +64,7 @@ class Certifications_model extends CI_Model {
         else {
             $this->db_orders->trans_commit();
             $this->_changeCondition($data['codOrder']);
-            return true;
+            return $item_id;
         }
     }
 

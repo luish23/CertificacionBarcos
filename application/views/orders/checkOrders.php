@@ -70,7 +70,7 @@
                         $disabled = '';
                       }
                       
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Ver Datos' data-toggle='modal' data-target='#seeOrder' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
+                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Preview Certificated' data-toggle='modal' data-target='#seeCertificado' data-id=".$value['idOrder']."><i class='far fa-eye' aria-hidden='true'></i></button>
                       <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' title='Validar Orden' data-toggle='modal' data-target='#validOrder' data-id=".$value['idOrder']."><i class='fas fa-check-double'></i></button></td>";
                       echo "</tr>";
                     }
@@ -103,11 +103,24 @@
     <!-- /.content -->
   </div>
 
-<div class="modal fade" id="seeOrder" role="dialog">
+<!-- <div class="modal fade" id="seeOrder" role="dialog">
   <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
           <div class="modal-body">
               <div class="fetched-data"></div>
+          </div>
+      </div>
+  </div>
+</div> -->
+
+<div class="modal fade" id="seeCertificado" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content bg-info">
+          <div class="modal-header">
+              <h4 class="modal-title"><?php echo $this->lang->line('answer_preview_certificated'); ?></h4>
+          </div>
+          <div class="modal-body">
+              <div class="fetched-dataGen"></div>
           </div>
       </div>
   </div>

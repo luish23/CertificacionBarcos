@@ -13,23 +13,21 @@ class Employees_model extends CI_Model {
     public function getEmployee($id)
     {
         $this->db_employee->select('e.id, e.name, e.lastName, e.gender, e.dni, e.position, e.address, e.photo, e.phone, e.codShipowner, e.site_lang, u.codTypeUser');
-        // $this->db_employee->select('e.id, e.name, e.lastName, e.gender, e.dni, e.position, e.address, e.photo, e.phone, e.codTypeUser, e.site_lang, '.$this->db_typeuser->database.'.typeUser.description');
         $this->db_employee->from("employee e");
-        $this->db_employee->join($this->db_employee->database.'.users u', $this->db_employee->database.'.u.id = '.$id);
-        $this->db_employee->where('e.codUser', $id);
+        $this->db_employee->join($this->db_employee->database.'.users u', $this->db_employee->database.'.u.id = e.codUser');
+        $this->db_employee->where('e.id', $id);
         // $this->db_employee->where('e.status', 1);
         $query = $this->db_employee->get();
-        $resultEmployee['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : $this->db_employee->last_query();
+        $resultEmployee['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
         return $resultEmployee;
     }
 
     public function getEmployeeUpdate($id)
     {
         $this->db_employee->select('e.id, e.name, e.lastName, e.gender, e.dni, e.position, e.address, e.photo, e.phone, e.codShipowner, e.status, e.site_lang, u.codTypeUser');
-        // $this->db_employee->select('e.id, e.name, e.lastName, e.gender, e.dni, e.position, e.address, e.photo, e.phone, e.status, e.codTypeUser, e.site_lang, '.$this->db_typeuser->database.'.typeUser.description');
         $this->db_employee->from("employee e");
-        $this->db_employee->join($this->db_employee->database.'.users u', $this->db_employee->database.'.u.id = '.$id);
-        $this->db_employee->where('e.codUser', $id);
+        $this->db_employee->join($this->db_employee->database.'.users u', $this->db_employee->database.'.u.id = e.codUser');
+        $this->db_employee->where('e.id', $id);
         $query = $this->db_employee->get();
         $resultEmployee['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
         return $resultEmployee;
@@ -50,6 +48,8 @@ class Employees_model extends CI_Model {
         $this->db_employee->trans_strict(FALSE);
 
         $this->db_employee->insert('employee', $data);
+        $item_id = $this->db_employee->insert_id();
+
         $this->db_employee->where('id', $data['codUser']);
         $this->db_employee->update('users', ['assigned' => 1]);
 
@@ -61,7 +61,7 @@ class Employees_model extends CI_Model {
 
         $this->db_employee->trans_commit();
 
-        return true;
+        return $item_id;
     }
 
     public function updateEmployee($data, $id)

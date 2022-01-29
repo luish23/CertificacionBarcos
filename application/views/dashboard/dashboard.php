@@ -71,7 +71,7 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3><?php echo $retVal = (isset($RECHAZADO)) ? $RECHAZADO : 0; ?></h3>
+                    <h3><?php echo $retVal = (isset($CANCELADO)) ? $CANCELADO : 0; ?></h3>
 
                     <p><?php echo $this->lang->line('label_canceled_orders'); ?></p>
                 </div>

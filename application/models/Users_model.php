@@ -73,6 +73,7 @@ class Users_model extends CI_Model {
         $this->db_users->trans_strict(FALSE);
 
         $this->db_users->insert('users', $data);
+        $item_id = $this->db_users->insert_id();
 
         if ($this->db_users->trans_status() === FALSE) {
             $this->db_users->trans_rollback();
@@ -82,7 +83,7 @@ class Users_model extends CI_Model {
 
         $this->db_users->trans_commit();
 
-        return true;
+        return $item_id;
     }
 
     public function updatetUser($data, $id)

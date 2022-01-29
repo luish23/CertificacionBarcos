@@ -10,7 +10,7 @@ class Boats extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("boats_model","users_model","login_model"));
+        $this->load->model(array("boats_model", "users_model", "login_model", "logs_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
         if($this->login_model->logged_id())
@@ -45,7 +45,7 @@ class Boats extends RESTController {
         }else{
             $data = $this->boats_model->getAllBoats();  
         }
-        // print_r($data); die;
+
         $template = array('title' => $this->lang->line('list_boats'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
@@ -98,6 +98,7 @@ class Boats extends RESTController {
         if ($response) {
             $relation = array('codUser' => $this->session->user_id, 'codBoat' => $response);
             $this->boats_model->relationUserBoat($relation);
+            $this->logs_model->registerLogs($this->session->user_id, 'registerBoat_post', 'Add', 'Insertó Boat Id: '.$response);
             echo "<script>alert('".$this->lang->line('alert_insert_ok')."');</script>";
             redirect('formBoat', 'refresh');
         }
@@ -140,6 +141,7 @@ class Boats extends RESTController {
         $response = $this->boats_model->updateBoat($data, $id);
 
         if ($response) {
+            $this->logs_model->registerLogs($this->session->user_id, 'updateBoat_post', 'Update', 'Actualizó Boat Id: '.$id);
             echo "<script>alert('".$this->lang->line('alert_update_ok')."');</script>";
             redirect('listBoats', 'refresh');
         }
@@ -156,6 +158,7 @@ class Boats extends RESTController {
         $response = $this->boats_model->deleteBoat($id);
 
         if ($response) {
+            $this->logs_model->registerLogs($this->session->user_id, 'deleteBoat_post', 'Delete', 'Eliminó Boat Id: '.$id);
             echo "<script>alert('".$this->lang->line('alert_delete_ok')."');</script>";
             redirect('listBoats', 'refresh');
         }

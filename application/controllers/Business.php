@@ -10,7 +10,7 @@ class Business extends RESTController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array("business_model","login_model"));
+        $this->load->model(array("business_model", "login_model", "logs_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
         if($this->login_model->logged_id())

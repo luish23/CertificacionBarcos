@@ -7,12 +7,13 @@ class Logs_model extends CI_Model {
         $this->db_logs = $this->load->database('default', true);
     }
 
-    public function registerLogs($codUser, $module, $action)
+    public function registerLogs($codUser, $module, $action, $description)
     {
         $data = array(
-            'codUser'   => $codUser,
-            'module'    => $module,
-            'action'    => $action
+            'codUser'           => $codUser,
+            'module'            => $module,
+            'action'            => $action,
+            'description'       => $description
         );
         $this->db_logs->insert('logs', $data);
     }

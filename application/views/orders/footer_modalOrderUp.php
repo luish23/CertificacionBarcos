@@ -87,7 +87,7 @@
 
   $('#condition').change(function() {
     var select = $("#condition").find('option:selected').val();
-    if( select == 0){
+    if( select == 'CANCELADO'){
       var newP = $('<div class="form-group"><label for="exampleInputEmail1">Observación</label><textarea class="form-control" rows="3" name="reasonRejection" id="reasonRejection" placeholder="Observación"></textarea></div>');
       $("msg").append(newP);
     }

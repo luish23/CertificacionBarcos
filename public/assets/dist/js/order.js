@@ -42,7 +42,20 @@ $(document).ready(function(){
     $.ajax({
         type : 'get',
         url : 'modalCertificado', //Here you will fetch records 
-        data :  'id='+ rowid, //Pass $id
+        data :  'id='+ rowid+'&downloadType=F', //Pass $id
+        success : function(data){
+        $('.fetched-dataGen').html(data);//Show fetched data from database
+        }
+    });
+  });
+
+  $('#seeCertificado').on('show.bs.modal', function (e) {
+    var rowid = $(e.relatedTarget).data('id');
+    console.log(rowid);
+    $.ajax({
+        type : 'get',
+        url : 'modalCertificado', //Here you will fetch records 
+        data :  'id='+ rowid+'&downloadType=D', //Pass $id
         success : function(data){
         $('.fetched-dataGen').html(data);//Show fetched data from database
         }
