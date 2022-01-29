@@ -70,7 +70,7 @@
                         $disabled = '';
                       }
                       
-                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Preview Certificated' data-toggle='modal' data-target='#seeCertificado' data-id=".$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>
+                      echo "<td><button type='button' class='btn btn-outline-success btn-rounded waves-effect' title='Preview Certificated' data-toggle='modal' data-target='#seeCertificado' data-id=".$value['idOrder']."><i class='far fa-eye' aria-hidden='true'></i></button>
                       <button type='button' class='btn btn-outline-info btn-rounded waves-effect ml-3' title='Validar Orden' data-toggle='modal' data-target='#validOrder' data-id=".$value['idOrder']."><i class='fas fa-check-double'></i></button></td>";
                       echo "</tr>";
                     }
