@@ -14,9 +14,9 @@
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
       <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+        <!-- <a class="nav-link" data-widget="navbar-search" href="#" role="button">
           <i class="fas fa-search"></i>
-        </a>
+        </a> -->
         <div class="navbar-search-block">
           <form class="form-inline">
             <div class="input-group input-group-sm">
@@ -33,14 +33,6 @@
           </form>
         </div>
       </li>
-
-      <div class="theme-switch-wrapper nav-link">
-        <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox">
-          <span class="slider round"></span>
-        </label>
-      </div>
-
 
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item">

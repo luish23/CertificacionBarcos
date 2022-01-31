@@ -152,5 +152,13 @@ $route['listCerts']['GET']                   = 'Certifications/listCerts';
  * BUSINESS
  */
 
-$route['business']['GET']        = 'Business/index';
-$route['listBusiness']['GET']        = 'Business/listBusiness';
+$route['business']['GET']               = 'Business/index';
+$route['listBusiness']['GET']           = 'Business/listBusiness';
+
+
+/**
+ * CRONS
+ */
+
+$route['crons']                          = 'Cron/index';
+$route['updateExpiration']               = 'Cron/updateExpiration';
