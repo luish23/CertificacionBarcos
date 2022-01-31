@@ -46,7 +46,6 @@ class Dashboard_model extends CI_Model {
         $this->db_dashboard->group_by("o.condition");
         $query = $this->db_dashboard->get();
         $resultC['conditions'] = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
-
         if ($resultC['conditions']) {
             foreach ($resultC['conditions'] as $key => $value) {
                 $result[$value['condition']] = $value['totalCondition'];

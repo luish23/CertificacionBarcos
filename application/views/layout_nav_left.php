@@ -107,6 +107,29 @@
             </ul>
           </li>
           <?php } ?>
+
+          <?php if ($session['mCert']) { ?>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="fas fa-award"></i>
+              <p>
+                <?php echo $this->lang->line('control_certs'); ?>
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <?php if ($session['listCert']) { ?>
+              <li class="nav-item">
+                <a href="/listCerts" class="nav-link">
+                  <i class="fas fa-list-ul"></i>
+                  <p><?php echo $this->lang->line('list_certs'); ?></p>
+                </a>
+              </li>
+              <?php } ?>
+            </ul>
+          </li>
+          <?php } ?>
+
           <?php if ($session['mUser']) { ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
