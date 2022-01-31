@@ -14,22 +14,23 @@ class Certifications extends RESTController {
         $this->load->library(array('custom_log','session'));
         $this->load->helper(array("url","custom"));
         setlocale(LC_ALL, 'es_ES');
-        // if($this->login_model->logged_id())
-		// {
-		// 	$this->session_data = array(
-		// 		'user_id'       => $this->session->user_id,
-		// 		'name'          => $this->session->name,
-		// 		'lastName'      => $this->session->lastName,
-		// 		'codTypeUser'   => $this->session->codTypeUser,
-        //         'codShipowner'  => $this->session->codShipowner,
-        //         'site_lang'  	=> $this->session->site_lang
-		// 	);
-        //  $this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
-        // }else{
-        //     $this->session->unset_userdata('session_data');
-        //     $this->session->sess_destroy();
-		// 	redirect("login");
-		// }
+        if($this->login_model->logged_id())
+		{
+			$this->session_data = array(
+				'user_id'       => $this->session->user_id,
+				'name'          => $this->session->name,
+				'lastName'      => $this->session->lastName,
+				'codTypeUser'   => $this->session->codTypeUser,
+                'codShipowner'  => $this->session->codShipowner,
+                'site_lang'  	=> $this->session->site_lang
+			);
+         $this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
+         $this->lang->load(array('certifications','orders_lang','layout_nav_left'), $this->session->site_lang);
+        }else{
+            $this->session->unset_userdata('session_data');
+            $this->session->sess_destroy();
+			redirect("login");
+		}
     }
     /**
      * METODO PARA REALIZAR PRUEBAS DE AJUSTE DEL CERTIFICADO
@@ -1129,6 +1130,26 @@ class Certifications extends RESTController {
         }
         // print_r($data); die;
         $this->load->view('certifications/modalCertificado', $data);
+    }
+
+    /**
+     * FUNCION PARA LISTAR CERTIFICADOS
+     */
+    public function listCerts_get()
+    {
+        if ($this->session->codTypeUser == 6) // Armador
+        {
+            $data = $this->certifications_model->getCertsByUser($this->session->codShipowner);
+        }else{
+            $data = $this->certifications_model->getAllCerts();  
+        }
+// print_r($data); die;
+        $template = array('title' => $this->lang->line('listCerts'));
+        $this->load->view("dashboard/header_dashboard",$template);
+        $this->load->view("layout_nav_top");
+        $this->load->view("layout_nav_left",$this->session_data);
+        $this->load->view('certifications/listCerts',$data);
+        $this->load->view("certifications/footer_certification");
     }
 
     /**

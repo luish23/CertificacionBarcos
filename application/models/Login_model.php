@@ -17,7 +17,7 @@ class Login_model extends CI_Model
 
     public function getPermission($idType)
     {
-        $this->db->select('previewInfo, editInfo, deleteInfo, generateCert, previewPdf, mNavio, addNavio, listNavio, mOrder, addOrder, listOrder, validOrder, mUser, addUser, listUser, mEmployee, addEmployee, listEmployee, mConfig, business');
+        $this->db->select('previewInfo, editInfo, deleteInfo, generateCert, previewPdf, mNavio, addNavio, listNavio, mOrder, addOrder, listOrder, validOrder, mCert, listCert, mUser, addUser, listUser, mEmployee, addEmployee, listEmployee, mConfig, business');
         $this->db->from('permission');
         $this->db->where('codTypeUser', $idType);
 

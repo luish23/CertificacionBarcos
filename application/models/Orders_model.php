@@ -78,7 +78,7 @@ class Orders_model extends CI_Model {
         $this->db_boats->join($this->db_boats->database.'.issuedCertifications ic', $this->db_boats->database.'.ic.codOrder = o.id', 'LEFT');
         $this->db_boats->join($this->db_boats->database.'.typeCertifications tc', $this->db_boats->database.'.o.codTypeCertification = tc.codCert');
 
-        $this->db_boats->group_by("b.id");
+        $this->db_boats->group_by("o.id");
         $this->db_boats->where('b.codShipowner',$id);
         $query = $this->db_boats->get();
         $resultBoats = ($query!==false && $query->num_rows() > 0) ? $query->result_array() : false;
