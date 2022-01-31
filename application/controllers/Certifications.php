@@ -383,6 +383,9 @@ class Certifications extends RESTController {
             
             if (!empty($data))
             {
+                $dateInspect = explode('-',$data['data']['inspect_date_end']);
+                $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days"));
+                $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days")));
                 $file_name = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'].'-'.$data['data']['codTypeCertification'].'_'.$data['data']['number_imo'].'.pdf';
                 $pdf = new FPDF();
                 $pdf->AddPage('P','A4',0);
@@ -947,6 +950,9 @@ class Certifications extends RESTController {
     {
         if (!empty($data))
         {
+            $dateInspect = explode('-',$data['data']['inspect_date_end']);
+            $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days"));
+            $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days")));
             $file_name = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'].'-'.$data['data']['codTypeCertification'].'_'.$data['data']['number_imo'].'.pdf';
             $pdf = new FPDF();
             $pdf->AddPage('P','A4',0);
@@ -1143,7 +1149,7 @@ class Certifications extends RESTController {
         }else{
             $data = $this->certifications_model->getAllCerts();  
         }
-// print_r($data); die;
+
         $template = array('title' => $this->lang->line('listCerts'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
