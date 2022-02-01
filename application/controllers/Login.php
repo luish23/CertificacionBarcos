@@ -59,7 +59,8 @@ class Login extends RESTController {
 
             if ($data) {
                 $userData = $this->employees_model->getEmployee($data);
-                if ($userData) {
+                // print_r($userData); die;
+                if ($userData['data']) {
                     $session_data = array(
                         'user_id'       => $data,
                         'name'          => $userData['data']['name'],

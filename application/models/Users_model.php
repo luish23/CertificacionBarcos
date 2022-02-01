@@ -26,6 +26,7 @@ class Users_model extends CI_Model {
         $this->db_users->select("id, password");
         $this->db_users->from("users");
         $this->db_users->where('user', $user);
+        $this->db_users->where('status', 1);
         $query = $this->db_users->get();
         $resulPassword = ($query!==false && $query->num_rows() > 0) ? $query->row() : false;
 
@@ -76,9 +77,9 @@ class Users_model extends CI_Model {
         $item_id = $this->db_users->insert_id();
 
         if ($this->db_users->trans_status() === FALSE) {
+            $error = $this->db_users->error();
             $this->db_users->trans_rollback();
-
-            return false;
+            return $error;
         }
 
         $this->db_users->trans_commit();

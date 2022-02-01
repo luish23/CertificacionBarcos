@@ -72,6 +72,7 @@ class Users extends RESTController {
 
     public function registerUsers_post()
     {
+        // echo "Hola"; die;
         if (!empty($this->input->post('username')) && !empty($this->input->post('password'))) {
             $data = array(  'user' => $this->input->post('username'),
                             'codTypeUser' => $this->input->post('codTypeUser'),
@@ -80,19 +81,30 @@ class Users extends RESTController {
                         );
 
             $response = $this->users_model->insertUser($data);
+            
+            switch ($response['code']) {
+                case 1062:
+                    echo "<script>alert('El Usuario ya se encuentra registrado');</script>";
+                    redirect('listUsers', 'refresh');
+                    break;
+            }
+
             if ($response) {
                 $this->logs_model->registerLogs($this->session->user_id, 'registerUsers_post', 'Add', 'Insertó User Id: '.$response);
                 echo "<script>alert('Usuario registrado satisfactoriamente!!');</script>";
                 redirect('formUsers', 'refresh');
             }
             else {
-                echo "Hubo un error al Insertar la data"; 
+                echo "<script>alert('Hubo un error al Insertar la data');</script>";
+                redirect('listUsers', 'refresh');
             }
         }else{
-            $this->response( [
-                'status' => false,
-                'message' => 'Datos no recibidos'
-            ], 200 );
+            echo "<script>alert('Datos no recibidos');</script>";
+            redirect('listUsers', 'refresh');
+            // $this->response( [
+            //     'status' => false,
+            //     'message' => 'Datos no recibidos'
+            // ], 200 );
         }
         
     }

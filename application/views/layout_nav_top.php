@@ -36,6 +36,11 @@
 
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item">
+        <a class="nav-link" target="_blank" href="<?php echo base_url()."public/manual/MANUAL-SGCB.pdf" ?>" role="button">
+        <i class="far fa-question-circle"></i>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
