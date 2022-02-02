@@ -49,12 +49,16 @@ $(function () {
       rules: {
           name: {
           required: true,
+          // lettersonly: true,
+          pattern: "^[a-zA-Z'.\\s]{1,40}$",
         },
         lastName: {
           required: true,
+          pattern: "^[a-zA-Z'.\\s]{1,40}$",
         },
         dni: {
           required: true,
+          number:true,
         },
         codUser: {
           required: true,
@@ -64,9 +68,11 @@ $(function () {
       messages: {
           name: {
           required: "Por favor ingrese un Nombre",
+          pattern: "Por favor ingrese solo letras y espacios",
         },
         lastName: {
           required: "Por favor introduzca un Apellido",
+          pattern: "Por favor ingrese solo letras y espacios",
         },
         dni: {
           required: "Por favor introduzca su DNI",
