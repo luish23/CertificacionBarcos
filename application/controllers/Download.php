@@ -9,6 +9,8 @@ class Download extends CI_Controller {
         $this->load->model(array("login_model","orders_model"));
         $this->load->helper(array('url','download', 'file'));
         $this->load->library(array('session'));
+
+        $this->lang->load(array('layout_nav_left'), $this->session->site_lang);
     }
 
 	public function index($id)
@@ -32,7 +34,7 @@ class Download extends CI_Controller {
             readfile($filePath);
             exit;
         }else{
-            echo "<script>alert('No existe el archivo');</script>";
+            echo "<script>alert('".$this->lang->line('file_no_exist')."');</script>";
             redirect('listOrders', 'refresh');
         }
 	}

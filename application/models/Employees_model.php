@@ -16,7 +16,7 @@ class Employees_model extends CI_Model {
         $this->db_employee->from("employee e");
         $this->db_employee->join($this->db_employee->database.'.users u', $this->db_employee->database.'.u.id = e.codUser');
         $this->db_employee->where('e.id', $id);
-        // $this->db_employee->where('e.status', 1);
+        $this->db_employee->where('e.status', 1);
         $query = $this->db_employee->get();
         $resultEmployee['data'] = ($query!==false && $query->num_rows() > 0) ? $query->row_array() : false;
         return $resultEmployee;
