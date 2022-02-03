@@ -41,7 +41,7 @@ class Business extends RESTController {
     {
         $data['data'] = $this->business_model->getBusiness();
 
-        $template = array('title' => 'Empresa');
+        $template = array('title' => $this->lang->line('business'));
         $this->load->view("dashboard/header_dashboard",$template);
         $this->load->view("layout_nav_top");
         $this->load->view("layout_nav_left",$this->session_data);
