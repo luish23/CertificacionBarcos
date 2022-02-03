@@ -58,3 +58,5 @@ $lang['position']                   = 'Cargo';
 $lang['select']                     = 'Seleccione';
 $lang['user']                       = 'Usuario';
 
+$lang['file_no_exist']              = 'No existe el archivo';
+

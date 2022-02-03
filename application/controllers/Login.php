@@ -59,7 +59,7 @@ class Login extends RESTController {
 
             if ($data) {
                 $userData = $this->employees_model->getEmployee($data);
-                // print_r($userData); die;
+
                 if ($userData['data']) {
                     $session_data = array(
                         'user_id'       => $data,
@@ -74,12 +74,12 @@ class Login extends RESTController {
                     $this->logs_model->registerLogs($data, 'login_post', 'Login System', NULL);
                     redirect("dashboard");
                 }else{
-                    $this->msg = array('msg' => 'Usuario No Asignado a Personal. Contacte al Admistrador');
+                    $this->msg = array('msg' => $this->lang->line('alert_adm'));
 	                $this->load->view('login/login',$this->msg);
                 }
                 
             }else{
-                $this->msg = array('msg' => 'Usuario y/o Password incorrecto.');
+                $this->msg = array('msg' => $this->lang->line('alert_error_user_pwd'));
 	            $this->load->view('login/login',$this->msg);
             } 
         }

@@ -84,22 +84,22 @@ class Users extends RESTController {
             
             switch ($response['code']) {
                 case 1062:
-                    echo "<script>alert('El Usuario ya se encuentra registrado');</script>";
+                    echo "<script>alert('".$this->lang->line('exist_user')."');</script>";
                     redirect('listUsers', 'refresh');
                     break;
             }
 
             if ($response) {
                 $this->logs_model->registerLogs($this->session->user_id, 'registerUsers_post', 'Add', 'Insertó User Id: '.$response);
-                echo "<script>alert('Usuario registrado satisfactoriamente!!');</script>";
+                echo "<script>alert('".$this->lang->line('alert_register_user_ok')."');</script>";
                 redirect('formUsers', 'refresh');
             }
             else {
-                echo "<script>alert('Hubo un error al Insertar la data');</script>";
+                echo "<script>alert('".$this->lang->line('alert_error_insert_user')."');</script>";
                 redirect('listUsers', 'refresh');
             }
         }else{
-            echo "<script>alert('Datos no recibidos');</script>";
+            echo "<script>alert('".$this->lang->line('alert_no_data')."');</script>";
             redirect('listUsers', 'refresh');
             // $this->response( [
             //     'status' => false,
@@ -116,7 +116,7 @@ class Users extends RESTController {
             $id = $this->input->post('id');
 
             if ($this->input->post('password') != $this->input->post('password_confirm')) {
-                echo "<script>alert('Las contraseñas no coinciden!!');</script>";
+                echo "<script>alert('".$this->lang->line('alert_no_equal_pwd')."');</script>";
                 redirect('listUsers', 'refresh');
             }else {
                 $data['password'] = $this->encryption->encrypt($this->input->post('password'));
@@ -126,11 +126,12 @@ class Users extends RESTController {
                 $response = $this->users_model->updatetUser($data, $id);
                 if ($response) {
                     $this->logs_model->registerLogs($this->session->user_id, 'updateUsers_post', 'Update', 'Actualizó User Id: '.$id);
-                    echo "<script>alert('Usuario Actualizado satisfactoriamente!!');</script>";
+                    echo "<script>alert('".$this->lang->line('alert_update_user_ok')."');</script>";
                     redirect('listUsers', 'refresh');
                 }
                 else {
-                    echo "Hubo un error al Actualizar la data";
+                    echo "<script>alert('".$this->lang->line('alert_no_update_data')."');</script>";
+                    redirect('listUsers', 'refresh');
                 }     
             }
         }else{

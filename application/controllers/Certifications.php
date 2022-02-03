@@ -842,14 +842,14 @@ class Certifications extends RESTController {
             if($response)
             {
                 $this->logs_model->registerLogs($this->session->user_id, '_createCertificate1', 'Get', 'Generó Certificado Id: '.$response);
-                echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
+                echo "<script>alert('".$this->lang->line('certificate')." ".$certificate['name_certificate']." ".$this->lang->line('satisfying')."');</script>";
                 redirect('listOrders', 'refresh');
             }else{
-                echo "<script>alert('Hubo un error al Generar el Certificado.');</script>";
+                echo "<script>alert('".$this->lang->line('alert_error')."');</script>";
                 redirect('listOrders', 'refresh');
             }
         }else{
-            echo "<script>alert('No se puede Generar el Certificado.');</script>";
+            echo "<script>alert('".$this->lang->line('alert_error2')."');</script>";
             redirect('listOrders', 'refresh');
         }
     }
@@ -933,14 +933,14 @@ class Certifications extends RESTController {
             if($response)
             {
                 $this->logs_model->registerLogs($this->session->user_id, '_createCertificate2', 'Get', 'Generó Certificado Id: '.$response);
-                echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
+                echo "<script>alert('".$this->lang->line('certificate')." ".$certificate['name_certificate']." ".$this->lang->line('satisfying')."');</script>";
                 redirect('listOrders', 'refresh');
             }else{
-                echo "<script>alert('Hubo un error al Generar el Certificado.');</script>";
+                echo "<script>alert('".$this->lang->line('alert_error')."');</script>";
                 redirect('listOrders', 'refresh');
             }
         }else{
-            echo "<script>alert('No se puede Generar el Certificado.');</script>";
+            echo "<script>alert('".$this->lang->line('alert_error2')."');</script>";
             redirect('listOrders', 'refresh');
         }
         
@@ -1115,14 +1115,14 @@ class Certifications extends RESTController {
             if($response)
             {
                 $this->logs_model->registerLogs($this->session->user_id, '_createCertificate3', 'Get', 'Generó Certificado Id: '.$response);
-                echo "<script>alert('Certificado '".$certificate['name_certificate']."' Generado satisfactoriamente!!');</script>";
+                echo "<script>alert('".$this->lang->line('certificate')." ".$certificate['name_certificate']." ".$this->lang->line('satisfying')."');</script>";
                 redirect('listOrders', 'refresh');
             }else{
-                echo "<script>alert('Hubo un error al Generar el Certificado.');</script>";
+                echo "<script>alert('".$this->lang->line('alert_error')."');</script>";
                 redirect('listOrders', 'refresh');
             }
         }else{
-            echo "<script>alert('No se puede Generar el Certificado.');</script>";
+            echo "<script>alert('".$this->lang->line('alert_error2')."');</script>";
             redirect('listOrders', 'refresh');
         }
     }
@@ -1165,51 +1165,51 @@ class Certifications extends RESTController {
     {
         switch ($month) {
             case 1:
-                return 'Enero';
+                return $this->lang->line('january');
                 break;
             
             case 2:
-                return 'Febrero';
+                return $this->lang->line('february');
                 break;
             
             case 3:
-                return 'Marzo';
+                return $this->lang->line('march');
                 break;
 
             case 4:
-                return 'Abril';
+                return $this->lang->line('april');
                 break;
             
             case 5:
-                return 'Mayo';
+                return $this->lang->line('may');
                 break;
             
             case 6:
-                return 'Junio';
+                return $this->lang->line('june');
                 break;
 
             case 7:
-                return 'Julio';
+                return $this->lang->line('july');
                 break;
             
             case 8:
-                return 'Agosto';
+                return $this->lang->line('august');
                 break;
 
             case 9:
-                return 'Septiembre';
+                return $this->lang->line('septembre');
                 break;
 
             case 10:
-                return 'Octubre';
+                return $this->lang->line('october');
                 break;
 
             case 11:
-                return 'Noviembre';
+                return $this->lang->line('november');
                 break;
 
             case 12:
-                return 'Diciembre';
+                return $this->lang->line('december');
                 break;
         }
     }
