@@ -196,4 +196,15 @@ class Boats_model extends CI_Model {
         return $result;
     }
 
+    public function checkIMO($imo)
+    {
+        $this->db_boats->select('id');
+        $this->db_boats->from("boats");
+        $this->db_boats->where('number_imo', $imo);
+        $query = $this->db_boats->get();
+        $result = ($query!==false && $query->num_rows() > 0) ? 1 : 0;
+
+        return $result;
+    }
+
 }

@@ -169,7 +169,6 @@ class Boats extends RESTController {
 
     }
     
-
     public function modalBoats_get()
     {
         $id = $this->input->get('id');
@@ -190,6 +189,23 @@ class Boats extends RESTController {
         $id = $this->input->get('id');
         $data = $this->boats_model->getBoatMinById($id);
         $this->load->view('boats/modalBoatDel', $data);
+    }
+
+    /**
+     * VALIDAR SI EL NUMERO IMO EXISTE
+     * var imo
+     * @return boolean
+     */
+
+    public function checkIMO_post()
+    {
+        $imo = $this->input->post('imo');
+        $data = $this->boats_model->checkIMO($imo);
+        
+        if ($data) {
+            echo "Ya existe el numero introducido";
+        }
+        
     }
  
 }

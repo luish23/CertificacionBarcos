@@ -109,6 +109,7 @@ $route['modalBoatUp']['GET']        = 'Boats/modalBoatsUp';
 $route['modalBoatDel']['GET']       = 'Boats/modalBoatsDel';
 $route['updateBoat']['POST']        = 'Boats/updateBoat';
 $route['deleteBoat']['POST']        = 'Boats/deleteBoat';
+$route['checkIMO']['POST']          = 'Boats/checkIMO';
 
 
 

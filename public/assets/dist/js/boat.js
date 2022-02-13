@@ -34,6 +34,22 @@ $(document).ready(function(){
         }
     });
    });
+
+   $('#number_imo').on('change', function () {
+    var dataIMO = $(this).val();
+    $.ajax({
+        type : 'post',
+        url : 'checkIMO', //Here you will fetch records 
+        data :  'imo='+ dataIMO, //Pass $id
+        success : function(data){
+          console.log(data);
+          if (data) {
+            alert(data);//Show fetched data from database
+            $('input[name=number_imo').val('');
+          }
+        }
+    });
+   });
   
    $('#boatForm').validate({
     rules: {
