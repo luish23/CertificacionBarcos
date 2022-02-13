@@ -149,7 +149,7 @@ class Employee extends RESTController {
         $id = $this->input->get('id');
         $data = $this->employees_model->getEmployeeUpdate($id);
         $this->load->view('employees/modalEmployeeUp', $data);
-        $this->load->view('employees/footer_modalEmployee', $data);
+        $this->load->view('employees/footer_modalEmployee');
     }
 
     public function modalEmployeeDel_get()
