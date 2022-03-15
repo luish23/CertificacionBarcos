@@ -13,6 +13,9 @@ $lang['alert_update_ok']                             = 'Navio Actualizado satisf
 $lang['alert_update_error']                          = 'Hubo un error al Actualizar la data';
 $lang['alert_delete_ok']                             = 'Navio Eliminado satisfactoriamente!!';
 $lang['alert_delete_error']                          = 'Hubo un error al Eliminar la data';
+$lang['copyright']                                   = 'Copyright';
+$lang['name_system']                                 = 'Administración de Certificados';
+$lang['all_rights_reserved']                         = 'Todos los derechos reservados';
 
 
 
