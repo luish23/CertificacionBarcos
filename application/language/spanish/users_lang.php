@@ -12,6 +12,9 @@ $lang['alert_error_insert_user']                = 'Hubo un error al Insertar la 
 $lang['alert_no_data']                          = 'Datos no recibidos'; 
 $lang['alert_no_update_data']                   = 'Hubo un error al Actualizar la data'; 
 $lang['alert_no_equal_pwd']                     = 'Las contraseñas no coinciden!!'; 
+$lang['copyright']                              = 'Copyright';
+$lang['name_system']                            = 'Administración de Certificados';
+$lang['all_rights_reserved']                    = 'Todos los derechos reservados';
 
 /**
  * formUsers.php
