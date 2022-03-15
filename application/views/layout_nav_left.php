@@ -41,6 +41,35 @@
               <p><?php echo $this->lang->line('dashboard'); ?></p>
             </a>
           </li>
+          <?php if ($session['mShipowner']) { ?>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="fas fa-anchor"></i>
+              <p>
+              <?php echo $this->lang->line('control_shipowner'); ?>
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <?php if ($session['addShipowner']) { ?>
+              <li class="nav-item">
+                <a href="/formShipowner" class="nav-link">
+                <i class="fas fa-plus-circle"></i>
+                  <p><?php echo $this->lang->line('add_shipowner'); ?></p>
+                </a>
+              </li>
+              <?php } ?>
+              <?php if ($session['listShipowner']) { ?>
+              <li class="nav-item">
+                <a href="/listShipowner" class="nav-link">
+                  <i class="fas fa-list-ul"></i>
+                  <p><?php echo $this->lang->line('list_shipowner'); ?></p>
+                </a>
+              </li>
+              <?php } ?>
+            </ul>
+          </li>
+          <?php } ?>
           <?php if ($session['mNavio']) { ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
