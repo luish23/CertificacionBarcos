@@ -5,6 +5,9 @@
  */
 
 $lang['order']                                  = 'Pedido';
+$lang['copyright']                              = 'Copyright';
+$lang['name_system']                            = 'Sistema de Gerenciamento de Certificados';
+$lang['all_rights_reserved']                    = 'Todos os direitos reservados';
 
 /*
  * listOrders.php
