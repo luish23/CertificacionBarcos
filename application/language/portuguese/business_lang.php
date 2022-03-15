@@ -16,4 +16,6 @@ $lang['actions']                                    = 'Acções';
 $lang['information']                                = 'Informações';
 $lang['edit_information']                           = 'Editar Informações';
 
-
+$lang['copyright']                                   = 'Copyright';
+$lang['name_system']                                 = 'Sistema de Gerenciamento de Certificados';
+$lang['all_rights_reserved']                         = 'Todos os direitos reservados';
