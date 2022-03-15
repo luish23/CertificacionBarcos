@@ -15,3 +15,7 @@ $lang['empty_pwd']                      = 'Campo Contraseña vacias';
 
 $lang['alert_adm']                      = 'Usuario No Asignado a Personal. Contacte al Admistrador'; 
 $lang['alert_error_user_pwd']           = 'Usuario Inhabilitado'; 
+
+$lang['copyright']                      = 'Copyright';
+$lang['name_system']                    = 'Administración de Certificados';
+$lang['all_rights_reserved']            = 'Todos los derechos reservados';

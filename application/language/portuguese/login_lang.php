@@ -15,3 +15,7 @@ $lang['empty_pwd']                      = 'Campo de senha vazio';
 
 $lang['alert_adm']                      = 'Usuário não atribuído a Pessoal. Entre em contato com o administrador'; 
 $lang['alert_error_user_pwd']           = 'Usuário desativado'; 
+
+$lang['copyright']                      = 'Copyright';
+$lang['name_system']                    = 'Sistema de Gerenciamento de Certificados';
+$lang['all_rights_reserved']            = 'Todos os direitos reservados';

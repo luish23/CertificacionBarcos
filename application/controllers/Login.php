@@ -14,6 +14,7 @@ class Login extends RESTController {
         $this->load->helper(array('url','form'));
         $this->load->library(array('form_validation','session','encryption'));
         $this->key = $this->config->item('encryption_key');
+        $this->base_url = $this->config->item('base_url');
         $this->encryption->initialize(
             array(  'driver' => 'openssl',
                     'cipher' => 'aes-128',
