@@ -24,3 +24,7 @@ $lang['september']                          = 'Septiembre';
 $lang['october']                            = 'Octubre';
 $lang['november']                           = 'Noviembre';
 $lang['december']                           = 'Diciembre';
+
+$lang['copyright']                          = 'Copyright';
+$lang['name_system']                        = 'Administración de Certificados';
+$lang['all_rights_reserved']                = 'Todos los derechos reservados';

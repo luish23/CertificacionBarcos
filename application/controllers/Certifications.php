@@ -13,6 +13,7 @@ class Certifications extends RESTController {
         $this->load->model(array("certifications_model","orders_model","login_model", "logs_model"));
         $this->load->library(array('custom_log','session'));
         $this->load->helper(array("url","custom"));
+        $this->base_url = $this->config->item('base_url');
         setlocale(LC_ALL, 'es_ES');
         if($this->login_model->logged_id())
 		{
