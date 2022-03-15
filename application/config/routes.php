@@ -85,6 +85,19 @@ $route['deleteUser']['POST']        = 'Users/deleteUser';
 
 $route['dashboard']['GET']    = 'Dashboard/index';
 
+/*
+* ROUTES SHIPOWNER 
+*/
+
+$route['shipowner']['GET']           = 'Shipowner/index';
+$route['formShipowner']['GET']       = 'Shipowner/formShipowner';
+$route['listShipowner']['GET']       = 'Shipowner/listShipowner';
+$route['modalShipownerUp']['GET']    = 'Shipowner/modalShipownerUp';
+$route['updateShipowner']['POST']    = 'Shipowner/updateShipowner';
+$route['registerShipowner']['POST']  = 'Shipowner/registerShipowner';
+
+
+
 /* 
 * ROUTES EMPLOYEES
 */
