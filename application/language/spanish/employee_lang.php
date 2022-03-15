@@ -19,3 +19,7 @@ $lang['alert_error_update_employee']                    = 'Hubo un error al Actu
 
 $lang['alert_delete_employee']                          = 'Personal Eliminado satisfactoriamente!!'; 
 $lang['alert_error_delete_employee']                    = 'Hubo un error al Eliminar la data';
+
+$lang['copyright']                                      = 'Copyright';
+$lang['name_system']                                    = 'Administración de Certificados';
+$lang['all_rights_reserved']                            = 'Todos los derechos reservados';

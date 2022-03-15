@@ -13,6 +13,7 @@ class Employee extends RESTController {
         $this->load->model(array("users_model","login_model", "employees_model", "boats_model", "logs_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
+        $this->base_url = $this->config->item('base_url');
         if($this->login_model->logged_id())
 		{
 			$this->session_data = array(
