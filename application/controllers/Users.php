@@ -82,7 +82,7 @@ class Users extends RESTController {
                         );
 
             $response = $this->users_model->insertUser($data);
-            
+            print_r($response); die;
             switch ($response['code']) {
                 case 1062:
                     echo "<script>alert('".$this->lang->line('exist_user')."');</script>";

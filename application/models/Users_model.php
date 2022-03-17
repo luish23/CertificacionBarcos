@@ -70,21 +70,27 @@ class Users_model extends CI_Model {
 
     public function insertUser($data)
     {
-        $this->db_users->trans_start();
-        $this->db_users->trans_strict(FALSE);
+        // $this->db_users->trans_start();
+        // $this->db_users->trans_strict(FALSE);
 
-        $this->db_users->insert('users', $data);
-        $item_id = $this->db_users->insert_id();
+        // $this->db_users->insert('users', $data);
+        // $item_id = $this->db_users->insert_id();
 
-        if ($this->db_users->trans_status() === FALSE) {
-            $error = $this->db_users->error();
-            $this->db_users->trans_rollback();
-            return $error;
+        // if ($this->db_users->trans_status() === FALSE) {
+        //     $error = $this->db_users->error();
+        //     $this->db_users->trans_rollback();
+        //     return $error;
+        // }
+
+        // $this->db_users->trans_commit();
+
+        // return $item_id;
+
+        try {
+            $this->db_users->insert('users', $data);
+        } catch (\Throwable $th) {
+            return "Hola";
         }
-
-        $this->db_users->trans_commit();
-
-        return $item_id;
     }
 
     public function updatetUser($data, $id)

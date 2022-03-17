@@ -134,7 +134,7 @@ function listVerif() {
       console.log(data);
         if( JSON.stringify(data.response) == 'true'){
           $(":submit").attr("disabled", true);
-          alert('Hay una certificación Vigente para este Navio');
+          alert('Existe uma certificação válida para este navio');
           $(":submit").removeClass("btn-success");
           $(":submit").addClass("btn-secondary");
         }

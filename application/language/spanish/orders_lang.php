@@ -5,9 +5,13 @@
  */
 
 $lang['order']                                  = 'Orden';
-$lang['copyright']                                   = 'Copyright';
-$lang['name_system']                                 = 'Administración de Certificados';
-$lang['all_rights_reserved']                         = 'Todos los derechos reservados';
+$lang['copyright']                              = 'Copyright';
+$lang['name_system']                            = 'Administración de Certificados';
+$lang['all_rights_reserved']                    = 'Todos los derechos reservados';
+$lang['order_activo']                           = 'ACTIVO';
+$lang['order_vence']                            = 'VENCIDO';
+$lang['order_vence_prox']                       = 'VENCE EN';
+$lang['provisional']                            = 'Provisional';
 
 /*
  * listOrders.php

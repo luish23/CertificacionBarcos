@@ -67,19 +67,19 @@ $(function () {
       },
       messages: {
           name: {
-          required: "Por favor ingrese un Nombre",
-          pattern: "Por favor ingrese solo letras y espacios",
+          required: "Por favor, digite um nome",
+          pattern: "Insira apenas letras e espaços",
         },
         lastName: {
-          required: "Por favor introduzca un Apellido",
-          pattern: "Por favor ingrese solo letras y espacios",
+          required: "Por favor, digite um sobrenome",
+          pattern: "Insira apenas letras e espaços",
         },
         dni: {
-          required: "Por favor introduzca su DNI",
+          required: "Por favor, insira seu ID",
         },
         codUser: {
-          required: "Por favor seleccione un Usuario",
-          min: "Por favor seleccione un Usuario"
+          required: "Selecione um usuário",
+          min: "Selecione um usuário"
         },
       },
       errorElement: 'span',
@@ -109,13 +109,13 @@ $(function () {
       },
       messages: {
           name: {
-          required: "Por favor ingrese un Nombre",
+          required: "Por favor, digite um nome",
         },
         lastName: {
-          required: "Por favor introduzca un Apellido",
+          required: "Por favor, digite um sobrenome",
         },
         dni: {
-          required: "Por favor introduzca su DNI",
+          required: "Por favor, insira seu ID",
         },
       },
       errorElement: 'span',

@@ -8,6 +8,10 @@ $lang['order']                                  = 'Pedido';
 $lang['copyright']                              = 'Copyright';
 $lang['name_system']                            = 'Sistema de Gerenciamento de Certificados';
 $lang['all_rights_reserved']                    = 'Todos os direitos reservados';
+$lang['order_activo']                           = 'ATIVO';
+$lang['order_vence']                            = 'EXPIRADO';
+$lang['order_vence_prox']                       = 'EXPIRA EM';
+$lang['provisional']                            = 'Provisório';
 
 /*
  * listOrders.php
