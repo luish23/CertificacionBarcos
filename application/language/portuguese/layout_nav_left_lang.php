@@ -5,9 +5,9 @@
  */
 
 $lang['dashboard']                  = 'Quadro'; 
-$lang['control_boats']              = 'Controle de Navios'; 
-$lang['add_boats']                  = 'Cadastrar Navios'; 
-$lang['list_boats']                 = 'Lista de Navios'; 
+$lang['control_boats']              = 'Controle de Embarcaçãos'; 
+$lang['add_boats']                  = 'Cadastrar Embarcaçãos'; 
+$lang['list_boats']                 = 'Lista de Embarcaçãos'; 
 $lang['control_orders']             = 'Controle de Pedidos'; 
 $lang['add_orders']                 = 'Cadastrar pedido'; 
 $lang['list_orders']                = 'Lista de pedidos'; 
@@ -39,7 +39,7 @@ $lang['save']                       = 'Guarda';
 $lang['update']                     = 'Atualizar';
 $lang['delete']                     = 'Excluir';
 $lang['close']                      = 'Fechar';
-$lang['boat']                       = 'Navio';
+$lang['boat']                       = 'Embarcação';
 $lang['information']                = 'Informações';
 $lang['dni']                        = 'cartão de identidade';
 $lang['lastName']                   = 'Sobrenome';

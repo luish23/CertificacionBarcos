@@ -19,7 +19,7 @@ $lang['provisional']                            = 'Provisório';
 
 $lang['title_listOrders']                      = 'Lista de Pedidos';
 $lang['title_formOrders']                      = 'Cadastrar pedidos';
-$lang['alert_formOrders']                      = 'Não possui registro de navios pendentes por Ordem';
+$lang['alert_formOrders']                      = 'Não possui registro de embarcaçãos pendentes por Ordem';
 $lang['alert_registerOrder']                   = 'Pedido cadastrado com sucesso!!';
 $lang['alert_updateOrder']                     = 'Pedido atualizado com sucesso!!';
 $lang['alert_deleteOrder']                     = 'Pedido removido com sucesso!!';
@@ -75,11 +75,11 @@ $lang['test_result']                            = 'Resultados do teste';
 
 $lang['shipowner']                                  = 'Armador';
 $lang['number_register']                            = 'Numero de Inscrição';
-$lang['call_sign']                                  = 'Indicativo do Navio';
+$lang['call_sign']                                  = 'Indicativo do Embarcação';
 $lang['year_build']                                 = 'Ano de Construção';
 $lang['place_build']                                = 'Lugar de Construcción';
 $lang['shipyard']                                   = 'Estaleiro';
-$lang['type_boat']                                  = 'Tipo de Navio';
+$lang['type_boat']                                  = 'Tipo de Embarcação';
 $lang['navigation']                                 = 'Navegação';
 $lang['service']                                    = 'Serviço';
 $lang['number_approved_passengers']                 = 'Numero de Passageiros Aprobados';

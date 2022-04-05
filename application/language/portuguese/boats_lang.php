@@ -4,14 +4,14 @@
 /**
  * General
  */
-$lang['add_boat']                                    = 'Cadastrar Navios';
-$lang['listBoats']                                   = 'Lista de Navios';
+$lang['add_boat']                                    = 'Cadastrar Embarcaçãos';
+$lang['listBoats']                                   = 'Lista de Embarcaçãos';
 $lang['answer_delete_boat']                          = 'Tem certeza de que deseja excluir o cadastro?';
-$lang['alert_insert_ok']                             = 'Navio cadastrado com sucesso!!';
+$lang['alert_insert_ok']                             = 'Embarcação cadastrado com sucesso!!';
 $lang['alert_insert_error']                          = 'Ocorreu um erro ao inserir os dados';
-$lang['alert_update_ok']                             = 'Navio atualizado com sucesso!!';
+$lang['alert_update_ok']                             = 'Embarcação atualizado com sucesso!!';
 $lang['alert_update_error']                          = 'Ocorreu um erro ao atualizar os dados';
-$lang['alert_delete_ok']                             = 'Navio removido com sucesso!!';
+$lang['alert_delete_ok']                             = 'Embarcação removido com sucesso!!';
 $lang['alert_delete_error']                          = 'Ocorreu um erro ao remover os dados';
 $lang['copyright']                                   = 'Copyright';
 $lang['name_system']                                 = 'Sistema de Gerenciamento de Certificados';
@@ -24,7 +24,7 @@ $lang['all_rights_reserved']                         = 'Todos os direitos reserv
 
 $lang['shipowner']                                  = 'Armador';
 $lang['number_register']                            = 'Numero de Inscrição';
-$lang['call_sign']                                  = 'Indicativo do Navio';
+$lang['call_sign']                                  = 'Indicativo do Embarcação';
 $lang['year_build']                                 = 'Ano de Construção';
 $lang['place_build']                                = 'Lugar de Construção';
 $lang['shipyard']                                   = 'Estaleiro';
