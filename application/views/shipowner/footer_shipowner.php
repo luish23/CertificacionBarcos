@@ -17,7 +17,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="http://sgcb.development.com">Sistema de Administración de Certificados</a>.</strong> All rights reserved.
+    <strong><?php echo $this->lang->line('copyright')."&copy; 2021-".date("Y")." <a href='".$this->base_url."'>".$this->lang->line('name_system')."</a>. </strong>".$this->lang->line('all_rights_reserved'); ?>
   </footer>
 </div>
 <!-- ./wrapper -->

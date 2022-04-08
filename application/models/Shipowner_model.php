@@ -30,6 +30,25 @@ class Shipowner_model extends CI_Model {
 
     }
 
+    public function insertShipowner($data)
+    {
+        $this->db_shipowner->trans_begin();
+
+        $this->db_shipowner->insert('shipowner', $data);
+        $item_id = $this->db_shipowner->insert_id();
+
+        if ($this->db_shipowner->trans_status() === FALSE) {
+            $this->db_shipowner->trans_rollback();
+
+            return false;
+        }
+        else {
+            $this->db_shipowner->trans_commit();
+            return $item_id;
+        }
+        
+    }
+
     public function updateShipowner($data, $id)
     {
         $this->db_shipowner->where('id', $id);

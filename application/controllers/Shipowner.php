@@ -13,6 +13,7 @@ class Shipowner extends RESTController {
         $this->load->model(array("shipowner_model", "login_model", "logs_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
+        $this->base_url = $this->config->item('base_url');
         if($this->login_model->logged_id())
 		{
 			$this->session_data = array(
@@ -69,7 +70,22 @@ class Shipowner extends RESTController {
 
     public function registerShipowner_post()
     {
-        $id = $this->input->post('id');
+        $data = array ( 'name_ship' => $this->input->post('name_ship'), 
+                        'address' => $this->input->post('address'),
+                        'phone' => $this->input->post('phone')
+                    );
+
+        $response = $this->shipowner_model->insertShipowner($data);
+
+        if ($response) {
+            $this->logs_model->registerLogs($this->session->user_id, 'registerShipowner_post', 'Add', 'Insertó Shipowner Id: '.$response);
+            echo "<script>alert('".$this->lang->line('alert_insert_ok')."');</script>";
+            redirect('listShipowner', 'refresh');
+        }
+        else {
+            echo "<script>alert('".$this->lang->line('alert_insert_error')."');</script>";
+            redirect('dashboard', 'refresh');
+        }
     }
 
     public function updateShipowner_post()
