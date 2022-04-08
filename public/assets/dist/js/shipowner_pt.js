@@ -27,7 +27,7 @@ $(function () {
       },
       messages: {
         name_ship: {
-          required: "Por favor ingrese un Nombre de Armador",
+          required: "O campo é obrigatório",
         },
 /*        address: {
           required: "Por favor introduzca una Dirección",
@@ -53,32 +53,32 @@ $(function () {
 
 $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-      "language": {
-        "sProcessing":    "Procesando...",
-        "sLengthMenu":    "Mostrar _MENU_ registros",
-        "sZeroRecords":   "No se encontraron resultados",
-        "sEmptyTable":    "Ningún dato disponible en esta tabla",
-        "sInfo":          "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-        "sInfoEmpty":     "Mostrando registros del 0 al 0 de un total de 0 registros",
-        "sInfoFiltered":  "(filtrado de un total de _MAX_ registros)",
-        "sInfoPostFix":   "",
-        "sSearch":        "Buscar:",
-        "sUrl":           "",
-        "sInfoThousands":  ",",
-        "sLoadingRecords": "Cargando...",
-        "oPaginate": {
-            "sFirst":    "Primero",
-            "sLast":    "Último",
-            "sNext":    "Siguiente",
-            "sPrevious": "Anterior"
-        },
-        "oAria": {
-            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "language": {
+          "sProcessing":    "Em processamento...",
+          "sLengthMenu":    "Mostrar _MENU_ registros",
+          "sZeroRecords":   "nenhum resultado encontrado",
+          "sEmptyTable":    "Não há dados disponíveis nesta tabela",
+          "sInfo":          "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
+          "sInfoEmpty":     "Mostrando registros de 0 a 0 de um total de 0 registros",
+          "sInfoFiltered":  "(filtrando um total de _MAX_ registros)",
+          "sInfoPostFix":   "",
+          "sSearch":        "Olhe para:",
+          "sUrl":           "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Carregando...",
+          "oPaginate": {
+              "sFirst":    "Primeiro",
+              "sLast":    "Mais recentes",
+              "sNext":    "Seguindo",
+              "sPrevious": "Anterior"
+          },
+          "oAria": {
+              "sSortAscending":  ": Marque para classificar a coluna em ordem crescente",
+              "sSortDescending": ": Marque para classificar a coluna decrescente"
+          }
         }
-      }
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,

@@ -50,7 +50,22 @@
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../public/assets/dist/js/demo.js"></script> -->
 <!-- Custom JS login -->
-<script src="../public/assets/dist/js/shipowner.js"></script>
+<?php switch ($this->session->site_lang) {
+  case 'spanish':
+    $src="../public/assets/dist/js/shipowner.js";
+    break;
+
+  case 'english':
+    $src="../public/assets/dist/js/shipowner_en.js";
+    break;
+  
+  default:
+    $src="../public/assets/dist/js/shipowner_pt.js";
+    break;
+} 
+?>
+<script src="<?php echo $src; ?>"></script>
+
 
 </body>
 </html>

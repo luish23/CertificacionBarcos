@@ -17,6 +17,9 @@ class Cron extends CI_Controller {
         echo "Controller Cron";
     }
 
+    /**
+     * RUN: php /var/www/html/sgcb.development.com/public_html/index.php cron updateExpiration
+     */
     public function updateExpiration()
     {
         // if (!is_cli()) {
@@ -26,13 +29,11 @@ class Cron extends CI_Controller {
         $firstDate  = new DateTime(date("Y-m-d"));
 
         $response = $this->cron_model->updateExpirationCerts();
-        
+
         if ($response) {
             foreach ($response as $key => $value) {
                 $secondDate = new DateTime($value['expired_certificated']);
                 $intvl = $firstDate->diff($secondDate);
-    
-                
     
                 if ($intvl->y == 0 && $intvl->m == 0 && $intvl->d > 0) {
                     $this->cron_model->updateDaysCerts($value['id'], 'VENCE EN', $intvl->d);
@@ -47,6 +48,10 @@ class Cron extends CI_Controller {
                     $this->cron_model->updateDaysCerts($value['id'], 'VENCIDO', 0);
                 }
             }
+
+            echo "Vencimentos Finais!! \n";
+        }else {
+            echo "Não há expirações!! \n";
         }
         
     }
