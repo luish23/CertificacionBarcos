@@ -143,7 +143,7 @@ class Orders_model extends CI_Model {
 
     public function getOrderBoatById($id)
     {
-        $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, o.provisional, o.condition, o.codTypeCertification, o.codListVerification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
+        $this->db_orders->select('b.*, o.id AS idOrder, o.codBoat, o.codWord, o.codPDF, o.provisional, o.expiry_time, o.condition, o.codTypeCertification, o.codListVerification, of.office, SUBSTRING(o.created_at, 3,2) AS anyo');
         $this->db_orders->from('orders o');
         $this->db_orders->join($this->db_orders->database.'.boats b', $this->db_orders->database.'.b.id = o.codBoat');
         $this->db_orders->join($this->db_orders->database.'.offices of', $this->db_orders->database.'.of.id = o.codOffice');
@@ -185,6 +185,8 @@ class Orders_model extends CI_Model {
     {
         if ($data['condition'] == 'PROCESO') {
             $data['inspect_date_end'] = date('Y-m-d');
+        }else{
+            $data['inspect_date_end'] = null;
         }
         $this->db_orders->where('id', $id);
         $this->db_orders->update('orders',$data);
@@ -249,6 +251,9 @@ class Orders_model extends CI_Model {
     {
         $this->db_orders->set('condition', $condition);
         $this->db_orders->set('reasonRejection', $reasonRejection);
+        if ($condition == "VALIDADO") {
+            $this->db_orders->set('inspect_date_end', date('Y-m-d'));
+        }
         $this->db_orders->where('id', $id);
         $this->db_orders->update('orders');
 

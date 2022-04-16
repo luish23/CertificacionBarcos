@@ -84,6 +84,7 @@
                     <option value="0" selected="selected"><?php echo $this->lang->line('no'); ?></option>
                     </select>
                   </div>
+                  <msg2></msg2>
                 </div>   
                 <!-- /.card-body -->
                 <div class="card-footer">
