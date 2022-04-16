@@ -1,92 +1,103 @@
 $(document).ready(function(){
-  $('#seeOrder').on('show.bs.modal', function (e) {
+    $('#seeOrder').on('show.bs.modal', function (e) {
+        var rowid = $(e.relatedTarget).data('id');
+        $.ajax({
+            type : 'get',
+            url : 'modalOrder', //Here you will fetch records 
+            data :  'id='+ rowid, //Pass $id
+            success : function(data){
+            $('.fetched-data').html(data);//Show fetched data from database
+            }
+        });
+    });
+
+    $('#updateOrder').on('show.bs.modal', function (e) {
+      var rowid = $(e.relatedTarget).data('id');
+      console.log(rowid);
+      $.ajax({
+          type : 'get',
+          url : 'modalOrderUp', //Here you will fetch records 
+          data :  'id='+ rowid, //Pass $id
+          success : function(data){
+          $('.fetched-dataUp').html(data);//Show fetched data from database
+          }
+      });
+    });
+
+    $('#delOrder').on('show.bs.modal', function (e) {
       var rowid = $(e.relatedTarget).data('id');
       $.ajax({
           type : 'get',
-          url : 'modalOrder', //Here you will fetch records 
+          url : 'modalOrderDel', //Here you will fetch records 
           data :  'id='+ rowid, //Pass $id
           success : function(data){
-          $('.fetched-data').html(data);//Show fetched data from database
+          $('.fetched-dataDel').html(data);//Show fetched data from database
           }
       });
-   });
-
-   $('#updateOrder').on('show.bs.modal', function (e) {
-    var rowid = $(e.relatedTarget).data('id');
-    console.log(rowid);
-    $.ajax({
-        type : 'get',
-        url : 'modalOrderUp', //Here you will fetch records 
-        data :  'id='+ rowid, //Pass $id
-        success : function(data){
-        $('.fetched-dataUp').html(data);//Show fetched data from database
-        }
     });
-  });
 
-  $('#delOrder').on('show.bs.modal', function (e) {
-    var rowid = $(e.relatedTarget).data('id');
-    $.ajax({
-        type : 'get',
-        url : 'modalOrderDel', //Here you will fetch records 
-        data :  'id='+ rowid, //Pass $id
-        success : function(data){
-        $('.fetched-dataDel').html(data);//Show fetched data from database
-        }
-    });
-  });
-
-  $('#genCertificado').on('show.bs.modal', function (e) {
-    var rowid = $(e.relatedTarget).data('id');
-    console.log(rowid);
-    $.ajax({
-        type : 'get',
-        url : 'modalCertificado', //Here you will fetch records 
-        data :  'id='+ rowid+'&downloadType=F', //Pass $id
-        success : function(data){
-        $('.fetched-dataGen').html(data);//Show fetched data from database
-        }
-    });
-  });
-
-  $('#seeCertificado').on('show.bs.modal', function (e) {
-    var rowid = $(e.relatedTarget).data('id');
-    console.log(rowid);
-    $.ajax({
-        type : 'get',
-        url : 'modalCertificado', //Here you will fetch records 
-        data :  'id='+ rowid+'&downloadType=D', //Pass $id
-        success : function(data){
-        $('.fetched-dataGen').html(data);//Show fetched data from database
-        }
-    });
-  });
-
-  $('#validOrder').on('show.bs.modal', function (e) {
-    var rowid = $(e.relatedTarget).data('id');
-    $.ajax({
-        type : 'get',
-        url : 'modalValidOrder', //Here you will fetch records 
-        data :  'id='+ rowid, //Pass $id
-        success : function(data){
-        $('.fetched-dataVal').html(data);//Show fetched data from database
-        }
-    });
-  });
-
-  $('#codTypeCertification').change(function() {
-    var selectCertif = $('option:selected', this).attr('value');
-
-    $.ajax({
-      type : 'post',
-      url : 'getVerifications', //Here you will fetch records 
-      data :  'idCer='+ selectCertif, //Pass $id
-      success : function(data){
-        console.log(data);
-        var newP = $(data);
-        $("#SelectListVerification").html(newP);
+    $('#provisional').change(function() {
+      var select = $("#provisional").find('option:selected').val();
+      if( select == '1'){
+        var newP = $('<div class="form-group"><label for="exampleInputEmail1">Tiempo de Expiración</label><select class="form-control" id="expiry_time" name="expiry_time"><option value="60">60 días</option><option value="90">90 días</option><option value="120">120 días</option><option value="180">180 días</option></select></div>');
+        $("msg2").append(newP);
+      }
+      else{
+        $( "msg2" ).empty();
       }
     });
+
+    $('#genCertificado').on('show.bs.modal', function (e) {
+      var rowid = $(e.relatedTarget).data('id');
+      // console.log(rowid);
+      $.ajax({
+          type : 'get',
+          url : 'modalCertificado', //Here you will fetch records 
+          data :  'id='+ rowid+'&downloadType=F', //Pass $id
+          success : function(data){
+          $('.fetched-dataGen').html(data);//Show fetched data from database
+          }
+      });
+    });
+
+    $('#seeCertificado').on('show.bs.modal', function (e) {
+      var rowid = $(e.relatedTarget).data('id');
+      console.log(rowid);
+      $.ajax({
+          type : 'get',
+          url : 'modalCertificado', //Here you will fetch records 
+          data :  'id='+ rowid+'&downloadType=D', //Pass $id
+          success : function(data){
+          $('.fetched-dataGen').html(data);//Show fetched data from database
+          }
+      });
+    });
+
+    $('#validOrder').on('show.bs.modal', function (e) {
+      var rowid = $(e.relatedTarget).data('id');
+      $.ajax({
+          type : 'get',
+          url : 'modalValidOrder', //Here you will fetch records 
+          data :  'id='+ rowid, //Pass $id
+          success : function(data){
+          $('.fetched-dataVal').html(data);//Show fetched data from database
+          }
+      });
+    });
+
+    $('#codTypeCertification').change(function() {
+      var selectCertif = $('option:selected', this).attr('value');
+
+      $.ajax({
+        type : 'post',
+        url : 'getVerifications', //Here you will fetch records 
+        data :  'idCer='+ selectCertif, //Pass $id
+        success : function(data){
+          console.log(data);
+          var newP = $(data);
+          $("#SelectListVerification").html(newP);
+        }
+      });
 
     $('#codBoat').change(function() {
       var selectCertif = $("#codTypeCertification").find('option:selected').val();

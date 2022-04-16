@@ -93,6 +93,37 @@
                     
                     </select>
                 </div>
+                <msg2>
+                    <?php if ($data['provisional']){ ?>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"><?php echo $this->lang->line('expiry_time'); ?></label>
+                            <select class="form-control" id="expiry_time" name="expiry_time">
+                                <?php if ($data['expiry_time'] == 60) {
+                                    echo '<option value="60" selected="selected">60 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="90">90 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="120">120 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="180">180 '.$this->lang->line("days").'</option>';
+                                }elseif($data['expiry_time'] == 90) {
+                                    echo '<option value="60">60 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="90" selected="selected">90 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="120">120 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="180">180 '.$this->lang->line("days").'</option>';
+                                }elseif($data['expiry_time'] == 120) {
+                                    echo '<option value="60">60 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="90">90 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="120" selected="selected">120 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="180">180 '.$this->lang->line("days").'</option>';
+                                }elseif($data['expiry_time'] == 180) {
+                                    echo '<option value="60">60 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="90">90 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="120">120 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="180" selected="selected">180 '.$this->lang->line("days").'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    <?php } ?>
+                </msg2>
                 <div class="modal-footer">
                     <input type="hidden" name="codBoat" id="codBoat" value="<?php echo $data['codBoat']; ?>">
                     <input type="hidden" name="idOrder" id="idOrder" value="<?php echo $data['idOrder']; ?>">
