@@ -16,9 +16,9 @@
 // $lang['alert_adm']                      = 'Usuario No Asignado a Personal. Contacte al Admistrador'; 
 // $lang['alert_error_user_pwd']           = 'Usuario Inhabilitado'; 
 
-// $lang['copyright']                      = 'Copyright';
-// $lang['name_system']                    = 'Administración de Certificados';
-// $lang['all_rights_reserved']            = 'Todos los derechos reservados';
+$lang['copyright']                      = 'Copyright';
+$lang['name_system']                    = 'Administración de Certificados';
+$lang['all_rights_reserved']            = 'Todos los derechos reservados';
 
 $lang['label_username']                 = 'Usuário'; 
 $lang['placeholder_username']           = 'Digite Usuário...'; 
@@ -32,6 +32,6 @@ $lang['empty_pwd']                      = 'Campo de senha vazio';
 $lang['alert_adm']                      = 'Usuário não atribuído a Pessoal. Entre em contato com o administrador'; 
 $lang['alert_error_user_pwd']           = 'Usuário desativado'; 
 
-$lang['copyright']                      = 'Copyright';
-$lang['name_system']                    = 'Sistema de Gerenciamento de Certificados';
-$lang['all_rights_reserved']            = 'Todos os direitos reservados';
+// $lang['copyright']                      = 'Copyright';
+// $lang['name_system']                    = 'Sistema de Gerenciamento de Certificados';
+// $lang['all_rights_reserved']            = 'Todos os direitos reservados';

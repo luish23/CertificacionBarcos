@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Spanish language
+ * Potuguese language
  */
 
 $lang['answer_delete_employee']                         = 'tem certeza de que deseja excluir o cadastro?'; 

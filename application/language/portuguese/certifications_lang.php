@@ -10,7 +10,9 @@ $lang['alert_error']                        = 'Ocorreu um erro ao gerar o certif
 $lang['alert_error2']                       = 'Não foi possível gerar o certificado';
 $lang['certificate']                        = 'Certificado';
 $lang['satisfying']                         = 'Gerado com sucesso!!';
-
+$lang['alert_convalidations']               = 'Por favor actualizar el formulario de Convalidaciones';
+$lang['alert_cdataExtraNS02']               = 'Por favor actualizar el formulario de Espacios Incluidos';
+$lang['alert_testResultNS03']               = 'Por favor actualizar el formulario de Resultados del Ensayo';
 
 $lang['january']                            = 'Janeiro';
 $lang['february']                           = 'Fevreiro';

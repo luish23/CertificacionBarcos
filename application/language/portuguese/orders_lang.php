@@ -12,6 +12,9 @@ $lang['order_activo']                           = 'ATIVO';
 $lang['order_vence']                            = 'EXPIRADO';
 $lang['order_vence_prox']                       = 'EXPIRA EM';
 $lang['provisional']                            = 'Provisório';
+$lang['provisional']                            = 'Provisional';
+$lang['expiry_time']                            = 'Tiempo de Expiración';
+$lang['days']                                   = 'días';
 
 /*
  * listOrders.php

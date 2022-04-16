@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Spanish language
+ * Potuguese language
  */
 
 $lang['select']                                 = 'Seleccionar'; 

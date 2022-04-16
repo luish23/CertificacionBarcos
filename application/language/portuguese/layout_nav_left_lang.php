@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Spanish language
+ * Potuguese language
  */
 
 $lang['dashboard']                  = 'Quadro'; 

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Spanish language
+ * Portuguese language
  */
 
 $lang['label_username']                 = 'Usuário'; 

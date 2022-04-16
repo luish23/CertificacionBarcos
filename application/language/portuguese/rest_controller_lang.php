@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Spanish language
+ * Potuguese language
  */
 
 $lang['text_rest_invalid_api_key'] = 'API key %s não valida'; // %s is the REST API key
