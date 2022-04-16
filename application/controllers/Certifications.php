@@ -26,7 +26,7 @@ class Certifications extends RESTController {
                 'site_lang'  	=> $this->session->site_lang
 			);
          $this->session_data['session'] = $this->login_model->getPermission($this->session->codTypeUser);
-         $this->lang->load(array('certifications','orders_lang','layout_nav_left'), $this->session->site_lang);
+         $this->lang->load(array('certifications','orders','layout_nav_left'), $this->session->site_lang);
         }else{
             $this->session->unset_userdata('session_data');
             $this->session->sess_destroy();
@@ -561,11 +561,19 @@ class Certifications extends RESTController {
                 if ($data['dataNS']) {
                     $data['dataNSEx'] = $this->orders_model->getDataNS('convalidationsNS01', ['codNS01' => $data['dataNS']['id']]);
                 }
+                if($data['dataNSEx'] == null){
+                    echo "<script>alert('".$this->lang->line('alert_convalidations')."');</script>";
+                    redirect("listOrders", 'refresh');
+                }
                 $this->_createCertificate1($data,$config,$certificate,$downloadType);
                 break;
             
             case 2:
                 $data['dataNS'] = $this->orders_model->getDataNS('dataExtraNS02', ['codOrder' => $id]);
+                if($data['dataNS'] == null){
+                    echo "<script>alert('".$this->lang->line('alert_dataExtraNS02')."');</script>";
+                    redirect("listOrders", 'refresh');
+                }
                 $this->_createCertificate2($data,$config,$certificate,$downloadType);
                 break;
             
@@ -573,6 +581,10 @@ class Certifications extends RESTController {
                 $data['dataNS'] = $this->orders_model->getDataNS('dataExtraNS03', ['codOrder' => $id]);
                 if ($data['dataNS']) {
                     $data['dataNSEx'] = $this->orders_model->getDataNS('testResultNS03', ['codNS03' => $data['dataNS']['id']]);
+                }
+                if($data['dataNSEx'] == null){
+                    echo "<script>alert('".$this->lang->line('alert_testResultNS03')."');</script>";
+                    redirect("listOrders", 'refresh');
                 }
                 $this->_createCertificate3($data,$config,$certificate,$downloadType);
                 break;
@@ -586,8 +598,16 @@ class Certifications extends RESTController {
         if (!empty($data))
         {
             $dateInspect = explode('-',$data['data']['inspect_date_end']);
-            $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 1824 days"));
-            $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 1824 days")));
+
+            if($data['data']['provisional'])
+            {
+                $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ ".$data['data']['expiry_time']." days"));
+                $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ ".$data['data']['expiry_time']." days")));
+            }else{
+                $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 1824 days"));
+                $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 1824 days")));
+            }
+            
             $file_name = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'].'-'.$data['data']['codTypeCertification'].'_'.$data['data']['number_imo'].'.pdf';
             
             $pdf = new FPDF();
@@ -860,9 +880,18 @@ class Certifications extends RESTController {
         if (!empty($data))
         {
             $dateInspect = explode('-',$data['data']['inspect_date_end']);
-            $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days"));
-            $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days")));
+
+            if($data['data']['provisional'])
+            {
+                $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ ".$data['data']['expiry_time']." days"));
+                $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ ".$data['data']['expiry_time']." days")));
+            }else{
+                $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days"));
+                $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days")));
+            }
+
             $file_name = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'].'-'.$data['data']['codTypeCertification'].'_'.$data['data']['number_imo'].'.pdf';
+  
             $pdf = new FPDF();
             $pdf->AddPage('P','A4',0);
             $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
@@ -952,8 +981,16 @@ class Certifications extends RESTController {
         if (!empty($data))
         {
             $dateInspect = explode('-',$data['data']['inspect_date_end']);
-            $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days"));
-            $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days")));
+
+            if($data['data']['provisional'])
+            {
+                $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ ".$data['data']['expiry_time']." days"));
+                $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ ".$data['data']['expiry_time']." days")));
+            }else{
+                $expireCert = date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days"));
+                $array_expireCert =  explode("-", date("Y-m-d",strtotime($data['data']['inspect_date_end']."+ 364 days")));
+            }
+
             $file_name = $data['data']['office'].str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'].'-'.$data['data']['codTypeCertification'].'_'.$data['data']['number_imo'].'.pdf';
             $pdf = new FPDF();
             $pdf->AddPage('P','A4',0);
