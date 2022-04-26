@@ -77,16 +77,16 @@
                   }
                   ?>
                   </tbody>
-                  <tfoot>
+                  <!-- <tfoot>
                   <tr>
                     <th>#</th>
-                    <th><?php echo $this->lang->line('name'); ?></th>
-                    <th><?php echo $this->lang->line('imo'); ?></th>
-                    <th><?php echo $this->lang->line('office'); ?></th>
-                    <th><?php echo $this->lang->line('status'); ?></th>
-                    <th><?php echo $this->lang->line('preview_doc'); ?></th>
-                    <th><?php echo $this->lang->line('actions'); ?></th>
-                  </tr>
+                    <th><?php // echo $this->lang->line('name'); ?></th>
+                    <th><?php // echo $this->lang->line('imo'); ?></th>
+                    <th><?php // echo $this->lang->line('office'); ?></th>
+                    <th><?php // echo $this->lang->line('status'); ?></th>
+                    <th><?php // echo $this->lang->line('preview_doc'); ?></th>
+                    <th><?php // echo $this->lang->line('actions'); ?></th>
+                  </tr> -->
                   </tfoot>
                 </table>
               </div>
