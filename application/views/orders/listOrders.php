@@ -109,19 +109,19 @@
                   }
                   ?>
                   </tbody>
-                  <tfoot>
+                  <!-- <tfoot>
                   <tr>
                     <th>#</th>
-                    <th><?php echo $this->lang->line('name'); ?></th>
-                    <!-- <th><?php // echo $this->lang->line('imo'); ?></th> -->
-                    <!-- <th><?php // echo $this->lang->line('type_certificate'); ?></th> -->
-                    <th><?php echo $this->lang->line('list_verification'); ?></th>
-                    <th><?php echo $this->lang->line('process'); ?></th>
-                    <th><?php echo $this->lang->line('check_documents'); ?></th>
-                    <th><?php echo $this->lang->line('certificated_status'); ?></th>
-                    <th><?php echo $this->lang->line('actions'); ?></th>
+                    <th><?php // echo $this->lang->line('name'); ?></th>
+                    <th><?php // echo $this->lang->line('imo'); ?></th>
+                    <th><?php // echo $this->lang->line('type_certificate'); ?></th>
+                    <th><?php // echo $this->lang->line('list_verification'); ?></th>
+                    <th><?php // echo $this->lang->line('process'); ?></th>
+                    <th><?php // echo $this->lang->line('check_documents'); ?></th>
+                    <th><?php // echo $this->lang->line('certificated_status'); ?></th>
+                    <th><?php // echo $this->lang->line('actions'); ?></th>
                   </tr>
-                  </tfoot>
+                  </tfoot> -->
                 </table>
               </div>
               <!-- /.card-body -->

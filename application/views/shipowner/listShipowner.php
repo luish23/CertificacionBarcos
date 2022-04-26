@@ -47,12 +47,12 @@
                   }
                   ?>
                   </tbody>
-                  <tfoot>
+                  <!-- <tfoot>
                   <tr>
-                    <th><?php echo $this->lang->line('business'); ?></th>
-                    <th><?php echo $this->lang->line('actions'); ?></th>
+                    <th><?php // echo $this->lang->line('business'); ?></th>
+                    <th><?php // echo $this->lang->line('actions'); ?></th>
                   </tr>
-                  </tfoot>
+                  </tfoot> -->
                 </table>
               </div>
               <!-- /.card-body -->

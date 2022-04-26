@@ -61,14 +61,14 @@
                   }
                   ?>
                   </tbody>
-                  <tfoot>
+                  <!-- <tfoot>
                   <tr>
-                    <th><?php echo $this->lang->line('name'); ?></th>
-                    <th><?php echo $this->lang->line('shipowner'); ?></th>
-                    <th><?php echo $this->lang->line('imo'); ?></th>
-                    <th><?php echo $this->lang->line('actions'); ?></th>
+                    <th><?php //echo $this->lang->line('name'); ?></th>
+                    <th><?php //echo $this->lang->line('shipowner'); ?></th>
+                    <th><?php //echo $this->lang->line('imo'); ?></th>
+                    <th><?php //echo $this->lang->line('actions'); ?></th>
                   </tr>
-                  </tfoot>
+                  </tfoot> -->
                 </table>
               </div>
               <!-- /.card-body -->

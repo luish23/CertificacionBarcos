@@ -77,16 +77,14 @@
                   }
                   ?>
                   </tbody>
-                  <tfoot>
+                  <!-- <tfoot>
                   <tr>
                     <th>#</th>
-                    <th><?php echo $this->lang->line('name'); ?></th>
-
-                    <th><?php echo $this->lang->line('list_verification'); ?></th>
-
-                    <th><?php echo $this->lang->line('certificated_status'); ?></th>
+                    <th><?php // echo $this->lang->line('name'); ?></th>
+                    <th><?php // echo $this->lang->line('list_verification'); ?></th>
+                    <th><?php // echo $this->lang->line('certificated_status'); ?></th>
                   </tr>
-                  </tfoot>
+                  </tfoot> -->
                 </table>
               </div>
               <!-- /.card-body -->
