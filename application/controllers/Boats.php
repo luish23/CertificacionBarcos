@@ -13,6 +13,7 @@ class Boats extends RESTController {
         $this->load->model(array("boats_model", "users_model", "login_model", "logs_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session'));
+        $this->base_url = $this->config->item('base_url');
         if($this->login_model->logged_id())
 		{
 			$this->session_data = array(
@@ -169,7 +170,6 @@ class Boats extends RESTController {
 
     }
     
-
     public function modalBoats_get()
     {
         $id = $this->input->get('id');
@@ -190,6 +190,23 @@ class Boats extends RESTController {
         $id = $this->input->get('id');
         $data = $this->boats_model->getBoatMinById($id);
         $this->load->view('boats/modalBoatDel', $data);
+    }
+
+    /**
+     * VALIDAR SI EL NUMERO IMO EXISTE
+     * var imo
+     * @return boolean
+     */
+
+    public function checkIMO_post()
+    {
+        $imo = $this->input->post('imo');
+        $data = $this->boats_model->checkIMO($imo);
+        
+        if ($data) {
+            echo "Ya existe el numero introducido";
+        }
+        
     }
  
 }

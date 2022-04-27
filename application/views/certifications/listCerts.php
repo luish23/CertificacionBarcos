@@ -49,17 +49,17 @@
                       echo "<td>".$value['name_list_verification']."</td>";
                     
                       if ($value['provisional']) {
-                        $provisional = "<span class='badge badge-warning ml-2'>Provisional</span>";
+                        $provisional = "<span class='badge badge-warning ml-2'>".$this->lang->line('provisional')."</span>";
                       }else {
                         $provisional = '';
                       }
                       if ($value['idCertificated']) {
                         if ($value['estado'] == 'ACTIVO') {
-                          $alert = "<span class='badge badge-success ml-2'>".$value['estado']."</span>";
+                          $alert = "<span class='badge badge-success ml-2'>".$this->lang->line('order_activo')."</span>";
                         }elseif($value['estado'] == 'VENCIDO'){
-                          $alert = "<span class='badge badge-danger ml-2'>".$value['estado']."</span>";
+                          $alert = "<span class='badge badge-danger ml-2'>".$this->lang->line('order_vence')."</span>";
                         }else{
-                          $alert = "<span class='badge badge-warning ml-2'>".$value['estado'].' '.$value['days_remaining']." días</span>";
+                          $alert = "<span class='badge badge-warning ml-2'>".$this->lang->line('order_vence_prox').' '.$value['days_remaining']." días</span>";
                         }
                         echo "<td><a target='blank' href='".$value['upload_path'].$value['file_name']."' class='btn btn-outline-danger btn-rounded waves-effect ml-1'><i class='far fa-file-pdf pr-2' aria-hidden='true'></i>PDF</a>".$alert."".$provisional."</td>";
                       }else {
@@ -77,16 +77,14 @@
                   }
                   ?>
                   </tbody>
-                  <tfoot>
+                  <!-- <tfoot>
                   <tr>
                     <th>#</th>
-                    <th><?php echo $this->lang->line('name'); ?></th>
-
-                    <th><?php echo $this->lang->line('list_verification'); ?></th>
-
-                    <th><?php echo $this->lang->line('certificated_status'); ?></th>
+                    <th><?php // echo $this->lang->line('name'); ?></th>
+                    <th><?php // echo $this->lang->line('list_verification'); ?></th>
+                    <th><?php // echo $this->lang->line('certificated_status'); ?></th>
                   </tr>
-                  </tfoot>
+                  </tfoot> -->
                 </table>
               </div>
               <!-- /.card-body -->

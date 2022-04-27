@@ -48,27 +48,27 @@
                       echo "<td>".$value['number_imo']."</td>";                 
                       echo "<td>";
                       if ($session['previewInfo']) {
-                        echo "<button type='button' title='Ver Navio' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".(int)$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>";
+                        echo "<button type='button' title='Ver Embarcação' class='btn btn-outline-success btn-rounded waves-effect' data-toggle='modal' data-target='#seeBoat' data-id=".(int)$value['id']."><i class='far fa-eye' aria-hidden='true'></i></button>";
                       }
                       if ($session['editInfo']) {
-                        echo "<button type='button' title='Editar Navio' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBoat' data-id=".(int)$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>";
+                        echo "<button type='button' title='Editar Embarcação' class='btn btn-outline-info btn-rounded waves-effect ml-3' data-toggle='modal' data-target='#updateBoat' data-id=".(int)$value['id']."><i class='far fa-edit' aria-hidden='true'></i></button>";
                       }
                       if ($session['deleteInfo']) {
-                        echo "<button type='button' data-toggle='modal' data-target='#delBoat' title='Eliminar Navio' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-id=".(int)$value['id']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>";
+                        echo "<button type='button' data-toggle='modal' data-target='#delBoat' title='Eliminar Embarcação' class='btn btn-outline-danger btn-rounded waves-effect ml-3' data-id=".(int)$value['id']."><i class='far fa-trash-alt' aria-hidden='true'></i></button>";
                       }
                         echo "</td></tr>";
                     }
                   }
                   ?>
                   </tbody>
-                  <tfoot>
+                  <!-- <tfoot>
                   <tr>
-                    <th><?php echo $this->lang->line('name'); ?></th>
-                    <th><?php echo $this->lang->line('shipowner'); ?></th>
-                    <th><?php echo $this->lang->line('imo'); ?></th>
-                    <th><?php echo $this->lang->line('actions'); ?></th>
+                    <th><?php //echo $this->lang->line('name'); ?></th>
+                    <th><?php //echo $this->lang->line('shipowner'); ?></th>
+                    <th><?php //echo $this->lang->line('imo'); ?></th>
+                    <th><?php //echo $this->lang->line('actions'); ?></th>
                   </tr>
-                  </tfoot>
+                  </tfoot> -->
                 </table>
               </div>
               <!-- /.card-body -->

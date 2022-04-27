@@ -13,7 +13,8 @@ class Orders extends RESTController {
         $this->load->model(array("boats_model","users_model","login_model", "orders_model", "offices_model", "certifications_model", "logs_model"));
         $this->load->helper(array("url","custom"));
         $this->load->library(array('session'));
-       
+        $this->base_url = $this->config->item('base_url');
+        
         if($this->login_model->logged_id())
 		{
 			$this->session_data = array(
@@ -151,6 +152,7 @@ class Orders extends RESTController {
                         'codListVerification' => $this->input->post('codListVerification'),
                         'provisional' => $this->input->post('provisional'),
                         'condition' => 'INICIADO',
+                        'expiry_time' => $retVal = ($this->input->post('expiry_time') != null) ? $this->input->post('expiry_time') : null,
                         'codWord' => $retVal = ($idWord != null) ? $idWord : null,
                         'codPDF' => $retVal = ($idPdf != null) ? $idPdf : null 
                     );
@@ -225,7 +227,8 @@ class Orders extends RESTController {
                         'codTypeCertification' => $this->input->post('codTypeCertification'),
                         'codListVerification' => $this->input->post('codListVerification'),
                         'provisional' => $this->input->post('provisional'),
-                        'condition' => $this->input->post('condition'),
+                        'condition' => $this->_changeLangBD($this->input->post('condition')),
+                        'expiry_time' => $retVal = ($this->input->post('expiry_time') != null) ? $this->input->post('expiry_time') : null,
                         'codWord' => $retVal = ($idWord != null) ? $idWord : $this->input->post('idword_old'),
                         'codPDF' => $retVal = ($idPdf != null) ? $idPdf : $this->input->post('idpdf_old') 
                     );
@@ -237,6 +240,16 @@ class Orders extends RESTController {
         }else{
             echo "Hubo un error al actualizar Orden!!.";
         }
+    }
+
+    private function _changeLangBD($phrase)
+    {
+        switch ($phrase) {
+            case 'PROCESSAR':
+                $phrase = 'PROCESO';
+                break;
+        }
+        return $phrase;
     }
 
     public function deleteOrder_post()

@@ -63,15 +63,15 @@
                   }
                   ?>
                   </tbody>
-                  <tfoot>
+                  <!-- <tfoot>
                   <tr>
-                    <th><?php echo $this->lang->line('name_lastname'); ?></th>
-                    <th><?php echo $this->lang->line('phone'); ?></th>
-                    <th><?php echo $this->lang->line('position'); ?></th>
-                    <th><?php echo $this->lang->line('status'); ?></th>
-                    <th><?php echo $this->lang->line('actions'); ?></th>
+                    <th><?php // echo $this->lang->line('name_lastname'); ?></th>
+                    <th><?php // echo $this->lang->line('phone'); ?></th>
+                    <th><?php // echo $this->lang->line('position'); ?></th>
+                    <th><?php // echo $this->lang->line('status'); ?></th>
+                    <th><?php // echo $this->lang->line('actions'); ?></th>
                   </tr>
-                  </tfoot>
+                  </tfoot> -->
                 </table>
               </div>
               <!-- /.card-body -->

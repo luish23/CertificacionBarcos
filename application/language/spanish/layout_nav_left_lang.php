@@ -22,6 +22,9 @@ $lang['add_employees']              = 'Registrar Personal';
 $lang['list_employees']             = 'Listado de Personal'; 
 $lang['configuration']              = 'Configuración'; 
 $lang['business']                   = 'Empresa'; 
+$lang['control_shipowner']          = 'Control de Armadores'; 
+$lang['add_shipowner']              = 'Registrar Armador'; 
+$lang['list_shipowner']             = 'Listado de Armadores'; 
 
 
 /**

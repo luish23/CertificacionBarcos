@@ -35,6 +35,20 @@
 <!-- jQuery -->
 <script src="../public/assets/plugins/jquery/jquery.min.js"></script>
 <!-- Custom JS login -->
-<script src="../public/assets/dist/js/login.js"></script>
+<?php switch ($this->session->site_lang) {
+  case 'spanish':
+    $src="../public/assets/dist/js/login.js";
+    break;
+
+  case 'english':
+    $src="../public/assets/dist/js/login_en.js";
+    break;
+  
+  default:
+    $src="../public/assets/dist/js/login_pt.js";
+    break;
+} 
+?>
+<script src="<?php echo $src; ?>"></script>
 </body>
 </html>

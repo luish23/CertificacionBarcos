@@ -59,16 +59,15 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('gender'); ?></label>
-                    <select class="form-control" name="gender" id="gender">
+                    <select class="form-select" name="gender" id="gender">
                       <option value="0"><?php echo $this->lang->line('select'); ?></option>
                       <option value="Femenino">Femenino</option>
                       <option value="Masculino">Masculino</option>
-                      <option value="Otro">Otro</option>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('user'); ?></label>
-                    <select class="form-control" name="codUser" id="codUser">
+                    <select class="form-select" name="codUser" id="codUser">
                       <option value="0"><?php echo $this->lang->line('select'); ?></option>
                       <?php 
                         foreach ($data as $key => $value) {
@@ -79,15 +78,15 @@
                   </div>   
                   <div class="form-group">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('shipowner'); ?></label>
-                    <select class="form-control" name="codShipowner" id="codShipowner">
+                    <select class="form-select selectpicker" id="select-country" data-live-search="true">
                       <option value="0"><?php echo $this->lang->line('select'); ?></option>
                       <?php 
                         foreach ($shipowner as $key2 => $value2) {
                             echo '<option value="'.$value2['id'].'">'.$value2['name_ship'].'</option>';
                         }
-                    ?>
+                      ?>
                     </select>
-                  </div>                
+                  </div>         
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">

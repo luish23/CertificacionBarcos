@@ -57,7 +57,9 @@ $route['translate_uri_dashes'] = FALSE;
  * PARA PRUEBAS
  */
 
-$route['welcome']['GET']      = 'Welcome/index';
+$route['welcome']['GET']                     = 'Welcome/index';
+$route['adminlte_form_advanced']['GET']      = 'Welcome/adminlte_form_advanced';
+
 
 /*
 * ROUTES LOGIN
@@ -85,6 +87,19 @@ $route['deleteUser']['POST']        = 'Users/deleteUser';
 
 $route['dashboard']['GET']    = 'Dashboard/index';
 
+/*
+* ROUTES SHIPOWNER 
+*/
+
+$route['shipowner']['GET']           = 'Shipowner/index';
+$route['formShipowner']['GET']       = 'Shipowner/formShipowner';
+$route['listShipowner']['GET']       = 'Shipowner/listShipowner';
+$route['modalShipownerUp']['GET']    = 'Shipowner/modalShipownerUp';
+$route['updateShipowner']['POST']    = 'Shipowner/updateShipowner';
+$route['registerShipowner']['POST']  = 'Shipowner/registerShipowner';
+
+
+
 /* 
 * ROUTES EMPLOYEES
 */
@@ -109,6 +124,7 @@ $route['modalBoatUp']['GET']        = 'Boats/modalBoatsUp';
 $route['modalBoatDel']['GET']       = 'Boats/modalBoatsDel';
 $route['updateBoat']['POST']        = 'Boats/updateBoat';
 $route['deleteBoat']['POST']        = 'Boats/deleteBoat';
+$route['checkIMO']['POST']          = 'Boats/checkIMO';
 
 
 

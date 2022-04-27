@@ -17,7 +17,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="http://sgcb.development.com">Sistema de Administración de Certificados</a>.</strong> All rights reserved.
+    <strong><?php echo $this->lang->line('copyright')."&copy; 2021-".date("Y")." <a href='".$this->base_url."'>".$this->lang->line('name_system')."</a>. </strong>".$this->lang->line('all_rights_reserved'); ?>
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -26,7 +26,7 @@
 <!-- jQuery -->
 <script src="../public/assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 <!-- jquery-validation -->
 <script src="../public/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="../public/assets/plugins/jquery-validation/additional-methods.min.js"></script>
@@ -50,7 +50,20 @@
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../public/assets/dist/js/demo.js"></script> -->
 <!-- Custom JS login -->
-<script src="../public/assets/dist/js/employee.js"></script>
+<?php switch ($this->session->site_lang) {
+  case 'spanish':
+    $src="../public/assets/dist/js/employee.js";
+    break;
 
+  case 'english':
+    $src="../public/assets/dist/js/employee_en.js";
+    break;
+  
+  default:
+    $src="../public/assets/dist/js/employee_pt.js";
+    break;
+} 
+?>
+<script src="<?php echo $src; ?>"></script>
 </body>
 </html>

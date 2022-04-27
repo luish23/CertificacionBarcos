@@ -1,10 +1,10 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="dashboard" class="brand-link">
-      <img src="../public/assets/dist/img/logo.jpg" alt="Logo Naval" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-link">
+      <img src="../public/assets/dist/img/logo.jpg" alt="Logo Naval" class="brand-image img-circle elevation-3">
       <span class="brand-text font-weight-bold">Naval Services</span>
-    </a>
+</span>
 
     <!-- Sidebar -->
     <div class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition"><div class="os-resize-observer-host observed"><div class="os-resize-observer" style="left: 0px; right: auto;"></div></div><div class="os-size-auto-observer observed" style="height: calc(100% + 1px); float: left;"><div class="os-resize-observer"></div></div><div class="os-content-glue" style="margin: 0px -8px; width: 249px; height: 860px;"></div><div class="os-padding"><div class="os-viewport os-viewport-native-scrollbars-invisible" style="overflow-y: scroll;"><div class="os-content" style="padding: 0px 8px; height: 100%; width: 100%;">
@@ -14,7 +14,7 @@
           <img src="../public/assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $name . " " . $lastName; ?></a>
+          <span class="text-light"><?php echo $name . " " . $lastName; ?></span>
         </div>
       </div>
 
@@ -41,6 +41,35 @@
               <p><?php echo $this->lang->line('dashboard'); ?></p>
             </a>
           </li>
+          <?php if ($session['mShipowner']) { ?>
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="fas fa-anchor"></i>
+              <p>
+              <?php echo $this->lang->line('control_shipowner'); ?>
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <?php if ($session['addShipowner']) { ?>
+              <li class="nav-item">
+                <a href="/formShipowner" class="nav-link">
+                <i class="fas fa-plus-circle"></i>
+                  <p><?php echo $this->lang->line('add_shipowner'); ?></p>
+                </a>
+              </li>
+              <?php } ?>
+              <?php if ($session['listShipowner']) { ?>
+              <li class="nav-item">
+                <a href="/listShipowner" class="nav-link">
+                  <i class="fas fa-list-ul"></i>
+                  <p><?php echo $this->lang->line('list_shipowner'); ?></p>
+                </a>
+              </li>
+              <?php } ?>
+            </ul>
+          </li>
+          <?php } ?>
           <?php if ($session['mNavio']) { ?>
           <li class="nav-item menu-open">
             <a href="#" class="nav-link active">

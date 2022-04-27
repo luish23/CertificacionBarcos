@@ -85,6 +85,7 @@ class Users_model extends CI_Model {
         $this->db_users->trans_commit();
 
         return $item_id;
+
     }
 
     public function updatetUser($data, $id)

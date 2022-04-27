@@ -39,7 +39,7 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('type_users'); ?></label>
-                    <select class="form-control" name="codTypeUser" id="codTypeUser">
+                    <select class="form-select" name="codTypeUser" id="codTypeUser">
                       <option value="0"><?php echo $this->lang->line('select'); ?></option>
                       <?php 
                         foreach ($typeUser as $key => $value2) {

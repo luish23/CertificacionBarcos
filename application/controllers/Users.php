@@ -13,6 +13,7 @@ class Users extends RESTController {
         $this->load->model(array("users_model", "login_model", "logs_model"));
         $this->load->helper(array('url'));
         $this->load->library(array('session','encryption'));
+        $this->base_url = $this->config->item('base_url');
         
         if($this->login_model->logged_id())
 		{
@@ -72,7 +73,6 @@ class Users extends RESTController {
 
     public function registerUsers_post()
     {
-        // echo "Hola"; die;
         if (!empty($this->input->post('username')) && !empty($this->input->post('password'))) {
             $data = array(  'user' => $this->input->post('username'),
                             'codTypeUser' => $this->input->post('codTypeUser'),
@@ -81,22 +81,22 @@ class Users extends RESTController {
                         );
 
             $response = $this->users_model->insertUser($data);
-            
-            switch ($response['code']) {
-                case 1062:
-                    echo "<script>alert('".$this->lang->line('exist_user')."');</script>";
-                    redirect('listUsers', 'refresh');
-                    break;
-            }
+
+            // switch ($response['code']) {
+            //     case 1062:
+            //         echo "<script>alert('".$this->lang->line('exist_user')."');</script>";
+            //         redirect('listUsers', 'refresh');
+            //         break;
+            // }
 
             if ($response) {
                 $this->logs_model->registerLogs($this->session->user_id, 'registerUsers_post', 'Add', 'Insertó User Id: '.$response);
                 echo "<script>alert('".$this->lang->line('alert_register_user_ok')."');</script>";
-                redirect('formUsers', 'refresh');
+                redirect('listUsers', 'refresh');
             }
             else {
                 echo "<script>alert('".$this->lang->line('alert_error_insert_user')."');</script>";
-                redirect('listUsers', 'refresh');
+                redirect('formUsers', 'refresh');
             }
         }else{
             echo "<script>alert('".$this->lang->line('alert_no_data')."');</script>";

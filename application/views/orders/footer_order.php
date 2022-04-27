@@ -17,7 +17,7 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="http://sgcb.development.com">Sistema de Administración de Certificados</a>.</strong> All rights reserved.
+    <strong><?php echo $this->lang->line('copyright')."&copy; 2021-".date("Y")." <a href='".$this->base_url."'>".$this->lang->line('name_system')."</a>. </strong>".$this->lang->line('all_rights_reserved'); ?>
   </footer>
 </div>
 <!-- ./wrapper -->
@@ -50,7 +50,21 @@
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="../public/assets/dist/js/demo.js"></script> -->
 <!-- Custom JS login -->
-<script src="../public/assets/dist/js/order.js"></script>
+<?php switch ($this->session->site_lang) {
+  case 'spanish':
+    $src="../public/assets/dist/js/order.js";
+    break;
+
+  case 'english':
+    $src="../public/assets/dist/js/order_en.js";
+    break;
+  
+  default:
+    $src="../public/assets/dist/js/order_pt.js";
+    break;
+} 
+?>
+<script src="<?php echo $src; ?>"></script>
 
 </body>
 </html>
