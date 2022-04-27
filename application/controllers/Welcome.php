@@ -40,4 +40,18 @@ class Welcome extends CI_Controller {
 
 		
 	}
+
+    public function adminlte_form_advanced()
+	{
+		$template = array('title' => 'adminlte_form_advanced');
+        $this->load->view("dashboard/header_dashboard",$template);
+        $this->load->view("layout_nav_top");
+        $this->load->view("layout_nav_left",$this->session_data);
+        $this->load->view('adminlte_form_advanced');
+        $this->load->view("welcome_footer");
+
+		
+	}
+
+    
 }

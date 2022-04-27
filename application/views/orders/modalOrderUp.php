@@ -31,7 +31,7 @@
             <form id="ordersFormUpdate" action="updateOrder" method="POST" enctype="multipart/form-data">
                 <div class="form-group err-form">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('office'); ?></label>
-                    <select class="form-control" id="codOffice" name="codOffice">
+                    <select class="form-select" id="codOffice" name="codOffice">
                     <option value="0"><?php echo $this->lang->line('select'); ?></option>
                     <?php 
                         foreach ($offices as $key => $value2) {
@@ -68,7 +68,7 @@
                 </br>
                 <div class="form-group err-form">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('condition'); ?></label>
-                    <select class="form-control" id="condition" name="condition">
+                    <select class="form-select" id="condition" name="condition">
                     <?php if ($data['condition'] == 'INICIADO') {
                         echo '<option value="'.$this->lang->line('start').'" selected="selected">'.$this->lang->line("start").'</option>';
                         echo '<option value="'.$this->lang->line('process').'">'.$this->lang->line("process").'</option>';
@@ -81,7 +81,7 @@
                 </div>
                 <div class="form-group err-form">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('provisional'); ?></label>
-                    <select class="form-control" id="provisional" name="provisional">
+                    <select class="form-select" id="provisional" name="provisional">
                         <?php if ($data['provisional']) {
                             echo '<option value="1" selected="selected">'.$this->lang->line("yes").'</option>';
                             echo '<option value="0">'.$this->lang->line("no").'</option>';
@@ -97,23 +97,33 @@
                     <?php if ($data['provisional']){ ?>
                         <div class="form-group">
                             <label for="exampleInputEmail1"><?php echo $this->lang->line('expiry_time'); ?></label>
-                            <select class="form-control" id="expiry_time" name="expiry_time">
-                                <?php if ($data['expiry_time'] == 60) {
+                            <select class="form-select" id="expiry_time" name="expiry_time">
+                                <?php if ($data['expiry_time'] == 30) {
+                                    echo '<option value="30" selected="selected">30 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="60">60 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="90">90 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="120">120 '.$this->lang->line("days").'</option>';
+                                    echo '<option value="180">180 '.$this->lang->line("days").'</option>';
+                                }elseif ($data['expiry_time'] == 60) {
+                                    echo '<option value="30">30 '.$this->lang->line("days").'</option>';
                                     echo '<option value="60" selected="selected">60 '.$this->lang->line("days").'</option>';
                                     echo '<option value="90">90 '.$this->lang->line("days").'</option>';
                                     echo '<option value="120">120 '.$this->lang->line("days").'</option>';
                                     echo '<option value="180">180 '.$this->lang->line("days").'</option>';
                                 }elseif($data['expiry_time'] == 90) {
+                                    echo '<option value="30">30 '.$this->lang->line("days").'</option>';
                                     echo '<option value="60">60 '.$this->lang->line("days").'</option>';
                                     echo '<option value="90" selected="selected">90 '.$this->lang->line("days").'</option>';
                                     echo '<option value="120">120 '.$this->lang->line("days").'</option>';
                                     echo '<option value="180">180 '.$this->lang->line("days").'</option>';
                                 }elseif($data['expiry_time'] == 120) {
+                                    echo '<option value="30">30 '.$this->lang->line("days").'</option>';
                                     echo '<option value="60">60 '.$this->lang->line("days").'</option>';
                                     echo '<option value="90">90 '.$this->lang->line("days").'</option>';
                                     echo '<option value="120" selected="selected">120 '.$this->lang->line("days").'</option>';
                                     echo '<option value="180">180 '.$this->lang->line("days").'</option>';
                                 }elseif($data['expiry_time'] == 180) {
+                                    echo '<option value="30">30 '.$this->lang->line("days").'</option>';
                                     echo '<option value="60">60 '.$this->lang->line("days").'</option>';
                                     echo '<option value="90">90 '.$this->lang->line("days").'</option>';
                                     echo '<option value="120">120 '.$this->lang->line("days").'</option>';
@@ -142,7 +152,7 @@
                         <div class="col-4">
                             <div class="form-group row err-form">
                                 <label for="exampleInputEmail1" class="col-8"><?php echo $this->lang->line('transport_commodity'); ?></label>
-                                <select class="form-control col-3 " id="transport_commodity" name="transport_commodity">
+                                <select class="form-select col-3" id="transport_commodity" name="transport_commodity">
                                     <?php 
                                         if ($dataNS['transport_commodity']) {
                                             echo '<option value="1" selected="selected">'.$this->lang->line("yes").'</option>';

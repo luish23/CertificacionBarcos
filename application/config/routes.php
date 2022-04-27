@@ -57,7 +57,9 @@ $route['translate_uri_dashes'] = FALSE;
  * PARA PRUEBAS
  */
 
-$route['welcome']['GET']      = 'Welcome/index';
+$route['welcome']['GET']                     = 'Welcome/index';
+$route['adminlte_form_advanced']['GET']      = 'Welcome/adminlte_form_advanced';
+
 
 /*
 * ROUTES LOGIN

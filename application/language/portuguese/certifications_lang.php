@@ -13,6 +13,8 @@ $lang['satisfying']                         = 'Gerado com sucesso!!';
 $lang['alert_convalidations']               = 'Por favor actualizar el formulario de Convalidaciones';
 $lang['alert_cdataExtraNS02']               = 'Por favor actualizar el formulario de Espacios Incluidos';
 $lang['alert_testResultNS03']               = 'Por favor actualizar el formulario de Resultados del Ensayo';
+$lang['conditional']                        = 'CONDICIONAL';
+$lang['interim']                            = 'PROVISÓRIO';
 
 $lang['january']                            = 'Janeiro';
 $lang['february']                           = 'Fevreiro';

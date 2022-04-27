@@ -549,6 +549,23 @@ class Certifications extends RESTController {
         $retVal = ($downloadType == 'F') ? 'VALIDADO' : 'PROCESO' ;
         $data = $this->certifications_model->generarCertificado($id,$retVal);
 
+        switch ($data['data']['expiry_time']) {
+            case 30:
+            case 60:
+            case 90:
+                $data['data']['label_expiry_time'] = $this->lang->line('conditional');
+                break;
+            
+            case 120:
+            case 180:
+                $data['data']['label_expiry_time'] = $this->lang->line('interim');
+                break;
+            
+            default:
+                $data['data']['label_expiry_time'] = '';
+                break;
+        }
+
         $pathDate = date("Y") . "/" . date("m") . "/" . date("d") . "/";
         getDir(FCPATH . 'uploads/Certificaciones/'.$pathDate);
 
@@ -614,6 +631,8 @@ class Certifications extends RESTController {
             $pdf->AddPage('P','A4',0);
             $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
             $pdf->SetFont('Arial','B',12);
+            $pdf->SetXY(80,17);
+            $pdf->Cell(50,10,strtoupper(utf8_decode($data['data']['label_expiry_time'])),0,1,'C');
             $pdf->SetXY(171,17);
             $pdf->Cell(29,10,$data['data']['office'].' '.str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'],0,1,'C');
             $pdf->SetXY(100,80);
@@ -896,6 +915,8 @@ class Certifications extends RESTController {
             $pdf->AddPage('P','A4',0);
             $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
             $pdf->SetFont('Arial','B',12);
+            $pdf->SetXY(80,17);
+            $pdf->Cell(50,10,strtoupper(utf8_decode($data['data']['label_expiry_time'])),0,1,'C');
             $pdf->SetXY(170,23);
             $pdf->Cell(28,10,$data['data']['office'].' '.str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'],0,1,'C');
             $pdf->SetXY(49,109);
@@ -996,6 +1017,8 @@ class Certifications extends RESTController {
             $pdf->AddPage('P','A4',0);
             $pdf->Image(FCPATH.$certificate['path_jpg_certification_front'], 0, 0, 210, 300);
             $pdf->SetFont('Arial','B',12);
+            $pdf->SetXY(80,17);
+            $pdf->Cell(50,10,strtoupper(utf8_decode($data['data']['label_expiry_time'])),0,1,'C');
             $pdf->SetXY(168,23);
             $pdf->Cell(29,10,$data['data']['office'].' '.str_pad($data['data']['codOrder'], 3, '0', STR_PAD_LEFT).$data['data']['anyo'],0,1,'C');
             $pdf->SetXY(55,53);

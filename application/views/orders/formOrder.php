@@ -35,7 +35,7 @@
                 <div class="card-body">
                 <div class="form-group err-form">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('office'); ?></label>
-                    <select class="form-control" id="codOffice" name="codOffice">
+                    <select class="form-select" id="codOffice" name="codOffice">
                     <option value="0"><?php echo $this->lang->line('select'); ?></option>
                     <?php 
                         foreach ($offices as $key => $value2) {
@@ -46,7 +46,7 @@
                   </div>
                   <div class="form-group err-form">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('boat'); ?></label>
-                    <select class="form-control" id="codBoat" name="codBoat">
+                    <select class="form-select" id="codBoat" name="codBoat">
                     <option value="0"><?php echo $this->lang->line('select'); ?></option>
                     <?php 
                         foreach ($data as $key => $value) {
@@ -58,7 +58,7 @@
                   </div>
                   <div class="form-group err-form">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('type_certificated'); ?></label>
-                    <select class="form-control" id="codTypeCertification" name="codTypeCertification">
+                    <select class="form-select" id="codTypeCertification" name="codTypeCertification">
                     <option value="0"><?php echo $this->lang->line('select'); ?></option>
                     <?php 
                         foreach ($certifications as $key => $value3) {
@@ -71,7 +71,7 @@
                   <div id="SelectListVerification">
                     <div class="form-group err-form">
                       <label for="exampleInputEmail1"><?php echo $this->lang->line('type_certificated'); ?></label>
-                      <select class="form-control" id="codListVerification" name="codListVerification">
+                      <select class="form-select" id="codListVerification" name="codListVerification">
                       <option value="0"><?php echo $this->lang->line('select'); ?></option>                              
                       </select>
                     </div>
@@ -79,7 +79,7 @@
 
                   <div class="form-group err-form">
                     <label for="exampleInputEmail1"><?php echo $this->lang->line('provisional'); ?></label>
-                    <select class="form-control" id="provisional" name="provisional">
+                    <select class="form-select" id="provisional" name="provisional">
                     <option value="1"><?php echo $this->lang->line('yes'); ?></option>
                     <option value="0" selected="selected"><?php echo $this->lang->line('no'); ?></option>
                     </select>

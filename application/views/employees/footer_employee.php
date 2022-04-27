@@ -26,7 +26,7 @@
 <!-- jQuery -->
 <script src="../public/assets/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="../public/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 <!-- jquery-validation -->
 <script src="../public/assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="../public/assets/plugins/jquery-validation/additional-methods.min.js"></script>

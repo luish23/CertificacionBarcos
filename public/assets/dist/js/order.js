@@ -39,7 +39,7 @@ $(document).ready(function(){
     $('#provisional').change(function() {
       var select = $("#provisional").find('option:selected').val();
       if( select == '1'){
-        var newP = $('<div class="form-group"><label for="exampleInputEmail1">Tiempo de Expiración</label><select class="form-control" id="expiry_time" name="expiry_time"><option value="60">60 días</option><option value="90">90 días</option><option value="120">120 días</option><option value="180">180 días</option></select></div>');
+        var newP = $('<div class="form-group"><label for="exampleInputEmail1">Tiempo de Expiración</label><select class="form-select" id="expiry_time" name="expiry_time"><option value="60">60 días</option><option value="90">90 días</option><option value="120">120 días</option><option value="180">180 días</option></select></div>');
         $("msg2").append(newP);
       }
       else{

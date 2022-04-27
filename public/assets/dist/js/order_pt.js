@@ -36,6 +36,17 @@ $(document).ready(function(){
     });
   });
 
+  $('#provisional').change(function() {
+    var select = $("#provisional").find('option:selected').val();
+    if( select == '1'){
+      var newP = $('<div class="form-group"><label for="exampleInputEmail1">Data de expiração</label><select class="form-select" id="expiry_time" name="expiry_time"><option value="60">60 dias</option><option value="90">90 dias</option><option value="120">120 dias</option><option value="180">180 dias</option></select></div>');
+      $("msg2").append(newP);
+    }
+    else{
+      $( "msg2" ).empty();
+    }
+  });
+
   $('#genCertificado').on('show.bs.modal', function (e) {
     var rowid = $(e.relatedTarget).data('id');
     console.log(rowid);
@@ -123,15 +134,15 @@ function listVerif() {
   var selectNavio = $("#codBoat").find('option:selected').val();
   var selectCertif = $("#codTypeCertification").find('option:selected').val();
   var selectVerif = $("#codListVerification").find('option:selected').val();
-  console.log(selectNavio);
-  console.log(selectCertif);
-  console.log(selectVerif);
+  // console.log(selectNavio);
+  // console.log(selectCertif);
+  // console.log(selectVerif);
     $.ajax({
     type : 'post',
     url : 'veriffOrder', //Here you will fetch records 
     data :  'idCer='+ selectCertif+'&idNav='+selectNavio+'&idVerif='+selectVerif, //Pass $id
     success : function(data){
-      console.log(data);
+      // console.log(data);
         if( JSON.stringify(data.response) == 'true'){
           $(":submit").attr("disabled", true);
           alert('Existe uma certificação válida para este embarcação');

@@ -32,7 +32,7 @@
     </div>
     <div class="form-group">
     <label for="exampleInputEmail1"><?php echo $this->lang->line('status'); ?></label>
-    <select class="form-control" name="status" id="status">
+    <select class="form-select" name="status" id="status">
     <?php 
         if ($data['status']) {
             echo '<option value="1" selected="selected">'.$this->lang->line('active').'</option>';
